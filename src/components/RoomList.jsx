@@ -1,38 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
 const RoomList = () => {
+    const [rooms, setRooms] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
     return (
         <RoomLi>
-            <RoomWrapper>
-                <Room></Room>
-                <FooterContainer>
-                    <FooterTop>
-                        오늘우리가찢는다!!!!!!!!!!!다들...
-                        <img
-                            src={process.env.PUBLIC_URL + 'icons/peers.svg'}
-                            alt="ddd"
-                        />
-                        4
-                    </FooterTop>
-                    <FooterBottom>20분째 탈출중</FooterBottom>
-                </FooterContainer>
-            </RoomWrapper>
+            {rooms.map(room => {
+                return (
+                    <RoomWrapper>
+                        <Room></Room>
+                        <FooterContainer>
+                            <FooterTop>
+                                오늘우리가찢는다!!!!!!!!!!!다들...
+                                <IconContainer>
+                                    <img
+                                        src={
+                                            process.env.PUBLIC_URL +
+                                            'icons/peers.svg'
+                                        }
+                                        alt="ddd"
+                                    />
+                                    4
+                                </IconContainer>
+                            </FooterTop>
+                            <FooterBottom>20분째 탈출중</FooterBottom>
+                        </FooterContainer>
+                    </RoomWrapper>
+                );
+            })}
         </RoomLi>
     );
 };
 
 const RoomLi = styled.div`
     display: flex;
-    background-color: aliceblue;
     flex-wrap: wrap;
     justify-content: flex-start;
 `;
 
 const RoomWrapper = styled.div`
-    border: 1px solid black;
-    border: 1px solid black;
     width: 250px;
     height: 300px;
     margin: 1%;
@@ -46,11 +54,26 @@ const Room = styled.div`
 `;
 
 const FooterContainer = styled.div`
-    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    line-height: 24px;
+    margin: 14px 12px;
 `;
 
-const FooterTop = styled.div``;
+const FooterTop = styled.div`
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+`;
 
-const FooterBottom = styled.div``;
+const IconContainer = styled.div``;
+
+const FooterBottom = styled.div`
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+
+    color: #394ddb;
+`;
 
 export default RoomList;

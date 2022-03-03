@@ -38,12 +38,6 @@ const Banner = styled.div`
 const RoomListContainer = styled.div`
     width: 100%;
     height: 464px;
-
-    /* background-color: yellow; */
-    overflow: auto;
-    ::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera*/
-    }
 `;
 
 const RoomListHeader = styled.div`
@@ -67,7 +61,7 @@ const RoomListHeader = styled.div`
 const Selector = styled.select`
     width: 84px;
     height: 33px;
-    padding-left: 16px;
+    padding-left: 15px;
     border: 2px solid #394ddb;
     box-sizing: border-box;
     border-radius: 19px;
@@ -75,7 +69,7 @@ const Selector = styled.select`
     appearance: none;
     background-image: url('/icons/DownArrow.png');
     background-repeat: no-repeat;
-    background-position-x: 55px;
+    background-position-x: 59px;
     background-position-y: 12px;
 `;
 

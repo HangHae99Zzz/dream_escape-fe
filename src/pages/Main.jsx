@@ -3,24 +3,27 @@ import styled from 'styled-components';
 
 import { Contents } from '../components/index';
 
-const Main = props => {
+import Layout from './Layout';
+
+const Main = () => {
     return (
-        <MainContainer>
-            <FlexContainer>
-                {/* <Sidebar /> */}
-                <Asidebar />
-                <ContentsContainer>
-                    {/* <Header /> */}
-                    <Aheader />
-                    <Contents />
-                </ContentsContainer>
-            </FlexContainer>
-        </MainContainer>
+        <>
+            <Layout>
+                <MainContainer>
+                    <FlexContainer>
+                        <ContentsContainer>
+                            <Contents />
+                        </ContentsContainer>
+                    </FlexContainer>
+                </MainContainer>
+            </Layout>
+        </>
     );
 };
 
 const MainContainer = styled.div`
-    width: 100vw;
+    background-color: gray;
+    width: 100%;
     height: 100vh;
 `;
 
@@ -30,22 +33,11 @@ const FlexContainer = styled.div`
 `;
 
 const ContentsContainer = styled.div`
-    background-color: gray;
+    /* background-color: gray; */
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
-
-const Aheader = styled.div`
-    background-color: green;
-    height: 280px;
-    width: 100%;
-`;
-const Asidebar = styled.div`
-    width: 14.583vw;
-    height: auto;
-    background-color: blue;
 `;
 
 export default Main;
