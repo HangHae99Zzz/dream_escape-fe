@@ -107,13 +107,6 @@ const ToggleBtn = styled.div`
     border-radius: 32px;
 
     span {
-      /* font-family: Pretendard;
-      font-style: normal;
-      font-weight: 800;
-      font-size: 16px;
-      line-height: 19px;
-      letter-spacing: -0.03em;
-      text-transform: uppercase; */
       color: #394ddb;
     }
   }
