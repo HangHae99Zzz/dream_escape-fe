@@ -28,7 +28,6 @@ const FlexContainer = styled.div`
 const Banner = styled.div`
     width: 100%;
     height: 368px;
-    /* background-color: aliceblue; */
     background-image: url('/images/20220302_010744 1.png');
     background-repeat: no-repeat;
     border-radius: 77px;
@@ -37,11 +36,9 @@ const Banner = styled.div`
 
 const RoomListContainer = styled.div`
     width: 100%;
-    height: 464px;
 `;
 
 const RoomListHeader = styled.div`
-    /* background-color: pink; */
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;

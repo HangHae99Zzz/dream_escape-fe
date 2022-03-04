@@ -10,11 +10,9 @@ const Main = () => {
         <>
             <Layout>
                 <MainContainer>
-                    <FlexContainer>
-                        <ContentsContainer>
-                            <Contents />
-                        </ContentsContainer>
-                    </FlexContainer>
+                    <ContentsContainer>
+                        <Contents />
+                    </ContentsContainer>
                 </MainContainer>
                 <Footer />
             </Layout>
@@ -23,14 +21,8 @@ const Main = () => {
 };
 
 const MainContainer = styled.div`
-    /* background-color: gray; */
+    background-color: gray;
     width: 100%;
-    height: 100vh;
-`;
-
-const FlexContainer = styled.div`
-    display: flex;
-    height: inherit;
 `;
 
 const ContentsContainer = styled.div`
