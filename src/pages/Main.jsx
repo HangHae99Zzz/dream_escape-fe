@@ -1,43 +1,43 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { Contents } from '../components/index';
+import { Contents } from "../components/index";
 
-import Layout from './Layout';
+import Layout from "./Layout";
 
 const Main = () => {
-    return (
-        <>
-            <Layout>
-                <MainContainer>
-                    <FlexContainer>
-                        <ContentsContainer>
-                            <Contents />
-                        </ContentsContainer>
-                    </FlexContainer>
-                </MainContainer>
-            </Layout>
-        </>
-    );
+  return (
+    <>
+      <Layout>
+        <MainContainer>
+          <FlexContainer>
+            <ContentsContainer>
+              <Contents />
+            </ContentsContainer>
+          </FlexContainer>
+        </MainContainer>
+      </Layout>
+    </>
+  );
 };
 
 const MainContainer = styled.div`
-    background-color: gray;
-    width: 100%;
-    height: 100vh;
+  /* background-color: gray; */
+  width: 100%;
+  height: 100vh;
 `;
 
 const FlexContainer = styled.div`
-    display: flex;
-    height: inherit;
+  display: flex;
+  height: inherit;
 `;
 
 const ContentsContainer = styled.div`
-    /* background-color: gray; */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  /* background-color: gray; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default Main;

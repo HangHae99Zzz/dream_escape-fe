@@ -11,9 +11,7 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <a href="/" className="logo">
-        <h1>THE TITLE</h1>
-      </a>
+      <a href="/" className="logo"></a>
       <div className="head-menu">
         <div className="right-nav">
           <ToggleBtn>
@@ -52,37 +50,19 @@ const StyledHeader = styled.header`
   height: 7.3vw;
   display: flex;
 
-  /* background-color: red; */
-
   .logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 14.58vw;
-    height: 100%;
-
-    h1 {
-      /* position: absolute; */
-      font-family: Work Sans;
-      font-style: normal;
-      font-weight: 800;
-      font-size: 32px;
-      line-height: 38px;
-
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-
-      color: #5668e8;
-    }
   }
+
   .head-menu {
-    width: 100%;
+    box-sizing: border-box;
+    width: calc(100% - 14.58vw);
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    padding-left: 6.8vw;
-    padding-right: 6.8vw;
+    padding-left: 4.89vw;
+    padding-right: 4.89vw;
   }
 
   .right-nav {
