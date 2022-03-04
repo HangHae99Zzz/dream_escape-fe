@@ -7,7 +7,7 @@ import {
   SvgRanking,
   SvgDescription,
   SvgUpdate,
-} from "/icons/sidebar/svg_sidebar";
+} from "../icons/sidebar/svg_sidebar";
 
 const Sidebar = () => {
   let navigate = useNavigate();
@@ -99,14 +99,9 @@ const Section = styled.section`
       font-size: 18px;
       line-height: 22px;
       letter-spacing: -0.03em;
+      margin-left: 10px;
 
       color: #bebebe;
-    }
-
-    img {
-      width: 16.5px;
-      height: 16.5px;
-      margin-right: 10px;
     }
   }
 

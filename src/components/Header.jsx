@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import { SvgFind, SvgSearch, SvgSettings } from "../icons/header/svg_header";
 
 const Header = () => {
   let [isToggleOn, setIsToggleOn] = useState(false);
@@ -100,7 +101,6 @@ const ToggleBtn = styled.div`
     width: 18.95vw;
     align-items: center;
     justify-content: space-between;
-    padding: 0 5px;
     position: relative;
 
     box-shadow: inset 0px 2px 10px rgba(104, 101, 255, 0.35);
@@ -158,8 +158,8 @@ const SearchInput = styled.div`
     left: 10px;
     top: 0;
     bottom: 0;
-    width: 20px;
-    background: url("/icons/header/search.svg") center / contain no-repeat;
+    width: 30px;
+    background: url("../icons/header/search.svg") center / contain no-repeat;
   }
 
   input {
@@ -168,7 +168,11 @@ const SearchInput = styled.div`
     border: 2px solid #5668e8;
     outline: none;
     border-radius: 25px;
-    padding-left: 30px;
+    padding-left: 40px;
+
+    ::placeholder {
+      font-size: 16px;
+    }
   }
 `;
 
@@ -176,7 +180,7 @@ const SettingBtn = styled.div`
   cursor: pointer;
   width: 1.2vw;
   height: 1.2vw;
-  background: url("/icons/header/settings.svg") center / contain no-repeat;
+  background: url("../icons/header/settings.svg") center / contain no-repeat;
 `;
 
 const UserProfile = styled.div`
