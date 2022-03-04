@@ -3,11 +3,11 @@ import {
   Routes,
   unstable_HistoryRouter as HistoryRouter,
 } from "react-router-dom";
-import Main from "./pages/Main";
-import GlobalStyles from "./components/GlobalStyle";
+import Main from "../pages/Main";
+import GlobalStyles from "../components/GlobalStyle";
 
 import { createBrowserHistory } from "history";
-import Loading from "./components/Loading";
+import Loading from "../components/Loading";
 export const history = createBrowserHistory();
 
 function App() {
