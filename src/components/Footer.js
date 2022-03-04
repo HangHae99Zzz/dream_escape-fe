@@ -17,12 +17,19 @@ const Footer = props => {
                 </FooterTop>
                 <FooterBottom>
                     <CopyRight>
-                        copyrights (c) the title 2022 All rights are reserved
+                        copyrights (c) the title 2022{' '}
+                        <AllRights>All rights are reserved</AllRights>
                     </CopyRight>
-                    <div>
-                        회사소개 이용약관 개인정보처리방침 청소년보기정책
-                        고객센터
-                    </div>
+                    <FlexContainer>
+                        <Rigth>
+                            <div>회사소개</div>
+                            <div>이용약관</div>
+                            <div>개인정보처리방침</div>
+                            <div>청소년보기정책</div>
+                            <div>고객센터</div>
+                        </Rigth>
+                        <Left></Left>
+                    </FlexContainer>
                 </FooterBottom>
             </PaddingLeft>
         </FooterContiner>
@@ -31,6 +38,7 @@ const Footer = props => {
 
 const FooterContiner = styled.div`
     background-color: #f7f7f7;
+    font-size: 14px;
 `;
 
 const PaddingLeft = styled.div`
@@ -38,7 +46,6 @@ const PaddingLeft = styled.div`
 `;
 
 const FooterTop = styled.div`
-    border: 1px solid black;
     font-weight: bold;
     font-size: 14px;
     color: #8f8f8f;
@@ -50,14 +57,37 @@ const Roll = styled.span`
     color: #666666;
 `;
 
-const FooterBottom = styled.div`
-    border: 1px solid black;
-`;
+const FooterBottom = styled.div``;
 
 const CopyRight = styled.span`
-    font-size: 14px;
-
+    font-weight: bold;
     color: #dddddd;
+`;
+
+const AllRights = styled.span`
+    font-weight: bold;
+    margin-left: 16px;
+`;
+
+const FlexContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0px 50px;
+    align-items: center;
+`;
+
+const Rigth = styled.div`
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    color: #b5b5b5;
+`;
+const Left = styled.div`
+    width: 72px;
+    height: 50px;
+    padding-right: 51px;
+    background-image: url('/images/hanghae.png');
+    background-repeat: no-repeat;
 `;
 
 export default Footer;

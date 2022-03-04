@@ -5,18 +5,23 @@ import { RoomList } from './index';
 
 const Contents = () => {
     return (
-        <FlexContainer>
-            <Banner></Banner>
-            <RoomListContainer>
-                <RoomListHeader>
-                    <h3 style={{ fontSize: '20px' }}>게임방리스트</h3>
-                    <Selector>
-                        <option>최신순</option>
-                    </Selector>
-                </RoomListHeader>
-                <RoomList></RoomList>
-            </RoomListContainer>
-        </FlexContainer>
+        <>
+            <FlexContainer>
+                <Banner src="/images/20220302_010744 1.png"></Banner>
+                <RoomListContainer>
+                    <RoomListHeader>
+                        <h3 style={{ fontSize: '20px' }}>게임방리스트</h3>
+                        <Selector>
+                            <option>최신순 </option>
+                        </Selector>
+                    </RoomListHeader>
+                    <RoomList></RoomList>
+                </RoomListContainer>
+            </FlexContainer>
+            <MoreBtn>
+                <span>더보기</span>
+            </MoreBtn>
+        </>
     );
 };
 
@@ -25,13 +30,9 @@ const FlexContainer = styled.div`
     height: 100%;
 `;
 
-const Banner = styled.div`
+const Banner = styled.img`
     width: 100%;
-    height: 368px;
-    background-image: url('/images/20220302_010744 1.png');
-    background-repeat: no-repeat;
-    border-radius: 77px;
-    background-size: cover;
+    object-fit: contain;
 `;
 
 const RoomListContainer = styled.div`
@@ -64,10 +65,34 @@ const Selector = styled.select`
     border-radius: 19px;
     color: #394ddb;
     appearance: none;
-    background-image: url('/icons/DownArrow.png');
+    background-image: url('/icons/contents/downArrow.png');
     background-repeat: no-repeat;
     background-position-x: 59px;
     background-position-y: 12px;
+`;
+
+const MoreBtn = styled.button`
+    position: relative;
+    width: 121px;
+    height: 40px;
+    background: #ffffff;
+    box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.15);
+    border-radius: 38px;
+    margin: 32px;
+
+    font-size: 20px;
+    color: #5668e8;
+    cursor: pointer;
+
+    background-image: url('/icons/contents/emptyDownArrow.svg');
+    background-repeat: no-repeat;
+    background-position-x: 82px;
+    background-position-y: 15px;
+    span {
+        position: absolute;
+        left: 22px;
+        top: 10px;
+    }
 `;
 
 export default Contents;

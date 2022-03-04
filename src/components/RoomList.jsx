@@ -18,9 +18,9 @@ const RoomList = () => {
                                     <img
                                         src={
                                             process.env.PUBLIC_URL +
-                                            'icons/peers.svg'
+                                            'icons/contents/peers.svg'
                                         }
-                                        alt="ddd"
+                                        alt="참가자 수: "
                                     />
                                     4
                                 </IconContainer>
