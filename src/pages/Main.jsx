@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Contents } from '../components/index';
+import { Contents, Footer } from '../components/index';
 
 import Layout from './Layout';
 
@@ -16,13 +16,14 @@ const Main = () => {
                         </ContentsContainer>
                     </FlexContainer>
                 </MainContainer>
+                <Footer />
             </Layout>
         </>
     );
 };
 
 const MainContainer = styled.div`
-    background-color: gray;
+    /* background-color: gray; */
     width: 100%;
     height: 100vh;
 `;
