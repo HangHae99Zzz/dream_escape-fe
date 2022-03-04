@@ -8,7 +8,8 @@ const Footer = props => {
             <PaddingLeft>
                 <FooterTop>
                     <div>
-                        <Roll>designer</Roll> kim bo kyung seo hye won{' '}
+                        <Roll style={{ margin: '0 7.5px 0 0' }}>designer</Roll>{' '}
+                        kim bo kyung seo hye won{' '}
                     </div>
                     <div>
                         <Roll>developer</Roll> kim ga eun ryu gang hyeon ban won
@@ -42,7 +43,7 @@ const FooterContiner = styled.div`
 `;
 
 const PaddingLeft = styled.div`
-    padding-left: 8.5%;
+    padding-left: 7%;
 `;
 
 const FooterTop = styled.div`
@@ -55,6 +56,7 @@ const FooterTop = styled.div`
 
 const Roll = styled.span`
     color: #666666;
+    padding-right: 12px;
 `;
 
 const FooterBottom = styled.div``;

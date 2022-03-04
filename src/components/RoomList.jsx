@@ -37,13 +37,13 @@ const RoomList = () => {
 const RoomLi = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-between;
 `;
 
 const RoomWrapper = styled.div`
     width: 250px;
     height: 300px;
-    margin: 1%;
+    margin: 1% 1% 1% 0;
 `;
 
 const Room = styled.div`

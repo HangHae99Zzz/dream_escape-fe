@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Contents, Footer } from '../components/index';
+import { MakeModal, WaitModal } from '../modal/index';
 
 import Layout from './Layout';
 
@@ -15,6 +16,7 @@ const Main = () => {
                     </ContentsContainer>
                 </MainContainer>
                 <Footer />
+                <MakeModal />
                 <MakeRoomBtn>방탈출 방 만들기</MakeRoomBtn>
             </Layout>
         </>
@@ -29,6 +31,7 @@ const ContentsContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-left: -1.1099999999999994vw;
     align-items: center;
 `;
 
@@ -36,7 +39,8 @@ const MakeRoomBtn = styled.div`
     position: fixed;
     width: 240px;
     height: 62px;
-    right: 36.5%;
+
+    right: 37.8%;
     bottom: 44px;
 
     backdrop-filter: blur(30px);
