@@ -1,41 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ModalBG from './ModalBG';
 import { MuteButton } from '../elements/index';
 
-const WaitModal = () => {
+const WaitModal = ({ closeModal }) => {
     return (
-        <ModalBG>
-            <ModalWindow>
-                <ExitContainer>
-                    <XIcon src="/icons/x.svg" alt="" />
-                </ExitContainer>
-                <div>
-                    <RoomName>방구석 대탈출ㅋㅋ</RoomName>
-                </div>
-                <div>현재인원</div>
-                <UserWrapper>
-                    <UserContainer>아이들</UserContainer>
-                    <UserContainer>아이들</UserContainer>
-                    <UserContainer>아이들</UserContainer>
-                    <UserContainer>아이들</UserContainer>
-                </UserWrapper>
-                게임방
-                <ImgContainer>
-                    <MuteButton> </MuteButton>
-                </ImgContainer>
-                <div>
-                    <MakeButton>게임시작</MakeButton>
-                </div>
-                <CopyContaier>
-                    <img src="/icons/clip.svg" alt="" /> <div>링크복사</div>
-                </CopyContaier>
-                <FooterContainer>
-                    친구들에게 공유하시면 함께 즐길 수 있어요
-                </FooterContainer>
-            </ModalWindow>
-        </ModalBG>
+        <ModalWindow>
+            <ExitContainer>
+                <XIcon
+                    src="/icons/x.svg"
+                    alt=""
+                    onClick={() => closeModal(false)}
+                />
+            </ExitContainer>
+            <div>
+                <RoomName>방구석 대탈출ㅋㅋ</RoomName>
+            </div>
+            <div>현재인원</div>
+            <UserWrapper>
+                <UserContainer>아이들</UserContainer>
+                <UserContainer>아이들</UserContainer>
+                <UserContainer>아이들</UserContainer>
+                <UserContainer>아이들</UserContainer>
+            </UserWrapper>
+            게임방
+            <ImgContainer>
+                <MuteButton> </MuteButton>
+            </ImgContainer>
+            <div>
+                <MakeButton>게임시작</MakeButton>
+            </div>
+            <CopyContaier>
+                <img src="/icons/clip.svg" alt="" /> <div>링크복사</div>
+            </CopyContaier>
+            <FooterContainer>
+                친구들에게 공유하시면 함께 즐길 수 있어요
+            </FooterContainer>
+        </ModalWindow>
     );
 };
 

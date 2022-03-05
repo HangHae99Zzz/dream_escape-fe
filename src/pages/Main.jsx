@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Contents, Footer } from '../components/index';
-import { MakeModal, WaitModal } from '../modal/index';
+import { MakeModal, ModalBG } from '../modal/index';
 
 import Layout from './Layout';
 
 const Main = () => {
+    const [openModal, setOpenModal] = useState(false);
+
     return (
         <>
             <Layout>
@@ -16,9 +18,16 @@ const Main = () => {
                     </ContentsContainer>
                 </MainContainer>
                 <Footer />
-                {/* <MakeModal /> */}
-                <WaitModal />
-                <MakeRoomBtn>방탈출 방 만들기</MakeRoomBtn>
+                <MakeRoomBtn onClick={() => setOpenModal(true)}>
+                    방탈출 방 만들기
+                </MakeRoomBtn>
+
+                {openModal && (
+                    <>
+                        <ModalBG closeModal={setOpenModal} />
+                        <MakeModal closeModal={setOpenModal} />
+                    </>
+                )}
             </Layout>
         </>
     );

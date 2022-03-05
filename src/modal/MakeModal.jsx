@@ -1,35 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import ModalBG from './ModalBG';
 import { MuteButton } from '../elements/index';
+import { WaitModal } from './index';
 
-const MakeModal = () => {
+const MakeModal = ({ closeModal }) => {
+    const [waitModal, SetWaitModal] = useState(false);
+
     return (
-        <ModalBG>
-            <ModalWindow>
-                <ExitContainer>
-                    <XIcon src="/icons/x.svg" alt="" />
-                </ExitContainer>
-                <div>
-                    <NameInput placeholder="방 이름을 입력하세요"></NameInput>
-                </div>
-                <MicContiner>
-                    <div>보이스채팅 마이크</div>
-                    <MuteButton> </MuteButton>
-                </MicContiner>
-                <ImgContainer></ImgContainer>
-                <div>
-                    <MakeButton>방 개설하기</MakeButton>
-                </div>
-                <CopyContaier>
-                    <img src="/icons/clip.svg" alt="" /> <div>링크복사</div>
-                </CopyContaier>
-                <FooterContainer>
-                    친구들에게 공유하시면 함께 즐길 수 있어요
-                </FooterContainer>
-            </ModalWindow>
-        </ModalBG>
+        <>
+            {waitModal ? (
+                <WaitModal closeModal={closeModal} />
+            ) : (
+                <ModalWindow>
+                    <ExitContainer>
+                        <XIcon
+                            src="/icons/x.svg"
+                            alt=""
+                            onClick={() => closeModal(false)}
+                        />
+                    </ExitContainer>
+                    <div>
+                        <NameInput placeholder="방 이름을 입력하세요"></NameInput>
+                    </div>
+                    <MicContiner>
+                        <div>보이스채팅 마이크</div>
+                        <MuteButton> </MuteButton>
+                    </MicContiner>
+                    <ImgContainer></ImgContainer>
+                    <div>
+                        <MakeButton onClick={() => SetWaitModal(true)}>
+                            방 개설하기
+                        </MakeButton>
+                    </div>
+                    <CopyContaier>
+                        <img src="/icons/clip.svg" alt="" /> <div>링크복사</div>
+                    </CopyContaier>
+                    <FooterContainer>
+                        친구들에게 공유하시면 함께 즐길 수 있어요
+                    </FooterContainer>
+                </ModalWindow>
+            )}
+        </>
     );
 };
 

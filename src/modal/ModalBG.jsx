@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ModalBG = props => {
-    return <BG>{props.children}</BG>;
+    return <BG onClick={() => props.closeModal(false)}></BG>;
 };
 
 const BG = styled.div`
-    /* display: none; */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
