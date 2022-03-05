@@ -16,16 +16,28 @@ const WaitModal = ({ closeModal }) => {
             <div>
                 <RoomName>방구석 대탈출ㅋㅋ</RoomName>
             </div>
-            <div>현재인원</div>
+            <Label>현재인원</Label>
             <UserWrapper>
-                <UserContainer>아이들</UserContainer>
-                <UserContainer>아이들</UserContainer>
-                <UserContainer>아이들</UserContainer>
-                <UserContainer>아이들</UserContainer>
+                <UserContainer>
+                    <UserImg />
+                    닉네임
+                </UserContainer>
+                <UserContainer>
+                    <UserImg />
+                    닉네임
+                </UserContainer>
+                <UserContainer>
+                    <UserImg />
+                    닉네임
+                </UserContainer>
+                <UserContainer>
+                    <UserImg />
+                    닉네임
+                </UserContainer>
             </UserWrapper>
-            게임방
+            <Label>게임방</Label>
             <ImgContainer>
-                <MuteButton> </MuteButton>
+                <MuteButton abs={true}> </MuteButton>
             </ImgContainer>
             <div>
                 <MakeButton>게임시작</MakeButton>
@@ -43,7 +55,7 @@ const WaitModal = ({ closeModal }) => {
 const ModalWindow = styled.div`
     position: fixed;
     z-index: 3;
-    width: 716px;
+    width: 37.292vw;
     height: 733px;
     left: 31.354vw;
     top: 112px;
@@ -65,25 +77,53 @@ const XIcon = styled.img`
     right: 42px;
 `;
 const RoomName = styled.h3`
+    margin-bottom: 47px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
     text-align: center;
+    letter-spacing: -0.03em;
+
+    color: #5668e8;
+`;
+const Label = styled.div`
+    margin-bottom: 16px;
     font-weight: bold;
     font-size: 18px;
-    line-height: 24px;
+    line-height: 22px;
     /* identical to box height */
     letter-spacing: -0.03em;
 
-    color: #5668e8; ;
+    color: #000000;
 `;
 const UserWrapper = styled.div`
     width: 48%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    margin-bottom: 44px;
 `;
-const UserContainer = styled.div``;
+const UserContainer = styled.div`
+    text-align: center;
+    margin: 0 12px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+`;
+const UserImg = styled.div`
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: #ecebeb;
+    margin-bottom: 12px;
+`;
 const ImgContainer = styled.div`
-    width: 600px;
-    height: 400px;
+    position: relative;
+    width: 15.625vw;
+    height: 10.417vw;
     background: #e3e3e3;
     border-radius: 30px;
 `;
@@ -95,6 +135,14 @@ const MakeButton = styled.button`
     border: 3px solid #5668e8;
     box-sizing: border-box;
     border-radius: 30px;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+    text-align: center;
+    letter-spacing: -0.03em;
+
+    color: #ffffff;
 `;
 const CopyContaier = styled.div`
     width: 12%;

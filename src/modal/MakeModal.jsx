@@ -48,7 +48,7 @@ const MakeModal = ({ closeModal }) => {
 const ModalWindow = styled.div`
     position: fixed;
     z-index: 3;
-    width: 716px;
+    width: 37.292vw;
     height: 733px;
     left: 31.354vw;
     top: 112px;
@@ -70,7 +70,7 @@ const XIcon = styled.img`
     right: 42px;
 `;
 const NameInput = styled.input`
-    width: 443px;
+    width: 23.073vw;
     height: 60px;
     left: 738px;
     top: 196px;
@@ -97,7 +97,7 @@ const MicContiner = styled.div`
     justify-content: space-evenly;
 `;
 const ImgContainer = styled.div`
-    width: 600px;
+    width: 31.25vw;
     height: 400px;
     background: #e3e3e3;
     border-radius: 30px;

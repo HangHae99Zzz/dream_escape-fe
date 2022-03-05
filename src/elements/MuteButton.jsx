@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MuteButton = () => {
+const MuteButton = ({ abs }) => {
     return (
-        <Button>
+        <Button abs={abs}>
             <Label>ON</Label>
             <MicIcon src="/icons/mic.svg" alt="" />
         </Button>
@@ -13,6 +13,9 @@ const MuteButton = () => {
 const Button = styled.div`
     display: flex;
     align-items: center;
+    position: ${props => props.abs && 'absolute'};
+    bottom: ${props => props.abs && '17px'};
+    left: ${props => props.abs && '24px'};
 `;
 const Label = styled.div`
     font-weight: bold;
