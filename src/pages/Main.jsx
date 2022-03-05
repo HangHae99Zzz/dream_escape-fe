@@ -16,7 +16,8 @@ const Main = () => {
                     </ContentsContainer>
                 </MainContainer>
                 <Footer />
-                <MakeModal />
+                {/* <MakeModal /> */}
+                <WaitModal />
                 <MakeRoomBtn>방탈출 방 만들기</MakeRoomBtn>
             </Layout>
         </>

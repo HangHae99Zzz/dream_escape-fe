@@ -11,17 +11,17 @@ const MakeModal = () => {
                 <ExitContainer>
                     <XIcon src="/icons/x.svg" alt="" />
                 </ExitContainer>
-                <NameContainer>
+                <div>
                     <NameInput placeholder="방 이름을 입력하세요"></NameInput>
-                </NameContainer>
+                </div>
                 <MicContiner>
                     <div>보이스채팅 마이크</div>
                     <MuteButton> </MuteButton>
                 </MicContiner>
                 <ImgContainer></ImgContainer>
-                <MakeContainer>
+                <div>
                     <MakeButton>방 개설하기</MakeButton>
-                </MakeContainer>
+                </div>
                 <CopyContaier>
                     <img src="/icons/clip.svg" alt="" /> <div>링크복사</div>
                 </CopyContaier>
@@ -57,7 +57,6 @@ const XIcon = styled.img`
     top: 39px;
     right: 42px;
 `;
-const NameContainer = styled.div``;
 const NameInput = styled.input`
     width: 443px;
     height: 60px;
@@ -91,7 +90,6 @@ const ImgContainer = styled.div`
     background: #e3e3e3;
     border-radius: 30px;
 `;
-const MakeContainer = styled.div``;
 const MakeButton = styled.button`
     width: 180px;
     height: 54px;

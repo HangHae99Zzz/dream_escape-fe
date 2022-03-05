@@ -6,7 +6,7 @@ const ModalBG = props => {
 };
 
 const BG = styled.div`
-    display: none;
+    /* display: none; */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
