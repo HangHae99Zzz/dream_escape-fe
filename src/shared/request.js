@@ -3,7 +3,7 @@ import axios from "axios";
 
 // api 요청 보내는 서버(나중에 .env.local로 옮기기)
 export const instance = axios.create({
-  baseURL: "http://3.36.48.132/",
+  baseURL: "https://banwonjae.shop:8080/",
 });
 
 // socket.io

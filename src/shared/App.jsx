@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Main from "../pages/Main";
 import GlobalStyles from "../components/GlobalStyle";
+import GameRoom from "../pages/GameRoom";
 
 import { createBrowserHistory } from "history";
 import Loading from "../components/Loading";
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/loading" element={<Loading />} />
+        <Route path="/game" element={<GameRoom />} />
       </Routes>
     </HistoryRouter>
   );
