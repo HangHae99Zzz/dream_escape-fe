@@ -9,8 +9,8 @@ const pc_config = {
         },
     ],
 };
-// const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
-const SOCKET_SERVER_URL = 'http://localhost:8080';
+const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
+// const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
     // const socket = io.connect(SOCKET_SERVER_URL);
@@ -64,10 +64,8 @@ const Chat = () => {
             .forEach(track => (track.enabled = !track.enabled));
 
         if (!muted) {
-            // muteBtn.innerText = 'Unmute';
             setMuted(true);
         } else {
-            // muteBtn.innerText = 'Mute';
             setMuted(false);
         }
     };
@@ -83,16 +81,19 @@ const Chat = () => {
                 .getSenders()
                 .find(sender => sender.track.kind === 'audio');
             audioSander.replaceTrack(audioTrack);
+            console.log(audioTrack);
             console.log(audioSander);
         }
     };
 
     const getLocalStream = useCallback(async deviceId => {
         const initialConstraints = {
+            video: true,
             audio: true,
         };
 
         const constraints = {
+            video: true,
             audio: { deviceId: { exact: deviceId } },
         };
 
@@ -142,12 +143,15 @@ const Chat = () => {
                             stream: e.streams[0],
                         })
                 );
+                console.log(e);
+                // 애가 잘 발생을 안하는구만
             };
 
             if (localStreamRef.current) {
                 localStreamRef.current.getTracks().forEach(track => {
                     if (!localStreamRef.current) return;
                     pcRef.current.addTrack(track, localStreamRef.current);
+                    console.log(pcRef.current);
                 });
             } else {
                 console.log('no local stream');
@@ -171,17 +175,17 @@ const Chat = () => {
                 if (!(pcRef.current && socketRef.current)) return;
                 const obj = { [user.id]: pcRef.current };
                 pcsRef.current = { ...pcsRef.current, ...obj };
-                console.log(pcsRef.current);
 
                 try {
                     const localSdp = await pcRef.current.createOffer({
                         offerToReceiveAudio: true,
                         offerToReceiveVideo: true,
                     });
+
                     await pcRef.current.setLocalDescription(
                         new RTCSessionDescription(localSdp)
                     );
-                    console.log(pcRef.current);
+
                     socketRef.current.emit('offer', {
                         sdp: localSdp,
                         offerSendID: socketRef.current.id,
