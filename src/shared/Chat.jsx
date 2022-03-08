@@ -73,12 +73,13 @@ const Chat = () => {
     };
 
     const handleMicChange = async () => {
-        const pc = createPeerConnection();
+        pcRef.current = createPeerConnection();
+        console.log(pcRef.current);
 
         await getLocalStream(micSelect.current.value);
-        if (pc) {
+        if (pcRef.current) {
             const audioTrack = localStreamRef.current.getAudioTracks()[0];
-            const audioSander = pc
+            const audioSander = pcRef.current
                 .getSenders()
                 .find(sender => sender.track.kind === 'audio');
             audioSander.replaceTrack(audioTrack);
@@ -87,7 +88,6 @@ const Chat = () => {
     };
 
     const getLocalStream = useCallback(async deviceId => {
-        console.log(deviceId);
         const initialConstraints = {
             audio: true,
         };
@@ -103,10 +103,9 @@ const Chat = () => {
 
             localStreamRef.current = localStream;
 
-            if (localVideoRef.current)
-                localVideoRef.current.srcObject = localStream;
+            localVideoRef.current.srcObject = localStream;
 
-            if (!socketRef.current) return;
+            if (!deviceId) await getDevices();
 
             socketRef.current.emit('join_room', {
                 room: '1234',
@@ -119,11 +118,10 @@ const Chat = () => {
 
     const createPeerConnection = useCallback((socketID, email) => {
         try {
-            const pc = new RTCPeerConnection(pc_config);
+            pcRef.current = new RTCPeerConnection(pc_config);
 
-            pc.onicecandidate = e => {
+            pcRef.current.onicecandidate = e => {
                 if (!(socketRef.current && e.candidate)) return;
-                console.log('onicecandidate');
                 socketRef.current.emit('candidate', {
                     candidate: e.candidate,
                     candidateSendID: socketRef.current.id,
@@ -131,12 +129,11 @@ const Chat = () => {
                 });
             };
 
-            pc.oniceconnectionstatechange = e => {
+            pcRef.current.oniceconnectionstatechange = e => {
                 // console.log(e);
             };
 
-            pc.ontrack = e => {
-                console.log('ontrack success');
+            pcRef.current.ontrack = e => {
                 setUsers(oldUsers =>
                     oldUsers
                         .filter(user => user.id !== socketID)
@@ -148,16 +145,15 @@ const Chat = () => {
             };
 
             if (localStreamRef.current) {
-                console.log('localstream add');
                 localStreamRef.current.getTracks().forEach(track => {
                     if (!localStreamRef.current) return;
-                    pc.addTrack(track, localStreamRef.current);
+                    pcRef.current.addTrack(track, localStreamRef.current);
                 });
             } else {
                 console.log('no local stream');
             }
 
-            return pc;
+            return pcRef.current;
         } catch (e) {
             console.error(e);
             return undefined;
@@ -171,22 +167,21 @@ const Chat = () => {
         socketRef.current.on('all_users', allUsers => {
             allUsers.forEach(async user => {
                 if (!localStreamRef.current) return;
-                const pc = createPeerConnection(user.id, user.emial);
-                if (!(pc && socketRef.current)) return;
-                const obj = { [user.id]: pc };
+                pcRef.current = createPeerConnection(user.id, user.emial);
+                if (!(pcRef.current && socketRef.current)) return;
+                const obj = { [user.id]: pcRef.current };
                 pcsRef.current = { ...pcsRef.current, ...obj };
                 console.log(pcsRef.current);
 
                 try {
-                    const localSdp = await pc.createOffer({
+                    const localSdp = await pcRef.current.createOffer({
                         offerToReceiveAudio: true,
                         offerToReceiveVideo: true,
                     });
-                    console.log('create offer success');
-                    await pc.setLocalDescription(
+                    await pcRef.current.setLocalDescription(
                         new RTCSessionDescription(localSdp)
                     );
-                    console.log(pc);
+                    console.log(pcRef.current);
                     socketRef.current.emit('offer', {
                         sdp: localSdp,
                         offerSendID: socketRef.current.id,
@@ -201,24 +196,23 @@ const Chat = () => {
 
         socketRef.current.on('getOffer', async data => {
             const { sdp, offerSendID, offerSendEmail } = data;
-            console.log('get offer');
             if (!localStreamRef.current) return;
-            const pc = createPeerConnection(offerSendID, offerSendEmail);
-            if (!(pc && socketRef.current)) return;
-            const obj = { [offerSendID]: pc };
+            pcRef.current = createPeerConnection(offerSendID, offerSendEmail);
+            if (!(pcRef.current && socketRef.current)) return;
+            const obj = { [offerSendID]: pcRef.current };
             pcsRef.current = { ...pcsRef.current, ...obj };
 
             try {
-                await pc.setRemoteDescription(new RTCSessionDescription(sdp));
-                console.log('answer set remote description success');
-                const localSdp = await pc.createAnswer({
-                    offerToReceiveVideo: true,
+                await pcRef.current.setRemoteDescription(
+                    new RTCSessionDescription(sdp)
+                );
+                const localSdp = await pcRef.current.createAnswer({
                     offerToReceiveAudio: true,
                 });
-                await pc.setLocalDescription(
+                await pcRef.current.setLocalDescription(
                     new RTCSessionDescription(localSdp)
                 );
-                console.log(pc);
+                console.log(pcRef.current);
                 socketRef.current.emit('answer', {
                     sdp: localSdp,
                     answerSendID: socketRef.current.id,
@@ -231,18 +225,17 @@ const Chat = () => {
 
         socketRef.current.on('getAnswer', data => {
             const { sdp, answerSendID } = data;
-            console.log('get answer');
-            const pc = pcsRef.current[answerSendID];
-            if (!pc) return;
-            pc.setRemoteDescription(new RTCSessionDescription(sdp));
+            pcRef.current = pcsRef.current[answerSendID];
+            if (!pcRef.current) return;
+            pcRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
         });
 
         socketRef.current.on('getCandidate', async data => {
-            console.log('get candidate');
-            const pc = pcsRef.current[data.candidateSendID];
-            if (!pc) return;
-            await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
-            console.log('candidate add success');
+            pcRef.current = pcsRef.current[data.candidateSendID];
+            if (!pcRef.current) return;
+            await pcRef.current.addIceCandidate(
+                new RTCIceCandidate(data.candidate)
+            );
         });
 
         socketRef.current.on('user_exit', data => {
