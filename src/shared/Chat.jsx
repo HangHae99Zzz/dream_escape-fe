@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import io from 'socket.io-client';
+import axios from 'axios';
+
 import Video from '../components/Video';
 
 const pc_config = {
@@ -15,10 +17,10 @@ const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
 const Chat = () => {
     // const socket = io.connect(SOCKET_SERVER_URL);
     const socketRef = useRef();
-    const pcRef = useRef();
     const pcsRef = useRef();
     const localStreamRef = useRef();
     const localVideoRef = useRef();
+    console.log(localVideoRef.current);
 
     const divicesRef = useRef();
     const micsRef = useRef();
@@ -71,13 +73,13 @@ const Chat = () => {
     };
 
     const handleMicChange = async () => {
-        pcRef.current = createPeerConnection();
-        console.log(pcRef.current);
+        const pc = createPeerConnection();
+        console.log(pc);
 
         await getLocalStream(micSelect.current.value);
-        if (pcRef.current) {
+        if (pc) {
             const audioTrack = localStreamRef.current.getAudioTracks()[0];
-            const audioSander = pcRef.current
+            const audioSander = pc
                 .getSenders()
                 .find(sender => sender.track.kind === 'audio');
             audioSander.replaceTrack(audioTrack);
@@ -119,9 +121,9 @@ const Chat = () => {
 
     const createPeerConnection = useCallback((socketID, email) => {
         try {
-            pcRef.current = new RTCPeerConnection(pc_config);
+            const pc = new RTCPeerConnection(pc_config);
 
-            pcRef.current.onicecandidate = e => {
+            pc.onicecandidate = e => {
                 if (!(socketRef.current && e.candidate)) return;
                 socketRef.current.emit('candidate', {
                     candidate: e.candidate,
@@ -130,16 +132,17 @@ const Chat = () => {
                 });
             };
 
-            pcRef.current.oniceconnectionstatechange = e => {
+            pc.oniceconnectionstatechange = e => {
                 // console.log(e);
             };
 
-            pcRef.current.ontrack = e => {
+            pc.ontrack = e => {
                 setUsers(oldUsers =>
                     oldUsers
                         .filter(user => user.id !== socketID)
                         .concat({
                             id: socketID,
+                            email,
                             stream: e.streams[0],
                         })
                 );
@@ -150,14 +153,13 @@ const Chat = () => {
             if (localStreamRef.current) {
                 localStreamRef.current.getTracks().forEach(track => {
                     if (!localStreamRef.current) return;
-                    pcRef.current.addTrack(track, localStreamRef.current);
-                    console.log(pcRef.current);
+                    pc.addTrack(track, localStreamRef.current);
                 });
             } else {
                 console.log('no local stream');
             }
 
-            return pcRef.current;
+            return pc;
         } catch (e) {
             console.error(e);
             return undefined;
@@ -171,18 +173,17 @@ const Chat = () => {
         socketRef.current.on('all_users', allUsers => {
             allUsers.forEach(async user => {
                 if (!localStreamRef.current) return;
-                pcRef.current = createPeerConnection(user.id, user.emial);
-                if (!(pcRef.current && socketRef.current)) return;
-                const obj = { [user.id]: pcRef.current };
-                pcsRef.current = { ...pcsRef.current, ...obj };
+                const pc = createPeerConnection(user.id, user.email);
+                if (!(pc && socketRef.current)) return;
+                pcsRef.current = { ...pcsRef.current, [user.id]: pc };
 
                 try {
-                    const localSdp = await pcRef.current.createOffer({
+                    const localSdp = await pc.createOffer({
                         offerToReceiveAudio: true,
                         offerToReceiveVideo: true,
                     });
 
-                    await pcRef.current.setLocalDescription(
+                    await pc.setLocalDescription(
                         new RTCSessionDescription(localSdp)
                     );
 
@@ -201,22 +202,19 @@ const Chat = () => {
         socketRef.current.on('getOffer', async data => {
             const { sdp, offerSendID, offerSendEmail } = data;
             if (!localStreamRef.current) return;
-            pcRef.current = createPeerConnection(offerSendID, offerSendEmail);
-            if (!(pcRef.current && socketRef.current)) return;
-            const obj = { [offerSendID]: pcRef.current };
-            pcsRef.current = { ...pcsRef.current, ...obj };
+            const pc = createPeerConnection(offerSendID, offerSendEmail);
+            if (!(pc && socketRef.current)) return;
+            pcsRef.current = { ...pcsRef.current, [offerSendID]: pc };
 
             try {
-                await pcRef.current.setRemoteDescription(
-                    new RTCSessionDescription(sdp)
-                );
-                const localSdp = await pcRef.current.createAnswer({
+                await pc.setRemoteDescription(new RTCSessionDescription(sdp));
+                const localSdp = await pc.createAnswer({
+                    offerToReceiveVideo: true,
                     offerToReceiveAudio: true,
                 });
-                await pcRef.current.setLocalDescription(
+                await pc.setLocalDescription(
                     new RTCSessionDescription(localSdp)
                 );
-                console.log(pcRef.current);
                 socketRef.current.emit('answer', {
                     sdp: localSdp,
                     answerSendID: socketRef.current.id,
@@ -229,25 +227,36 @@ const Chat = () => {
 
         socketRef.current.on('getAnswer', data => {
             const { sdp, answerSendID } = data;
-            pcRef.current = pcsRef.current[answerSendID];
-            if (!pcRef.current) return;
-            pcRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
+            const pc = pcsRef.current[answerSendID];
+            if (!pc) return;
+            pc.setRemoteDescription(new RTCSessionDescription(sdp));
         });
 
         socketRef.current.on('getCandidate', async data => {
-            pcRef.current = pcsRef.current[data.candidateSendID];
-            if (!pcRef.current) return;
-            await pcRef.current.addIceCandidate(
-                new RTCIceCandidate(data.candidate)
-            );
+            const pc = pcsRef.current[data.candidateSendID];
+            if (!pc) return;
+            await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
         });
 
+        ////////////////////////////////////////////////////////////////////////////
         socketRef.current.on('user_exit', data => {
             if (!pcsRef.current[data.id]) return;
             pcsRef.current[data.id].close();
             delete pcsRef.current[data.id];
             setUsers(oldUsers => oldUsers.filter(user => user.id !== data.id));
+
+            console.log({ userId: data.id });
+
+            // axios
+            //     .post('https://banwonjae.shop:8080/user', { userId: data.id })
+            //     .then(function (response) {
+            //         console.log(response);
+            //     })
+            //     .catch(function (error) {
+            //         console.log(error);
+            //     });
         });
+        //////////////////////////////////////////////////////////////////////////
 
         return () => {
             if (socketRef.current) {
@@ -279,6 +288,9 @@ const Chat = () => {
                         muted
                         ref={localVideoRef}
                         autoPlay
+                        onInput={() => {
+                            console.log('a');
+                        }}
                     />
                     <button ref={muteBtn} onClick={() => handleMuteClick()}>
                         {'muted ' + muted}
