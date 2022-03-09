@@ -7,7 +7,7 @@ import { MakeModal, ModalBG } from '../modal/index';
 import Layout from './Layout';
 
 const Main = () => {
-    const [openModal, setOpenModal] = useState(false);
+    const [openMakeModal, setOpenMakeModal] = useState(false);
 
     return (
         <>
@@ -18,14 +18,14 @@ const Main = () => {
                     </ContentsContainer>
                 </MainContainer>
                 <Footer />
-                <MakeRoomBtn onClick={() => setOpenModal(true)}>
+                <MakeRoomBtn onClick={() => setOpenMakeModal(true)}>
                     방탈출 방 만들기
                 </MakeRoomBtn>
 
-                {openModal && (
+                {openMakeModal && (
                     <>
-                        <ModalBG closeModal={setOpenModal} />
-                        <MakeModal closeModal={setOpenModal} />
+                        <ModalBG closeModal={setOpenMakeModal} />
+                        <MakeModal closeModal={setOpenMakeModal} />
                     </>
                 )}
             </Layout>

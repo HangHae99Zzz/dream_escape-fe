@@ -3,6 +3,7 @@ import {
     Routes,
     unstable_HistoryRouter as HistoryRouter,
 } from 'react-router-dom';
+
 import Main from '../pages/Main';
 import GlobalStyles from '../components/GlobalStyle';
 import GameRoom from '../pages/GameRoom';
@@ -16,9 +17,10 @@ function App() {
     return (
         <HistoryRouter history={history}>
             <GlobalStyles />
+            <Chat />
 
             <Routes>
-                <Route path="/" element={<Chat />} />
+                <Route path="/" element={<Main />} />
                 <Route path="/loading" element={<Loading />} />
                 <Route path="/game" element={<GameRoom />} />
             </Routes>

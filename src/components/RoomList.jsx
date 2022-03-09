@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
+import axios from 'axios';
+
+import { WaitModal, ModalBG } from '../modal/index';
 
 const RoomList = () => {
     const [rooms, setRooms] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+    useEffect(() => {
+        axios
+            .get('https://banwonjae.shop:8080/user')
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }, []);
+
+    const [openWaitModal, setOpenWaitModal] = useState(false);
 
     return (
         <RoomLi>
             {rooms.map(room => {
                 return (
-                    <RoomWrapper>
+                    <RoomWrapper onClick={() => setOpenWaitModal(true)}>
                         <Room></Room>
                         <FooterContainer>
                             <FooterTop>
@@ -30,6 +46,12 @@ const RoomList = () => {
                     </RoomWrapper>
                 );
             })}
+            {openWaitModal && (
+                <>
+                    <ModalBG closeModal={setOpenWaitModal} />
+                    <WaitModal closeModal={setOpenWaitModal} />
+                </>
+            )}
         </RoomLi>
     );
 };
@@ -44,6 +66,7 @@ const RoomWrapper = styled.div`
     width: 250px;
     height: 300px;
     margin: 1% 1% 1% 0;
+    cursor: pointer;
 `;
 
 const Room = styled.div`

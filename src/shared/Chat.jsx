@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
 
+import styled from 'styled-components';
+
 import Video from '../components/Video';
 
 const pc_config = {
@@ -110,10 +112,12 @@ const Chat = () => {
 
             if (!deviceId) await getDevices();
 
+            /////////////////////////////////////////////////////////////////////////
             socketRef.current.emit('join_room', {
                 room: '1234',
                 email: 'sample@naver.com',
             });
+            /////////////////////////////////////////////////////////////////////////
         } catch (e) {
             console.log(`getUserMedia error: ${e}`);
         }
@@ -169,6 +173,8 @@ const Chat = () => {
     useEffect(() => {
         socketRef.current = io.connect(SOCKET_SERVER_URL);
         getLocalStream().then(() => getDevices());
+
+        // room 들어가면 실행하도록 /////////////////////////////////////
 
         socketRef.current.on('all_users', allUsers => {
             allUsers.forEach(async user => {
@@ -277,7 +283,7 @@ const Chat = () => {
     } else {
         return (
             <>
-                <div>
+                <ChatWrapper>
                     <video
                         style={{
                             width: 240,
@@ -288,9 +294,6 @@ const Chat = () => {
                         muted
                         ref={localVideoRef}
                         autoPlay
-                        onInput={() => {
-                            console.log('a');
-                        }}
                     />
                     <button ref={muteBtn} onClick={() => handleMuteClick()}>
                         {'muted ' + muted}
@@ -329,10 +332,14 @@ const Chat = () => {
                     {users.map((user, index) => (
                         <Video key={index} stream={user.stream} />
                     ))}
-                </div>
+                </ChatWrapper>
             </>
         );
     }
 };
+
+const ChatWrapper = styled.div`
+    display: none;
+`;
 
 export default Chat;
