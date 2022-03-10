@@ -8,3 +8,5 @@ export const instance = axios.create({
 
 // socket.io
 // URL: "https://www.roomescape57.shop:3000/";
+
+export default instance;

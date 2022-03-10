@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 import Main from '../pages/Main';
-import GlobalStyles from '../components/GlobalStyle';
+import GlobalStyles from '../shared/GlobalStyle';
 import GameRoom from '../pages/GameRoom';
 import Chat from './Chat';
 

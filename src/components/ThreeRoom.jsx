@@ -3,74 +3,55 @@ import { Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Html, useProgress } from "@react-three/drei";
+import Hacker from "../elements/Hacker";
+import Test from "../elements/Test";
+import Model from "../elements/Model";
+import Modal from "../modal/Modal";
+
 const ThreeRoom = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [quizType, setQuizType] = useState("");
+  console.log(modalOpen, quizType, typeof quizType);
+
   function Loader() {
     const { progress } = useProgress();
     return <Html center>{progress} % loaded</Html>;
   }
 
-  function Model(props) {
-    const group = useRef();
-    const { nodes, materials } = useGLTF("/Poinmandres.gltf");
-    return (
-      <group ref={group} {...props} dispose={null}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Curve007_1.geometry}
-          material={materials["Material.001"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Curve007_2.geometry}
-          material={materials["Material.002"]}
-        />
-      </group>
-    );
-  }
-
-  useGLTF.preload("/Poinmandres.gltf");
-
-  function Box(props) {
-    // This reference gives us direct access to the THREE.Mesh object
-    const ref = useRef();
-    // Hold state for hovered and clicked events
-    const [hovered, hover] = useState(false);
-    const [clicked, click] = useState(false);
-    // Subscribe this component to the render-loop, rotate the mesh every frame
-    useFrame((state, delta) => (ref.current.rotation.x += 0.01));
-    // Return the view, these are regular Threejs elements expressed in JSX
-    return (
-      <mesh
-        {...props}
-        ref={ref}
-        scale={clicked ? 1.5 : 1}
-        onClick={(event) => click(!clicked)}
-        onPointerOver={(event) => hover(true)}
-        onPointerOut={(event) => hover(false)}
-      >
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
-      </mesh>
-    );
-  }
-
   return (
-    <Canvas>
-      <ambientLight intensity={0.5} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} />
-      <Box position={[-1.2, 0, 0]} />
-      <Box position={[1.2, 0, 0]} />
-      <Suspense fallback={<Loader />}>
-        <Model />
-        <OrbitControls />
-        <Environment preset="sunset" background />
-      </Suspense>
-    </Canvas>
+    <div>
+      {modalOpen && <Modal setOpenModal={setModalOpen} quizType={quizType} />}
+
+      <Canvas style={{ width: "100%", height: "100vh" }}>
+        <axesHelper size={5} />
+        <directionalLight intensity={0.75} color={0xcaa7d9} />
+        <pointLight
+          position={[-1, 2, -2]}
+          intensity={0.75}
+          color={0xffb348}
+          decay={2}
+        />
+        <pointLight
+          position={[2, 1.5, -2]}
+          intensity={0.75}
+          color={0xbf492e}
+          decay={2}
+        />
+        <pointLight position={[1, 1, 1]} color={0xff613d} />
+        <OrbitControls enableZoom={true} />
+        <perspectiveCamera fov={0} aspect={1} />
+        <Suspense fallback={<Loader />}>
+          <Test
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+            setQuizType={setQuizType}
+          />
+        </Suspense>
+      </Canvas>
+    </div>
   );
 };
 

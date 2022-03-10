@@ -1,9 +1,10 @@
-import React from "react";
-import ThreeRoom from "../components/ThreeRoom";
+import React, { useState } from "react";
+import { ThreeRoom } from "../components/index";
+import Modal from "../modal/Modal";
 
 const GameRoom = () => {
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
+    <div>
       <ThreeRoom />
     </div>
   );
