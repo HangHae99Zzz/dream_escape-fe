@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { MuteButton } from "../elements/index";
 
 const WaitModal = ({ closeModal }) => {
+  let navigate = useNavigate();
   return (
     <ModalWindow>
       <ExitContainer>
@@ -37,7 +38,7 @@ const WaitModal = ({ closeModal }) => {
         <MuteButton abs={true}> </MuteButton>
       </ImgContainer>
       <div>
-        <MakeButton>게임시작</MakeButton>
+        <MakeButton onClick={() => navigate("/game")}>게임시작</MakeButton>
       </div>
       <CopyContaier>
         <img src="/icons/clip.svg" alt="" /> <div>링크복사</div>

@@ -4,5 +4,6 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Loading from "./Loading";
+import ThreeRoom from "./ThreeRoom";
 
-export { Contents, RoomList, Footer, Header, Sidebar, Loading };
+export { Contents, RoomList, Footer, Header, Sidebar, Loading, ThreeRoom };

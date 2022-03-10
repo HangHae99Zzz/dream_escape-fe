@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+import { Header, Sidebar } from "../components/index";
 
 const Layout = ({ children }) => {
   return (

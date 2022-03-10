@@ -3,19 +3,16 @@ import {
   Routes,
   unstable_HistoryRouter as HistoryRouter,
 } from "react-router-dom";
-import Main from "../pages/Main";
-import GlobalStyles from "../components/GlobalStyle";
-import GameRoom from "../pages/GameRoom";
-
+import { Main, GameRoom } from "../pages/index";
+import GlobalStyle from "./GlobalStyle";
+import { Loading } from "../components/index";
 import { createBrowserHistory } from "history";
-import Loading from "../components/Loading";
 export const history = createBrowserHistory();
 
 function App() {
   return (
     <HistoryRouter history={history}>
-      <GlobalStyles />
-
+      <GlobalStyle />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/loading" element={<Loading />} />

@@ -7,6 +7,7 @@ import instance from "../../shared/request";
 // Action Creators
 
 // initialState
+const initialState = {};
 
 //  middleware Actions
 
