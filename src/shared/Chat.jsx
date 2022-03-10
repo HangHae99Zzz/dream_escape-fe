@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
-import axios from 'axios';
-
+import instance from './request';
 import styled from 'styled-components';
+import { actionCreator as userActions } from '../redux/modules/user';
 
 import Video from '../components/Video';
 
@@ -13,15 +14,19 @@ const pc_config = {
         },
     ],
 };
-const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
-// const SOCKET_SERVER_URL = 'http://localhost:8080';
+
+// const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
+const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
+    const { roomInfo } = useSelector(({ room }) => room);
+
+    const dispatch = useDispatch();
+
     const socketRef = useRef();
     const pcsRef = useRef();
     const localStreamRef = useRef();
     const localVideoRef = useRef();
-    console.log(localVideoRef.current);
 
     const divicesRef = useRef();
     const micsRef = useRef();
@@ -75,7 +80,6 @@ const Chat = () => {
 
     const handleMicChange = async () => {
         const pc = createPeerConnection();
-        console.log(pc);
 
         await getLocalStream(micSelect.current.value);
         if (pc) {
@@ -110,13 +114,6 @@ const Chat = () => {
             localVideoRef.current.srcObject = localStream;
 
             if (!deviceId) await getDevices();
-
-            /////////////////////////////////////////////////////////////////////////
-            socketRef.current.emit('join_room', {
-                room: '1234',
-                email: 'sample@naver.com',
-            });
-            /////////////////////////////////////////////////////////////////////////
         } catch (e) {
             console.log(`getUserMedia error: ${e}`);
         }
@@ -125,6 +122,8 @@ const Chat = () => {
     const createPeerConnection = useCallback((socketID, email) => {
         try {
             const pc = new RTCPeerConnection(pc_config);
+
+            console.log(pc);
 
             pc.onicecandidate = e => {
                 if (!(socketRef.current && e.candidate)) return;
@@ -171,7 +170,21 @@ const Chat = () => {
 
     useEffect(() => {
         socketRef.current = io.connect(SOCKET_SERVER_URL);
-        getLocalStream().then(() => getDevices());
+
+        if (!roomInfo) return;
+
+        getLocalStream()
+            .then(() => getDevices())
+            .then(() => {
+                console.log(socketRef.current.id);
+                dispatch(userActions.getUserId(socketRef.current.id));
+            })
+            .then(() => {
+                socketRef.current.emit('join_room', {
+                    room: roomInfo.roomId,
+                    email: 'sample@naver.com',
+                });
+            });
 
         // room 들어가면 실행하도록 /////////////////////////////////////
 
@@ -252,14 +265,14 @@ const Chat = () => {
 
             console.log({ userId: data.id });
 
-            // axios
-            //     .post('https://banwonjae.shop:8080/user', { userId: data.id })
-            //     .then(function (response) {
-            //         console.log(response);
-            //     })
-            //     .catch(function (error) {
-            //         console.log(error);
-            //     });
+            instance
+                .post('/user', { userId: data.id })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         });
         //////////////////////////////////////////////////////////////////////////
 
@@ -274,7 +287,7 @@ const Chat = () => {
             });
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [createPeerConnection, getLocalStream]);
+    }, [createPeerConnection, getLocalStream, roomInfo]);
 
     if (!micsRef.current && !speakersRef.current) {
         getDevices();

@@ -44,14 +44,15 @@ const WaitModal = ({ closeModal }) => {
             <div>
                 <MakeButton
                     onClick={() => {
-                        navigate('/loading');
+                        navigate('/game');
                     }}
                 >
                     게임시작
                 </MakeButton>
             </div>
             <CopyContaier>
-                <img src="/icons/clip.svg" alt="" /> <div>링크복사</div>
+                <img src="/icons/contents/clip.png" alt="" />{' '}
+                <div>링크복사</div>
             </CopyContaier>
             <FooterContainer>
                 친구들에게 공유하시면 함께 즐길 수 있어요

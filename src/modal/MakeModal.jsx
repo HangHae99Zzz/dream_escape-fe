@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreator as roomActions } from '../redux/modules/room';
 import styled from 'styled-components';
 
 import { MuteButton } from '../elements/index';
 import { WaitModal } from './index';
 
 const MakeModal = ({ closeModal }) => {
+    const dispatch = useDispatch();
+
+    const { userId } = useSelector(({ user }) => user);
+
+    const teamNameRef = useRef();
+
     const [waitModal, SetWaitModal] = useState(false);
+
+    const makeRoom = () => {
+        const teamName = teamNameRef.current.value;
+
+        dispatch(roomActions.makeRoom(teamName, userId));
+
+        SetWaitModal(true);
+    };
 
     return (
         <>
@@ -21,7 +37,10 @@ const MakeModal = ({ closeModal }) => {
                         />
                     </ExitContainer>
                     <div>
-                        <NameInput placeholder="방 이름을 입력하세요"></NameInput>
+                        <NameInput
+                            ref={teamNameRef}
+                            placeholder="팀 이름을 입력하세요"
+                        ></NameInput>
                     </div>
                     <MicContiner>
                         <div>보이스채팅 마이크</div>
@@ -29,12 +48,13 @@ const MakeModal = ({ closeModal }) => {
                     </MicContiner>
                     <ImgContainer></ImgContainer>
                     <div>
-                        <MakeButton onClick={() => SetWaitModal(true)}>
+                        <MakeButton onClick={() => makeRoom()}>
                             방 개설하기
                         </MakeButton>
                     </div>
                     <CopyContaier>
-                        <img src="/icons/clip.svg" alt="" /> <div>링크복사</div>
+                        <img src="/icons/contents/clip.png" alt="" />{' '}
+                        <div>링크복사</div>
                     </CopyContaier>
                     <FooterContainer>
                         친구들에게 공유하시면 함께 즐길 수 있어요
