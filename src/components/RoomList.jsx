@@ -10,7 +10,7 @@ const RoomList = () => {
 
     useEffect(() => {
         axios
-            .get('https://banwonjae.shop:8080/user')
+            .get('https://banwonjae.shop:8080/rooms')
             .then(function (response) {
                 console.log(response);
             })

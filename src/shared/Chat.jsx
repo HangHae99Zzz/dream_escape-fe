@@ -17,7 +17,6 @@ const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
 // const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
-    // const socket = io.connect(SOCKET_SERVER_URL);
     const socketRef = useRef();
     const pcsRef = useRef();
     const localStreamRef = useRef();

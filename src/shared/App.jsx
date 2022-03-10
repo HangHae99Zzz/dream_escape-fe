@@ -17,7 +17,7 @@ function App() {
     return (
         <HistoryRouter history={history}>
             <GlobalStyles />
-            <Chat />
+            {/* <Chat /> */}
 
             <Routes>
                 <Route path="/" element={<Main />} />
