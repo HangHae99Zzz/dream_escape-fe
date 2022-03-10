@@ -34,7 +34,6 @@ const RoomList = () => {
                             onClick={() => enterRoom(room.roomId)}
                             key={i}
                         >
-                            {'roomID(socket) : ' + room.roomId}
                             <Left>
                                 <Top>
                                     <Title>{room.teamName}</Title>
@@ -160,8 +159,12 @@ const Member = styled.div`
 
 const UserImg = styled.div`
     background-image: url('/images/userImg_ex.png');
-    width: 100px;
+    width: 20%;
+    /* min-width: 60px; */
     height: 100px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
 `;
 
 export default RoomList;

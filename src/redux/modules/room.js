@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 
 import instance from '../../shared/request';
+
 // actions
 const GET_ROOM_INFO = 'GET_ROOM_INFO';
 const GET_ROOM_LIST = 'GET_ROOM_LIST';

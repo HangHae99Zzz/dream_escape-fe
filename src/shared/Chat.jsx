@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 import instance from './request';
 import styled from 'styled-components';
+
+import { actionCreator as socketActions } from '../redux/modules/socket';
 import { actionCreator as userActions } from '../redux/modules/user';
 
 import Video from '../components/Video';
@@ -170,6 +172,9 @@ const Chat = () => {
 
     useEffect(() => {
         socketRef.current = io.connect(SOCKET_SERVER_URL);
+        console.log(socketRef.current);
+
+        dispatch(socketActions.getSocket(socketRef.current));
 
         if (!roomInfo) return;
 

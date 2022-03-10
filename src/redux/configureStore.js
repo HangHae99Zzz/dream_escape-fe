@@ -8,6 +8,7 @@ import User from './modules/user';
 import Room from './modules/room';
 // import Rank from "./modules/rank";
 import Escape from './modules/escape';
+import Socket from './modules/socket';
 
 export const history = createBrowserHistory();
 
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     room: Room,
     // rank: Rank,
     escape: Escape,
+    socket: Socket,
     // router: connectRouter(history),
 });
 

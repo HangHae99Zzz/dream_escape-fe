@@ -1,19 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { MuteButton } from '../elements/index';
 
 const WaitModal = ({ closeModal }) => {
+    const { socket } = useSelector(({ socket }) => socket);
+    console.log(socket);
     const navigate = useNavigate();
+    const exit = () => {
+        socket.close();
+        closeModal(false);
+    };
     return (
         <ModalWindow>
             <ExitContainer>
-                <XIcon
-                    src="/icons/x.svg"
-                    alt=""
-                    onClick={() => closeModal(false)}
-                />
+                <XIcon src="/icons/contents/x.svg" alt="" onClick={exit} />
             </ExitContainer>
             <div>
                 <RoomName>방구석 대탈출ㅋㅋ</RoomName>

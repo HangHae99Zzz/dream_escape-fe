@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ModalBG = props => {
-    return <BG onClick={() => props.closeModal(false)}></BG>;
+    // return <BG onClick={() => props.closeModal(false)}></BG>;
+    return <BG></BG>;
 };
 
 const BG = styled.div`
