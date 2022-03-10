@@ -17,8 +17,8 @@ const pc_config = {
     ],
 };
 
-// const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
-const SOCKET_SERVER_URL = 'http://localhost:8080';
+const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
+// const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
     const { roomInfo } = useSelector(({ room }) => room);
@@ -176,7 +176,7 @@ const Chat = () => {
 
         dispatch(socketActions.getSocket(socketRef.current));
 
-        if (!roomInfo) return;
+        // if (!roomInfo) return;
 
         getLocalStream()
             .then(() => getDevices())
@@ -194,6 +194,7 @@ const Chat = () => {
         // room 들어가면 실행하도록 /////////////////////////////////////
 
         socketRef.current.on('all_users', allUsers => {
+            console.log('allUsers', allUsers);
             allUsers.forEach(async user => {
                 if (!localStreamRef.current) return;
                 const pc = createPeerConnection(user.id, user.email);
