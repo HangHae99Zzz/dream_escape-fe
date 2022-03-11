@@ -1,3 +1,4 @@
+///아시발망가졌다
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
