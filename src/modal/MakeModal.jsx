@@ -9,7 +9,7 @@ import { WaitModal } from './index';
 const MakeModal = ({ closeModal }) => {
     const dispatch = useDispatch();
 
-    const { userId } = useSelector(({ user }) => user);
+    const { socket } = useSelector(({ socket }) => socket);
 
     const teamNameRef = useRef();
 
@@ -17,8 +17,12 @@ const MakeModal = ({ closeModal }) => {
 
     const makeRoom = () => {
         const teamName = teamNameRef.current.value;
+        // 이 시점에 userId가 없네
 
-        dispatch(roomActions.makeRoom(teamName, userId));
+        // 이젠 있네 그치
+        console.log(socket.id);
+
+        dispatch(roomActions.makeRoom(teamName, socket.id));
 
         SetWaitModal(true);
     };
@@ -31,7 +35,7 @@ const MakeModal = ({ closeModal }) => {
                 <ModalWindow>
                     <ExitContainer>
                         <XIcon
-                            src="/icons/x.svg"
+                            src="/icons/contents/x.svg"
                             alt=""
                             onClick={() => closeModal(false)}
                         />

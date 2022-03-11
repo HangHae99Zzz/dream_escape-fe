@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { actionCreator as socketActions } from '../redux/modules/socket';
 import { actionCreator as userActions } from '../redux/modules/user';
+import { actionCreator as roomActions } from '../redux/modules/room';
 
 import Video from '../components/Video';
 
@@ -17,11 +18,12 @@ const pc_config = {
     ],
 };
 
-const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
-// const SOCKET_SERVER_URL = 'http://localhost:8080';
+// const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
+const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
     const { roomInfo } = useSelector(({ room }) => room);
+    const { socket } = useSelector(({ socket }) => socket);
 
     const dispatch = useDispatch();
 
@@ -125,8 +127,6 @@ const Chat = () => {
         try {
             const pc = new RTCPeerConnection(pc_config);
 
-            console.log(pc);
-
             pc.onicecandidate = e => {
                 if (!(socketRef.current && e.candidate)) return;
                 socketRef.current.emit('candidate', {
@@ -141,6 +141,9 @@ const Chat = () => {
             };
 
             pc.ontrack = e => {
+                // console.log(roomInfo.roomId);
+                // dispatch(roomActions.refRoom(roomInfo.roomId));
+                console.log('누가 들어옴');
                 setUsers(oldUsers =>
                     oldUsers
                         .filter(user => user.id !== socketID)
@@ -150,7 +153,6 @@ const Chat = () => {
                             stream: e.streams[0],
                         })
                 );
-                console.log(e);
                 // 애가 잘 발생을 안하는구만
             };
 
@@ -172,16 +174,13 @@ const Chat = () => {
 
     useEffect(() => {
         socketRef.current = io.connect(SOCKET_SERVER_URL);
-        console.log(socketRef.current);
-
         dispatch(socketActions.getSocket(socketRef.current));
 
-        // if (!roomInfo) return;
-
+        if (!roomInfo) return;
+        console.log(roomInfo);
         getLocalStream()
             .then(() => getDevices())
             .then(() => {
-                console.log(socketRef.current.id);
                 dispatch(userActions.getUserId(socketRef.current.id));
             })
             .then(() => {
@@ -194,7 +193,6 @@ const Chat = () => {
         // room 들어가면 실행하도록 /////////////////////////////////////
 
         socketRef.current.on('all_users', allUsers => {
-            console.log('allUsers', allUsers);
             allUsers.forEach(async user => {
                 if (!localStreamRef.current) return;
                 const pc = createPeerConnection(user.id, user.email);
@@ -293,7 +291,7 @@ const Chat = () => {
             });
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [createPeerConnection, getLocalStream, roomInfo]);
+    }, [createPeerConnection, getLocalStream]);
 
     if (!micsRef.current && !speakersRef.current) {
         getDevices();

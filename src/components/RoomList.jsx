@@ -10,19 +10,21 @@ const RoomList = () => {
     const dispatch = useDispatch();
     const { roomList } = useSelector(({ room }) => room);
     const { roomInfo } = useSelector(({ room }) => room);
+    const { userId } = useSelector(({ user }) => user);
     const [openWaitModal, setOpenWaitModal] = useState(false);
 
     const enterRoom = roomId => {
-        // roomInfo 업데이트
-        dispatch(roomActions.refRoom(roomId));
+        //  참여시키기
+        dispatch(roomActions.joinRoom(roomId, userId, setOpenWaitModal));
         // modal
-        setOpenWaitModal(true);
     };
 
     useEffect(() => {
         dispatch(roomActions.refRoomList());
-        console.log(roomInfo);
     }, [roomInfo]);
+
+    console.log('roomList', roomList);
+    console.log('roomInfo', roomInfo);
 
     return (
         <RoomLi>
@@ -38,8 +40,8 @@ const RoomList = () => {
                                 <Top>
                                     <Title>{room.teamName}</Title>
                                     <Time>
-                                        {room.count
-                                            ? `${room.count}분째 탈출중`
+                                        {room.startAt
+                                            ? `${room.startAt}분째 탈출중`
                                             : `대기중`}
                                     </Time>
                                 </Top>

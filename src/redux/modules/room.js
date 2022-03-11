@@ -23,6 +23,7 @@ const initialState = {
 // 방 개설하기
 const makeRoom = (teamName, userId) => {
     return function (dispatch, getState) {
+        console.log(teamName, userId);
         instance
             .post('/room', {
                 teamName,
@@ -54,14 +55,20 @@ const refRoom = roomId => {
 };
 
 // 방 참여하기
-const joinRoom = roomId => {
+const joinRoom = (roomId, userId, modal) => {
     return function (dispatch, getState) {
         instance
             .post(`/room/${roomId}`, {
-                userId: '',
+                userId,
             })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
+            .then(res => {
+                // roomInfo 업데이트
+                dispatch(refRoom(roomId));
+                // session storage에 저장 roomId:'1'
+                sessionStorage.setItem('roomId', roomId);
+                modal(true);
+            })
+            .catch(err => window.alert('인원가득'));
     };
 };
 

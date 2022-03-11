@@ -27,10 +27,11 @@ const refUser = roomId => {
 };
 
 // 유저 삭제하기
-const deleteUser = Id => {
+const deleteUser = userId => {
     return function (dispatch, getState) {
+        console.log(userId);
         instance
-            .delete(`/user/${Id}`)
+            .post(`/user`, { userId: userId })
             .then(res => console.log(res))
             .catch(err => console.log(err));
     };
