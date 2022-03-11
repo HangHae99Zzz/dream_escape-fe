@@ -13,7 +13,7 @@ const initialState = {};
 
 // 방 개설하기
 const makeRoom = () => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .post("/room", {
         teamName: "",
@@ -26,7 +26,7 @@ const makeRoom = () => {
 
 // 방 리스트 조회하기
 const refRoomList = () => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .get("/rooms")
       .then((res) => console.log(res))
@@ -36,7 +36,7 @@ const refRoomList = () => {
 
 // 방 조회하기
 const refRoom = (roomId) => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .get(`/room/${roomId}`)
       .then((res) => console.log(res))
@@ -46,7 +46,7 @@ const refRoom = (roomId) => {
 
 // 방 참여하기
 const joinRoom = (roomId) => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .post(`/room/${roomId}`, {
         userId: "",
@@ -58,9 +58,21 @@ const joinRoom = (roomId) => {
 
 // 방 삭제하기
 const deleteRoom = (roomId) => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .delete(`/room/${roomId}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+};
+
+// 코멘트 입력하기
+const writeComment = (comment, roomId) => {
+  return function (dispatch, getState) {
+    instance
+      .post(`/room/${roomId}/comment`, {
+        comment: "",
+      })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -69,6 +81,13 @@ const deleteRoom = (roomId) => {
 export default handleActions({}, initialState);
 
 // action creator export
-const actionCreator = { makeRoom, refRoomList, refRoom, joinRoom, deleteRoom };
+const actionCreator = {
+  makeRoom,
+  refRoomList,
+  refRoom,
+  joinRoom,
+  deleteRoom,
+  writeComment,
+};
 
 export { actionCreator };

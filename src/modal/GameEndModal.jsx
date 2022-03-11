@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as escapeActions } from "../redux/modules/escape";
+import { actionCreator as roomActions } from "../redux/modules/room";
 
 function Modal({ setOpenModal, quizType }) {
-  const [hintModal, setHintModal] = useState(false);
-  console.log(hintModal);
   const inputRef = useRef("");
   const dispatch = useDispatch();
   const question = useSelector((state) => state.escape.question);
@@ -13,15 +12,12 @@ function Modal({ setOpenModal, quizType }) {
   const answer = useSelector((state) => state.escape.answer);
 
   useEffect(() => {
-    dispatch(escapeActions.refQuiz(quizType));
+    // 랭킹 가져오기
+    // dispatch(escapeActions.refQuiz(quizType));
   }, []);
 
-  const handleAnswer = () => {
-    if (inputRef.current.value === answer) {
-      console.log("정답입니다!");
-    } else {
-      console.log("오답입니다!");
-    }
+  const handleComment = () => {
+    dispatch(roomActions.writeComment(inputRef.current.value));
   };
 
   return (
@@ -37,29 +33,25 @@ function Modal({ setOpenModal, quizType }) {
           </button>
         </TitleCloseBtn>
 
-        <Title>{question ? <h1>{question}</h1> : <h1>오류</h1>}</Title>
+        <Title>
+          <h1>게임종료</h1>
+        </Title>
         <Body>{content ? <p>{content}</p> : <p>오류</p>}</Body>
         <Input>
           <label>
-            <input ref={inputRef} type="text" placeholder="정답을 입력하세요" />
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="한줄평을 남겨보세요!"
+            />
           </label>
         </Input>
         <Footer>
-          <button type="submit" onClick={handleAnswer}>
-            제출하기
+          <button type="submit" onClick={handleComment}>
+            확인
           </button>
         </Footer>
-        <Hint>
-          <button onClick={() => setHintModal(true)}>힌트보기</button>
-        </Hint>
       </ModalContainer>
-      {hintModal ? (
-        <HintModal>
-          <p onClick={() => setHintModal(false)}>
-            스타워즈 포스터를 눈여겨 보자
-          </p>
-        </HintModal>
-      ) : null}
     </ModalBackground>
   );
 }

@@ -9,11 +9,15 @@ import { Html, useProgress } from "@react-three/drei";
 import Hacker from "../elements/Hacker";
 import Test from "../elements/Test";
 import Model from "../elements/Model";
+import ClueModal from "../modal/ClueModal";
 import Modal from "../modal/Modal";
 
 const ThreeRoom = () => {
+  // quiz 모달, hint modal 분리하기
   const [modalOpen, setModalOpen] = useState(false);
   const [quizType, setQuizType] = useState("");
+  const [clueModalOpen, setClueModalOpen] = useState(false);
+  const [clueType, setClueType] = useState(false);
   console.log(modalOpen, quizType, typeof quizType);
 
   function Loader() {
@@ -24,6 +28,9 @@ const ThreeRoom = () => {
   return (
     <div>
       {modalOpen && <Modal setOpenModal={setModalOpen} quizType={quizType} />}
+      {clueModalOpen && (
+        <ClueModal setClueModalOpen={setClueModalOpen} clueType={clueType} />
+      )}
 
       <Canvas style={{ width: "100%", height: "100vh" }}>
         <axesHelper size={5} />
@@ -45,9 +52,10 @@ const ThreeRoom = () => {
         <perspectiveCamera fov={0} aspect={1} />
         <Suspense fallback={<Loader />}>
           <Test
-            modalOpen={modalOpen}
             setModalOpen={setModalOpen}
             setQuizType={setQuizType}
+            setClueModalOpen={setClueModalOpen}
+            setClueType={setClueType}
           />
         </Suspense>
       </Canvas>

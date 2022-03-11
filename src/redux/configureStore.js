@@ -1,7 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { createBrowserHistory } from "history";
-// import { connectRouter } from "connected-react-router";
 
 // modules import
 // import User from "./modules/user";
@@ -9,18 +7,15 @@ import { createBrowserHistory } from "history";
 // import Rank from "./modules/rank";
 import Escape from "./modules/escape";
 
-export const history = createBrowserHistory();
-
 const rootReducer = combineReducers({
   // user: User,
   // room: Room,
   // rank: Rank,
   escape: Escape,
-  // router: connectRouter(history),
 });
 
 // middleware
-const middlewares = [thunk.withExtraArgument({ history: history })];
+const middlewares = [thunk];
 
 // redux dev-tools
 const composeEnhancers =

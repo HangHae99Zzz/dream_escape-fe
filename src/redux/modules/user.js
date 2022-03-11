@@ -14,7 +14,7 @@ const initialState = {};
 
 // 유저 정보 조회하기
 const refUser = (roomId) => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .get(`/user/${roomId}`)
       .then((res) => console.log(res))
@@ -24,7 +24,7 @@ const refUser = (roomId) => {
 
 // 유저 삭제하기
 const deleteUser = (Id) => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .delete(`/user/${Id}`)
       .then((res) => console.log(res))

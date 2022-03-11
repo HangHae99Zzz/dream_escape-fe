@@ -14,7 +14,7 @@ const initialState = {};
 
 // 걸린 시간 등록하기
 const recordTime = (roomId, time) => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .post(`/ranks/${roomId}`, {
         time: "",
@@ -26,7 +26,7 @@ const recordTime = (roomId, time) => {
 
 // 랭킹 조회하기
 const refRank = () => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .get("/ranks")
       .then((res) => console.log(res))
