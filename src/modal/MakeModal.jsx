@@ -31,7 +31,7 @@ const MakeModal = ({ closeModal }) => {
                 <ModalWindow>
                     <ExitContainer>
                         <XIcon
-                            src="/icons/x.svg"
+                            src="/icons/contents/x.svg"
                             alt=""
                             onClick={() => closeModal(false)}
                         />
@@ -98,6 +98,11 @@ const NameInput = styled.input`
     border: 3px solid #5668e8;
     box-sizing: border-box;
     border-radius: 7px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.03em;
     ::placeholder {
         text-align: center;
         font-weight: 500;
@@ -130,6 +135,14 @@ const MakeButton = styled.button`
     border: 3px solid #5668e8;
     box-sizing: border-box;
     border-radius: 30px;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+    text-align: center;
+    letter-spacing: -0.03em;
+
+    color: #ffffff;
 `;
 const CopyContaier = styled.div`
     width: 12%;

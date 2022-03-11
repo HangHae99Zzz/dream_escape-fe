@@ -37,11 +37,11 @@ const RoomList = () => {
                             <Left>
                                 <Top>
                                     <Title>{room.teamName}</Title>
-                                    <Time>
-                                        {room.count
-                                            ? `${room.count}분째 탈출중`
-                                            : `대기중`}
-                                    </Time>
+                                    {room.startAt ? (
+                                        <Time>`${room.count}분째 탈출중`</Time>
+                                    ) : (
+                                        <Wait>대기중</Wait>
+                                    )}
                                 </Top>
                                 <Bottom>
                                     <IconContainer>
@@ -63,7 +63,10 @@ const RoomList = () => {
                                     </MemberContainer>
                                 </Bottom>
                             </Left>
-                            <UserImg></UserImg>
+                            <Right>
+                                <UserImg></UserImg>
+                                <Creator>방장</Creator>
+                            </Right>
                         </RoomWrapper>
                     );
                 })}
@@ -127,6 +130,16 @@ const Time = styled.div`
     color: #5668e8;
 `;
 
+const Wait = styled.div`
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+    letter-spacing: -0.03em;
+
+    color: #43e3bd;
+`;
+
 const Bottom = styled.div``;
 
 const IconContainer = styled.div`
@@ -157,14 +170,31 @@ const Member = styled.div`
     color: #fff;
 `;
 
+const Right = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
 const UserImg = styled.div`
     background-image: url('/images/userImg_ex.png');
-    width: 20%;
+    width: 100px;
     /* min-width: 60px; */
     height: 100px;
     background-repeat: no-repeat;
     background-position: right;
     background-size: contain;
+    margin-bottom: 8px;
+`;
+
+const Creator = styled.div`
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+    letter-spacing: -0.03em;
+
+    color: #5668e8;
 `;
 
 export default RoomList;
