@@ -52,7 +52,7 @@ const slideUp = keyframes`
     transform: translateY(500px);
   }
   to {
-    transform: translateY(0px);
+    transform: translateY(-100px);
   }
 `;
 

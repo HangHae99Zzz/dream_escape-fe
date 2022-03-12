@@ -4,13 +4,13 @@ import thunk from "redux-thunk";
 // modules import
 // import User from "./modules/user";
 // import Room from "./modules/room";
-// import Rank from "./modules/rank";
+import Rank from "./modules/rank";
 import Escape from "./modules/escape";
 
 const rootReducer = combineReducers({
   // user: User,
   // room: Room,
-  // rank: Rank,
+  rank: Rank,
   escape: Escape,
 });
 

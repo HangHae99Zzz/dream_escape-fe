@@ -1,22 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreator as escapeActions } from "../redux/modules/escape";
+import { actionCreator as rankActions } from "../redux/modules/rank";
 import { actionCreator as roomActions } from "../redux/modules/room";
 
 function Modal({ setOpenModal, quizType }) {
   const inputRef = useRef("");
   const dispatch = useDispatch();
-  const question = useSelector((state) => state.escape.question);
-  const content = useSelector((state) => state.escape.content);
-  const answer = useSelector((state) => state.escape.answer);
+  const rank = useSelector((state) => state.rank);
 
   useEffect(() => {
     // 랭킹 가져오기
-    // dispatch(escapeActions.refQuiz(quizType));
+    // dispatch(rankActions.onGameRank());
   }, []);
 
   const handleComment = () => {
+    console.log(inputRef.current.value);
     dispatch(roomActions.writeComment(inputRef.current.value));
   };
 
@@ -36,7 +35,7 @@ function Modal({ setOpenModal, quizType }) {
         <Title>
           <h1>게임종료</h1>
         </Title>
-        <Body>{content ? <p>{content}</p> : <p>오류</p>}</Body>
+        <Body>{rank ? <p>{rank}</p> : <p>오류</p>}</Body>
         <Input>
           <label>
             <input
@@ -117,7 +116,7 @@ const Body = styled.div`
     text-align: center;
   }
 `;
-const Input = styled.div`
+const Input = styled.form`
   margin: auto;
   width: 443px;
   height: 60px;

@@ -7,6 +7,11 @@ import instance from "../../shared/request";
 const LOAD_QUIZ = "LOAD_QUIZ";
 
 // Action Creators
+const loadQuiz = createAction(LOAD_QUIZ, (question, content, answer) => ({
+  question,
+  content,
+  answer,
+}));
 
 // initialState
 const initialState = {
@@ -14,12 +19,8 @@ const initialState = {
   content: "",
   answer: "",
 };
+
 //  middleware Actions
-const loadQuiz = createAction(LOAD_QUIZ, (question, content, answer) => ({
-  question,
-  content,
-  answer,
-}));
 
 // Quiz 조회하기
 const refQuiz = (quizType) => {

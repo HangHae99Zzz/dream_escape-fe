@@ -70,8 +70,8 @@ const deleteRoom = (roomId) => {
 const writeComment = (comment, roomId) => {
   return function (dispatch, getState) {
     instance
-      .post(`/room/${roomId}/comment`, {
-        comment: "",
+      .post(`/room/14/comment`, {
+        comment: comment,
       })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));

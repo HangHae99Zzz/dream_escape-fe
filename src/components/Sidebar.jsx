@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import {
   SvgHome,
@@ -22,7 +22,7 @@ const Sidebar = () => {
             <SvgHome />
             <span>홈</span>
           </li>
-          <li onClick={() => navigate("/")}>
+          <li onClick={() => navigate("/ranks")}>
             <SvgRanking />
             <span>랭킹조회</span>
           </li>

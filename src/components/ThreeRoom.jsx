@@ -5,7 +5,12 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Environment, OrbitControls } from "@react-three/drei";
-import { Html, useProgress } from "@react-three/drei";
+import {
+  Html,
+  useProgress,
+  PerspectiveCamera,
+  PointerLockControls,
+} from "@react-three/drei";
 import Hacker from "../elements/Hacker";
 import Test from "../elements/Test";
 import Model from "../elements/Model";
@@ -26,30 +31,54 @@ const ThreeRoom = () => {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       {modalOpen && <Modal setOpenModal={setModalOpen} quizType={quizType} />}
       {clueModalOpen && (
         <ClueModal setClueModalOpen={setClueModalOpen} clueType={clueType} />
       )}
+      {!modalOpen && !clueModalOpen && (
+        <div
+          style={{
+            width: "30px",
+            height: "30px",
+            position: "absolute",
+            zIndex: 10,
+            border: "2px solid #fff",
+            borderRadius: "50%",
+          }}
+        ></div>
+      )}
 
-      <Canvas style={{ width: "100%", height: "100vh" }}>
+      <Canvas
+        style={{ width: "100%", height: "100vh" }}
+        camera={{ position: [1, 4, 3] }}
+      >
         <axesHelper size={5} />
-        <directionalLight intensity={0.75} color={0xcaa7d9} />
+        <directionalLight intensity={1.5} color={0xeec4ff} />
         <pointLight
           position={[-1, 2, -2]}
-          intensity={0.75}
-          color={0xffb348}
+          intensity={0.5}
+          color={0xffb9f0}
           decay={2}
         />
         <pointLight
           position={[2, 1.5, -2]}
-          intensity={0.75}
-          color={0xbf492e}
+          intensity={0.5}
+          color={0xff7ee3}
           decay={2}
         />
-        <pointLight position={[1, 1, 1]} color={0xff613d} />
-        <OrbitControls enableZoom={true} />
-        <perspectiveCamera fov={0} aspect={1} />
+        <pointLight position={[1, 1, 1]} color={0xf242cb} />
+        {/* <OrbitControls /> */}
+        <PointerLockControls
+          fov={45}
+          aspect={window.innerWidth / window.innerHeight}
+        />
         <Suspense fallback={<Loader />}>
           <Test
             setModalOpen={setModalOpen}
