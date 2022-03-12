@@ -3,15 +3,17 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as rankActions } from "../redux/modules/rank";
 import { actionCreator as roomActions } from "../redux/modules/room";
+import EndingRankList from "../elements/EndingRankList";
+import { SvgUserGroup } from "../icons/etc/svg_etc";
 
 function Modal({ setOpenModal, quizType }) {
   const inputRef = useRef("");
   const dispatch = useDispatch();
-  const rank = useSelector((state) => state.rank);
+  const rank = useSelector((state) => state.rank.gameRank);
 
   useEffect(() => {
     // 랭킹 가져오기
-    // dispatch(rankActions.onGameRank());
+    dispatch(rankActions.onGameRank());
   }, []);
 
   const handleComment = () => {
@@ -35,7 +37,17 @@ function Modal({ setOpenModal, quizType }) {
         <Title>
           <h1>게임종료</h1>
         </Title>
-        <Body>{rank ? <p>{rank}</p> : <p>오류</p>}</Body>
+        <Body>
+          <RankList>
+            <h4>순위</h4>
+            <h4>방이름</h4>
+            <h4>총 소요시간</h4>
+            <div>
+              <SvgUserGroup />
+            </div>
+          </RankList>
+          <EndingRankList list={rank}></EndingRankList>
+        </Body>
         <Input>
           <label>
             <input
@@ -190,5 +202,24 @@ const HintModal = styled.div`
     letter-spacing: -0.03em;
 
     color: #ffffff;
+  }
+`;
+
+const RankList = styled.div`
+  background: Red;
+  width: 350px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  h4 {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    letter-spacing: -0.03em;
   }
 `;

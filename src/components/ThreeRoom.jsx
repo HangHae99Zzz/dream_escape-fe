@@ -1,19 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Suspense } from "react";
-import { useGLTF } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Html,
   useProgress,
+  OrbitControls,
   PerspectiveCamera,
   PointerLockControls,
 } from "@react-three/drei";
-import Hacker from "../elements/Hacker";
+import WasdControls from "../elements/WasdControls";
 import Test from "../elements/Test";
-import Model from "../elements/Model";
 import ClueModal from "../modal/ClueModal";
 import Modal from "../modal/Modal";
 
@@ -29,6 +25,14 @@ const ThreeRoom = () => {
     const { progress } = useProgress();
     return <Html center>{progress} % loaded</Html>;
   }
+
+  // useEffect(() => {
+  //   console.log(modalOpen, "esc 버튼아 눌려라");
+  //   var event = new KeyboardEvent('keydown', {
+  //     key: 'Escape',
+  //   });
+  //   document.dispatchEvent(event);
+  // }, [modalOpen]);
 
   return (
     <div
@@ -75,10 +79,13 @@ const ThreeRoom = () => {
         />
         <pointLight position={[1, 1, 1]} color={0xf242cb} />
         {/* <OrbitControls /> */}
-        <PointerLockControls
-          fov={45}
-          aspect={window.innerWidth / window.innerHeight}
-        />
+        {/* {modalOpen ? (
+          <PointerLockControls enabled={false} />
+        ) : (
+          <PointerLockControls enabled={true} />
+        )} */}
+        <WasdControls />
+        <PointerLockControls />
         <Suspense fallback={<Loader />}>
           <Test
             setModalOpen={setModalOpen}

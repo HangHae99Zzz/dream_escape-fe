@@ -7,7 +7,6 @@ import RankList from "../components/RankList";
 const Rank = () => {
   const dispatch = useDispatch();
   const ranks = useSelector((state) => state.rank.ranklist);
-  const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
     dispatch(rankActions.refRank());

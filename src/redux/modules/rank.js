@@ -48,10 +48,10 @@ const refRank = () => {
 const onGameRank = (roomId) => {
   return function (dispatch, getState) {
     instance
-      .get(`/rank/${roomId}`)
+      .get(`/rank/14`)
       .then((res) => {
         console.log(res);
-        // dispatch(loadGameRank(res.data));
+        dispatch(loadGameRank(res.data));
       })
       .catch((err) => console.log(err));
   };
@@ -77,6 +77,6 @@ export default handleActions(
 );
 
 // action creator export
-const actionCreator = { recordTime, refRank };
+const actionCreator = { recordTime, refRank, onGameRank };
 
 export { actionCreator };

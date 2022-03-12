@@ -13,6 +13,8 @@ function Modal({ setOpenModal, quizType }) {
   const answer = useSelector((state) => state.escape.answer);
 
   useEffect(() => {
+    // document.dispatchEvent(new KeyboardEvent("keydown", { key: "escape" }));
+
     dispatch(escapeActions.refQuiz(quizType));
   }, []);
 
