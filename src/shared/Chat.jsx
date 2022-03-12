@@ -19,8 +19,8 @@ const pc_config = {
     ],
 };
 
-// const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
-const SOCKET_SERVER_URL = 'http://localhost:8080';
+const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
+// const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
     const { roomInfo } = useSelector(({ room }) => room);
@@ -46,6 +46,7 @@ const Chat = () => {
 
     const [muted, setMuted] = useState(false);
     const [users, setUsers] = useState([]);
+    const [isFirst, setIsFIrst] = useState(true);
 
     const getDevices = async () => {
         try {
@@ -174,21 +175,29 @@ const Chat = () => {
     }, []);
 
     useEffect(() => {
-        socketRef.current = io.connect(SOCKET_SERVER_URL);
-        dispatch(socketActions.getSocket(socketRef.current));
+        if (isFirst) {
+            socketRef.current = io.connect(SOCKET_SERVER_URL);
+            console.log(socketRef.current);
+
+            dispatch(socketActions.getSocket(socketRef.current));
+            setIsFIrst(false);
+        }
 
         if (!roomInfo) return;
-        console.log(roomInfo);
         getLocalStream()
             .then(() => getDevices())
             .then(() => {
+                console.log('내 아이디', socketRef.current.id);
                 dispatch(userActions.getUserId(socketRef.current.id));
             })
             .then(() => {
-                socketRef.current.emit('join_room', {
-                    room: roomInfo.roomId,
-                    email: 'sample@naver.com',
-                });
+                setTimeout(() => {
+                    console.log(roomInfo.roomId);
+                    socketRef.current.emit('join_room', {
+                        room: roomInfo.roomId,
+                        email: 'sample@naver.com',
+                    });
+                }, 2000);
             });
 
         // room 들어가면 실행하도록 /////////////////////////////////////
@@ -268,8 +277,9 @@ const Chat = () => {
             delete pcsRef.current[data.id];
             setUsers(oldUsers => oldUsers.filter(user => user.id !== data.id));
 
-            console.log({ userId: data.id });
+            console.log(`나간애 :${data.id}`);
 
+            // 비정상종료일경우 다른애들이 대신 해줌
             instance
                 .post('/user', { userId: data.id })
                 .then(function (response) {
@@ -292,7 +302,7 @@ const Chat = () => {
             });
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [createPeerConnection, getLocalStream]);
+    }, [createPeerConnection, getLocalStream, roomInfo]);
 
     if (!micsRef.current && !speakersRef.current) {
         getDevices();
@@ -356,7 +366,7 @@ const Chat = () => {
 };
 
 const ChatWrapper = styled.div`
-    display: none;
+    /* display: none; */
 `;
 
 export default Chat;

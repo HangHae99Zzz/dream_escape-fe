@@ -10,27 +10,33 @@ const RoomList = () => {
     const dispatch = useDispatch();
     const { roomList } = useSelector(({ room }) => room);
     const { roomInfo } = useSelector(({ room }) => room);
-    const { userId } = useSelector(({ user }) => user);
+    const { socket } = useSelector(({ socket }) => socket);
+    // const { userId } = useSelector(({ user }) => user);
     const [openWaitModal, setOpenWaitModal] = useState(false);
 
     const enterRoom = roomId => {
-        //  참여시키기
-        dispatch(roomActions.joinRoom(roomId, userId, setOpenWaitModal));
-        // modal
+        // 참여시키기 userId가 올때까지 기다려봐
+        // userId가 없으면 기다렸다가 다시 본인을 호출
+        setTimeout(
+            () =>
+                dispatch(
+                    roomActions.joinRoom(roomId, socket.id, setOpenWaitModal)
+                ),
+            1000
+        );
     };
 
     useEffect(() => {
         dispatch(roomActions.refRoomList());
     }, [roomInfo]);
 
-    console.log('roomList', roomList);
-    console.log('roomInfo', roomInfo);
-
     return (
         <RoomLi>
             {roomList &&
                 roomList.map((room, i) => {
-                    return (
+                    return room.currentNum === 0 ? (
+                        <React.Fragment key={i}></React.Fragment>
+                    ) : (
                         <RoomWrapper
                             // onClick={() => setOpenWaitModal(true)}
                             onClick={() => enterRoom(room.roomId)}
@@ -39,11 +45,11 @@ const RoomList = () => {
                             <Left>
                                 <Top>
                                     <Title>{room.teamName}</Title>
-                                    <Time>
-                                        {room.startAt
-                                            ? `${room.startAt}분째 탈출중`
-                                            : `대기중`}
-                                    </Time>
+                                    {room.startAt ? (
+                                        <Time>`${room.count}분째 탈출중`</Time>
+                                    ) : (
+                                        <Wait>대기중</Wait>
+                                    )}
                                 </Top>
                                 <Bottom>
                                     <IconContainer>
@@ -59,13 +65,18 @@ const RoomList = () => {
                                     </IconContainer>
 
                                     <MemberContainer>
-                                        <Member>닉네임 1</Member>
-                                        <Member>닉네임 2</Member>
-                                        <Member>닉네임 3</Member>
+                                        {room.userList.map((user, i) => {
+                                            return i === 0 ? null : (
+                                                <Member key={i}>{user}</Member>
+                                            );
+                                        })}
                                     </MemberContainer>
                                 </Bottom>
                             </Left>
-                            <UserImg></UserImg>
+                            <Right>
+                                <UserImg></UserImg>
+                                <Creator>{room.userList[0]}</Creator>
+                            </Right>
                         </RoomWrapper>
                     );
                 })}
@@ -129,6 +140,16 @@ const Time = styled.div`
     color: #5668e8;
 `;
 
+const Wait = styled.div`
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+    letter-spacing: -0.03em;
+
+    color: #43e3bd;
+`;
+
 const Bottom = styled.div``;
 
 const IconContainer = styled.div`
@@ -159,14 +180,31 @@ const Member = styled.div`
     color: #fff;
 `;
 
+const Right = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
 const UserImg = styled.div`
     background-image: url('/images/userImg_ex.png');
-    width: 20%;
+    width: 100px;
     /* min-width: 60px; */
     height: 100px;
     background-repeat: no-repeat;
     background-position: right;
     background-size: contain;
+    margin-bottom: 8px;
+`;
+
+const Creator = styled.div`
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+    letter-spacing: -0.03em;
+
+    color: #5668e8;
 `;
 
 export default RoomList;

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreator as roomActions } from '../redux/modules/room';
+import { actionCreator as userActions } from '../redux/modules/user';
 import styled from 'styled-components';
 
 import { MuteButton } from '../elements/index';
@@ -20,9 +21,9 @@ const MakeModal = ({ closeModal }) => {
         // 이 시점에 userId가 없네
 
         // 이젠 있네 그치
-        console.log(socket.id);
 
         dispatch(roomActions.makeRoom(teamName, socket.id));
+        dispatch(userActions.getUserId(socket.id));
 
         SetWaitModal(true);
     };
@@ -102,6 +103,11 @@ const NameInput = styled.input`
     border: 3px solid #5668e8;
     box-sizing: border-box;
     border-radius: 7px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.03em;
     ::placeholder {
         text-align: center;
         font-weight: 500;
@@ -134,6 +140,14 @@ const MakeButton = styled.button`
     border: 3px solid #5668e8;
     box-sizing: border-box;
     border-radius: 30px;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+    text-align: center;
+    letter-spacing: -0.03em;
+
+    color: #ffffff;
 `;
 const CopyContaier = styled.div`
     width: 12%;

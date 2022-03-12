@@ -29,7 +29,7 @@ const refUser = roomId => {
 // 유저 삭제하기
 const deleteUser = userId => {
     return function (dispatch, getState) {
-        console.log(userId);
+        console.log('유저삭제', userId);
         instance
             .post(`/user`, { userId: userId })
             .then(res => console.log(res))

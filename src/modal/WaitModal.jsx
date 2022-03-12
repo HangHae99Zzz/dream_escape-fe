@@ -16,11 +16,14 @@ const WaitModal = ({ closeModal }) => {
     const navigate = useNavigate();
     const exit = userId => {
         console.log(userId);
+        console.log(socket.id);
         dispatch(userActions.deleteUser(userId));
         socket.close();
+        console.log(socket);
         closeModal(false);
+        // isfirst false, roominfo null
     };
-    console.log(roomInfo);
+
     return (
         <ModalWindow>
             <ExitContainer>
@@ -35,22 +38,12 @@ const WaitModal = ({ closeModal }) => {
             </div>
             <Label>현재인원</Label>
             <UserWrapper>
-                <UserContainer>
-                    <UserImg />
-                    닉네임
-                </UserContainer>
-                <UserContainer>
-                    <UserImg />
-                    닉네임
-                </UserContainer>
-                <UserContainer>
-                    <UserImg />
-                    닉네임
-                </UserContainer>
-                <UserContainer>
-                    <UserImg />
-                    닉네임
-                </UserContainer>
+                {roomInfo?.userList.map((user, i) => (
+                    <UserContainer key={i}>
+                        <UserImg />
+                        {user}
+                    </UserContainer>
+                ))}
             </UserWrapper>
             <Label>게임방</Label>
             <ImgContainer>
