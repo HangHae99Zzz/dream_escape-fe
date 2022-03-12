@@ -5,14 +5,19 @@ import instance from '../../shared/request';
 
 // actions
 const USER_ID = 'USER_ID';
+const IS_IN = 'IS_IN';
 
 // Action Creators
 const getUserId = createAction(USER_ID, userId => ({
     userId,
 }));
 
+const setIsIn = createAction(IS_IN, isIn => ({
+    isIn,
+}));
+
 // initialState
-const initialState = { userId: '' };
+const initialState = { userId: '', isIn: false };
 
 //  middleware Actions
 
@@ -43,11 +48,15 @@ export default handleActions(
             produce(state, draft => {
                 draft.userId = action.payload.userId;
             }),
+        [IS_IN]: (state, action) =>
+            produce(state, draft => {
+                draft.isIn = action.payload.isIn;
+            }),
     },
     initialState
 );
 
 // action creator export
-const actionCreator = { getUserId, refUser, deleteUser };
+const actionCreator = { setIsIn, getUserId, refUser, deleteUser };
 
 export { actionCreator };

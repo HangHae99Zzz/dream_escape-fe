@@ -104,6 +104,13 @@ export default handleActions(
 );
 
 // action creator export
-const actionCreator = { makeRoom, refRoomList, refRoom, joinRoom, deleteRoom };
+const actionCreator = {
+    getRoomInfo,
+    makeRoom,
+    refRoomList,
+    refRoom,
+    joinRoom,
+    deleteRoom,
+};
 
 export { actionCreator };

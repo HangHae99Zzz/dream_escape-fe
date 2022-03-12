@@ -23,6 +23,7 @@ const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
 // const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
+    const { isIn } = useSelector(({ user }) => user);
     const { roomInfo } = useSelector(({ room }) => room);
     const { socket } = useSelector(({ socket }) => socket);
 
@@ -46,7 +47,6 @@ const Chat = () => {
 
     const [muted, setMuted] = useState(false);
     const [users, setUsers] = useState([]);
-    const [isFirst, setIsFIrst] = useState(true);
 
     const getDevices = async () => {
         try {
@@ -175,12 +175,12 @@ const Chat = () => {
     }, []);
 
     useEffect(() => {
-        if (isFirst) {
+        if (!isIn) {
+            console.log('처음이야!');
             socketRef.current = io.connect(SOCKET_SERVER_URL);
-            console.log(socketRef.current);
 
             dispatch(socketActions.getSocket(socketRef.current));
-            setIsFIrst(false);
+            dispatch(userActions.setIsIn(true));
         }
 
         if (!roomInfo) return;

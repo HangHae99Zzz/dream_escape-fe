@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { actionCreator as roomActions } from '../redux/modules/room';
 import { actionCreator as userActions } from '../redux/modules/user';
 
 import { MuteButton } from '../elements/index';
@@ -15,10 +16,10 @@ const WaitModal = ({ closeModal }) => {
 
     const navigate = useNavigate();
     const exit = userId => {
-        console.log(userId);
-        console.log(socket.id);
         dispatch(userActions.deleteUser(userId));
         socket.close();
+        dispatch(userActions.setIsIn(false));
+        dispatch(roomActions.getRoomInfo(null));
         console.log(socket);
         closeModal(false);
         // isfirst false, roominfo null
