@@ -39,6 +39,7 @@ const makeRoom = (teamName, userId) => {
 
 // 방 리스트 조회하기
 const refRoomList = () => {
+
     return function (dispatch, getState) {
         instance
             .get('/rooms')

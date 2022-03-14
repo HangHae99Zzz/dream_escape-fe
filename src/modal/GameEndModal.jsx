@@ -1,29 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreator as escapeActions } from "../redux/modules/escape";
+import { actionCreator as rankActions } from "../redux/modules/rank";
+import { actionCreator as roomActions } from "../redux/modules/room";
+import EndingRankList from "../elements/EndingRankList";
+import { SvgUserGroup } from "../icons/etc/svg_etc";
 
 function Modal({ setOpenModal, quizType }) {
-  const [hintModal, setHintModal] = useState(false);
-  console.log(hintModal);
   const inputRef = useRef("");
   const dispatch = useDispatch();
-  const question = useSelector((state) => state.escape.question);
-  const content = useSelector((state) => state.escape.content);
-  const answer = useSelector((state) => state.escape.answer);
+  const rank = useSelector((state) => state.rank.gameRank);
 
   useEffect(() => {
-    // document.dispatchEvent(new KeyboardEvent("keydown", { key: "escape" }));
-
-    dispatch(escapeActions.refQuiz(quizType));
+    // 랭킹 가져오기
+    dispatch(rankActions.onGameRank());
   }, []);
 
-  const handleAnswer = () => {
-    if (inputRef.current.value === answer) {
-      console.log("정답입니다!");
-    } else {
-      console.log("오답입니다!");
-    }
+  const handleComment = () => {
+    console.log(inputRef.current.value);
+    dispatch(roomActions.writeComment(inputRef.current.value));
   };
 
   return (
@@ -39,29 +34,35 @@ function Modal({ setOpenModal, quizType }) {
           </button>
         </TitleCloseBtn>
 
-        <Title>{question ? <h1>{question}</h1> : <h1>오류</h1>}</Title>
-        <Body>{content ? <p>{content}</p> : <p>오류</p>}</Body>
+        <Title>
+          <h1>게임종료</h1>
+        </Title>
+        <Body>
+          <RankList>
+            <h4>순위</h4>
+            <h4>방이름</h4>
+            <h4>총 소요시간</h4>
+            <div>
+              <SvgUserGroup />
+            </div>
+          </RankList>
+          <EndingRankList list={rank}></EndingRankList>
+        </Body>
         <Input>
           <label>
-            <input ref={inputRef} type="text" placeholder="정답을 입력하세요" />
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="한줄평을 남겨보세요!"
+            />
           </label>
         </Input>
         <Footer>
-          <button type="submit" onClick={handleAnswer}>
-            제출하기
+          <button type="submit" onClick={handleComment}>
+            확인
           </button>
         </Footer>
-        <Hint>
-          <button onClick={() => setHintModal(true)}>힌트보기</button>
-        </Hint>
       </ModalContainer>
-      {hintModal ? (
-        <HintModal>
-          <p onClick={() => setHintModal(false)}>
-            스타워즈 포스터를 눈여겨 보자
-          </p>
-        </HintModal>
-      ) : null}
     </ModalBackground>
   );
 }
@@ -127,7 +128,7 @@ const Body = styled.div`
     text-align: center;
   }
 `;
-const Input = styled.div`
+const Input = styled.form`
   margin: auto;
   width: 443px;
   height: 60px;
@@ -201,5 +202,24 @@ const HintModal = styled.div`
     letter-spacing: -0.03em;
 
     color: #ffffff;
+  }
+`;
+
+const RankList = styled.div`
+  background: Red;
+  width: 350px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  h4 {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    letter-spacing: -0.03em;
   }
 `;
