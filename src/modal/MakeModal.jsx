@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreator as roomActions } from '../redux/modules/room';
+import { actionCreator as userActions } from '../redux/modules/user';
 import styled from 'styled-components';
 
 import { MuteButton } from '../elements/index';
@@ -9,7 +10,7 @@ import { WaitModal } from './index';
 const MakeModal = ({ closeModal }) => {
     const dispatch = useDispatch();
 
-    const { userId } = useSelector(({ user }) => user);
+    const { socket } = useSelector(({ socket }) => socket);
 
     const teamNameRef = useRef();
 
@@ -17,8 +18,12 @@ const MakeModal = ({ closeModal }) => {
 
     const makeRoom = () => {
         const teamName = teamNameRef.current.value;
+        // 이 시점에 userId가 없네
 
-        dispatch(roomActions.makeRoom(teamName, userId));
+        // 이젠 있네 그치
+
+        dispatch(roomActions.makeRoom(teamName, socket.id));
+        dispatch(userActions.getUserId(socket.id));
 
         SetWaitModal(true);
     };

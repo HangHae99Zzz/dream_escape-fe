@@ -23,12 +23,16 @@ const initialState = {
 // 방 개설하기
 const makeRoom = (teamName, userId) => {
     return function (dispatch, getState) {
+        console.log(`방이름: ${teamName} 내 이름: ${userId}`);
         instance
             .post('/room', {
                 teamName,
                 userId,
             })
-            .then(res => dispatch(getRoomInfo(res.data)))
+            .then(res => {
+                console.log(`방 만든사람: ${res.data.createdUser}`);
+                return dispatch(getRoomInfo(res.data));
+            })
             .catch(err => console.log(err));
     };
 };
@@ -54,14 +58,24 @@ const refRoom = roomId => {
 };
 
 // 방 참여하기
-const joinRoom = roomId => {
+const joinRoom = (roomId, userId, modal) => {
     return function (dispatch, getState) {
+        // roomInfo 업데이트
+        dispatch(refRoom(roomId));
+        // session storage에 저장 roomId:'1'
+        sessionStorage.setItem('roomId', roomId);
+        console.log('방 참여 APi에 보내는', roomId, userId);
+
         instance
             .post(`/room/${roomId}`, {
-                userId: '',
+                userId,
             })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
+            .then(res => {
+                // session storage에 저장 roomId:'1'
+                sessionStorage.setItem('roomId', roomId);
+                modal(true);
+            })
+            .catch(err => window.alert('인원가득'));
     };
 };
 
@@ -90,6 +104,13 @@ export default handleActions(
 );
 
 // action creator export
-const actionCreator = { makeRoom, refRoomList, refRoom, joinRoom, deleteRoom };
+const actionCreator = {
+    getRoomInfo,
+    makeRoom,
+    refRoomList,
+    refRoom,
+    joinRoom,
+    deleteRoom,
+};
 
 export { actionCreator };

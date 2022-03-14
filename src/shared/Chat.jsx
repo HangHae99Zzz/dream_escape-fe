@@ -1,3 +1,4 @@
+///아시발망가졌다
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
@@ -6,6 +7,7 @@ import styled from 'styled-components';
 
 import { actionCreator as socketActions } from '../redux/modules/socket';
 import { actionCreator as userActions } from '../redux/modules/user';
+import { actionCreator as roomActions } from '../redux/modules/room';
 
 import Video from '../components/Video';
 
@@ -21,7 +23,9 @@ const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
 // const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
+    const { isIn } = useSelector(({ user }) => user);
     const { roomInfo } = useSelector(({ room }) => room);
+    const { socket } = useSelector(({ socket }) => socket);
 
     const dispatch = useDispatch();
 
@@ -125,8 +129,6 @@ const Chat = () => {
         try {
             const pc = new RTCPeerConnection(pc_config);
 
-            console.log(pc);
-
             pc.onicecandidate = e => {
                 if (!(socketRef.current && e.candidate)) return;
                 socketRef.current.emit('candidate', {
@@ -141,6 +143,9 @@ const Chat = () => {
             };
 
             pc.ontrack = e => {
+                // console.log(roomInfo.roomId);
+                // dispatch(roomActions.refRoom(roomInfo.roomId));
+                console.log('누가 들어옴');
                 setUsers(oldUsers =>
                     oldUsers
                         .filter(user => user.id !== socketID)
@@ -150,7 +155,6 @@ const Chat = () => {
                             stream: e.streams[0],
                         })
                 );
-                console.log(e);
                 // 애가 잘 발생을 안하는구만
             };
 
@@ -171,30 +175,34 @@ const Chat = () => {
     }, []);
 
     useEffect(() => {
-        socketRef.current = io.connect(SOCKET_SERVER_URL);
-        console.log(socketRef.current);
+        if (!isIn) {
+            console.log('처음이야!');
+            socketRef.current = io.connect(SOCKET_SERVER_URL);
 
-        dispatch(socketActions.getSocket(socketRef.current));
+            dispatch(socketActions.getSocket(socketRef.current));
+            dispatch(userActions.setIsIn(true));
+        }
 
-        // if (!roomInfo) return;
-
+        if (!roomInfo) return;
         getLocalStream()
             .then(() => getDevices())
             .then(() => {
-                console.log(socketRef.current.id);
+                console.log('내 아이디', socketRef.current.id);
                 dispatch(userActions.getUserId(socketRef.current.id));
             })
             .then(() => {
-                socketRef.current.emit('join_room', {
-                    room: roomInfo.roomId,
-                    email: 'sample@naver.com',
-                });
+                setTimeout(() => {
+                    console.log(roomInfo.roomId);
+                    socketRef.current.emit('join_room', {
+                        room: roomInfo.roomId,
+                        email: 'sample@naver.com',
+                    });
+                }, 2000);
             });
 
         // room 들어가면 실행하도록 /////////////////////////////////////
 
         socketRef.current.on('all_users', allUsers => {
-            console.log('allUsers', allUsers);
             allUsers.forEach(async user => {
                 if (!localStreamRef.current) return;
                 const pc = createPeerConnection(user.id, user.email);
@@ -269,8 +277,9 @@ const Chat = () => {
             delete pcsRef.current[data.id];
             setUsers(oldUsers => oldUsers.filter(user => user.id !== data.id));
 
-            console.log({ userId: data.id });
+            console.log(`나간애 :${data.id}`);
 
+            // 비정상종료일경우 다른애들이 대신 해줌
             instance
                 .post('/user', { userId: data.id })
                 .then(function (response) {
@@ -357,7 +366,7 @@ const Chat = () => {
 };
 
 const ChatWrapper = styled.div`
-    display: none;
+    /* display: none; */
 `;
 
 export default Chat;

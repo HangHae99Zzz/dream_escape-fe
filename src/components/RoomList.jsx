@@ -10,25 +10,33 @@ const RoomList = () => {
     const dispatch = useDispatch();
     const { roomList } = useSelector(({ room }) => room);
     const { roomInfo } = useSelector(({ room }) => room);
+    const { socket } = useSelector(({ socket }) => socket);
+    // const { userId } = useSelector(({ user }) => user);
     const [openWaitModal, setOpenWaitModal] = useState(false);
 
     const enterRoom = roomId => {
-        // roomInfo 업데이트
-        dispatch(roomActions.refRoom(roomId));
-        // modal
-        setOpenWaitModal(true);
+        // 참여시키기 userId가 올때까지 기다려봐
+        // userId가 없으면 기다렸다가 다시 본인을 호출
+        setTimeout(
+            () =>
+                dispatch(
+                    roomActions.joinRoom(roomId, socket.id, setOpenWaitModal)
+                ),
+            1000
+        );
     };
 
     useEffect(() => {
         dispatch(roomActions.refRoomList());
-        console.log(roomInfo);
     }, [roomInfo]);
 
     return (
         <RoomLi>
             {roomList &&
                 roomList.map((room, i) => {
-                    return (
+                    return room.currentNum === 0 ? (
+                        <React.Fragment key={i}></React.Fragment>
+                    ) : (
                         <RoomWrapper
                             // onClick={() => setOpenWaitModal(true)}
                             onClick={() => enterRoom(room.roomId)}
@@ -57,15 +65,17 @@ const RoomList = () => {
                                     </IconContainer>
 
                                     <MemberContainer>
-                                        <Member>닉네임 1</Member>
-                                        <Member>닉네임 2</Member>
-                                        <Member>닉네임 3</Member>
+                                        {room.userList.map((user, i) => {
+                                            return i === 0 ? null : (
+                                                <Member key={i}>{user}</Member>
+                                            );
+                                        })}
                                     </MemberContainer>
                                 </Bottom>
                             </Left>
                             <Right>
                                 <UserImg></UserImg>
-                                <Creator>방장</Creator>
+                                <Creator>{room.userList[0]}</Creator>
                             </Right>
                         </RoomWrapper>
                     );
