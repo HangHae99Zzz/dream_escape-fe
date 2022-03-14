@@ -52,7 +52,7 @@ const slideUp = keyframes`
     transform: translateY(500px);
   }
   to {
-    transform: translateY(-100px);
+    transform: translateY(-200px);
   }
 `;
 
@@ -72,7 +72,7 @@ const Container = styled.div`
 const DivContainer = styled.div`
   width: 500px;
 
-  animation-duration: 10s;
+  animation-duration: 13s;
   animation-timing-function: ease-out;
   animation-name: ${slideUp};
   animation-fill-mode: forwards;

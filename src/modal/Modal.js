@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as escapeActions } from "../redux/modules/escape";
 
-function Modal({ setOpenModal, quizType }) {
+function Modal({ setModalOpen, quizType }) {
   const [hintModal, setHintModal] = useState(false);
   console.log(hintModal);
   const inputRef = useRef("");
@@ -13,8 +13,6 @@ function Modal({ setOpenModal, quizType }) {
   const answer = useSelector((state) => state.escape.answer);
 
   useEffect(() => {
-    // document.dispatchEvent(new KeyboardEvent("keydown", { key: "escape" }));
-
     dispatch(escapeActions.refQuiz(quizType));
   }, []);
 
@@ -27,12 +25,16 @@ function Modal({ setOpenModal, quizType }) {
   };
 
   return (
-    <ModalBackground>
+    <ModalBackground
+      onClick={() => {
+        document.exitPointerLock();
+      }}
+    >
       <ModalContainer>
         <TitleCloseBtn>
           <button
             onClick={() => {
-              setOpenModal(false);
+              setModalOpen(false);
             }}
           >
             X

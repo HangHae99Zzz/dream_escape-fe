@@ -1,17 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import {
-  Html,
-  useProgress,
-  OrbitControls,
-  PerspectiveCamera,
-  PointerLockControls,
-} from "@react-three/drei";
+import { Html, useProgress, PointerLockControls } from "@react-three/drei";
 import WasdControls from "../elements/WasdControls";
 import Test from "../elements/Test";
 import ClueModal from "../modal/ClueModal";
 import Modal from "../modal/Modal";
+import styled from "styled-components";
+import InGameUsers from "./InGameUsers";
 
 const ThreeRoom = () => {
   // quiz 모달, hint modal 분리하기
@@ -26,38 +22,15 @@ const ThreeRoom = () => {
     return <Html center>{progress} % loaded</Html>;
   }
 
-  // useEffect(() => {
-  //   console.log(modalOpen, "esc 버튼아 눌려라");
-  //   var event = new KeyboardEvent('keydown', {
-  //     key: 'Escape',
-  //   });
-  //   document.dispatchEvent(event);
-  // }, [modalOpen]);
-
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {modalOpen && <Modal setOpenModal={setModalOpen} quizType={quizType} />}
+    <Container>
+      <InGameUsers />
+      {modalOpen && <Modal setModalOpen={setModalOpen} quizType={quizType} />}
       {clueModalOpen && (
         <ClueModal setClueModalOpen={setClueModalOpen} clueType={clueType} />
       )}
-      {!modalOpen && !clueModalOpen && (
-        <div
-          style={{
-            width: "30px",
-            height: "30px",
-            position: "absolute",
-            zIndex: 10,
-            border: "2px solid #fff",
-            borderRadius: "50%",
-          }}
-        ></div>
-      )}
+      {/* 가운데 원 */}
+      {!modalOpen && !clueModalOpen && <MouseCircle></MouseCircle>}
 
       <Canvas
         style={{ width: "100%", height: "100vh" }}
@@ -78,14 +51,12 @@ const ThreeRoom = () => {
           decay={2}
         />
         <pointLight position={[1, 1, 1]} color={0xf242cb} />
-        {/* <OrbitControls /> */}
-        {/* {modalOpen ? (
+        {modalOpen || clueModalOpen ? (
           <PointerLockControls enabled={false} />
         ) : (
           <PointerLockControls enabled={true} />
-        )} */}
+        )}
         <WasdControls />
-        <PointerLockControls />
         <Suspense fallback={<Loader />}>
           <Test
             setModalOpen={setModalOpen}
@@ -95,8 +66,23 @@ const ThreeRoom = () => {
           />
         </Suspense>
       </Canvas>
-    </div>
+    </Container>
   );
 };
 
 export default ThreeRoom;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MouseCircle = styled.div`
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 10;
+  border: 2px solid #fff;
+  border-radius: 50%;
+`;

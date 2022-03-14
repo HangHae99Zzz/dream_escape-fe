@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as rankActions } from "../redux/modules/rank";
 import { actionCreator as roomActions } from "../redux/modules/room";
 import EndingRankList from "../elements/EndingRankList";
-import { SvgUserGroup } from "../icons/etc/svg_etc";
 
 function Modal({ setOpenModal, quizType }) {
   const inputRef = useRef("");
@@ -18,7 +17,8 @@ function Modal({ setOpenModal, quizType }) {
 
   const handleComment = () => {
     console.log(inputRef.current.value);
-    dispatch(roomActions.writeComment(inputRef.current.value));
+    // dispatch(roomActions.writeComment(inputRef.current.value));
+    setOpenModal(false);
   };
 
   return (
@@ -38,14 +38,6 @@ function Modal({ setOpenModal, quizType }) {
           <h1>게임종료</h1>
         </Title>
         <Body>
-          <RankList>
-            <h4>순위</h4>
-            <h4>방이름</h4>
-            <h4>총 소요시간</h4>
-            <div>
-              <SvgUserGroup />
-            </div>
-          </RankList>
           <EndingRankList list={rank}></EndingRankList>
         </Body>
         <Input>
@@ -114,7 +106,9 @@ const Title = styled.div`
   }
 `;
 const Body = styled.div`
+  /* background: blue; */
   flex: 50%;
+  /* height: 125px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -128,6 +122,27 @@ const Body = styled.div`
     text-align: center;
   }
 `;
+
+const RankList = styled.div`
+  background: Red;
+  width: 350px;
+  height: 25px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  h4 {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    letter-spacing: -0.03em;
+  }
+`;
+
 const Input = styled.form`
   margin: auto;
   width: 443px;
@@ -143,6 +158,7 @@ const Input = styled.form`
     text-align: center;
   }
 `;
+
 const Footer = styled.div`
   flex: 20%;
   display: flex;
@@ -161,65 +177,5 @@ const Footer = styled.div`
     background: #5668e8;
     border: 3px solid #5668e8;
     border-radius: 30px;
-  }
-`;
-
-const Hint = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  button {
-    background: none;
-    cursor: pointer;
-    font-weight: 900;
-    font-size: 18px;
-    line-height: 22px;
-
-    text-align: center;
-    letter-spacing: -0.03em;
-
-    color: #5668e8;
-  }
-`;
-
-const HintModal = styled.div`
-  width: 443px;
-  height: 82px;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 30px;
-
-  z-index: 11;
-  p {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    letter-spacing: -0.03em;
-
-    color: #ffffff;
-  }
-`;
-
-const RankList = styled.div`
-  background: Red;
-  width: 350px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  h4 {
-    font-family: "Pretendard";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    /* identical to box height */
-
-    letter-spacing: -0.03em;
   }
 `;

@@ -48,9 +48,8 @@ const refRank = () => {
 const onGameRank = (roomId) => {
   return function (dispatch, getState) {
     instance
-      .get(`/rank/14`)
+      .get(`/rank/19`)
       .then((res) => {
-        console.log(res);
         dispatch(loadGameRank(res.data));
       })
       .catch((err) => console.log(err));
