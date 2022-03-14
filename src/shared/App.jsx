@@ -18,7 +18,6 @@ function App() {
         <HistoryRouter history={history}>
             <GlobalStyles />
             <Chat />
-
             <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="/loading" element={<Loading />} />

@@ -188,7 +188,6 @@ const Chat = () => {
             .then(() => getDevices())
             .then(() => {
                 console.log('내 아이디', socketRef.current.id);
-                dispatch(userActions.getUserId(socketRef.current.id));
             })
             .then(() => {
                 setTimeout(() => {

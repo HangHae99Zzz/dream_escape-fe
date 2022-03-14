@@ -11,12 +11,11 @@ import { MuteButton } from '../elements/index';
 const WaitModal = ({ closeModal }) => {
     const dispatch = useDispatch();
     const { socket } = useSelector(({ socket }) => socket);
-    const { userId } = useSelector(({ user }) => user);
     const { roomInfo } = useSelector(({ room }) => room);
 
     const navigate = useNavigate();
-    const exit = userId => {
-        dispatch(userActions.deleteUser(userId));
+    const exit = socketId => {
+        dispatch(userActions.deleteUser(socketId));
         socket.close();
         dispatch(userActions.setIsIn(false));
         dispatch(roomActions.getRoomInfo(null));
@@ -31,7 +30,7 @@ const WaitModal = ({ closeModal }) => {
                 <XIcon
                     src="/icons/contents/x.svg"
                     alt=""
-                    onClick={() => exit(userId)}
+                    onClick={() => exit(socket.id)}
                 />
             </ExitContainer>
             <div>
@@ -51,7 +50,7 @@ const WaitModal = ({ closeModal }) => {
                 <MuteButton abs={true}> </MuteButton>
             </ImgContainer>
             <div>
-                {userId === roomInfo?.createdUser ? (
+                {socket.id === roomInfo?.createdUser ? (
                     <MakeButton
                         onClick={() => {
                             navigate('/game');

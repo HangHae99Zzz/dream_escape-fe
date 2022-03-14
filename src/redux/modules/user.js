@@ -4,20 +4,15 @@ import produce from 'immer';
 import instance from '../../shared/request';
 
 // actions
-const USER_ID = 'USER_ID';
 const IS_IN = 'IS_IN';
 
 // Action Creators
-const getUserId = createAction(USER_ID, userId => ({
-    userId,
-}));
-
 const setIsIn = createAction(IS_IN, isIn => ({
     isIn,
 }));
 
 // initialState
-const initialState = { userId: '', isIn: false };
+const initialState = { isIn: false };
 
 //  middleware Actions
 
@@ -32,11 +27,11 @@ const refUser = roomId => {
 };
 
 // 유저 삭제하기
-const deleteUser = userId => {
+const deleteUser = socketId => {
     return function (dispatch, getState) {
-        console.log('유저삭제', userId);
+        console.log('유저삭제', socketId);
         instance
-            .post(`/user`, { userId: userId })
+            .post(`/user`, { userId: socketId })
             .then(res => console.log(res))
             .catch(err => console.log(err));
     };
@@ -44,10 +39,6 @@ const deleteUser = userId => {
 
 export default handleActions(
     {
-        [USER_ID]: (state, action) =>
-            produce(state, draft => {
-                draft.userId = action.payload.userId;
-            }),
         [IS_IN]: (state, action) =>
             produce(state, draft => {
                 draft.isIn = action.payload.isIn;
@@ -57,6 +48,6 @@ export default handleActions(
 );
 
 // action creator export
-const actionCreator = { setIsIn, getUserId, refUser, deleteUser };
+const actionCreator = { setIsIn, refUser, deleteUser };
 
 export { actionCreator };

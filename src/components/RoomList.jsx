@@ -11,12 +11,11 @@ const RoomList = () => {
     const { roomList } = useSelector(({ room }) => room);
     const { roomInfo } = useSelector(({ room }) => room);
     const { socket } = useSelector(({ socket }) => socket);
-    // const { userId } = useSelector(({ user }) => user);
     const [openWaitModal, setOpenWaitModal] = useState(false);
 
     const enterRoom = roomId => {
-        // 참여시키기 userId가 올때까지 기다려봐
-        // userId가 없으면 기다렸다가 다시 본인을 호출
+        // 참여시키기 socket.id가 올때까지 기다려봐
+        // socket.id가 없으면 기다렸다가 다시 본인을 호출
         setTimeout(
             () =>
                 dispatch(

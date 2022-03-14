@@ -21,13 +21,13 @@ const initialState = {
 //  middleware Actions
 
 // 방 개설하기
-const makeRoom = (teamName, userId) => {
+const makeRoom = (teamName, socketId) => {
     return function (dispatch, getState) {
-        console.log(`방이름: ${teamName} 내 이름: ${userId}`);
+        console.log(`방이름: ${teamName} 내 이름: ${socketId}`);
         instance
             .post('/room', {
                 teamName,
-                userId,
+                userId: socketId,
             })
             .then(res => {
                 console.log(`방 만든사람: ${res.data.createdUser}`);
@@ -58,17 +58,17 @@ const refRoom = roomId => {
 };
 
 // 방 참여하기
-const joinRoom = (roomId, userId, modal) => {
+const joinRoom = (roomId, socketId, modal) => {
     return function (dispatch, getState) {
         // roomInfo 업데이트
         dispatch(refRoom(roomId));
         // session storage에 저장 roomId:'1'
         sessionStorage.setItem('roomId', roomId);
-        console.log('방 참여 APi에 보내는', roomId, userId);
+        console.log('방 참여 APi에 보내는', roomId, socketId);
 
         instance
             .post(`/room/${roomId}`, {
-                userId,
+                userId: socketId,
             })
             .then(res => {
                 // session storage에 저장 roomId:'1'
