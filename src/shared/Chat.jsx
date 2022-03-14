@@ -1,8 +1,13 @@
+///아시발망가졌다
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
-import axios from 'axios';
-
+import instance from './request';
 import styled from 'styled-components';
+
+import { actionCreator as socketActions } from '../redux/modules/socket';
+import { actionCreator as userActions } from '../redux/modules/user';
+import { actionCreator as roomActions } from '../redux/modules/room';
 
 import Video from '../components/Video';
 
@@ -13,15 +18,21 @@ const pc_config = {
         },
     ],
 };
+
 const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
 // const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
+    const { isIn } = useSelector(({ user }) => user);
+    const { roomInfo } = useSelector(({ room }) => room);
+    const { socket } = useSelector(({ socket }) => socket);
+
+    const dispatch = useDispatch();
+
     const socketRef = useRef();
     const pcsRef = useRef();
     const localStreamRef = useRef();
     const localVideoRef = useRef();
-    console.log(localVideoRef.current);
 
     const divicesRef = useRef();
     const micsRef = useRef();
@@ -75,7 +86,6 @@ const Chat = () => {
 
     const handleMicChange = async () => {
         const pc = createPeerConnection();
-        console.log(pc);
 
         await getLocalStream(micSelect.current.value);
         if (pc) {
@@ -110,13 +120,6 @@ const Chat = () => {
             localVideoRef.current.srcObject = localStream;
 
             if (!deviceId) await getDevices();
-
-            /////////////////////////////////////////////////////////////////////////
-            socketRef.current.emit('join_room', {
-                room: '1234',
-                email: 'sample@naver.com',
-            });
-            /////////////////////////////////////////////////////////////////////////
         } catch (e) {
             console.log(`getUserMedia error: ${e}`);
         }
@@ -140,6 +143,9 @@ const Chat = () => {
             };
 
             pc.ontrack = e => {
+                // console.log(roomInfo.roomId);
+                // dispatch(roomActions.refRoom(roomInfo.roomId));
+                console.log('누가 들어옴');
                 setUsers(oldUsers =>
                     oldUsers
                         .filter(user => user.id !== socketID)
@@ -149,7 +155,6 @@ const Chat = () => {
                             stream: e.streams[0],
                         })
                 );
-                console.log(e);
                 // 애가 잘 발생을 안하는구만
             };
 
@@ -170,8 +175,30 @@ const Chat = () => {
     }, []);
 
     useEffect(() => {
-        socketRef.current = io.connect(SOCKET_SERVER_URL);
-        getLocalStream().then(() => getDevices());
+        if (!isIn) {
+            console.log('처음이야!');
+            socketRef.current = io.connect(SOCKET_SERVER_URL);
+
+            dispatch(socketActions.getSocket(socketRef.current));
+            dispatch(userActions.setIsIn(true));
+        }
+
+        if (!roomInfo) return;
+        getLocalStream()
+            .then(() => getDevices())
+            .then(() => {
+                console.log('내 아이디', socketRef.current.id);
+                dispatch(userActions.getUserId(socketRef.current.id));
+            })
+            .then(() => {
+                setTimeout(() => {
+                    console.log(roomInfo.roomId);
+                    socketRef.current.emit('join_room', {
+                        room: roomInfo.roomId,
+                        email: 'sample@naver.com',
+                    });
+                }, 2000);
+            });
 
         // room 들어가면 실행하도록 /////////////////////////////////////
 
@@ -250,16 +277,17 @@ const Chat = () => {
             delete pcsRef.current[data.id];
             setUsers(oldUsers => oldUsers.filter(user => user.id !== data.id));
 
-            console.log({ userId: data.id });
+            console.log(`나간애 :${data.id}`);
 
-            // axios
-            //     .post('https://banwonjae.shop:8080/user', { userId: data.id })
-            //     .then(function (response) {
-            //         console.log(response);
-            //     })
-            //     .catch(function (error) {
-            //         console.log(error);
-            //     });
+            // 비정상종료일경우 다른애들이 대신 해줌
+            instance
+                .post('/user', { userId: data.id })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         });
         //////////////////////////////////////////////////////////////////////////
 
@@ -274,7 +302,7 @@ const Chat = () => {
             });
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [createPeerConnection, getLocalStream]);
+    }, [createPeerConnection, getLocalStream, roomInfo]);
 
     if (!micsRef.current && !speakersRef.current) {
         getDevices();
@@ -338,7 +366,7 @@ const Chat = () => {
 };
 
 const ChatWrapper = styled.div`
-    display: none;
+    /* display: none; */
 `;
 
 export default Chat;

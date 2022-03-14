@@ -1,11 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreator as roomActions } from '../redux/modules/room';
+import { actionCreator as userActions } from '../redux/modules/user';
 import styled from 'styled-components';
 
 import { MuteButton } from '../elements/index';
 import { WaitModal } from './index';
 
 const MakeModal = ({ closeModal }) => {
+    const dispatch = useDispatch();
+
+    const { socket } = useSelector(({ socket }) => socket);
+
+    const teamNameRef = useRef();
+
     const [waitModal, SetWaitModal] = useState(false);
+
+    const makeRoom = () => {
+        const teamName = teamNameRef.current.value;
+        // 이 시점에 userId가 없네
+
+        // 이젠 있네 그치
+
+        dispatch(roomActions.makeRoom(teamName, socket.id));
+        dispatch(userActions.getUserId(socket.id));
+
+        SetWaitModal(true);
+    };
 
     return (
         <>
@@ -15,13 +36,16 @@ const MakeModal = ({ closeModal }) => {
                 <ModalWindow>
                     <ExitContainer>
                         <XIcon
-                            src="/icons/x.svg"
+                            src="/icons/contents/x.svg"
                             alt=""
                             onClick={() => closeModal(false)}
                         />
                     </ExitContainer>
                     <div>
-                        <NameInput placeholder="방 이름을 입력하세요"></NameInput>
+                        <NameInput
+                            ref={teamNameRef}
+                            placeholder="팀 이름을 입력하세요"
+                        ></NameInput>
                     </div>
                     <MicContiner>
                         <div>보이스채팅 마이크</div>
@@ -29,12 +53,13 @@ const MakeModal = ({ closeModal }) => {
                     </MicContiner>
                     <ImgContainer></ImgContainer>
                     <div>
-                        <MakeButton onClick={() => SetWaitModal(true)}>
+                        <MakeButton onClick={() => makeRoom()}>
                             방 개설하기
                         </MakeButton>
                     </div>
                     <CopyContaier>
-                        <img src="/icons/clip.svg" alt="" /> <div>링크복사</div>
+                        <img src="/icons/contents/clip.png" alt="" />{' '}
+                        <div>링크복사</div>
                     </CopyContaier>
                     <FooterContainer>
                         친구들에게 공유하시면 함께 즐길 수 있어요
@@ -78,6 +103,11 @@ const NameInput = styled.input`
     border: 3px solid #5668e8;
     box-sizing: border-box;
     border-radius: 7px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.03em;
     ::placeholder {
         text-align: center;
         font-weight: 500;
@@ -110,6 +140,14 @@ const MakeButton = styled.button`
     border: 3px solid #5668e8;
     box-sizing: border-box;
     border-radius: 30px;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+    text-align: center;
+    letter-spacing: -0.03em;
+
+    color: #ffffff;
 `;
 const CopyContaier = styled.div`
     width: 12%;

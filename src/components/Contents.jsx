@@ -10,7 +10,7 @@ const Contents = () => {
                 <Banner src="/images/20220302_010744 1.png"></Banner>
                 <RoomListContainer>
                     <RoomListHeader>
-                        <h3 style={{ fontSize: '20px' }}>게임방리스트</h3>
+                        <Sub>게임방리스트</Sub>
                         <Selector>
                             <option>최신순 </option>
                         </Selector>
@@ -56,6 +56,16 @@ const RoomListHeader = styled.div`
     align-items: center;
 `;
 
+const Sub = styled.h3`
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+    letter-spacing: -0.03em;
+
+    color: #000000;
+`;
+
 const Selector = styled.select`
     width: 84px;
     height: 33px;
@@ -63,12 +73,17 @@ const Selector = styled.select`
     border: 2px solid #394ddb;
     box-sizing: border-box;
     border-radius: 19px;
-    color: #394ddb;
     appearance: none;
     background-image: url('/icons/contents/downArrow.png');
     background-repeat: no-repeat;
-    background-position-x: 59px;
+    background-position-x: 56px;
     background-position-y: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.03em;
+    color: #394DDB;
+}
 `;
 
 const MoreBtn = styled.button`

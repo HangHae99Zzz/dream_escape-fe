@@ -1,59 +1,77 @@
-import React from "react";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { MuteButton } from "../elements/index";
+import { actionCreator as roomActions } from '../redux/modules/room';
+import { actionCreator as userActions } from '../redux/modules/user';
+
+import { MuteButton } from '../elements/index';
 
 const WaitModal = ({ closeModal }) => {
-  const navigate = useNavigate();
-  return (
-    <ModalWindow>
-      <ExitContainer>
-        <XIcon src="/icons/x.svg" alt="" onClick={() => closeModal(false)} />
-      </ExitContainer>
-      <div>
-        <RoomName>방구석 대탈출ㅋㅋ</RoomName>
-      </div>
-      <Label>현재인원</Label>
-      <UserWrapper>
-        <UserContainer>
-          <UserImg />
-          닉네임
-        </UserContainer>
-        <UserContainer>
-          <UserImg />
-          닉네임
-        </UserContainer>
-        <UserContainer>
-          <UserImg />
-          닉네임
-        </UserContainer>
-        <UserContainer>
-          <UserImg />
-          닉네임
-        </UserContainer>
-      </UserWrapper>
-      <Label>게임방</Label>
-      <ImgContainer>
-        <MuteButton abs={true}> </MuteButton>
-      </ImgContainer>
-      <div>
-        <MakeButton
-          onClick={() => {
-            navigate("/game");
-          }}
-        >
-          게임시작
-        </MakeButton>
-      </div>
-      <CopyContaier>
-        <img src="/icons/clip.svg" alt="" /> <div>링크복사</div>
-      </CopyContaier>
-      <FooterContainer>
-        친구들에게 공유하시면 함께 즐길 수 있어요
-      </FooterContainer>
-    </ModalWindow>
-  );
+    const dispatch = useDispatch();
+    const { socket } = useSelector(({ socket }) => socket);
+    const { userId } = useSelector(({ user }) => user);
+    const { roomInfo } = useSelector(({ room }) => room);
+
+    const navigate = useNavigate();
+    const exit = userId => {
+        dispatch(userActions.deleteUser(userId));
+        socket.close();
+        dispatch(userActions.setIsIn(false));
+        dispatch(roomActions.getRoomInfo(null));
+        console.log(socket);
+        closeModal(false);
+        // isfirst false, roominfo null
+    };
+
+    return (
+        <ModalWindow>
+            <ExitContainer>
+                <XIcon
+                    src="/icons/contents/x.svg"
+                    alt=""
+                    onClick={() => exit(userId)}
+                />
+            </ExitContainer>
+            <div>
+                <RoomName>{roomInfo?.teamName}</RoomName>
+            </div>
+            <Label>현재인원</Label>
+            <UserWrapper>
+                {roomInfo?.userList.map((user, i) => (
+                    <UserContainer key={i}>
+                        <UserImg />
+                        {user}
+                    </UserContainer>
+                ))}
+            </UserWrapper>
+            <Label>게임방</Label>
+            <ImgContainer>
+                <MuteButton abs={true}> </MuteButton>
+            </ImgContainer>
+            <div>
+                {userId === roomInfo?.createdUser ? (
+                    <MakeButton
+                        onClick={() => {
+                            navigate('/game');
+                        }}
+                    >
+                        게임시작
+                    </MakeButton>
+                ) : (
+                    <MakeButton disabled>대기중</MakeButton>
+                )}
+            </div>
+            <CopyContaier>
+                <img src="/icons/contents/clip.png" alt="" />{' '}
+                <div>링크복사</div>
+            </CopyContaier>
+            <FooterContainer>
+                친구들에게 공유하시면 함께 즐길 수 있어요
+            </FooterContainer>
+        </ModalWindow>
+    );
 };
 
 const ModalWindow = styled.div`

@@ -13,8 +13,7 @@ function App() {
   return (
     <Router>
       <GlobalStyles />
-      {/* <Chat /> */}
-
+       <Chat />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/ranks" element={<Rank />} />
