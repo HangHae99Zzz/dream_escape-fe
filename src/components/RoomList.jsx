@@ -66,7 +66,9 @@ const RoomList = () => {
                                     <MemberContainer>
                                         {room.userList.map((user, i) => {
                                             return i === 0 ? null : (
-                                                <Member key={i}>{user}</Member>
+                                                <Member key={i}>
+                                                    {user.nickName}
+                                                </Member>
                                             );
                                         })}
                                     </MemberContainer>
@@ -74,7 +76,7 @@ const RoomList = () => {
                             </Left>
                             <Right>
                                 <UserImg></UserImg>
-                                <Creator>{room.userList[0]}</Creator>
+                                <Creator>{room.userList[0].nickName}</Creator>
                             </Right>
                         </RoomWrapper>
                     );

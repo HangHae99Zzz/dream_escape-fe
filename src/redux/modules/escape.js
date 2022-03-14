@@ -7,6 +7,11 @@ import instance from "../../shared/request";
 const LOAD_QUIZ = "LOAD_QUIZ";
 
 // Action Creators
+const loadQuiz = createAction(LOAD_QUIZ, (question, content, answer) => ({
+  question,
+  content,
+  answer,
+}));
 
 // initialState
 const initialState = {
@@ -14,17 +19,13 @@ const initialState = {
   content: "",
   answer: "",
 };
+
 //  middleware Actions
-const loadQuiz = createAction(LOAD_QUIZ, (question, content, answer) => ({
-  question,
-  content,
-  answer,
-}));
 
 // Quiz 조회하기
 const refQuiz = (quizType) => {
   console.log("refQuiz 미들웨어에서 받았습니다!", quizType, typeof quizType);
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .get(`/escape/6/${quizType}`)
       .then((res) => {
@@ -41,7 +42,7 @@ const refQuiz = (quizType) => {
 
 // 힌트 조회하기
 const submitAnswer = (quizType) => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .post(`/escape/hint/${quizType}`, {})
       .then((res) => console.log(res))
@@ -51,7 +52,7 @@ const submitAnswer = (quizType) => {
 
 // count +1
 const submitResult = (roomId) => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getState) {
     instance
       .post(`/escape/${roomId}`, {})
       .then((res) => console.log(res))

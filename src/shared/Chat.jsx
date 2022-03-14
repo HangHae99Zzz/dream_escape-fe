@@ -1,4 +1,3 @@
-///아시발망가졌다
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
@@ -365,7 +364,7 @@ const Chat = () => {
 };
 
 const ChatWrapper = styled.div`
-    /* display: none; */
+    display: none;
 `;
 
 export default Chat;
