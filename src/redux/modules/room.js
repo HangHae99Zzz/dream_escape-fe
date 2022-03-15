@@ -16,9 +16,17 @@ const getRoomList = createAction(GET_ROOM_LIST, roomList => ({ roomList }));
 const initialState = {
     roomInfo: null,
     roomList: null,
+    peers: [],
 };
 
 //  middleware Actions
+
+// 게임시작
+const saveSession = roomId => {
+    // session storage에 저장 roomId:'1'
+    console.log('세션에 저장합니다!');
+    sessionStorage.setItem('sessionRoomId', roomId);
+};
 
 // 방 개설하기
 const makeRoom = (teamName, socketId) => {
@@ -31,6 +39,7 @@ const makeRoom = (teamName, socketId) => {
             })
             .then(res => {
                 console.log(`방 만든사람: ${res.data.createdUser}`);
+                saveSession(res.data.roomId);
                 return dispatch(getRoomInfo(res.data));
             })
             .catch(err => console.log(err));
@@ -39,7 +48,6 @@ const makeRoom = (teamName, socketId) => {
 
 // 방 리스트 조회하기
 const refRoomList = () => {
-
     return function (dispatch, getState) {
         instance
             .get('/rooms')
@@ -53,7 +61,10 @@ const refRoom = roomId => {
     return function (dispatch, getState) {
         instance
             .get(`/room/${roomId}`)
-            .then(res => dispatch(getRoomInfo(res.data)))
+            .then(res => {
+                saveSession(res.data.roomId);
+                return dispatch(getRoomInfo(res.data));
+            })
             .catch(err => console.log(err));
     };
 };
@@ -63,9 +74,6 @@ const joinRoom = (roomId, socketId, modal) => {
     return function (dispatch, getState) {
         // roomInfo 업데이트
         dispatch(refRoom(roomId));
-        // session storage에 저장 roomId:'1'
-        sessionStorage.setItem('roomId', roomId);
-        console.log('방 참여 APi에 보내는', roomId, socketId);
 
         instance
             .post(`/room/${roomId}`, {
@@ -73,7 +81,7 @@ const joinRoom = (roomId, socketId, modal) => {
             })
             .then(res => {
                 // session storage에 저장 roomId:'1'
-                sessionStorage.setItem('roomId', roomId);
+                sessionStorage.setItem('sessionRoomId', roomId);
                 modal(true);
             })
             .catch(err => window.alert('인원가득'));

@@ -1,78 +1,80 @@
-import { createAction, handleActions } from "redux-actions";
-import axios from "axios";
+import { createAction, handleActions } from 'redux-actions';
+import axios from 'axios';
 
-import instance from "../../shared/request";
+import instance from '../../shared/request';
+
+const sessionRoomId = sessionStorage.getItem('sessionRoomId');
 
 // actions
-const LOAD_QUIZ = "LOAD_QUIZ";
+const LOAD_QUIZ = 'LOAD_QUIZ';
 
 // Action Creators
 const loadQuiz = createAction(LOAD_QUIZ, (question, content, answer) => ({
-  question,
-  content,
-  answer,
+    question,
+    content,
+    answer,
 }));
 
 // initialState
 const initialState = {
-  question: "",
-  content: "",
-  answer: "",
+    question: '',
+    content: '',
+    answer: '',
 };
 
 //  middleware Actions
 
 // Quiz 조회하기
-const refQuiz = (quizType) => {
-  console.log("refQuiz 미들웨어에서 받았습니다!", quizType, typeof quizType);
-  return function (dispatch, getState) {
-    instance
-      .get(`/escape/6/${quizType}`)
-      .then((res) => {
-        let _question = res.data.question;
-        let _content = res.data.content;
-        let _answer = res.data.answer;
-        dispatch(loadQuiz(_question, _content, _answer));
-        console.log(res);
-      })
+const refQuiz = quizType => {
+    console.log('refQuiz 미들웨어에서 받았습니다!', quizType, typeof quizType);
+    return function (dispatch, getState) {
+        instance
+            .get(`/escape/${sessionRoomId}/${quizType}`)
+            .then(res => {
+                let _question = res.data.question;
+                let _content = res.data.content;
+                let _answer = res.data.answer;
+                dispatch(loadQuiz(_question, _content, _answer));
+                console.log(res);
+            })
 
-      .catch((err) => console.log(err));
-  };
+            .catch(err => console.log(err));
+    };
 };
 
 // 힌트 조회하기
-const submitAnswer = (quizType) => {
-  return function (dispatch, getState) {
-    instance
-      .post(`/escape/hint/${quizType}`, {})
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
+const submitAnswer = quizType => {
+    return function (dispatch, getState) {
+        instance
+            .post(`/escape/hint/${quizType}`, {})
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+    };
 };
 
 // count +1
-const submitResult = (roomId) => {
-  return function (dispatch, getState) {
-    instance
-      .post(`/escape/${roomId}`, {})
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
+const submitResult = roomId => {
+    return function (dispatch, getState) {
+        instance
+            .post(`/escape/${roomId}`, {})
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+    };
 };
 
 export default handleActions(
-  {
-    [LOAD_QUIZ]: (state = initialState, action = {}) => {
-      console.log(action.payload);
-      return {
-        ...state,
-        question: action.payload.question,
-        content: action.payload.content,
-        answer: action.payload.answer,
-      };
+    {
+        [LOAD_QUIZ]: (state = initialState, action = {}) => {
+            console.log(action.payload);
+            return {
+                ...state,
+                question: action.payload.question,
+                content: action.payload.content,
+                answer: action.payload.answer,
+            };
+        },
     },
-  },
-  initialState
+    initialState
 );
 
 // action creator export

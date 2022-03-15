@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { actionCreator as roomActions } from '../redux/modules/room';
 import { actionCreator as userActions } from '../redux/modules/user';
+import { actionCreator as gameActions } from '../redux/modules/game';
 
 import { MuteButton } from '../elements/index';
 
@@ -15,11 +16,11 @@ const WaitModal = ({ closeModal }) => {
 
     const navigate = useNavigate();
     const exit = socketId => {
-        dispatch(userActions.deleteUser(socketId));
+        // dispatch(userActions.deleteUser(socketId));
+        // console.log(socket);
         socket.close();
         dispatch(userActions.setIsIn(false));
         dispatch(roomActions.getRoomInfo(null));
-        console.log(socket);
         closeModal(false);
         // isfirst false, roominfo null
     };
@@ -53,7 +54,11 @@ const WaitModal = ({ closeModal }) => {
                 {socket.id === roomInfo?.createdUser ? (
                     <MakeButton
                         onClick={() => {
-                            navigate('/game');
+                            dispatch(gameActions.gameStart());
+                            navigate('/loading');
+                            // navigate('/game');
+                            // 로딩넘어가게
+                            // 2초 있다가 gamestart API 호출
                         }}
                     >
                         게임시작

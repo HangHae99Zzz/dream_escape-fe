@@ -45,7 +45,7 @@ const RoomList = () => {
                                 <Top>
                                     <Title>{room.teamName}</Title>
                                     {room.startAt ? (
-                                        <Time>`${room.count}분째 탈출중`</Time>
+                                        <Time>{room.count}분째 탈출중</Time>
                                     ) : (
                                         <Wait>대기중</Wait>
                                     )}

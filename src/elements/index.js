@@ -1,3 +1,4 @@
 import MuteButton from './MuteButton';
+import Timer from './Timer';
 
-export { MuteButton };
+export { MuteButton, Timer };

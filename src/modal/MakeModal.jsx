@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreator as roomActions } from '../redux/modules/room';
+import room, { actionCreator as roomActions } from '../redux/modules/room';
 import { actionCreator as userActions } from '../redux/modules/user';
 import styled from 'styled-components';
 

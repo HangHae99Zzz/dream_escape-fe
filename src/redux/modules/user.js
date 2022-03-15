@@ -12,7 +12,7 @@ const setIsIn = createAction(IS_IN, isIn => ({
 }));
 
 // initialState
-const initialState = { isIn: false };
+const initialState = { isIn: false, isCreator: false };
 
 //  middleware Actions
 
@@ -37,6 +37,18 @@ const deleteUser = socketId => {
     };
 };
 
+// 코멘트달기
+const writeComment = contents => {
+    return function (dispatch, getState) {
+        instance
+            .post('/comment', {
+                comment: contents,
+            })
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+    };
+};
+
 export default handleActions(
     {
         [IS_IN]: (state, action) =>
@@ -48,6 +60,6 @@ export default handleActions(
 );
 
 // action creator export
-const actionCreator = { setIsIn, refUser, deleteUser };
+const actionCreator = { setIsIn, refUser, deleteUser, writeComment };
 
 export { actionCreator };
