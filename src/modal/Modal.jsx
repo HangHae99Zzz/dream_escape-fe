@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as escapeActions } from "../redux/modules/escape";
+import { SvgX } from "../icons/etc/svg_etc";
 
 function Modal({ setModalOpen, quizType }) {
   const [hintModal, setHintModal] = useState(false);
@@ -11,11 +12,12 @@ function Modal({ setModalOpen, quizType }) {
   const question = useSelector((state) => state.escape.question);
   const content = useSelector((state) => state.escape.content);
   const answer = useSelector((state) => state.escape.answer);
+  const _tempRoomId = useSelector((state) => state.room.roomInfo.roomId);
 
   const { socket } = useSelector(({ socket }) => socket);
 
   useEffect(() => {
-    dispatch(escapeActions.refQuiz(quizType));
+    dispatch(escapeActions.refQuiz(_tempRoomId, quizType));
   }, []);
 
   socket.on("countPlus", () => {
@@ -44,7 +46,7 @@ function Modal({ setModalOpen, quizType }) {
               setModalOpen(false);
             }}
           >
-            X
+            <SvgX />
           </button>
         </TitleCloseBtn>
 

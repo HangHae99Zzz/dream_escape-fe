@@ -57,7 +57,7 @@ const submitAnswer = (quizType) => {
 const submitResult = (roomId) => {
   return function (dispatch, getState) {
     instance
-      .post(`/escape/${roomId}`, {})
+      .post(`/escape/${sessionRoomId}`, {})
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
