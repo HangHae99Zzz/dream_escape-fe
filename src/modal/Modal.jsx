@@ -12,12 +12,11 @@ function Modal({ setModalOpen, quizType }) {
   const question = useSelector((state) => state.escape.question);
   const content = useSelector((state) => state.escape.content);
   const answer = useSelector((state) => state.escape.answer);
-  const _tempRoomId = useSelector((state) => state.room.roomInfo.roomId);
 
   const { socket } = useSelector(({ socket }) => socket);
 
   useEffect(() => {
-    dispatch(escapeActions.refQuiz(_tempRoomId, quizType));
+    dispatch(escapeActions.refQuiz(quizType));
   }, []);
 
   socket.on("countPlus", () => {
