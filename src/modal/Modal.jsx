@@ -1,62 +1,77 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreator as rankActions } from "../redux/modules/rank";
-import { actionCreator as roomActions } from "../redux/modules/room";
-import { actionCreator as userActions } from "../redux/modules/user";
-import EndingRankList from "../elements/EndingRankList";
-import { useNavigate } from "react-router-dom";
+import { actionCreator as escapeActions } from "../redux/modules/escape";
+import { SvgX } from "../icons/etc/svg_etc";
 
-function Modal({ setOpenModal, quizType, setIsCredit }) {
+function Modal({ setModalOpen, quizType }) {
+  const [hintModal, setHintModal] = useState(false);
+  console.log(hintModal);
   const inputRef = useRef("");
   const dispatch = useDispatch();
-  const rank = useSelector((state) => state.rank.gameRank);
+  const question = useSelector((state) => state.escape.question);
+  const content = useSelector((state) => state.escape.content);
+  const answer = useSelector((state) => state.escape.answer);
+
+  const { socket } = useSelector(({ socket }) => socket);
 
   useEffect(() => {
-    // 랭킹 가져오기
-    dispatch(rankActions.onGameRank());
+    dispatch(escapeActions.refQuiz(quizType));
   }, []);
 
-  const handleComment = () => {
-    console.log(inputRef.current.value);
-    dispatch(userActions.writeComment(inputRef.current.value));
-    setIsCredit(true);
+  socket.on("countPlus", () => {
+    // count 올리는 로직
+  });
+
+  const handleAnswer = () => {
+    if (inputRef.current.value === answer) {
+      console.log("정답입니다!");
+      socket.emit("count");
+    } else {
+      console.log("오답입니다!");
+    }
   };
 
   return (
-    <ModalBackground>
+    <ModalBackground
+      onClick={() => {
+        document.exitPointerLock();
+      }}
+    >
       <ModalContainer>
         <TitleCloseBtn>
           <button
             onClick={() => {
-              setOpenModal(false);
+              setModalOpen(false);
             }}
           >
-            X
+            <SvgX />
           </button>
         </TitleCloseBtn>
 
-        <Title>
-          <h1>게임종료</h1>
-        </Title>
-        <Body>
-          <EndingRankList list={rank}></EndingRankList>
-        </Body>
+        <Title>{question ? <h1>{question}</h1> : <h1>오류</h1>}</Title>
+        <Body>{content ? <p>{content}</p> : <p>오류</p>}</Body>
         <Input>
           <label>
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="한줄평을 남겨보세요!"
-            />
+            <input ref={inputRef} type="text" placeholder="정답을 입력하세요" />
           </label>
         </Input>
         <Footer>
-          <button type="submit" onClick={handleComment}>
-            확인
+          <button type="submit" onClick={handleAnswer}>
+            제출하기
           </button>
         </Footer>
+        <Hint>
+          <button onClick={() => setHintModal(true)}>힌트보기</button>
+        </Hint>
       </ModalContainer>
+      {hintModal ? (
+        <HintModal>
+          <p onClick={() => setHintModal(false)}>
+            스타워즈 포스터를 눈여겨 보자
+          </p>
+        </HintModal>
+      ) : null}
     </ModalBackground>
   );
 }
@@ -87,14 +102,11 @@ const ModalContainer = styled.div`
 `;
 
 const TitleCloseBtn = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap");
-
   display: flex;
   justify-content: flex-end;
   button {
     background-color: transparent;
     border: none;
-    font-family: "Comfortaa", sans-serif;
     font-size: 25px;
     cursor: pointer;
   }
@@ -111,9 +123,7 @@ const Title = styled.div`
   }
 `;
 const Body = styled.div`
-  /* background: blue; */
   flex: 50%;
-  /* height: 125px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -127,28 +137,7 @@ const Body = styled.div`
     text-align: center;
   }
 `;
-
-const RankList = styled.div`
-  background: Red;
-  width: 350px;
-  height: 25px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  h4 {
-    font-family: "Pretendard";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    /* identical to box height */
-
-    letter-spacing: -0.03em;
-  }
-`;
-
-const Input = styled.form`
+const Input = styled.div`
   margin: auto;
   width: 443px;
   height: 60px;
@@ -163,7 +152,6 @@ const Input = styled.form`
     text-align: center;
   }
 `;
-
 const Footer = styled.div`
   flex: 20%;
   display: flex;
@@ -182,5 +170,46 @@ const Footer = styled.div`
     background: #5668e8;
     border: 3px solid #5668e8;
     border-radius: 30px;
+  }
+`;
+
+const Hint = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    background: none;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 22px;
+
+    text-align: center;
+    letter-spacing: -0.03em;
+
+    color: #5668e8;
+  }
+`;
+
+const HintModal = styled.div`
+  width: 443px;
+  height: 82px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 30px;
+
+  z-index: 11;
+  p {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: -0.03em;
+
+    color: #ffffff;
   }
 `;
