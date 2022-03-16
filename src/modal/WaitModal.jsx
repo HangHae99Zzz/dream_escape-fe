@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -15,14 +15,22 @@ const WaitModal = ({ closeModal }) => {
     const { roomInfo } = useSelector(({ room }) => room);
 
     const navigate = useNavigate();
-    const exit = socketId => {
-        // dispatch(userActions.deleteUser(socketId));
-        // console.log(socket);
+
+    const exit = () => {
         socket.close();
         dispatch(userActions.setIsIn(false));
         dispatch(roomActions.getRoomInfo(null));
         closeModal(false);
-        // isfirst false, roominfo null
+    };
+    socket.on('loadingComplete', data => {
+        navigate('/loading');
+        setTimeout(() => {
+            dispatch(gameActions.gameStart());
+        }, 2000);
+    });
+
+    const start = () => {
+        socket.emit('loading');
     };
 
     return (
@@ -41,7 +49,7 @@ const WaitModal = ({ closeModal }) => {
             <UserWrapper>
                 {roomInfo?.userList.map((user, i) => (
                     <UserContainer key={i}>
-                        <UserImg />
+                        <UserImg img={user.img} />
                         {user.nickName}
                     </UserContainer>
                 ))}
@@ -52,17 +60,7 @@ const WaitModal = ({ closeModal }) => {
             </ImgContainer>
             <div>
                 {socket.id === roomInfo?.createdUser ? (
-                    <MakeButton
-                        onClick={() => {
-                            dispatch(gameActions.gameStart());
-                            navigate('/loading');
-                            // navigate('/game');
-                            // 로딩넘어가게
-                            // 2초 있다가 gamestart API 호출
-                        }}
-                    >
-                        게임시작
-                    </MakeButton>
+                    <MakeButton onClick={start}>게임시작</MakeButton>
                 ) : (
                     <MakeButton disabled>대기중</MakeButton>
                 )}
@@ -133,7 +131,9 @@ const UserWrapper = styled.div`
     margin-bottom: 44px;
 `;
 const UserContainer = styled.div`
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 0 12px;
     font-weight: 500;
     font-size: 14px;
@@ -145,6 +145,8 @@ const UserImg = styled.div`
     border-radius: 50%;
     background: #ecebeb;
     margin-bottom: 12px;
+    background: url(${props => props.img});
+    background-size: contain;
 `;
 const ImgContainer = styled.div`
     position: relative;

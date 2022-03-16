@@ -32,7 +32,12 @@ const deleteUser = socketId => {
         console.log('유저삭제', socketId);
         instance
             .post(`/user`, { userId: socketId })
-            .then(res => console.log(res))
+            .then(res => {
+                // 내가방장
+                // isCreator true
+                // spring에 내가 방장임을 알리기
+                console.log(res);
+            })
             .catch(err => console.log(err));
     };
 };

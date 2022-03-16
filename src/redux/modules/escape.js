@@ -3,8 +3,6 @@ import axios from 'axios';
 
 import instance from '../../shared/request';
 
-const sessionRoomId = sessionStorage.getItem('sessionRoomId');
-
 // actions
 const LOAD_QUIZ = 'LOAD_QUIZ';
 
@@ -26,6 +24,7 @@ const initialState = {
 
 // Quiz 조회하기
 const refQuiz = quizType => {
+    const sessionRoomId = sessionStorage.getItem('sessionRoomId');
     console.log('refQuiz 미들웨어에서 받았습니다!', quizType, typeof quizType);
     return function (dispatch, getState) {
         instance

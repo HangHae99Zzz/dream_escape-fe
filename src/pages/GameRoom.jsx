@@ -5,12 +5,12 @@ import { actionCreator as roomActions } from '../redux/modules/room';
 import Modal from '../modal/Modal';
 
 const GameRoom = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        const sessionRoomId = sessionStorage.getItem('sessionRoomId');
-        dispatch(roomActions.refRoom(sessionRoomId));
-    }, []);
+    // // useEffect(() => {
+    // //     const sessionRoomId = sessionStorage.getItem('sessionRoomId');
+    // //     dispatch(roomActions.refRoom(sessionRoomId));
+    // // }, []);
     return (
         <div>
             <ThreeRoom />

@@ -100,12 +100,12 @@ const Chat = () => {
 
     const getLocalStream = useCallback(async deviceId => {
         const initialConstraints = {
-            video: true,
+            // video: true,
             audio: true,
         };
 
         const constraints = {
-            video: true,
+            // video: true,
             audio: { deviceId: { exact: deviceId } },
         };
 
@@ -209,8 +209,8 @@ const Chat = () => {
 
                 try {
                     const localSdp = await pc.createOffer({
+                        // offerToReceiveVideo: true,
                         offerToReceiveAudio: true,
-                        offerToReceiveVideo: true,
                     });
 
                     await pc.setLocalDescription(
@@ -239,7 +239,7 @@ const Chat = () => {
             try {
                 await pc.setRemoteDescription(new RTCSessionDescription(sdp));
                 const localSdp = await pc.createAnswer({
-                    offerToReceiveVideo: true,
+                    // offerToReceiveVideo: true,
                     offerToReceiveAudio: true,
                 });
                 await pc.setLocalDescription(
@@ -270,6 +270,7 @@ const Chat = () => {
 
         ////////////////////////////////////////////////////////////////////////////
         socketRef.current.on('user_exit', data => {
+            console.log('exit event');
             if (!pcsRef.current[data.id]) return;
             pcsRef.current[data.id].close();
             delete pcsRef.current[data.id];
@@ -279,17 +280,6 @@ const Chat = () => {
 
             // 종료될경우 다른애들이 대신 해줌
             dispatch(userActions.deleteUser(data.id));
-
-            // 위에거랑 같음
-            // instance
-            //     .post('/user', { userId: data.id })
-            //     .then(function (response) {
-            //         console.log(response);
-            //     })
-            //     .catch(function (error) {
-            //         console.log(error);
-            //     });
-            // get peers
         });
         //////////////////////////////////////////////////////////////////////////
 
@@ -359,7 +349,7 @@ const Chat = () => {
                         })}
                     </select>
                     {users.map((user, index) => (
-                        <Video key={index} stream={user.stream} />
+                        <Video key={index} stream={user.stream} muted />
                     ))}
                 </ChatWrapper>
             </>

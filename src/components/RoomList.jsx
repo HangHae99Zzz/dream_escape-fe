@@ -13,6 +13,8 @@ const RoomList = () => {
     const { socket } = useSelector(({ socket }) => socket);
     const [openWaitModal, setOpenWaitModal] = useState(false);
 
+    const clientTime = Date.now();
+
     const enterRoom = roomId => {
         // 참여시키기 socket.id가 올때까지 기다려봐
         // socket.id가 없으면 기다렸다가 다시 본인을 호출
@@ -35,20 +37,64 @@ const RoomList = () => {
                 roomList.map((room, i) => {
                     return room.currentNum === 0 ? (
                         <React.Fragment key={i}></React.Fragment>
+                    ) : room.startAt ? (
+                        <RoomWrapper
+                            key={i}
+                            onClick={() => {
+                                window.alert('탈출 중입니다');
+                            }}
+                        >
+                            <Left>
+                                <Top>
+                                    <Title>{room.teamName}</Title>
+                                    <Time>
+                                        {Math.ceil(
+                                            (clientTime -
+                                                Number(room.startAt)) /
+                                                1000 /
+                                                60
+                                        )}
+                                        분째 탈출중
+                                    </Time>
+                                </Top>
+                                <Bottom>
+                                    <IconContainer>
+                                        현재인원
+                                        <MemberIcon
+                                            src={
+                                                process.env.PUBLIC_URL +
+                                                'icons/contents/peers.svg'
+                                            }
+                                            alt="참가자 수: "
+                                        />
+                                        {room.currentNum}
+                                    </IconContainer>
+
+                                    <MemberContainer>
+                                        {room.userList.map((user, i) => {
+                                            return i === 0 ? null : (
+                                                <Member key={i}>
+                                                    {user.nickName}
+                                                </Member>
+                                            );
+                                        })}
+                                    </MemberContainer>
+                                </Bottom>
+                            </Left>
+                            <Right>
+                                <UserImg></UserImg>
+                                <Creator>{room.userList[0].nickName}</Creator>
+                            </Right>
+                        </RoomWrapper>
                     ) : (
                         <RoomWrapper
-                            // onClick={() => setOpenWaitModal(true)}
                             onClick={() => enterRoom(room.roomId)}
                             key={i}
                         >
                             <Left>
                                 <Top>
                                     <Title>{room.teamName}</Title>
-                                    {room.startAt ? (
-                                        <Time>{room.count}분째 탈출중</Time>
-                                    ) : (
-                                        <Wait>대기중</Wait>
-                                    )}
+                                    <Wait>대기중</Wait>
                                 </Top>
                                 <Bottom>
                                     <IconContainer>
