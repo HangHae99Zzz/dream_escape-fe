@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as escapeActions } from "../redux/modules/escape";
-import { SvgX } from "../icons/etc/svg_etc";
 
 function Modal({ setModalOpen, quizType }) {
   const [hintModal, setHintModal] = useState(false);
@@ -13,13 +12,20 @@ function Modal({ setModalOpen, quizType }) {
   const content = useSelector((state) => state.escape.content);
   const answer = useSelector((state) => state.escape.answer);
 
+  const { socket } = useSelector(({ socket }) => socket);
+
   useEffect(() => {
     dispatch(escapeActions.refQuiz(quizType));
   }, []);
 
+  socket.on("countPlus", () => {
+    // count 올리는 로직
+  });
+
   const handleAnswer = () => {
     if (inputRef.current.value === answer) {
       console.log("정답입니다!");
+      socket.emit("count");
     } else {
       console.log("오답입니다!");
     }
@@ -38,7 +44,7 @@ function Modal({ setModalOpen, quizType }) {
               setModalOpen(false);
             }}
           >
-            <SvgX />
+            X
           </button>
         </TitleCloseBtn>
 
