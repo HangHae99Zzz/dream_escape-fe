@@ -279,7 +279,11 @@ const Chat = () => {
             console.log(`나간애 :${data.id}`);
 
             // 종료될경우 다른애들이 대신 해줌
-            dispatch(userActions.deleteUser(data.id));
+            // dispatch(userActions.deleteUser(data.id));
+        });
+
+        socketRef.current.on('changedUser', data => {
+            console.log(data);
         });
         //////////////////////////////////////////////////////////////////////////
 

@@ -12,7 +12,7 @@ const setIsIn = createAction(IS_IN, isIn => ({
 }));
 
 // initialState
-const initialState = { isIn: false, isCreator: false };
+const initialState = { isIn: false, isCreator: false, peers: [] };
 
 //  middleware Actions
 

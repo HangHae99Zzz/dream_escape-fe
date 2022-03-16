@@ -7,9 +7,7 @@ import { actionCreator as userActions } from '../redux/modules/user';
 import EndingRankList from '../elements/EndingRankList';
 import { useNavigate } from 'react-router-dom';
 
-function Modal({ setOpenModal, quizType }) {
-    const navigate = useNavigate();
-
+function Modal({ setOpenModal, quizType, setIsCredit }) {
     const inputRef = useRef('');
     const dispatch = useDispatch();
     const rank = useSelector(state => state.rank.gameRank);
@@ -22,7 +20,7 @@ function Modal({ setOpenModal, quizType }) {
     const handleComment = () => {
         console.log(inputRef.current.value);
         dispatch(userActions.writeComment(inputRef.current.value));
-        navigate('/ending');
+        setIsCredit(true);
     };
 
     return (
