@@ -1,48 +1,55 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import { SvgMic } from "../icons/etc/svg_etc";
+import styled from 'styled-components';
+
+import { SvgMic } from '../icons/etc/svg_etc';
 
 const Users = () => {
-  return (
-    <Container>
-      <UserContainer>
-        <User></User>
-        <NameBox>
-          <SvgMic />
-          <p>닉네임</p>
-        </NameBox>
-      </UserContainer>
-    </Container>
-  );
+    const { peers } = useSelector(({ room }) => room);
+
+    return (
+        <Container>
+            {peers?.map((peer, i) => (
+                <UserContainer key={i}>
+                    <User img={peer.img}></User>
+                    <NameBox>
+                        <SvgMic />
+                        <p>{peer.nickName}</p>
+                    </NameBox>
+                </UserContainer>
+            ))}
+        </Container>
+    );
 };
 
 export default Users;
 
 const Container = styled.div`
-  display: flex;
-  width: 241px;
-  height: 120px;
-  /* flex-direction: column; */
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 20px;
+    display: flex;
+    width: 241px;
+    height: 120px;
+    /* flex-direction: column; */
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
 
-  z-index: 2;
+    z-index: 2;
 `;
 
 const UserContainer = styled.div``;
 
 const User = styled.div`
-  width: 65px;
-  height: 65px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: 3px solid #56e8c5;
 
-  background: #000000;
-  border: 3px solid #56e8c5;
-  border-radius: 50%;
-  box-sizing: border-box;
+    background: url(${props => props.img});
+    background-size: contain;
+    box-sizing: border-box;
 `;
 
 const NameBox = styled.div`
-  display: flex;
+    display: flex;
 `;

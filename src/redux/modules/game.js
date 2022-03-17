@@ -3,8 +3,6 @@ import produce from 'immer';
 
 import instance from '../../shared/request';
 
-const sessionRoomId = sessionStorage.getItem('sessionRoomId');
-
 // actions
 const SET_COUNT = 'SET_COUNT';
 
@@ -15,7 +13,7 @@ const countUp = createAction(SET_COUNT, count => ({ count }));
 const initialState = {
     count: 0,
     countLimit: 1,
-    gameEnd: false,
+    // 나중에 타이머 멈추고 클릭 막을것 필요
 };
 
 //  middleware Actions

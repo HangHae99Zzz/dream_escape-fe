@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 const Timer = ({ setGameTime }) => {
     const [renderedStreamDuration, setRenderedStreamDuration] =
-            useState('00:00:00'),
+            useState('00:30:00'),
         streamDuration = useRef(0),
         previousTime = useRef(0),
         requestAnimationFrameId = useRef(null),
@@ -14,7 +14,7 @@ const Timer = ({ setGameTime }) => {
 
         if (dt >= 1000) {
             streamDuration.current =
-                streamDuration.current + Math.round(dt / 1000);
+                streamDuration.current - Math.round(dt / 1000);
             const formattedStreamDuration = new Date(
                 streamDuration.current * 1000
             )

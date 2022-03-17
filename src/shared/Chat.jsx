@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { actionCreator as socketActions } from '../redux/modules/socket';
 import { actionCreator as userActions } from '../redux/modules/user';
+import { actionCreator as roomActions } from '../redux/modules/room';
 import { actionCreator as gameActions } from '../redux/modules/game';
 
 import Video from '../components/Video';
@@ -144,6 +145,9 @@ const Chat = () => {
 
             pc.ontrack = e => {
                 console.log('누가 들어옴');
+                // peers 업데이트
+                const roomId = sessionStorage.getItem('sessionRoomId');
+                dispatch(roomActions.refPeers(roomId));
                 setUsers(oldUsers =>
                     oldUsers
                         .filter(user => user.id !== socketID)
@@ -275,8 +279,9 @@ const Chat = () => {
             setUsers(oldUsers => oldUsers.filter(user => user.id !== data.id));
 
             console.log(`나간애 :${data.id}`);
-
             // 종료될경우 다른애들이 대신 해줌
+            // peers 업데이트
+            dispatch(roomActions.refPeers(roomInfo.roomId));
             // dispatch(userActions.deleteUser(data.id));
         });
 

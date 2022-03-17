@@ -12,7 +12,7 @@ import { MuteButton } from '../elements/index';
 const WaitModal = ({ closeModal }) => {
     const dispatch = useDispatch();
     const { socket } = useSelector(({ socket }) => socket);
-    const { roomInfo } = useSelector(({ room }) => room);
+    const { roomInfo, peers } = useSelector(({ room }) => room);
 
     const navigate = useNavigate();
 
@@ -47,10 +47,10 @@ const WaitModal = ({ closeModal }) => {
             </div>
             <Label>현재인원</Label>
             <UserWrapper>
-                {roomInfo?.userList.map((user, i) => (
+                {peers?.map((peer, i) => (
                     <UserContainer key={i}>
-                        <UserImg img={user.img} />
-                        {user.nickName}
+                        <UserImg img={peer.img} />
+                        {peer.nickName}
                     </UserContainer>
                 ))}
             </UserWrapper>

@@ -7,8 +7,8 @@ import { Timer } from '../elements/index';
 import { SvgMic, SvgMyMic } from '../icons/etc/svg_etc';
 
 const InGameUsers = () => {
-    const { count } = useSelector(({ game }) => game);
-    const { countLimit } = useSelector(({ game }) => game);
+    const { count, countLimit } = useSelector(({ game }) => game);
+
     const [gameTime, setGameTime] = useState('');
 
     return (
