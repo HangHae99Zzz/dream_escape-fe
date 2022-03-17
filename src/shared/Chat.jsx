@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { actionCreator as socketActions } from '../redux/modules/socket';
 import { actionCreator as userActions } from '../redux/modules/user';
-import { actionCreator as roomActions } from '../redux/modules/room';
+import { actionCreator as gameActions } from '../redux/modules/game';
 
 import Video from '../components/Video';
 
@@ -22,9 +22,10 @@ const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
 // const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
+    const { socket } = useSelector(({ socket }) => socket);
     const { isIn } = useSelector(({ user }) => user);
     const { roomInfo } = useSelector(({ room }) => room);
-    const { socket } = useSelector(({ socket }) => socket);
+    const { countLimit } = useSelector(({ game }) => game);
 
     const dispatch = useDispatch();
 
@@ -286,6 +287,17 @@ const Chat = () => {
             console.log(data);
         });
         //////////////////////////////////////////////////////////////////////////
+        let count = 0;
+
+        socketRef.current.on('countPlus', () => {
+            count++;
+            dispatch(gameActions.countUp(count));
+            console.log('count up!', count);
+            count === countLimit && console.log('게임끝');
+            // 타이머도 멈춰 store game에 stopTimer true
+        });
+
+        ///////////////////////////////////////////////////////////////////////////
 
         return () => {
             if (socketRef.current) {
@@ -353,7 +365,7 @@ const Chat = () => {
                         })}
                     </select>
                     {users.map((user, index) => (
-                        <Video key={index} stream={user.stream} muted />
+                        <Video key={index} stream={user.stream} />
                     ))}
                 </ChatWrapper>
             </>

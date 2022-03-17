@@ -6,11 +6,17 @@ import instance from '../../shared/request';
 const sessionRoomId = sessionStorage.getItem('sessionRoomId');
 
 // actions
+const SET_COUNT = 'SET_COUNT';
 
 // Action Creators
+const countUp = createAction(SET_COUNT, count => ({ count }));
 
 // initialState
-const initialState = {};
+const initialState = {
+    count: 0,
+    countLimit: 1,
+    stopTimer: false,
+};
 
 //  middleware Actions
 const gameStart = () => {
@@ -24,6 +30,7 @@ const gameStart = () => {
 // 게임 종료하기
 const deleteGame = () => {
     console.log('deleteGame 미들웨어 도착');
+    const sessionRoomId = sessionStorage.getItem('sessionRoomId');
     return function (dispatch, getState) {
         instance
             .delete(`/game/${sessionRoomId}/ending`)
@@ -32,12 +39,21 @@ const deleteGame = () => {
     };
 };
 
-export default handleActions({}, initialState);
+export default handleActions(
+    {
+        [SET_COUNT]: (state, action) =>
+            produce(state, draft => {
+                draft.count = action.payload.count;
+            }),
+    },
+    initialState
+);
 
 // action creator export
 const actionCreator = {
     gameStart,
     deleteGame,
+    countUp,
 };
 
 export { actionCreator };

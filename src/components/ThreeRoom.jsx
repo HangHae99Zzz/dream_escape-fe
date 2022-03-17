@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import InGameUsers from './InGameUsers';
 import GameEndModal from '../modal/GameEndModal';
 import { actionCreator as gameActions } from '../redux/modules/game';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { EndingCredit } from './index';
 
 const ThreeRoom = () => {
@@ -22,6 +22,8 @@ const ThreeRoom = () => {
     const [clueType, setClueType] = useState(false);
     const [gameEnd, setGameEnd] = useState(false);
     const [IsCredit, setIsCredit] = useState(false);
+
+    const { count, countLimit } = useSelector(({ game }) => game);
 
     console.log(modalOpen, quizType, typeof quizType);
 
@@ -39,7 +41,12 @@ const ThreeRoom = () => {
     return (
         <Container>
             <InGameUsers />
-            {gameEnd && <GameEndModal setIsCredit={setIsCredit} />}
+            {gameEnd && (
+                <GameEndModal
+                    setGameEnd={setGameEnd}
+                    setIsCredit={setIsCredit}
+                />
+            )}
             {modalOpen && (
                 <Modal setModalOpen={setModalOpen} quizType={quizType} />
             )}
@@ -84,10 +91,12 @@ const ThreeRoom = () => {
                         setQuizType={setQuizType}
                         setClueModalOpen={setClueModalOpen}
                         setClueType={setClueType}
+                        count={count}
+                        countLimit={countLimit}
                     />
                 </Suspense>
             </Canvas>
-            {/* {!IsCredit ? <EndingCredit /> : <></>} */}
+            {IsCredit ? <EndingCredit /> : <></>}
         </Container>
     );
 };

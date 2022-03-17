@@ -48,16 +48,16 @@ const EndingCredit = () => {
 export default EndingCredit;
 
 const sober = keyframes`
+// 0% {
+//     backdrop-filter: hue-rotate(30deg)
+// }85% {
+//     backdrop-filter:hue-rotate(120deg)
+// }100% {backdrop-filter: hue-rotate(30deg)}
 0% {
-    backdrop-filter: hue-rotate(30deg)
-}85% {
-    backdrop-filter:hue-rotate(120deg)
-}100% {backdrop-filter: hue-rotate(30deg)}
-/* 0% {
     backdrop-filter: contrast(0.1)
 }70% {
-    backdrop-filter: contrast(0.3)
-}100% {backdrop-filter: contrast(0.1)} */
+    backdrop-filter: contrast(0.8)
+}100% {backdrop-filter: contrast(0.1)}
 `;
 
 const slideUp = keyframes`
@@ -74,7 +74,7 @@ const Container = styled.div`
     z-index: 1;
     width: 100%;
     height: 100%;
-    background-color: #000000fc;
+    background-color: #000000d4;
     color: white;
 
     display: flex;
