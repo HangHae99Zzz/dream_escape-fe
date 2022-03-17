@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 import { Layout } from './index';
 import { Footer } from '../components/index';
-import { MakeRoomBtn } from '../elements/index';
-import { MakeModal, ModalBG } from '../modal/index';
+import { RoomCreateModal } from '../modal/index';
+import { MakeRoomBtn, ModalBG } from '../elements/index';
 
 const GameDescription = () => {
-    const [openMakeModal, setOpenMakeModal] = useState(false);
+    const [openRoomCreateModal, setOpenRoomCreateModal] = useState(false);
 
     return (
         <Layout>
@@ -53,7 +53,7 @@ const GameDescription = () => {
                             지금 바로 ‘ zzz (지지지) ’ 를 시작하세요 !
                         </Catch>
                         <MakeRoomBtn
-                            setOpenMakeModal={setOpenMakeModal}
+                            setOpenRoomCreateModal={setOpenRoomCreateModal}
                             block={true}
                         />
                     </Bottom>
@@ -63,10 +63,10 @@ const GameDescription = () => {
                 </Backgrounds>
             </Height>
             <Footer />
-            {openMakeModal && (
+            {openRoomCreateModal && (
                 <>
-                    <ModalBG closeModal={setOpenMakeModal} />
-                    <MakeModal closeModal={setOpenMakeModal} />
+                    <ModalBG closeModal={setOpenRoomCreateModal} />
+                    <RoomCreateModal closeModal={setOpenRoomCreateModal} />
                 </>
             )}
         </Layout>

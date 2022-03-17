@@ -1,5 +1,4 @@
-import MakeModal from './MakeModal';
+import RoomCreateModal from './RoomCreateModal';
 import WaitModal from './WaitModal';
-import ModalBG from './ModalBG';
 
-export { MakeModal, WaitModal, ModalBG };
+export { RoomCreateModal, WaitModal };

@@ -15,7 +15,7 @@ const countUp = createAction(SET_COUNT, count => ({ count }));
 const initialState = {
     count: 0,
     countLimit: 1,
-    stopTimer: false,
+    gameEnd: false,
 };
 
 //  middleware Actions

@@ -2,9 +2,9 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-const MakeRoomBtn = ({ setOpenMakeModal, block }) => {
+const MakeRoomBtn = ({ setOpenRoomCreateModal, block }) => {
     return (
-        <Btn block={block} onClick={() => setOpenMakeModal(true)}>
+        <Btn block={block} onClick={() => setOpenRoomCreateModal(true)}>
             방탈출 방 만들기
         </Btn>
     );

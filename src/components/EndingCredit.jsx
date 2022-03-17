@@ -83,7 +83,7 @@ const Container = styled.div`
 
     overflow: hidden;
 
-    animation-duration: 6s;
+    animation-duration: 3s;
     /* animation-timing-function: cubic-bezier(0, -0.64, 1, 1.46); */
     animation-name: ${sober};
     animation-fill-mode: forwards;

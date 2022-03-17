@@ -139,12 +139,10 @@ const Chat = () => {
             };
 
             pc.oniceconnectionstatechange = e => {
-                // console.log(e);
+                // console.log('뭔가 peer에 변화');
             };
 
             pc.ontrack = e => {
-                // console.log(roomInfo.roomId);
-                // dispatch(roomActions.refRoom(roomInfo.roomId));
                 console.log('누가 들어옴');
                 setUsers(oldUsers =>
                     oldUsers
@@ -155,7 +153,6 @@ const Chat = () => {
                             stream: e.streams[0],
                         })
                 );
-                // 애가 잘 발생을 안하는구만
             };
 
             if (localStreamRef.current) {

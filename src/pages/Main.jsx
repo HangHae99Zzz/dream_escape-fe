@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Contents, Footer } from '../components/index';
-import { MakeModal, ModalBG } from '../modal/index';
-import { MakeRoomBtn } from '../elements/index';
+import { RoomCreateModal } from '../modal/index';
+import { MakeRoomBtn, ModalBG } from '../elements/index';
 
 import Layout from './Layout';
 
 const Main = () => {
-    const [openMakeModal, setOpenMakeModal] = useState(false);
+    const [openRoomCreateModal, setOpenRoomCreateModal] = useState(false);
 
     return (
         <>
@@ -18,12 +18,12 @@ const Main = () => {
                     </ContentsContainer>
                 </MainContainer>
                 <Footer />
-                <MakeRoomBtn setOpenMakeModal={setOpenMakeModal} />
+                <MakeRoomBtn setOpenRoomCreateModal={setOpenRoomCreateModal} />
 
-                {openMakeModal && (
+                {openRoomCreateModal && (
                     <>
-                        <ModalBG closeModal={setOpenMakeModal} />
-                        <MakeModal closeModal={setOpenMakeModal} />
+                        <ModalBG closeModal={setOpenRoomCreateModal} />
+                        <RoomCreateModal closeModal={setOpenRoomCreateModal} />
                     </>
                 )}
             </Layout>

@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 import { actionCreator as roomActions } from '../redux/modules/room';
 
-import { WaitModal, ModalBG } from '../modal/index';
+import { WaitModal } from '../modal/index';
+import { ModalBG } from '../elements/index';
 
 const RoomList = () => {
     const dispatch = useDispatch();
