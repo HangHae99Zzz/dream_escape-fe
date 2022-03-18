@@ -1,45 +1,52 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreator as gameActions } from "../redux/modules/game";
 
-const Timer = ({ setGameTime }) => {
-    const [renderedStreamDuration, setRenderedStreamDuration] =
-            useState('00:30:00'),
-        streamDuration = useRef(0),
-        previousTime = useRef(0),
-        requestAnimationFrameId = useRef(null),
-        [isStartTimer, setIsStartTimer] = useState(false);
+const Timer = ({ setGameTime, gameEnd }) => {
+  const dispatch = useDispatch();
 
-    const updateTimer = useCallback(() => {
-        let now = performance.now();
-        let dt = now - previousTime.current;
+  const roomId = useSelector((state) => state.room.roomInfo.roomId);
 
-        if (dt >= 1000) {
-            streamDuration.current =
-                streamDuration.current - Math.round(dt / 1000);
-            const formattedStreamDuration = new Date(
-                streamDuration.current * 1000
-            )
-                .toISOString()
-                .substr(11, 8);
-            setRenderedStreamDuration(formattedStreamDuration);
-            previousTime.current = now;
+  const [minutes, setMinutes] = useState(30);
+  const [seconds, setSeconds] = useState(0);
+  const [streamDuration, setStreamDuration] = useState(0);
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      setStreamDuration(streamDuration + 1);
+      if (parseInt(seconds) > 0) {
+        setSeconds(parseInt(seconds) - 1);
+      }
+      if (parseInt(seconds) === 0) {
+        if (parseInt(minutes) === 0) {
+          clearInterval(countdown);
+        } else {
+          setMinutes(parseInt(minutes) - 1);
+          setSeconds(59);
         }
-        requestAnimationFrameId.current = requestAnimationFrame(updateTimer);
-    }, []);
+      }
+    }, 1000);
+    return () => clearInterval(countdown);
+  }, [minutes, seconds]);
 
-    const startTimer = useCallback(() => {
-        previousTime.current = performance.now();
-        requestAnimationFrameId.current = requestAnimationFrame(updateTimer);
-    }, [updateTimer]);
+  useEffect(() => {
+    if (!gameEnd) return;
+    console.log("Timer.jsx에서 dispatch");
+    const _temp = streamDuration;
 
-    useEffect(() => {
-        startTimer();
-    }, []);
+    //초를 시 분 초로 변경
+    var _value = new Date(_temp * 1000).toISOString().substr(11, 8);
+    console.log(_value);
 
-    return (
-        <div className="timer-controller-wrapper">
-            <div className="timer-display">{renderedStreamDuration}</div>
-        </div>
-    );
+    dispatch(gameActions.deleteGame(roomId, _value));
+    // dispatch(rankActions.recordTime();
+  }, [gameEnd]);
+
+  return (
+    <div>
+      {minutes}:{seconds > 10 ? seconds : "0" + seconds}
+    </div>
+  );
 };
 
 export default Timer;

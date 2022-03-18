@@ -3,6 +3,8 @@ import axios from "axios";
 
 import instance from "../../shared/request";
 
+const sessionRoomId = sessionStorage.getItem("sessionRoomId");
+
 // actions
 const LOAD_RANKS = "LOAD_RANKS";
 const LOAD_GAME_RANK = "LOAD_GAME_RANK";
@@ -24,7 +26,7 @@ const recordTime = (roomId, time) => {
   return function (dispatch, getState) {
     instance
       .post(`/ranks/${roomId}`, {
-        time: "",
+        time: time,
       })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -47,9 +49,11 @@ const refRank = () => {
 // (게임 종료시) 랭킹 조회하기
 const onGameRank = (roomId) => {
   return function (dispatch, getState) {
+    console.log("onGameRank", roomId);
     instance
-      .get(`/rank/19`)
+      .get(`/rank/${roomId}`)
       .then((res) => {
+        console.log(res);
         dispatch(loadGameRank(res.data));
       })
       .catch((err) => console.log(err));
