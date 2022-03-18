@@ -9,7 +9,7 @@ import {
   SvgUpdate,
 } from "../icons/sidebar/svg_sidebar";
 
-const Sidebar2 = () => {
+const Sidebar = () => {
   let navigate = useNavigate();
   return (
     <StyledSidebar>
@@ -48,7 +48,7 @@ const Sidebar2 = () => {
   );
 };
 
-export default Sidebar2;
+export default Sidebar;
 
 const StyledSidebar = styled.nav`
   width: 14.58vw;
@@ -65,6 +65,10 @@ const StyledSidebar = styled.nav`
     width: 100%;
     height: 7.3vw;
     background-color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     h1 {
       /* position: absolute; */
@@ -83,10 +87,10 @@ const StyledSidebar = styled.nav`
 `;
 
 const Logo = styled.div`
-  background: url("icons/sidebar/logo.png");
-  background-size: cover;
+  background: url("./images/logo.png");
+  background-size: contain;
   background-repeat: no-repeat;
-  width: 100%;
+  width: 80%;
   height: 68px;
 `;
 
