@@ -14,7 +14,7 @@ const Rank2 = () => {
 
   // 초반 3개, 이후 ranks
   const topThreeRanks = ranks.filter((i) => i.rank < 4);
-  const underThreeRanks = ranks.filter((i) => i.rank > 3);
+  const underThreeRanks = ranks.filter((i) => i.rank > 3 && i.rank < 11);
 
   React.useEffect(() => {
     dispatch(rankActions.refRank());
@@ -57,15 +57,21 @@ const Rank2 = () => {
                       <div className="under-three-teamname teamname">
                         {i.teamName}
                       </div>
-                      <UserNum>{i.userNum}</UserNum>
+                      <UserNum style={{ background: "#FFC3F2" }}>
+                        {i.userNum}
+                      </UserNum>
                     </TeamName>
                     <div className="third under-three-time">{i.time}</div>
                   </UnderThree>
                 );
               })}
           </Body>
-          <button id="rank-button">더보기</button>
         </Container>
+        <ButtonContainer>
+          <MoreBtn>
+            <span>더보기</span>
+          </MoreBtn>
+        </ButtonContainer>
       </Layout>
     </>
   );
@@ -179,7 +185,7 @@ const UserNum = styled.div`
   background: #f242cb;
   border-radius: 50%;
 
-  display: felx;
+  display: flex;
   justify-content: center;
   align-items: center;
 `;
@@ -224,5 +230,34 @@ const UnderThree = styled.div`
     letter-spacing: -0.03em;
 
     color: #a6b1ff;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const MoreBtn = styled.button`
+  position: relative;
+  width: 121px;
+  height: 40px;
+  background: #ffffff;
+  box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.15);
+  border-radius: 38px;
+  margin: 32px;
+
+  font-size: 20px;
+  color: #5668e8;
+  cursor: pointer;
+
+  background-image: url("/icons/contents/emptyDownArrow.svg");
+  background-repeat: no-repeat;
+  background-position-x: 82px;
+  background-position-y: 15px;
+  span {
+    position: absolute;
+    left: 22px;
+    top: 10px;
   }
 `;
