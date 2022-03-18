@@ -7,14 +7,14 @@ import { actionCreator as rankActions } from "../redux/modules/rank";
 
 import Layout from "./Layout";
 
-const Rank = () => {
+const Rank2 = () => {
   const dispatch = useDispatch();
 
   const ranks = useSelector((state) => state.rank.ranklist);
 
   // 초반 3개, 이후 ranks
-  const underThreeRanks = ranks.filter((i) => i.rank < 4);
-  const overThreeRanks = ranks.filter((i) => i.rank > 3);
+  const topThreeRanks = ranks.filter((i) => i.rank < 4);
+  const underThreeRanks = ranks.filter((i) => i.rank > 3);
 
   React.useEffect(() => {
     dispatch(rankActions.refRank());
@@ -24,146 +24,205 @@ const Rank = () => {
     <>
       <Layout>
         <Container>
-          <table id="title">
-            <thead>
-              <tr>
-                <th>순위</th>
-                <th>방이름</th>
-                <th>팀원</th>
-                <th>총 소요시간</th>
-              </tr>
-            </thead>
-            <tbody>
-              {underThreeRanks &&
-                underThreeRanks.map((i) => {
-                  const imgUrl = `./images/rank_top_${i.rank}.png`;
-                  return (
-                    <tr
-                      key={i.roomId}
-                      id="top-three"
-                      style={{
-                        // position: "relative",
-                        height: "100px",
-                        borderCollapse: "collapse",
-                        background:
-                          "linear-gradient(#fff 0 0) padding-box, linear-gradient(to right, #9c20aa, #fb3570) border-box",
-                        // padding: "10px",
-                        border: "3px solid transparent",
-                        borderRadius: "15px",
-                      }}
-                    >
-                      <td colSpan={4}>
-                        <img src={imgUrl} style={{ display: "block" }} />
-                      </td>
-                      <td className="top-three-teamname">{i.teamName}</td>
-                      <td>{i.userNum}</td>
-                      <td className="top-three-time">{i.time}</td>
-                    </tr>
-                  );
-                })}
-              {overThreeRanks &&
-                overThreeRanks.map((i) => {
-                  return (
-                    <tr key={i.roomId} id="under-three">
-                      <td className="under-three-rank">{i.rank}</td>
-                      <td className="under-three-teamname">{i.teamName}</td>
-                      <td>{i.userNum}</td>
-                      <td className="under-three-time">{i.time}</td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+          <Header>
+            <div className="first">순위</div>
+            <div className="second">방이름(인원수)</div>
+            <div className="third">총 소요 시간</div>
+          </Header>
+          <Body>
+            {topThreeRanks &&
+              topThreeRanks.map((i) => {
+                const imgUrl = `./images/rank_top_${i.rank}.png`;
+                return (
+                  <TopThree key={i.roomId} id="top-three">
+                    <div className="first">
+                      <img src={imgUrl} />
+                    </div>
+                    <TeamName className="second">
+                      <div className="top-three-teamname teamname">
+                        {i.teamName}
+                      </div>
+                      <UserNum>{i.userNum}</UserNum>
+                    </TeamName>
+                    <div className="third top-three-time">{i.time}</div>
+                  </TopThree>
+                );
+              })}
+            {underThreeRanks &&
+              underThreeRanks.map((i) => {
+                return (
+                  <UnderThree key={i.roomId} id="under-three">
+                    <div className="first under-three-rank">{i.rank}</div>
+                    <TeamName className="second">
+                      <div className="under-three-teamname teamname">
+                        {i.teamName}
+                      </div>
+                      <UserNum>{i.userNum}</UserNum>
+                    </TeamName>
+                    <div className="third under-three-time">{i.time}</div>
+                  </UnderThree>
+                );
+              })}
+          </Body>
+          <button id="rank-button">더보기</button>
         </Container>
       </Layout>
     </>
   );
 };
 
-export default Rank;
+export default Rank2;
 
 const Container = styled.div`
+  width: 80%;
   padding-left: 94px;
-  text-align: center;
 
-  #title {
-    border-collapse: collapse;
-    width: 90%;
+  .first {
+    flex: 20%;
+    padding-left: 53px;
   }
 
-  #title td,
-  #title th {
-    padding: 18px;
+  .second {
+    flex: 60%;
   }
 
-  #title th {
-    padding-top: 19px;
-    padding-bottom: 19px;
-    background-color: #5668e8;
-    color: white;
+  .third {
+    flex: 20%;
   }
 
-  #title th:first-child {
-    width: 10%;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+  .teamname {
+    padding-right: 24px;
   }
 
-  #title th:last-child {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
+  #rank-button {
+    position: fixed;
+    width: 121px;
+    height: 40px;
+    left: 723px;
+    bottom: 24px;
+
+    background: #ffffff;
+    box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.15);
+    border-radius: 38px;
+
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    letter-spacing: -0.03em;
+
+    color: #5668e8;
   }
+`;
+const Header = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  #top-three {
-    img {
-      height: 76px;
-    }
+  color: white;
 
-    .top-three-teamname {
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 29px;
-      /* identical to box height */
+  height: 54px;
 
-      text-align: center;
-      letter-spacing: -0.03em;
+  background: #5668e8;
+  border-radius: 30px;
+`;
 
-      color: #000000;
-    }
-    .top-three-time {
-      font-weight: 700;
-      font-size: 32px;
-      line-height: 38px;
-      text-align: center;
-      letter-spacing: -0.03em;
+const Body = styled.div``;
 
-      color: #5668e8;
-    }
-  }
+const TopThree = styled.div`
+  display: flex;
+  align-items: center;
 
-  #under-three {
+  border: 5px solid transparent;
+  border-radius: 20px;
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to right, #5668e8, #56e8c5, #f242cb);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  margin: 10px;
+
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+
+  .top-three-teamname {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+
     text-align: center;
     letter-spacing: -0.03em;
-    .under-three-rank {
-      font-weight: 800;
-      font-size: 24px;
-      line-height: 29px;
 
-      color: #a6b1ff;
-    }
-    .under-three-teamname {
-      font-weight: 600;
-      font-size: 18px;
-      line-height: 22px;
+    color: #000000;
+  }
+  .top-three-time {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: center;
+    letter-spacing: -0.03em;
 
-      color: #222222;
-    }
-    .under-three-time {
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 29px;
+    color: #5668e8;
+  }
+`;
 
-      color: #a6b1ff;
-    }
+const TeamName = styled.div`
+  display: flex;
+`;
+
+const UserNum = styled.div`
+  width: 31px;
+  height: 31px;
+
+  color: #fff;
+
+  background: #f242cb;
+  border-radius: 50%;
+
+  display: felx;
+  justify-content: center;
+  align-items: center;
+`;
+
+const UnderThree = styled.div`
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+
+  .under-three-rank {
+    padding-left: 83px;
+
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+
+    letter-spacing: -0.03em;
+
+    color: #5668e8;
+  }
+
+  .under-three-teamname {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    letter-spacing: -0.03em;
+
+    color: #222222;
+  }
+
+  .under-three-time {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: -0.03em;
+
+    color: #a6b1ff;
   }
 `;
