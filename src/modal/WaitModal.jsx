@@ -13,21 +13,24 @@ const WaitModal = ({ closeModal }) => {
     const dispatch = useDispatch();
     const { socket } = useSelector(({ socket }) => socket);
     const { roomInfo, peers } = useSelector(({ room }) => room);
+    const { isCreator } = useSelector(({ user }) => user);
 
     const navigate = useNavigate();
 
-    const exit = () => {
-        socket.close();
-        dispatch(userActions.setIsIn(false));
-        dispatch(roomActions.getRoomInfo(null));
-        closeModal(false);
-    };
     socket.on('loadingComplete', data => {
         navigate('/loading');
         setTimeout(() => {
             dispatch(gameActions.gameStart());
         }, 2000);
     });
+
+    const exit = () => {
+        socket.close();
+        dispatch(userActions.isIn(false));
+        dispatch(userActions.isCreator(false));
+        dispatch(roomActions.getRoomInfo(null));
+        closeModal(false);
+    };
 
     const start = () => {
         socket.emit('loading');
@@ -59,7 +62,7 @@ const WaitModal = ({ closeModal }) => {
                 <MuteButton abs={true}> </MuteButton>
             </ImgContainer>
             <div>
-                {socket.id === roomInfo?.createdUser ? (
+                {isCreator ? (
                     <MakeButton onClick={start}>게임시작</MakeButton>
                 ) : (
                     <MakeButton disabled>대기중</MakeButton>

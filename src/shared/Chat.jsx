@@ -181,7 +181,7 @@ const Chat = () => {
             socketRef.current = io.connect(SOCKET_SERVER_URL);
 
             dispatch(socketActions.getSocket(socketRef.current));
-            dispatch(userActions.setIsIn(true));
+            dispatch(userActions.isIn(true));
         }
 
         if (!roomInfo) return;
@@ -286,7 +286,9 @@ const Chat = () => {
         });
 
         socketRef.current.on('changedUser', data => {
-            console.log(data);
+            return data.createdUser === socketRef.current.id
+                ? dispatch(userActions.isCreator(true))
+                : null;
         });
         //////////////////////////////////////////////////////////////////////////
         let count = 0;

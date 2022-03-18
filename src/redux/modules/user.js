@@ -3,16 +3,21 @@ import produce from 'immer';
 
 import instance from '../../shared/request';
 
+// initialState
+const initialState = { isIn: false, isCreator: false, peers: [] };
+
 // actions
 const IS_IN = 'IS_IN';
+const IS_CREATOR = 'IS_CREATOR';
 
 // Action Creators
-const setIsIn = createAction(IS_IN, isIn => ({
+const isIn = createAction(IS_IN, isIn => ({
     isIn,
 }));
 
-// initialState
-const initialState = { isIn: false, isCreator: false, peers: [] };
+const isCreator = createAction(IS_CREATOR, isCreator => ({
+    isCreator,
+}));
 
 //  middleware Actions
 
@@ -60,11 +65,15 @@ export default handleActions(
             produce(state, draft => {
                 draft.isIn = action.payload.isIn;
             }),
+        [IS_CREATOR]: (state, action) =>
+            produce(state, draft => {
+                draft.isCreator = action.payload.isCreator;
+            }),
     },
     initialState
 );
 
 // action creator export
-const actionCreator = { setIsIn, refUser, deleteUser, writeComment };
+const actionCreator = { isCreator, isIn, refUser, deleteUser, writeComment };
 
 export { actionCreator };

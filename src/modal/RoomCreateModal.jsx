@@ -18,12 +18,9 @@ const RoomCreateModal = ({ closeModal }) => {
 
     const makeRoom = () => {
         const teamName = teamNameRef.current.value;
-        // 이 시점에 socket.id가 없네
 
-        // 이젠 있네 그치
-
+        dispatch(userActions.isCreator(true));
         dispatch(roomActions.makeRoom(teamName, socket.id));
-
         SetWaitModal(true);
     };
 
