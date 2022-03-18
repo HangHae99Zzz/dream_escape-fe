@@ -6,7 +6,6 @@ import GameEndModal from "../modal/GameEndModal";
 import { Main, Rank, Update, GameRoom, GameDescription } from "../pages/index";
 import { Loading, EndingCredit, InGameUsers } from "../components/index";
 import { Timer } from "../elements/index";
-import Sidebar2 from "../components/Sidebar";
 
 function App() {
   return (
