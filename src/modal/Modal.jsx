@@ -22,6 +22,7 @@ function Modal({ setModalOpen, quizType }) {
     const handleAnswer = () => {
         if (inputRef.current.value === answer) {
             console.log('정답입니다!');
+            setModalOpen(false);
             socket.emit('count');
         } else {
             console.log('오답입니다!');

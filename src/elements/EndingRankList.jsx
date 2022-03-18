@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { SvgUserGroup } from "../icons/etc/svg_etc";
 
 const EndingRankList = ({ list }) => {
+  console.log(list);
   // 여기 좀 복잡해짐. css가 roomId가 같다면 효과주고, 아니면 다른 효과
   return (
     <div>

@@ -54,10 +54,10 @@ const sober = keyframes`
 //     backdrop-filter:hue-rotate(120deg)
 // }100% {backdrop-filter: hue-rotate(30deg)}
 0% {
-    backdrop-filter: contrast(0.1)
-}70% {
+    backdrop-filter: contrast(1)
+}30% {
     backdrop-filter: contrast(0.8)
-}100% {backdrop-filter: contrast(0.1)}
+}100% {backdrop-filter: contrast(.1)}
 `;
 
 const slideUp = keyframes`
@@ -87,7 +87,7 @@ const Container = styled.div`
     /* animation-timing-function: cubic-bezier(0, -0.64, 1, 1.46); */
     animation-name: ${sober};
     animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
+    /* animation-iteration-count: infinite; */
 `;
 
 const DivContainer = styled.div`

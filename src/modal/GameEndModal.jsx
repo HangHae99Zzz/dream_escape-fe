@@ -11,6 +11,7 @@ function Modal({ setGameEnd, quizType, setIsCredit }) {
     const inputRef = useRef('');
     const dispatch = useDispatch();
     const rank = useSelector(state => state.rank.gameRank);
+    const roomId = useSelector(state => state.room.roomInfo.roomId);
 
     const handleComment = () => {
         console.log(inputRef.current.value);
@@ -20,7 +21,9 @@ function Modal({ setGameEnd, quizType, setIsCredit }) {
 
     useEffect(() => {
         // 랭킹 가져오기
-        dispatch(rankActions.onGameRank());
+        setTimeout(() => {
+            dispatch(rankActions.onGameRank(roomId));
+        }, 1000);
     }, []);
 
     return (

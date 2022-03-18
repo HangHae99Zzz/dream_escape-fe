@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import Users from '../elements/Users';
-import { MyTimer } from '../elements/index';
+import { Timer } from '../elements/index';
 import { SvgMic, SvgMyMic } from '../icons/etc/svg_etc';
 
-const InGameUsers = () => {
+const InGameUsers = ({ gameEnd }) => {
     const { count, countLimit } = useSelector(({ game }) => game);
+
+    const [gameTime, setGameTime] = useState('');
 
     return (
         <Container>
@@ -24,7 +26,7 @@ const InGameUsers = () => {
                 </Score>
                 <TimerWrapper>
                     <p>타이머</p>
-                    <MyTimer />
+                    <Timer setGameTime={setGameTime} gameEnd={gameEnd} />
                 </TimerWrapper>
             </GameInfo>
             <MyInfo>
