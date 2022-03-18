@@ -36,12 +36,28 @@ const Rank = () => {
             <tbody>
               {underThreeRanks &&
                 underThreeRanks.map((i) => {
+                  const imgUrl = `./images/rank_top_${i.rank}.png`;
                   return (
-                    <tr key={i.roomId} id="top-three">
-                      <td>{i.rank}</td>
-                      <td>{i.teamName}</td>
+                    <tr
+                      key={i.roomId}
+                      id="top-three"
+                      style={{
+                        // position: "relative",
+                        height: "100px",
+                        borderCollapse: "collapse",
+                        background:
+                          "linear-gradient(#fff 0 0) padding-box, linear-gradient(to right, #9c20aa, #fb3570) border-box",
+                        // padding: "10px",
+                        border: "3px solid transparent",
+                        borderRadius: "15px",
+                      }}
+                    >
+                      <td colSpan={4}>
+                        <img src={imgUrl} style={{ display: "block" }} />
+                      </td>
+                      <td className="top-three-teamname">{i.teamName}</td>
                       <td>{i.userNum}</td>
-                      <td>{i.time}</td>
+                      <td className="top-three-time">{i.time}</td>
                     </tr>
                   );
                 })}
@@ -49,10 +65,10 @@ const Rank = () => {
                 overThreeRanks.map((i) => {
                   return (
                     <tr key={i.roomId} id="under-three">
-                      <td>{i.rank}</td>
-                      <td>{i.teamName}</td>
+                      <td className="under-three-rank">{i.rank}</td>
+                      <td className="under-three-teamname">{i.teamName}</td>
                       <td>{i.userNum}</td>
-                      <td>{i.time}</td>
+                      <td className="under-three-time">{i.time}</td>
                     </tr>
                   );
                 })}
@@ -98,8 +114,56 @@ const Container = styled.div`
     border-bottom-right-radius: 30px;
   }
 
-  /* #title tbody #top-three {
-    height: 100px;
-    border: 1px solid red;
-  } */
+  #top-three {
+    img {
+      height: 76px;
+    }
+
+    .top-three-teamname {
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 29px;
+      /* identical to box height */
+
+      text-align: center;
+      letter-spacing: -0.03em;
+
+      color: #000000;
+    }
+    .top-three-time {
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 38px;
+      text-align: center;
+      letter-spacing: -0.03em;
+
+      color: #5668e8;
+    }
+  }
+
+  #under-three {
+    text-align: center;
+    letter-spacing: -0.03em;
+    .under-three-rank {
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 29px;
+
+      color: #a6b1ff;
+    }
+    .under-three-teamname {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+
+      color: #222222;
+    }
+    .under-three-time {
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 29px;
+
+      color: #a6b1ff;
+    }
+  }
 `;
