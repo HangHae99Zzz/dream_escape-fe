@@ -1,12 +1,12 @@
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
-import GlobalStyles from '../shared/GlobalStyle';
-import Chat from './Chat';
-import GameEndModal from '../modal/GameEndModal';
-import { Main, Rank, Update, GameRoom, GameDescription } from '../pages/index';
-import { Loading, EndingCredit, InGameUsers } from '../components/index';
-import { Timer } from '../elements/index';
-import Sidebar2 from '../components/Sidebar';
+
+import GlobalStyles from "../shared/GlobalStyle";
+import Chat from "./Chat";
+import GameEndModal from "../modal/GameEndModal";
+import { Main, Rank, Update, GameRoom, GameDescription } from "../pages/index";
+import { Loading, EndingCredit, InGameUsers } from "../components/index";
+import { Timer } from "../elements/index";
 
 function App() {
     return (
