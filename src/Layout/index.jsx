@@ -1,0 +1,1 @@
+import DefaultLayout from './DefaultLayout';
