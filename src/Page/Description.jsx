@@ -2,22 +2,21 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-import { Layout } from '../Layout/DefaultLayout';
-import { Footer } from '../components/index';
-import { RoomCreateModal } from '../../modal/index';
-import { MakeRoomBtn, ModalBG } from '../elements/index';
+import { DefaultLayout, Footer } from '../Layout';
+import { RoomCreateModal } from '../Component/Main/Modal';
+import { MakeRoomBtn, ModalBG } from '../Component/Element';
 
-const GameDescription = () => {
+const Description = () => {
     const [openRoomCreateModal, setOpenRoomCreateModal] = useState(false);
 
     return (
-        <Layout>
+        <DefaultLayout>
             <Height>
                 <Backgrounds>
                     <DescContainer>
                         <LogoContainer>
-                            <Logo1 src="icons/sidebar/logo.png"></Logo1>
-                            <Logo2 src="icons/contents/desc_logo.png"></Logo2>
+                            <Logo1 src="image/logo.png"></Logo1>
+                            <Logo2 src="image/desc_logo.png"></Logo2>
                         </LogoContainer>
                         ‘zzz’ 는 꿈을 꾸는 상태를 표현한 단어이자, 게임
                         프로젝트의 이름입니다
@@ -31,10 +30,10 @@ const GameDescription = () => {
                         있는지 궁금하지 않으신가요?
                     </DescContainer>
                     <ImgContainer>
-                        <Img1 src="images/desc_image1.png" />
+                        <Img1 src="image/desc_image1.png" />
                         <ImgContainer2>
-                            <Img2 src="images/desc_image2.png" />
-                            <Img3 src="images/desc_image3.png" />
+                            <Img2 src="image/desc_image2.png" />
+                            <Img3 src="image/desc_image3.png" />
                         </ImgContainer2>
                     </ImgContainer>
                     <Bottom>
@@ -69,7 +68,7 @@ const GameDescription = () => {
                     <RoomCreateModal closeModal={setOpenRoomCreateModal} />
                 </>
             )}
-        </Layout>
+        </DefaultLayout>
     );
 };
 
@@ -148,7 +147,7 @@ const Catch = styled.span`
 
 const Background1 = styled.div`
     position: absolute;
-    background: url('images/desc_background1.png');
+    background: url('image/desc_background1.png');
     width: 100%;
     height: 1074px;
     top: -120px;
@@ -158,7 +157,7 @@ const Background1 = styled.div`
 
 const Background2 = styled.div`
     position: absolute;
-    background: url('images/desc_background2.png');
+    background: url('image/desc_background2.png');
     width: 100%;
     height: 1074px;
     background-position-x: -250px;
@@ -168,7 +167,7 @@ const Background2 = styled.div`
 
 const Background3 = styled.div`
     position: absolute;
-    background: url('images/desc_background3.png');
+    background: url('image/desc_background3.png');
     width: 100%;
     background-position-x: 350px;
     height: 1074px;
@@ -176,4 +175,4 @@ const Background3 = styled.div`
     z-index: -1;
 `;
 
-export default GameDescription;
+export default Description;

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreator as escapeActions } from '../redux/modules/escape';
-import { SvgX } from '../icons/etc/svg_etc';
+import { actionCreator as escapeActions } from '../../../redux/modules/escape';
+import { SvgX } from '../../../Asset/icon/etc/svg_etc';
 
 function Modal({ setModalOpen, quizType }) {
     const [hintModal, setHintModal] = useState(false);

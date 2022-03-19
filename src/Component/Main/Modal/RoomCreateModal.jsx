@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreator as roomActions } from '../redux/modules/room';
-import { actionCreator as userActions } from '../redux/modules/user';
 import styled from 'styled-components';
 
-import { MuteButton } from '../Element/index';
+import { actionCreator as roomActions } from '../../../redux/modules/room';
+import { actionCreator as userActions } from '../../../redux/modules/user';
+
+import { MuteButton } from '../../Element';
 import { WaitModal } from './index';
 
 const RoomCreateModal = ({ closeModal }) => {
@@ -32,7 +33,7 @@ const RoomCreateModal = ({ closeModal }) => {
                 <ModalWindow>
                     <ExitContainer>
                         <XIcon
-                            src="/icons/contents/x.svg"
+                            src="image/x.svg"
                             alt=""
                             onClick={() => closeModal(false)}
                         />
@@ -54,8 +55,7 @@ const RoomCreateModal = ({ closeModal }) => {
                         </MakeButton>
                     </div>
                     <CopyContaier>
-                        <img src="/icons/contents/clip.png" alt="" />{' '}
-                        <div>링크복사</div>
+                        <img src="image/clip.png" alt="" /> <div>링크복사</div>
                     </CopyContaier>
                     <FooterContainer>
                         친구들에게 공유하시면 함께 즐길 수 있어요

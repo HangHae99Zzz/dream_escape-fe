@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import Users from '../elements/Users';
-import { Timer } from '../elements/index';
-import { SvgMic, SvgMyMic } from '../icons/etc/svg_etc';
+import Users from '../../Element/MainUsers';
+import Timer from './Timer';
+import { SvgMic } from '../../../Asset/icon/etc/svg_etc';
 
-const InGameUsers = ({ gameEnd }) => {
+const GameUsers = ({ gameEnd }) => {
     const { count, countLimit } = useSelector(({ game }) => game);
 
     const [gameTime, setGameTime] = useState('');
@@ -39,7 +39,7 @@ const InGameUsers = ({ gameEnd }) => {
     );
 };
 
-export default InGameUsers;
+export default GameUsers;
 
 const Container = styled.div`
     color: white;
@@ -135,7 +135,7 @@ const MyMic = styled.div`
     height: 76px;
 
     border-radius: 50%;
-    background-image: url('./images/mymic.png');
+    background-image: url('image/mymic.png');
 
     display: flex;
     justify-content: center;

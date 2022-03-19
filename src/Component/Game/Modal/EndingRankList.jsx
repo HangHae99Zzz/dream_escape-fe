@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SvgUserGroup } from '../icons/etc/svg_etc';
+import { SvgUserGroup } from '../../../Asset/icon/etc/svg_etc';
 
 import { useSelector } from 'react-redux';
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Contents, Footer } from '../components/index';
-import { RoomCreateModal } from '../modal/index';
-import { MakeRoomBtn, ModalBG } from '../elements/index';
+import { Contents } from '../Component/Main';
+import { Footer } from '../Layout';
+import { RoomCreateModal } from '../Component/Main/Modal';
+import { MakeRoomBtn, ModalBG } from '../Component/Element';
 
 import Layout from '../Layout/DefaultLayout';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Header, Sidebar } from '../Component/index';
+import { Header, Sidebar } from './index';
 
 const DefaultLayout = ({ children }) => {
     return (

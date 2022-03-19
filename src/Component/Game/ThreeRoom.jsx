@@ -1,18 +1,14 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Suspense } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { Html, useProgress, PointerLockControls } from '@react-three/drei';
-import WasdControls from '../elements/WasdControls';
-import Test from '../elements/Test';
-import ClueModal from '../modal/ClueModal';
-import Modal from '../modal/Modal';
-import styled from 'styled-components';
-import InGameUsers from './InGameUsers';
-import GameEndModal from '../modal/GameEndModal';
-import { actionCreator as rankActions } from '../../redux/modules/rank';
-import { actionCreator as gameActions } from '../../redux/modules/game';
 import { useDispatch, useSelector } from 'react-redux';
-import { EndingCredit } from '../Main/index';
+import styled from 'styled-components';
+import WasdControls from './WasdControls';
+import Test from './Test';
+import { Modal, ClueModal, GameEndModal } from './Modal';
+import InGameUsers from './UI/GameUsers';
+import { EndingCredit } from '../Main';
 
 const ThreeRoom = () => {
     const dispatch = useDispatch();
@@ -106,8 +102,6 @@ const ThreeRoom = () => {
     );
 };
 
-export default ThreeRoom;
-
 const Container = styled.div`
     display: flex;
     justify-content: center;
@@ -122,3 +116,5 @@ const MouseCircle = styled.div`
     border: 2px solid #fff;
     border-radius: 50%;
 `;
+
+export default ThreeRoom;

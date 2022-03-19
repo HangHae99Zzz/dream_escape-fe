@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { actionCreator as roomActions } from '../redux/modules/room';
-import { actionCreator as userActions } from '../redux/modules/user';
-import { actionCreator as gameActions } from '../redux/modules/game';
+import { actionCreator as roomActions } from '../../../redux/modules/room';
+import { actionCreator as userActions } from '../../../redux/modules/user';
+import { actionCreator as gameActions } from '../../../redux/modules/game';
 
-import { MuteButton } from '../Element/index';
+import { MuteButton } from '../../Element';
 
 const WaitModal = ({ closeModal }) => {
     const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const WaitModal = ({ closeModal }) => {
         <ModalWindow>
             <ExitContainer>
                 <XIcon
-                    src="/icons/contents/x.svg"
+                    src="image/x.svg"
                     alt=""
                     onClick={() => exit(socket.id)}
                 />
@@ -69,7 +69,7 @@ const WaitModal = ({ closeModal }) => {
                 )}
             </div>
             <CopyContaier>
-                <img src="/icons/contents/clip.png" alt="" />{' '}
+                <img src="image/clip.png" alt="" />
                 <div>링크복사</div>
             </CopyContaier>
             <FooterContainer>

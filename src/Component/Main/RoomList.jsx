@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { actionCreator as roomActions } from '../redux/modules/room';
+import { actionCreator as roomActions } from '../../redux/modules/room';
 
-import { WaitModal } from '../Modal/index';
+import { WaitModal } from './Modal';
 import { ModalBG } from '../Element/index';
 
 const RoomList = () => {
@@ -64,7 +64,7 @@ const RoomList = () => {
                                         <MemberIcon
                                             src={
                                                 process.env.PUBLIC_URL +
-                                                'icons/contents/peers.svg'
+                                                'image/peers.svg'
                                             }
                                             alt="참가자 수: "
                                         />
@@ -103,7 +103,7 @@ const RoomList = () => {
                                         <MemberIcon
                                             src={
                                                 process.env.PUBLIC_URL +
-                                                'icons/contents/peers.svg'
+                                                'image/peers.svg'
                                             }
                                             alt="참가자 수: "
                                         />
@@ -235,7 +235,7 @@ const Right = styled.div`
 `;
 
 const UserImg = styled.div`
-    background-image: url('/images/userImg_ex.png');
+    background-image: url('image/userImg_ex.png');
     width: 100px;
     /* min-width: 60px; */
     height: 100px;

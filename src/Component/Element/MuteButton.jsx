@@ -5,7 +5,7 @@ const MuteButton = ({ abs }) => {
     return (
         <Button abs={abs}>
             <Label>ON</Label>
-            <MicIcon src="/icons/contents/mic.svg" alt="" />
+            <MicIcon src="image/mic.svg" alt="" />
         </Button>
     );
 };

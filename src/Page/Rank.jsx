@@ -3,9 +3,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { actionCreator as rankActions } from '../../redux/modules/rank';
+import { actionCreator as rankActions } from '../redux/modules/rank';
 
-import Layout from './Layout';
+import { DefaultLayout } from '../Layout';
 
 const Rank2 = () => {
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const Rank2 = () => {
 
     return (
         <>
-            <Layout>
+            <DefaultLayout>
                 <Container>
                     <Header>
                         <div className="first">순위</div>
@@ -32,7 +32,7 @@ const Rank2 = () => {
                     <Body>
                         {topThreeRanks &&
                             topThreeRanks.map(i => {
-                                const imgUrl = `./images/rank_top_${i.rank}.png`;
+                                const imgUrl = `image/rank_top_${i.rank}.png`;
                                 return (
                                     <TopThree key={i.roomId} id="top-three">
                                         <div className="first">
@@ -82,7 +82,7 @@ const Rank2 = () => {
                         <span>더보기</span>
                     </MoreBtn>
                 </ButtonContainer>
-            </Layout>
+            </DefaultLayout>
         </>
     );
 };
@@ -261,7 +261,7 @@ const MoreBtn = styled.button`
     color: #5668e8;
     cursor: pointer;
 
-    background-image: url('/icons/contents/emptyDownArrow.svg');
+    background-image: url('image/emptyDownArrow.svg');
     background-repeat: no-repeat;
     background-position-x: 82px;
     background-position-y: 15px;

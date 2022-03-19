@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreator as rankActions } from '../redux/modules/rank';
-import { actionCreator as roomActions } from '../redux/modules/room';
-import { actionCreator as userActions } from '../redux/modules/user';
-import EndingRankList from '../elements/EndingRankList';
-import { useNavigate } from 'react-router-dom';
+import { actionCreator as rankActions } from '../../../redux/modules/rank';
+import { actionCreator as userActions } from '../../../redux/modules/user';
+import { EndingRankList } from './index';
 
 function Modal({ setGameEnd, quizType, setIsCredit }) {
     const inputRef = useRef('');

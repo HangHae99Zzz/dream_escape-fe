@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 
 import styled from 'styled-components';
 
-import { SvgMic } from '../icons/etc/svg_etc';
+import { SvgMic } from '../../Asset/icon/etc/svg_etc';
 
-const Users = () => {
+const MainUsers = () => {
     const { peers } = useSelector(({ room }) => room);
 
     return (
@@ -23,7 +23,7 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default MainUsers;
 
 const Container = styled.div`
     display: flex;

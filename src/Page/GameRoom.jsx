@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { ThreeRoom } from '../components/index';
-import { actionCreator as roomActions } from '../../redux/modules/room';
-import Modal from '../../modal/Modal';
+import React from 'react';
+import { ThreeRoom } from '../Component/Game';
 
 const GameRoom = () => {
     // const dispatch = useDispatch();

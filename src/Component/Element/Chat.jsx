@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 import styled from 'styled-components';
 
-import { actionCreator as socketActions } from '../../redux/module/socket';
-import { actionCreator as userActions } from '../../redux/module/user';
-import { actionCreator as roomActions } from '../../redux/module/room';
-import { actionCreator as gameActions } from '../../redux/module/game';
+import { actionCreator as socketActions } from '../../redux/modules/socket';
+import { actionCreator as userActions } from '../../redux/modules/user';
+import { actionCreator as roomActions } from '../../redux/modules/room';
+import { actionCreator as gameActions } from '../../redux/modules/game';
 
 import Video from './Video';
 

@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { SvgFind, SvgSearch, SvgSettings } from '../icons/header/svg_header';
+import { SvgFind, SvgSettings } from '../Asset/icon/header/svg_header';
 
 const Header = () => {
     let [isToggleOn, setIsToggleOn] = useState(false);
@@ -166,7 +166,7 @@ const SearchInput = styled.div`
         top: 0;
         bottom: 0;
         width: 30px;
-        background: url('../icons/header/search.svg') center / contain no-repeat;
+        background: url('image/search.svg') center / contain no-repeat;
     }
 
     input {
@@ -187,7 +187,7 @@ const SettingBtn = styled.div`
     cursor: pointer;
     width: 1.2vw;
     height: 1.2vw;
-    background: url('../icons/header/settings.svg') center / contain no-repeat;
+    background: url('image/setting.svg') center / contain no-repeat;
 `;
 
 const UserProfile = styled.div`

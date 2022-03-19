@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { actionCreator as userActions } from '../redux/modules/user';
+import { actionCreator as userActions } from '../../redux/modules/user';
 
 const MakeRoomBtn = ({ setOpenRoomCreateModal, block }) => {
     const dispatch = useDispatch();
