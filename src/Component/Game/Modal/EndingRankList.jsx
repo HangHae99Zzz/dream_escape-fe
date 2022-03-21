@@ -1,123 +1,113 @@
-import React from 'react';
-import styled from 'styled-components';
-import { SvgUserGroup } from '../../../Asset/icon/etc/svg_etc';
+import React from "react";
+import styled from "styled-components";
+import { SvgUserGroup } from "../../../Asset/Icon/etc/svg_etc";
 
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 const EndingRankList = ({ list }) => {
-    console.log(list);
-    // 여기 좀 복잡해짐. css가 roomId가 같다면 효과주고, 아니면 다른 효과
-    const { roomInfo } = useSelector(({ room }) => room);
-    return (
-        <div>
-            <RankList>
-                <thead>
-                    <tr className="title">
-                        <th>순위</th>
-                        <th>방이름</th>
-                        <th>총 소요시간</th>
-                        <th>
-                            <SvgUserGroup />
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {list &&
-                        list.map(rank => {
-                            //99:99:99면 빈 tr(공간만 차지)
-                            if (
-                                rank.time == '00:00:00' ||
-                                rank.time == '99:99:99'
-                            ) {
-                                return (
-                                    <tr
-                                        key={rank.roomId}
-                                        style={{ height: '20px' }}
-                                    ></tr>
-                                );
-                                // 여기 안에서 if문 한번 더 써서 내 방 넘버랑 같으면 className 붙여주기
-                            } else if (rank.roomId === roomInfo.roomId) {
-                                return (
-                                    <tr key={rank.roomId} className="myScore">
-                                        <td>{rank.rank}</td>
-                                        <td>{rank.teamName}</td>
-                                        <td style={{ color: '#5668E8' }}>
-                                            {rank.time}
-                                        </td>
-                                        <td>{rank.userNum}</td>
-                                    </tr>
-                                );
-                            } else {
-                                return (
-                                    <tr key={rank.roomId}>
-                                        <td>{rank.rank}</td>
-                                        <td>{rank.teamName}</td>
-                                        <td>{rank.time}</td>
-                                        <td>{rank.userNum}</td>
-                                    </tr>
-                                );
-                            }
-                        })}
-                </tbody>
-            </RankList>
-        </div>
-    );
+  console.log(list);
+  // 여기 좀 복잡해짐. css가 roomId가 같다면 효과주고, 아니면 다른 효과
+  const { roomInfo } = useSelector(({ room }) => room);
+  return (
+    <div>
+      <RankList>
+        <thead>
+          <tr className="title">
+            <th>순위</th>
+            <th>방이름</th>
+            <th>총 소요시간</th>
+            <th>
+              <SvgUserGroup />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {list &&
+            list.map((rank) => {
+              //99:99:99면 빈 tr(공간만 차지)
+              if (rank.time == "00:00:00" || rank.time == "99:99:99") {
+                return <tr key={rank.roomId} style={{ height: "20px" }}></tr>;
+                // 여기 안에서 if문 한번 더 써서 내 방 넘버랑 같으면 className 붙여주기
+              } else if (rank.roomId === roomInfo.roomId) {
+                return (
+                  <tr key={rank.roomId} className="myScore">
+                    <td>{rank.rank}</td>
+                    <td>{rank.teamName}</td>
+                    <td style={{ color: "#5668E8" }}>{rank.time}</td>
+                    <td>{rank.userNum}</td>
+                  </tr>
+                );
+              } else {
+                return (
+                  <tr key={rank.roomId}>
+                    <td>{rank.rank}</td>
+                    <td>{rank.teamName}</td>
+                    <td>{rank.time}</td>
+                    <td>{rank.userNum}</td>
+                  </tr>
+                );
+              }
+            })}
+        </tbody>
+      </RankList>
+    </div>
+  );
 };
 
 export default EndingRankList;
 
 const RankList = styled.table`
-    width: 350px;
-    height: 160px;
+  width: 350px;
+  height: 160px;
 
-    .title th {
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 22px;
+  .title th {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
 
-        letter-spacing: -0.03em;
+    letter-spacing: -0.03em;
 
-        color: #000000;
+    color: #000000;
+  }
+
+  tr:nth-child(even) {
+    font-size: 20px;
+    line-height: 24px;
+
+    letter-spacing: -0.03em;
+
+    color: #a5a5a5;
+
+    td {
+      font-weight: 600;
     }
+  }
 
-    tr:nth-child(even) {
-        font-size: 20px;
-        line-height: 24px;
+  tr:nth-child(odd) {
+    font-size: 14px;
+    line-height: 17px;
 
-        letter-spacing: -0.03em;
+    letter-spacing: -0.03em;
 
-        color: #a5a5a5;
+    color: #a5a5a5;
 
-        td {
-            font-weight: 600;
-        }
+    opacity: 0.7;
+
+    td {
+      font-weight: 600;
     }
+  }
 
-    tr:nth-child(odd) {
-        font-size: 14px;
-        line-height: 17px;
+  tr.myScore {
+    font-size: 24px;
+    line-height: 29px;
 
-        letter-spacing: -0.03em;
+    color: #000000;
 
-        color: #a5a5a5;
+    opacity: 1;
 
-        opacity: 0.7;
-
-        td {
-            font-weight: 600;
-        }
+    td {
+      font-weight: bold;
     }
-
-    tr.myScore {
-        font-size: 24px;
-        line-height: 29px;
-
-        color: #000000;
-
-        opacity: 1;
-
-        td {
-            font-weight: bold;
-        }
-    }
+  }
 `;
