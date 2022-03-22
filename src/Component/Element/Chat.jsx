@@ -22,7 +22,6 @@ const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
 // const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Chat = () => {
-    const { socket } = useSelector(({ socket }) => socket);
     const { isIn } = useSelector(({ user }) => user);
     const { roomInfo } = useSelector(({ room }) => room);
     const { countLimit } = useSelector(({ game }) => game);
@@ -146,7 +145,9 @@ const Chat = () => {
                 console.log('누가 들어옴');
                 // peers 업데이트
                 const roomId = sessionStorage.getItem('sessionRoomId');
+
                 dispatch(roomActions.refPeers(roomId));
+
                 setUsers(oldUsers =>
                     oldUsers
                         .filter(user => user.id !== socketID)
@@ -183,20 +184,19 @@ const Chat = () => {
             dispatch(userActions.isIn(true));
         }
 
-        if (!roomInfo) return;
+        if (!roomInfo?.roomId) return;
+        // 변경사항: setTimeOut 삭제
         getLocalStream()
             .then(() => getDevices())
             .then(() => {
                 console.log('내 아이디', socketRef.current.id);
             })
             .then(() => {
-                setTimeout(() => {
-                    console.log(roomInfo.roomId);
-                    socketRef.current.emit('join_room', {
-                        room: roomInfo.roomId,
-                        email: 'sample@naver.com',
-                    });
-                }, 2000);
+                console.log(roomInfo.roomId);
+                socketRef.current.emit('join_room', {
+                    room: roomInfo.roomId,
+                    email: 'sample@naver.com',
+                });
             });
 
         // room 들어가면 실행하도록 /////////////////////////////////////

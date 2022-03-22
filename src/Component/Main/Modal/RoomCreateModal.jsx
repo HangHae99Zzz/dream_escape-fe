@@ -20,6 +20,7 @@ const RoomCreateModal = ({ closeModal }) => {
     const makeRoom = () => {
         const teamName = teamNameRef.current.value;
 
+        if (!teamName) return alert('팀 이름을 입력해주세요');
         dispatch(userActions.isCreator(true));
         dispatch(roomActions.makeRoom(teamName, socket.id));
         SetWaitModal(true);
