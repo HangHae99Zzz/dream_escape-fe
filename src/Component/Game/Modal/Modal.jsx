@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreator as escapeActions } from "../../../redux/modules/escape";
+import { actionCreator as quizActions } from "../../../redux/modules/quiz";
 import { SvgX } from "../../../Asset/Icon/etc/svg_etc";
 
 function Modal({ setModalOpen, quizType }) {
@@ -16,7 +16,7 @@ function Modal({ setModalOpen, quizType }) {
   const { socket } = useSelector(({ socket }) => socket);
 
   useEffect(() => {
-    dispatch(escapeActions.refQuiz(quizType));
+    dispatch(quizActions.refQuiz(quizType));
   }, []);
 
   const handleAnswer = () => {
@@ -29,16 +29,12 @@ function Modal({ setModalOpen, quizType }) {
       if (setHintModal == true) {
         window.alert("오답입니다!");
       }
-      //   setModalOpen(false);
     }
   };
 
   const onKeyDown = (e) => {
     if (e.key == "Enter") {
       handleAnswer();
-    } else if (e.key == 93) {
-      console.log("눌렀다!");
-      setHintModal(true);
     }
   };
 
