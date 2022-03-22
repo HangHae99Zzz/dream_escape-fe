@@ -21,7 +21,7 @@ const gameStart = () => {
     return function (dispatch, getState) {
         const sessionRoomId = sessionStorage.getItem('sessionRoomId');
         console.log(`방이름: ${sessionRoomId} 시작합니다!`);
-        instance.post(`/game/${sessionRoomId}`).catch(err => console.log(err));
+        instance.put(`/games/${sessionRoomId}`).catch(err => console.log(err));
     };
 };
 
@@ -31,7 +31,7 @@ const deleteGame = (roomId, time) => {
     const sessionRoomId = sessionStorage.getItem('sessionRoomId');
     return function (dispatch, getState) {
         instance
-            .post(`/game/${sessionRoomId}/ending`, {
+            .post(`/games/${sessionRoomId}`, {
                 time: time,
             })
             .then(res => console.log(res))

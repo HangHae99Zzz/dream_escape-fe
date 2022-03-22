@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { RoomList } from './index';
 
 const Contents = () => {
+    const [page, setPage] = useState(1);
+
+    const pagination = page => {
+        setPage(page + 1);
+    };
+
     return (
         <>
             <FlexContainer>
@@ -15,10 +21,10 @@ const Contents = () => {
                             <option>최신순 </option>
                         </Selector>
                     </RoomListHeader>
-                    <RoomList></RoomList>
+                    <RoomList page={page}></RoomList>
                 </RoomListContainer>
             </FlexContainer>
-            <MoreBtn>
+            <MoreBtn onClick={() => pagination(page)}>
                 <span>더보기</span>
             </MoreBtn>
         </>

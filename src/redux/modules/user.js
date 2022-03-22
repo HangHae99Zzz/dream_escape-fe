@@ -51,7 +51,7 @@ const deleteUser = socketId => {
 const writeComment = contents => {
     return function (dispatch, getState) {
         instance
-            .post('/comment', {
+            .post('/comments', {
                 comment: contents,
             })
             .catch(err => console.log(err));

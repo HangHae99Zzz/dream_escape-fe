@@ -37,7 +37,7 @@ const recordTime = (roomId, time) => {
 const refRank = () => {
     return function (dispatch, getState) {
         instance
-            .get('/ranks')
+            .get(`/ranks/${sessionRoomId}`)
             .then(res => {
                 let ranklist = res.data;
                 dispatch(loadRanks(ranklist));

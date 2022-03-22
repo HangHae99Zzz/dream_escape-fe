@@ -7,30 +7,36 @@ import { actionCreator as roomActions } from '../../redux/modules/room';
 import { WaitModal } from './Modal';
 import { ModalBG } from '../Element/index';
 
-const RoomList = () => {
+const RoomList = ({ page }) => {
     const dispatch = useDispatch();
     const { roomList } = useSelector(({ room }) => room);
     const { roomInfo } = useSelector(({ room }) => room);
     const { socket } = useSelector(({ socket }) => socket);
     const [openWaitModal, setOpenWaitModal] = useState(false);
+    const [pollingCnt, setPollingCnt] = useState(1);
 
     const clientTime = Date.now();
 
     const enterRoom = roomId => {
         // 참여시키기 socket.id가 올때까지 기다려봐
         // socket.id가 없으면 기다렸다가 다시 본인을 호출
-        setTimeout(
-            () =>
-                dispatch(
-                    roomActions.joinRoom(roomId, socket.id, setOpenWaitModal)
-                ),
-            1000
-        );
+        // setTimeout(
+        //     () =>
+        dispatch(roomActions.joinRoom(roomId, socket.id, setOpenWaitModal));
+        //     100
+        // );
     };
 
     useEffect(() => {
-        dispatch(roomActions.refRoomList());
-    }, [roomInfo]);
+        dispatch(roomActions.refRoomList(page));
+    }, [page, roomInfo, dispatch]);
+
+    // useEffect(() => {
+    //     console.log(pollingCnt, page);
+    //     dispatch(roomActions.refRoomList(page));
+    //     const timeout = setTimeout(() => setPollingCnt(pollingCnt + 1), 1000);
+    //     return () => clearTimeout(timeout);
+    // }, [pollingCnt, page, dispatch]);
 
     return (
         <RoomLi>

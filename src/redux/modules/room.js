@@ -36,7 +36,7 @@ const makeRoom = (teamName, socketId) => {
     return function (dispatch, getState) {
         console.log(`방이름: ${teamName} 내 이름: ${socketId}`);
         instance
-            .post('/room', {
+            .post('/rooms', {
                 teamName,
                 userId: socketId,
             })
@@ -50,10 +50,10 @@ const makeRoom = (teamName, socketId) => {
 };
 
 // 방 리스트 조회하기
-const refRoomList = () => {
+const refRoomList = page => {
     return function (dispatch, getState) {
         instance
-            .get('/rooms/2')
+            .get(`rooms/pages/${page}`)
             .then(res => dispatch(getRoomList(res.data)))
             .catch(err => console.log(err));
     };
@@ -63,7 +63,7 @@ const refRoomList = () => {
 const refRoom = roomId => {
     return function (dispatch, getState) {
         instance
-            .get(`/room/${roomId}`)
+            .get(`/rooms/${roomId}`)
             .then(res => {
                 console.log(res);
                 return dispatch(getRoomInfo(res.data));
@@ -79,7 +79,7 @@ const joinRoom = (roomId, socketId, modal) => {
         dispatch(refRoom(roomId));
 
         instance
-            .post(`/room/${roomId}`, {
+            .post(`/rooms/${roomId}`, {
                 userId: socketId,
             })
             .then(res => {
