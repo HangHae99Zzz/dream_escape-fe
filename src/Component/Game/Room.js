@@ -3,7 +3,9 @@ import { useGLTF } from "@react-three/drei";
 
 export default function Model({ ...props }) {
   const group = useRef();
-  const { nodes, materials } = useGLTF("/room.gltf");
+  const { nodes, materials } = useGLTF(
+    "https://test001-s3-bucket.s3.ap-northeast-2.amazonaws.com/room.gltf"
+  );
   return (
     <group ref={group} {...props} dispose={null}>
       <group
@@ -30,10 +32,10 @@ export default function Model({ ...props }) {
         position={[-8.77, 4.2, -5.83]}
         rotation={[-0.1, 0.1, -0.01]}
       >
-        <mesh
+        {/* <mesh
           geometry={nodes.Plane028_1.geometry}
           material={nodes.Plane028_1.material}
-        />
+        /> */}
       </mesh>
       <mesh
         geometry={nodes.Plane015.geometry}
@@ -78,11 +80,11 @@ export default function Model({ ...props }) {
           geometry={nodes.Plane033_2.geometry}
           material={nodes.Plane033_2.material}
         />
-        <mesh
+        {/* <mesh
           geometry={nodes.Circle002_1.geometry}
           material={nodes.Circle002_1.material}
           position={[0, 0.32, 0.57]}
-        />
+        /> */}
         <group position={[0, 0.31, -0.01]} scale={[-1, -1, 1]}>
           <mesh
             geometry={nodes.Cube_1.geometry}
@@ -314,11 +316,11 @@ export default function Model({ ...props }) {
           geometry={nodes.Plane035.geometry}
           material={nodes.Plane035.material}
         />
-        <mesh
+        {/* <mesh
           geometry={nodes.Plane036_1.geometry}
           material={nodes.Plane036_1.material}
           position={[0, 0, -0.09]}
-        />
+        /> */}
         <mesh
           geometry={nodes.Plane037.geometry}
           material={nodes.Plane037.material}
@@ -399,10 +401,10 @@ export default function Model({ ...props }) {
           geometry={nodes.Plane040_2.geometry}
           material={materials["screen-dos-game"]}
         />
-        <mesh
+        {/* <mesh
           geometry={nodes.Plane019_1.geometry}
           material={nodes.Plane019_1.material}
-        />
+        /> */}
         <mesh
           geometry={nodes.Plane020_2.geometry}
           material={nodes.Plane020_2.material}
@@ -434,7 +436,7 @@ export default function Model({ ...props }) {
           geometry={nodes.Plane050_4.geometry}
           material={materials["led.002"]}
         />
-        <mesh
+        {/* <mesh
           geometry={nodes.Plane031_1.geometry}
           material={nodes.Plane031_1.material}
           position={[0.64, 1.92, 0.46]}
@@ -451,8 +453,8 @@ export default function Model({ ...props }) {
               material={nodes.Cylinder_2.material}
             />
           </group>
-        </mesh>
-        <mesh
+        </mesh> */}
+        {/* <mesh
           geometry={nodes.Plane032_1.geometry}
           material={nodes.Plane032_1.material}
           position={[0.64, 1.92, -0.3]}
@@ -469,7 +471,7 @@ export default function Model({ ...props }) {
               material={nodes.Cylinder_2.material}
             />
           </group>
-        </mesh>
+        </mesh> */}
         <mesh
           geometry={nodes.Plane033_3.geometry}
           material={nodes.Plane033_3.material}
@@ -549,11 +551,11 @@ export default function Model({ ...props }) {
           rotation={[0, -0.34, 0]}
           scale={10.29}
         >
-          <mesh
+          {/* <mesh
             geometry={nodes.Vert008_3.geometry}
             material={nodes.Vert008_3.material}
             scale={0.92}
-          />
+          /> */}
         </mesh>
       </mesh>
       <mesh
@@ -843,11 +845,11 @@ export default function Model({ ...props }) {
           material={materials["cable.001"]}
           position={[0, 0, -0.68]}
         />
-        <mesh
+        {/* <mesh
           geometry={nodes.Vert004_2.geometry}
           material={materials["cable.002"]}
           position={[0, 0, -1.37]}
-        />
+        /> */}
         <mesh
           geometry={nodes.Vert005_1.geometry}
           material={materials["cable.003"]}
@@ -869,11 +871,11 @@ export default function Model({ ...props }) {
           material={nodes.Circle007.material}
           position={[0.65, 0.89, -0.18]}
         />
-        <mesh
+        {/* <mesh
           geometry={nodes.Circle018_1.geometry}
           material={nodes.Circle018_1.material}
           position={[0.65, 0.89, 0.31]}
-        />
+        /> */}
         <mesh
           geometry={nodes.Circle008_1.geometry}
           material={nodes.Circle008_1.material}
@@ -1239,4 +1241,6 @@ export default function Model({ ...props }) {
   );
 }
 
-useGLTF.preload("/room.gltf");
+useGLTF.preload(
+  "https://test001-s3-bucket.s3.ap-northeast-2.amazonaws.com/room.gltf"
+);
