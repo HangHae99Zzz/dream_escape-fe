@@ -6,6 +6,7 @@ const Timer = ({ setGameTime, gameEnd }) => {
     const dispatch = useDispatch();
 
     const roomId = useSelector(state => state.room.roomInfo.roomId);
+    const { isCreator } = useSelector(({ user }) => user);
 
     const [minutes, setMinutes] = useState(30);
     const [seconds, setSeconds] = useState(0);
@@ -30,15 +31,16 @@ const Timer = ({ setGameTime, gameEnd }) => {
     }, [minutes, seconds]);
 
     useEffect(() => {
-        if (!gameEnd) return;
-        console.log('Timer.jsx에서 dispatch');
-        const _temp = streamDuration;
+        if (gameEnd && isCreator) {
+            console.log('Timer.jsx에서 dispatch');
+            const _temp = streamDuration;
 
-        //초를 시 분 초로 변경
-        var _value = new Date(_temp * 1000).toISOString().substr(11, 8);
-        console.log(_value);
+            //초를 시 분 초로 변경
+            var _value = new Date(_temp * 1000).toISOString().substr(11, 8);
+            console.log(_value);
 
-        dispatch(gameActions.deleteGame(roomId, _value));
+            dispatch(gameActions.deleteGame(roomId, _value));
+        }
         // dispatch(rankActions.recordTime();
     }, [gameEnd]);
 

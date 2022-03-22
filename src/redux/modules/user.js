@@ -3,9 +3,6 @@ import produce from 'immer';
 
 import instance from '../../util/request';
 
-// initialState
-const initialState = { isIn: false, isCreator: false, peers: [] };
-
 // actions
 const IS_IN = 'IS_IN';
 const IS_CREATOR = 'IS_CREATOR';
@@ -18,6 +15,9 @@ const isIn = createAction(IS_IN, isIn => ({
 const isCreator = createAction(IS_CREATOR, isCreator => ({
     isCreator,
 }));
+
+// initialState
+const initialState = { isIn: false, isCreator: false };
 
 //  middleware Actions
 

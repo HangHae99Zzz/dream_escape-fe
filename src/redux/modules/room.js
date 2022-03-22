@@ -25,7 +25,7 @@ const initialState = {
 //  middleware Actions
 
 // 게임시작
-const saveSession = roomId => {
+const saveSessionRoomId = roomId => {
     // session storage에 저장 roomId:'1'
     console.log('세션에 저장합니다!');
     sessionStorage.setItem('sessionRoomId', roomId);
@@ -42,7 +42,7 @@ const makeRoom = (teamName, socketId) => {
             })
             .then(res => {
                 console.log(`방 만든사람: ${res.data.createdUser}`);
-                saveSession(res.data.roomId);
+                saveSessionRoomId(res.data.roomId);
                 return dispatch(getRoomInfo(res.data));
             })
             .catch(err => console.log(err));
@@ -53,7 +53,7 @@ const makeRoom = (teamName, socketId) => {
 const refRoomList = () => {
     return function (dispatch, getState) {
         instance
-            .get('/rooms')
+            .get('/rooms/2')
             .then(res => dispatch(getRoomList(res.data)))
             .catch(err => console.log(err));
     };
@@ -65,7 +65,7 @@ const refRoom = roomId => {
         instance
             .get(`/room/${roomId}`)
             .then(res => {
-                saveSession(res.data.roomId);
+                console.log(res);
                 return dispatch(getRoomInfo(res.data));
             })
             .catch(err => console.log(err));
@@ -84,7 +84,7 @@ const joinRoom = (roomId, socketId, modal) => {
             })
             .then(res => {
                 // session storage에 저장 roomId:'1'
-                sessionStorage.setItem('sessionRoomId', roomId);
+                saveSessionRoomId(roomId);
                 modal(true);
             })
             .catch(err => window.alert('인원가득'));
@@ -107,8 +107,8 @@ const refPeers = roomId => {
         instance
             .get(`/room/${roomId}`)
             .then(res => {
-                console.log(res.data.userList);
-                return dispatch(getPeers(res.data.userList));
+                const peers = res.data.userList;
+                dispatch(getPeers(peers));
             })
             .catch(err => console.log(err));
     };
