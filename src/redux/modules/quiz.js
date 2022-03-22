@@ -30,7 +30,7 @@ const refQuiz = quizType => {
     console.log('refQuiz 미들웨어에서 받았습니다!', quizType, typeof quizType);
     return function (dispatch, getState) {
         instance
-            .get(`/escape/${sessionRoomId}/${quizType}`)
+            .get(`/rooms/${sessionRoomId}/quizzes/${quizType}`)
             .then(res => {
                 let _question = res.data.question;
                 let _content = res.data.content;

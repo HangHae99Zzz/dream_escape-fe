@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -17,12 +17,14 @@ const WaitModal = ({ closeModal }) => {
 
     const navigate = useNavigate();
 
-    socket.on('loadingComplete', data => {
-        navigate('/loading');
-        setTimeout(() => {
-            dispatch(gameActions.gameStart());
-        }, 2000);
-    });
+    useEffect(() => {
+        socket.on('loadingComplete', data => {
+            navigate('/loading');
+            setTimeout(() => {
+                dispatch(gameActions.gameStart());
+            }, 2000);
+        });
+    }, []);
 
     const exit = () => {
         socket.close();
