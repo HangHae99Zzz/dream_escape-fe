@@ -1,4 +1,5 @@
-# zzz 꿈깨<img src="./Asset/image/logo.png" align=left width=100>
+# zzz 꿈깨
+<!-- <img src="https://user-images.githubusercontent.com/74045440/159398628-3296c8af-a716-48c6-80ca-81f3cbc78368.png" align=left width=100> -->
 
 > 온라인 3D 방탈출 게임 서비스 😴
 
@@ -32,7 +33,7 @@
 
 ## 🍎 Team Member - `FrontEnd`
 
-|  <img src="./Asset/강현.jpeg" width=200>   | <img src="./Asset/image/혜민.jpeg" width=200> |
+|  <img src="https://user-images.githubusercontent.com/74045440/159398343-db70bd0a-b93b-4e08-9193-5f666521f472.jpeg" width=200>   | <img src="https://user-images.githubusercontent.com/74045440/159398563-46cd3461-4369-4bfd-b9bf-254277e878c8.jpeg" width=200> |
 | :----------------------------------------: | :-------------------------------------------: |
 |                 **류강현**                 |                  **우혜민**                   |
 | [@Ryu ganghun](https://github.com/softwat) | [@Woo hyemin](https://github.com/hyemin9403)  |
