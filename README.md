@@ -1,4 +1,8 @@
 # zzz 꿈깨
+<<<<<<< HEAD
+=======
+
+>>>>>>> 936646a75b9d00783d6c266740cbcd52351c6e61
 <!-- <img src="https://user-images.githubusercontent.com/74045440/159398628-3296c8af-a716-48c6-80ca-81f3cbc78368.png" align=left width=100> -->
 
 > 온라인 3D 방탈출 게임 서비스 😴
@@ -20,12 +24,21 @@
 
 ## ✨ 주요 기능
 
+<<<<<<< HEAD
 -   **`홈`**
     방탈출 게임을 위한 방을 만들고, 랭킹조회 및 게임 설명을 확인할 수 있습니다.
 -   **`대기`**
     현재 대기중인 인원을 체크하고 게임을 시작할 수 있습니다.
 -   **`게임`**
     팀원들과 보이스채팅을 나누며 방에 배치된 3D 물체를 클릭해 주어진 문제를 풀고 탈출할 수 있습니다.
+=======
+- **`홈`**
+  방탈출 게임을 위한 방을 만들고, 랭킹조회 및 게임 설명을 확인할 수 있습니다.
+- **`대기`**
+  현재 대기중인 인원을 체크하고 게임을 시작할 수 있습니다.
+- **`게임`**
+  팀원들과 보이스채팅을 나누며 방에 배치된 3D 물체를 클릭해 주어진 문제를 풀고 탈출할 수 있습니다.
+>>>>>>> 936646a75b9d00783d6c266740cbcd52351c6e61
 
 <!-- ![This is the last](https://user-images.githubusercontent.com/75469131/150535885-e6c38a60-19b0-4957-8919-2c78074cdb50.png) -->
 
@@ -33,10 +46,17 @@
 
 ## 🍎 Team Member - `FrontEnd`
 
+<<<<<<< HEAD
 |  <img src="https://user-images.githubusercontent.com/74045440/159398343-db70bd0a-b93b-4e08-9193-5f666521f472.jpeg" width=200>   | <img src="https://user-images.githubusercontent.com/74045440/159398563-46cd3461-4369-4bfd-b9bf-254277e878c8.jpeg" width=200> |
 | :----------------------------------------: | :-------------------------------------------: |
 |                 **류강현**                 |                  **우혜민**                   |
 | [@Ryu ganghun](https://github.com/softwat) | [@Woo hyemin](https://github.com/hyemin9403)  |
+=======
+| <img src="https://user-images.githubusercontent.com/74045440/159398343-db70bd0a-b93b-4e08-9193-5f666521f472.jpeg" width=200> | <img src="https://user-images.githubusercontent.com/74045440/159398563-46cd3461-4369-4bfd-b9bf-254277e878c8.jpeg" width=200> |
+| :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
+|                                                          **류강현**                                                          |                                                          **우혜민**                                                          |
+|                                          [@Ryu ganghun](https://github.com/softwat)                                          |                                         [@Woo hyemin](https://github.com/hyemin9403)                                         |
+>>>>>>> 936646a75b9d00783d6c266740cbcd52351c6e61
 
 #### 류강현
 
@@ -141,12 +161,21 @@ ex) handleComment(O) handle_comment(X)
 
 `develop` - default
 
+<<<<<<< HEAD
 -   protected → 승인 받아야만 merge 가능
 
 `feature`
 
 -   feature/#이슈번호
 -   feature/#1
+=======
+- protected → 승인 받아야만 merge 가능
+
+`feature`
+
+- feature/#이슈번호
+- feature/#1
+>>>>>>> 936646a75b9d00783d6c266740cbcd52351c6e61
 
 </details>
 
@@ -159,7 +188,11 @@ ex) handleComment(O) handle_comment(X)
 
 > 2️⃣ **Branch**
 >
+<<<<<<< HEAD
 > -   ex. feature/#16
+=======
+> - ex. feature/#16
+>>>>>>> 936646a75b9d00783d6c266740cbcd52351c6e61
 
 > 3️⃣ **Pull request**
 >
@@ -171,7 +204,11 @@ ex) handleComment(O) handle_comment(X)
 > 1. 수정 요청
 > 2. 대상자(작업자)가 수정을 하고 다시 커밋을 날림
 > 3. 수정 반영하고 답글로 커밋로그 남기기
+<<<<<<< HEAD
 >     - 수정사항은 커밋번호로 남기기
+=======
+>    - 수정사항은 커밋번호로 남기기
+>>>>>>> 936646a75b9d00783d6c266740cbcd52351c6e61
 
 > 5️⃣ **merge**
 >
@@ -188,6 +225,7 @@ ex) handleComment(O) handle_comment(X)
 <details markdown="1">
 <summary>폴더 구조✨</summary>
 
+<<<<<<< HEAD
 -   🗂 src
     -   App.jsx
     -   index.jsx
@@ -255,6 +293,75 @@ ex) handleComment(O) handle_comment(X)
 
     -   🗂 Icon
     -   🗂 Image
+=======
+- 🗂 src
+  - App.jsx
+  - index.jsx
+  - GlobalStyle.js
+- 🗂 Page
+
+  - index.js
+  - Main.jsx
+  - Rank.jsx
+  - Description.jsx
+  - Update.jsx
+  - GameRoom.jsx
+
+- 🗂 Layout
+
+  - index.js
+  - Header.jsx
+  - Sidebar.jsx
+  - Footer.jsx
+  - DefaultLayout.jsx
+
+- 🗂 Component
+
+  - 🗂 Main
+    - 🗂 Modal
+    - index.js
+    - RoomList.jsx
+    - Contents.jsx
+    - Loading.jsx
+    - EndingCredit.jsx
+  - 🗂 Game
+    - 🗂 Modal
+    - 🗂 UI
+    - index.js
+    - ThreeRoom.jsx
+    - Test.js
+    - WasdControls.js
+  - 🗂 Element
+    - index.js
+    - Chat.jsx
+    - MainUsers.jsx
+    - MakeRoomBtn.jsx
+    - ModalBG.jsx
+    - MuteButton.jsx
+    - Video.jsx
+
+- 🗂 redux
+
+  - configureStore.js
+
+  -🗂 modules
+
+  - escape.js(게임 퀴즈 관련 API )
+  - game.js(게임 시작 및 종료 API)
+  - rank.js(랭크 조회 API)
+  - room.js(방 생성 삭제 API)
+  - socket.js(소켓 관련 API)
+  - user.js(유저 정보 조회 및 삭제 API)
+
+- 🗂 Util
+
+  - request.js
+
+- 🗂 Asset
+
+  - 🗂 Icon
+  - 🗂 Image
+>>>>>>> 936646a75b9d00783d6c266740cbcd52351c6e61
 
 </details>
 
