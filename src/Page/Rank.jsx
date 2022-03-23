@@ -31,7 +31,7 @@ const Rank2 = () => {
           </Header>
           <Body>
             {topThreeRanks &&
-              topThreeRanks.map((i) => {
+              topThreeRanks((i) => {
                 const imgUrl = `image/rank_top_${i.rank}.png`;
                 return (
                   <TopThree key={i.roomId} id="top-three">
@@ -49,7 +49,7 @@ const Rank2 = () => {
                 );
               })}
             {underThreeRanks &&
-              underThreeRanks.map((i) => {
+              underThreeRanks((i) => {
                 return (
                   <UnderThree key={i.roomId} id="under-three">
                     <div className="first under-three-rank">{i.rank}</div>

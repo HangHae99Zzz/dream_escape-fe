@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as quizActions } from "../../../redux/modules/quiz";
 import { SvgX } from "../../../Asset/Icon/etc/svg_etc";
 
+import Virus from "./Virus";
+
 function Modal({ setModalOpen, quizType }) {
   const [hintModal, setHintModal] = useState(false);
   console.log(hintModal);
@@ -57,7 +59,12 @@ function Modal({ setModalOpen, quizType }) {
         <Title>
           {modalData ? <h1>{modalData.question}</h1> : <h1>오류</h1>}
         </Title>
-        {quizType === "Bb" ? (
+
+        {quizType === "Ab" ? (
+          <Body>
+            <Virus modalData={modalData} />
+          </Body>
+        ) : quizType === "Bb" ? (
           <Body>
             <div>
               <img
@@ -74,9 +81,6 @@ function Modal({ setModalOpen, quizType }) {
           <Body>
             <div>
               <img src="./image/Ca.png" alt="" />
-            </div>
-            <div className="hint">
-              {modalData ? <p>{modalData.hint}</p> : <p>오류</p>}
             </div>
           </Body>
         ) : (
