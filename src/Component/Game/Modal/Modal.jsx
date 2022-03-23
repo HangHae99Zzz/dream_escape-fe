@@ -9,9 +9,7 @@ function Modal({ setModalOpen, quizType }) {
   console.log(hintModal);
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-  const question = useSelector((state) => state.escape.question);
-  const content = useSelector((state) => state.escape.content);
-  const answer = useSelector((state) => state.escape.answer);
+  const modalData = useSelector((state) => state.quiz);
 
   const { socket } = useSelector(({ socket }) => socket);
 
@@ -20,7 +18,7 @@ function Modal({ setModalOpen, quizType }) {
   }, []);
 
   const handleAnswer = () => {
-    if (inputRef.current.value === answer) {
+    if (inputRef.current.value === modalData.answer) {
       window.alert("정답입니다!");
       setModalOpen(false);
       socket.emit("count");
@@ -55,8 +53,10 @@ function Modal({ setModalOpen, quizType }) {
           </button>
         </TitleCloseBtn>
 
-        <Title>{question ? <h1>{question}</h1> : <h1>오류</h1>}</Title>
-        <Body>{content ? <p>{content}</p> : <p>오류</p>}</Body>
+        <Title>
+          {modalData ? <h1>{modalData.question}</h1> : <h1>오류</h1>}
+        </Title>
+        <Body>{modalData ? <p>{modalData.content}</p> : <p>오류</p>}</Body>
         <Input>
           <label>
             <input
@@ -80,7 +80,7 @@ function Modal({ setModalOpen, quizType }) {
       </ModalContainer>
       {hintModal ? (
         <HintModal>
-          <p onClick={() => setHintModal(false)}>틀렸다. 시계를 돌려볼까?</p>
+          {modalData ? <p>{modalData.hint}</p> : <p>찬스가 없습니다.</p>}
         </HintModal>
       ) : null}
     </ModalBackground>

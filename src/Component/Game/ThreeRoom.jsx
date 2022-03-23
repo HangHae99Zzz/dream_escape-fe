@@ -26,7 +26,7 @@ const ThreeRoom = () => {
 
   const { count, countLimit } = useSelector(({ game }) => game);
 
-  console.log(modalOpen, quizType, typeof quizType);
+  // console.log(modalOpen, quizType, typeof quizType);
 
   //   useEffect(() => {
   //     if (!gameEnd) return;

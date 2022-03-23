@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreator as quizActions } from "../../../redux/modules/quiz";
 import { SvgX } from "../../../Asset/Icon/etc/svg_etc";
 
 function Modal({ clueType, setClueModalOpen }) {
-  console.log(clueType, typeof clueType);
+  const dispatch = useDispatch();
+  const clues = useSelector((state) => state?.quiz?.clue);
+  const roomId = useSelector((state) => state.room.roomInfo.roomId);
+  useEffect(() => dispatch(quizActions.refClue(roomId)), []);
+  let _temp = Object.values(clues);
 
   return (
     <ModalBackground>
@@ -22,7 +28,17 @@ function Modal({ clueType, setClueModalOpen }) {
           <h1>단서</h1>
         </Title>
         <Body>
-          {clueType === "poster2" ? <p>예쁜 스타워즈 포스터다</p> : <p>오류</p>}
+          {_temp && clueType === "Ba1" ? (
+            <p>{_temp[0][0].content}</p>
+          ) : clueType === "Ba2" ? (
+            <p>{_temp[0][1].content}</p>
+          ) : clueType === "Ba3" ? (
+            <p>{_temp[0][2].content}</p>
+          ) : clueType === "Bb1" ? (
+            <p>Bb1</p>
+          ) : (
+            <p>오류</p>
+          )}
         </Body>
 
         <Footer>
