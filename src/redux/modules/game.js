@@ -26,13 +26,13 @@ const gameStart = () => {
 };
 
 // 게임 종료하기
-const deleteGame = (roomId, time) => {
-    console.log('deleteGame 미들웨어 도착');
+const deleteGame = (pass, time) => {
     const sessionRoomId = sessionStorage.getItem('sessionRoomId');
     return function (dispatch, getState) {
         instance
             .post(`/games/${sessionRoomId}`, {
-                time: time,
+                pass,
+                time,
             })
             .then(res => console.log(res))
             .catch(err => console.log(err));

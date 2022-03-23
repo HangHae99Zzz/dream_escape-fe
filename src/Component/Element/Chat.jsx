@@ -301,8 +301,6 @@ const Chat = () => {
             count++;
             dispatch(gameActions.countUp(count));
             console.log('count up!', count);
-            count === countLimit && console.log('게임끝');
-            // 타이머도 멈춰 store game에 stopTimer true
         });
 
         ///////////////////////////////////////////////////////////////////////////

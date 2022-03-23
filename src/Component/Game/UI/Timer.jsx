@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreator as gameActions } from '../../../redux/modules/game';
 
-const Timer = ({ setGameTime, gameEnd }) => {
+const Timer = ({ setGameTime, gameEnd, setGameEnd, gamePassed }) => {
     const dispatch = useDispatch();
 
-    const roomId = useSelector(state => state.room.roomInfo.roomId);
     const { isCreator } = useSelector(({ user }) => user);
 
     const [minutes, setMinutes] = useState(30);
@@ -26,6 +25,10 @@ const Timer = ({ setGameTime, gameEnd }) => {
                     setSeconds(59);
                 }
             }
+            if (streamDuration === 1800) {
+                // 30분 되면 게임 끝
+                setGameEnd(true);
+            }
         }, 1000);
         return () => clearInterval(countdown);
     }, [minutes, seconds]);
@@ -39,7 +42,7 @@ const Timer = ({ setGameTime, gameEnd }) => {
             var _value = new Date(_temp * 1000).toISOString().substr(11, 8);
             console.log(_value);
 
-            dispatch(gameActions.deleteGame(roomId, _value));
+            dispatch(gameActions.deleteGame(gamePassed, _value));
         }
         // dispatch(rankActions.recordTime();
     }, [gameEnd]);
