@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 
 import instance from '../../util/request';
+import socket from './socket';
 
 // actions
 const GET_ROOM_INFO = 'GET_ROOM_INFO';
@@ -73,7 +74,7 @@ const refRoom = roomId => {
 };
 
 // 방 참여하기
-const joinRoom = (roomId, socketId, modal) => {
+const joinRoom = (roomId, socketId) => {
     return function (dispatch, getState) {
         // roomInfo 업데이트
         dispatch(refRoom(roomId));
@@ -85,7 +86,6 @@ const joinRoom = (roomId, socketId, modal) => {
             .then(res => {
                 // session storage에 저장 roomId:'1'
                 saveSessionRoomId(roomId);
-                modal(true);
             })
             .catch(err => window.alert('인원가득'));
     };
@@ -102,12 +102,15 @@ const deleteRoom = roomId => {
 };
 
 // peers 조회하기
-const refPeers = roomId => {
+const refPeers = (roomId, socketId) => {
     return function (dispatch, getState) {
         instance
-            .get(`/room/${roomId}`)
+            .get(`/rooms/${roomId}`)
             .then(res => {
-                const peers = res.data.userList;
+                const peers = res.data.userList.filter(
+                    user => user.userId !== socketId
+                );
+                console.log(peers);
                 dispatch(getPeers(peers));
             })
             .catch(err => console.log(err));

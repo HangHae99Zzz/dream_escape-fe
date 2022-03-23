@@ -146,7 +146,7 @@ const Chat = () => {
                 // peers 업데이트
                 const roomId = sessionStorage.getItem('sessionRoomId');
 
-                dispatch(roomActions.refPeers(roomId));
+                dispatch(roomActions.refPeers(roomId, socketRef.current.id));
 
                 setUsers(oldUsers =>
                     oldUsers
@@ -280,7 +280,9 @@ const Chat = () => {
             console.log(`나간애 :${data.id}`);
             // 종료될경우 다른애들이 대신 해줌
             // peers 업데이트
-            dispatch(roomActions.refPeers(roomInfo.roomId));
+            dispatch(
+                roomActions.refPeers(roomInfo.roomId, socketRef.current.id)
+            );
             // dispatch(userActions.deleteUser(data.id));
         });
 

@@ -32,6 +32,7 @@ const WaitModal = ({ closeModal }) => {
         dispatch(userActions.isCreator(false));
         dispatch(roomActions.getRoomInfo(null));
         closeModal(false);
+        navigate('/');
     };
 
     const start = () => {

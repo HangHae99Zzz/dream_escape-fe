@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { actionCreator as roomActions } from '../../redux/modules/room';
@@ -9,8 +10,8 @@ import { ModalBG } from '../Element/index';
 
 const RoomList = ({ page }) => {
     const dispatch = useDispatch();
+    const { roomId } = useParams();
     const { roomList } = useSelector(({ room }) => room);
-    const { roomInfo } = useSelector(({ room }) => room);
     const { socket } = useSelector(({ socket }) => socket);
     const [openWaitModal, setOpenWaitModal] = useState(false);
     const [pollingCnt, setPollingCnt] = useState(1);
@@ -18,33 +19,31 @@ const RoomList = ({ page }) => {
     const clientTime = Date.now();
 
     const enterRoom = roomId => {
-        // 참여시키기 socket.id가 올때까지 기다려봐
-        // socket.id가 없으면 기다렸다가 다시 본인을 호출
-        // setTimeout(
-        //     () =>
-        dispatch(roomActions.joinRoom(roomId, socket.id, setOpenWaitModal));
-        //     100
-        // );
+        if (!socket) return;
+        setOpenWaitModal(true);
+        setTimeout(
+            () => dispatch(roomActions.joinRoom(roomId, socket.id)),
+            1000
+        );
     };
 
     useEffect(() => {
-        dispatch(roomActions.refRoomList(page));
-    }, [page, roomInfo, dispatch]);
+        if (!roomId) return;
+        console.log(socket);
+        enterRoom(roomId);
+    }, [socket]);
 
-    // useEffect(() => {
-    //     console.log(pollingCnt, page);
-    //     dispatch(roomActions.refRoomList(page));
-    //     const timeout = setTimeout(() => setPollingCnt(pollingCnt + 1), 1000);
-    //     return () => clearTimeout(timeout);
-    // }, [pollingCnt, page, dispatch]);
+    useEffect(() => {
+        dispatch(roomActions.refRoomList(page));
+        const timeout = setTimeout(() => setPollingCnt(pollingCnt + 1), 1000);
+        return () => clearTimeout(timeout);
+    }, [pollingCnt, page, dispatch]);
 
     return (
         <RoomLi>
             {roomList &&
                 roomList.map((room, i) => {
-                    return room.currentNum === 0 ? (
-                        <React.Fragment key={i}></React.Fragment>
-                    ) : room.startAt ? (
+                    return room.startAt ? (
                         <RoomWrapper
                             key={i}
                             onClick={() => {
@@ -90,7 +89,7 @@ const RoomList = ({ page }) => {
                             </Left>
                             <Right>
                                 <UserImg></UserImg>
-                                <Creator>{room.userList[0].nickName}</Creator>
+                                <Creator>{room?.userList[0]?.nickName}</Creator>
                             </Right>
                         </RoomWrapper>
                     ) : (
@@ -129,7 +128,7 @@ const RoomList = ({ page }) => {
                             </Left>
                             <Right>
                                 <UserImg></UserImg>
-                                <Creator>{room.userList[0].nickName}</Creator>
+                                <Creator>{room?.userList[0]?.nickName}</Creator>
                             </Right>
                         </RoomWrapper>
                     );
