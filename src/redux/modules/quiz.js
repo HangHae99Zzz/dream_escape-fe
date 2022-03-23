@@ -1,84 +1,113 @@
-import { createAction, handleActions } from 'redux-actions';
-import axios from 'axios';
+import { createAction, handleActions } from "redux-actions";
+import axios from "axios";
 
-import instance from '../../util/request';
+import instance from "../../util/request";
 
-const sessionRoomId = sessionStorage.getItem('sessionRoomId');
+const sessionRoomId = sessionStorage.getItem("sessionRoomId");
 
 // actions
-const LOAD_QUIZ = 'LOAD_QUIZ';
+const LOAD_QUIZ = "LOAD_QUIZ";
+const LOAD_CLUE = "LOAD_CLUE";
 
 // Action Creators
-const loadQuiz = createAction(LOAD_QUIZ, (question, content, answer) => ({
+const loadQuiz = createAction(
+  LOAD_QUIZ,
+  (question, content, answer, chance, hint) => ({
     question,
     content,
     answer,
+    chance,
+    hint,
+  })
+);
+
+const loadClue = createAction(LOAD_CLUE, (clue) => ({
+  clue,
 }));
 
 // initialState
 const initialState = {
-    question: '',
-    content: '',
-    answer: '',
+  question: "",
+  content: "",
+  answer: "",
+  chance: "",
+  hint: "",
+  clue: [],
 };
 
 //  middleware Actions
 
 // Quiz 조회하기
-const refQuiz = quizType => {
-    const sessionRoomId = sessionStorage.getItem('sessionRoomId');
-    console.log('refQuiz 미들웨어에서 받았습니다!', quizType, typeof quizType);
-    return function (dispatch, getState) {
-        instance
-            .get(`/rooms/${sessionRoomId}/quizzes/${quizType}`)
-            .then(res => {
-                let _question = res.data.question;
-                let _content = res.data.content;
-                let _answer = res.data.answer;
-                dispatch(loadQuiz(_question, _content, _answer));
-                console.log(res);
-            })
+const refQuiz = (quizType) => {
+  console.log("refQuiz 미들웨어에서 받았습니다!", quizType, typeof quizType);
+  return function (dispatch, getState) {
+    instance
+      .get(`/rooms/${sessionRoomId}/quizzes/${quizType}`)
+      .then((res) => {
+        let _question = res.data.question;
+        let _content = res.data.content;
+        let _answer = res.data.answer;
+        let _chance = res.data.chance;
+        let _hint = res.data.hint;
+        dispatch(loadQuiz(_question, _content, _answer, _chance, _hint));
+        console.log(res);
+      })
 
-            .catch(err => console.log(err));
-    };
+      .catch((err) => console.log(err));
+  };
 };
 
-// 힌트 조회하기
-const submitAnswer = quizType => {
-    return function (dispatch, getState) {
-        instance
-            .post(`/escape/hint/${quizType}`, {})
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    };
+// Clue 조회하기
+const refClue = (roomId, clueType) => {
+  console.log("refClue 미들웨어에서 받았습니다!", roomId);
+  return function (dispatch, getState) {
+    instance
+      .get(`/rooms/${roomId}/clues/${clueType}`)
+      .then((res) => {
+        console.log(res);
+        let _temp = res.data;
+        dispatch(loadClue(_temp));
+      })
+      .catch((err) => console.log(err));
+  };
 };
 
 // count +1
-const submitResult = roomId => {
-    return function (dispatch, getState) {
-        instance
-            .post(`/escape/${sessionRoomId}`, {})
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    };
+const submitResult = (roomId) => {
+  return function (dispatch, getState) {
+    instance
+      .post(`/escape/${sessionRoomId}`, {})
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 };
 
 export default handleActions(
-    {
-        [LOAD_QUIZ]: (state = initialState, action = {}) => {
-            console.log(action.payload);
-            return {
-                ...state,
-                question: action.payload.question,
-                content: action.payload.content,
-                answer: action.payload.answer,
-            };
-        },
+  {
+    [LOAD_QUIZ]: (state = initialState, action = {}) => {
+      console.log(action.payload);
+      return {
+        ...state,
+        question: action.payload.question,
+        content: action.payload.content,
+        answer: action.payload.answer,
+        chance: action.payload.chance,
+        hint: action.payload.hint,
+      };
     },
-    initialState
+
+    [LOAD_CLUE]: (state, action = {}) => {
+      console.log(action.payload);
+      return {
+        ...state,
+        clue: action.payload,
+      };
+    },
+  },
+  initialState
 );
 
 // action creator export
-const actionCreator = { refQuiz, submitAnswer, submitResult };
+const actionCreator = { refQuiz, refClue, submitResult };
 
 export { actionCreator };
