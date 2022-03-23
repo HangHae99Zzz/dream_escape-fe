@@ -58,15 +58,15 @@ const refQuiz = (quizType) => {
 };
 
 // Clue 조회하기
-const refClue = (roomId) => {
+const refClue = (roomId, clueType) => {
   console.log("refClue 미들웨어에서 받았습니다!", roomId);
   return function (dispatch, getState) {
     instance
-      .get(`/rooms/${roomId}/clues`)
+      .get(`/rooms/${roomId}/clues/${clueType}`)
       .then((res) => {
         console.log(res);
-        let _clues = res.data;
-        dispatch(loadClue(_clues));
+        let _temp = res.data;
+        dispatch(loadClue(_temp));
       })
       .catch((err) => console.log(err));
   };
@@ -92,7 +92,7 @@ export default handleActions(
         content: action.payload.content,
         answer: action.payload.answer,
         chance: action.payload.chance,
-        hint: action.payload.answer,
+        hint: action.payload.hint,
       };
     },
 

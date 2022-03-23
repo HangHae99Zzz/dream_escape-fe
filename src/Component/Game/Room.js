@@ -1099,18 +1099,21 @@ export default function Model({
         material={materials["Material.004"]}
         position={[5.63, 2.89, -7.19]}
         rotation={[-2.4, -1.49, -2.4]}
+        onClick={() => clueHandler("Bb1")}
       />
       <mesh
         geometry={nodes.Plane023?.geometry}
         material={materials["Material.003"]}
         position={[6.01, 0.02, -8.46]}
         rotation={[-2.4, -1.49, -2.4]}
+        onClick={() => clueHandler("Bb1")}
       />
       <mesh
         geometry={nodes.Plane024?.geometry}
         material={materials.Material}
         position={[6.01, 0.02, -8.46]}
         rotation={[-2.4, -1.49, -2.4]}
+        onClick={() => clueHandler("Bb1")}
       />
       <mesh
         geometry={nodes.Circle004?.geometry}
