@@ -8,7 +8,7 @@ import Users from '../../Element/MainUsers';
 import Timer from './Timer';
 import { SvgMic } from '../../../Asset/Icon/etc/svg_etc';
 
-const GameUsers = ({ gameEnd }) => {
+const GameUsers = ({ gameEnd, setGameEnd, gamePassed }) => {
     const { count, countLimit } = useSelector(({ game }) => game);
     const { myNickName } = useSelector(({ room }) => room);
 
@@ -31,7 +31,12 @@ const GameUsers = ({ gameEnd }) => {
                 </Score>
                 <TimerWrapper>
                     <p>타이머</p>
-                    <Timer setGameTime={setGameTime} gameEnd={gameEnd} />
+                    <Timer
+                        setGameTime={setGameTime}
+                        gameEnd={gameEnd}
+                        setGameEnd={setGameEnd}
+                        gamePassed={gamePassed}
+                    />
                 </TimerWrapper>
             </GameInfo>
             <MyInfo>

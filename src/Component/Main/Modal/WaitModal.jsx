@@ -134,7 +134,7 @@ const RoomName = styled.h3`
     color: #5668e8;
 `;
 const Label = styled.div`
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     font-weight: bold;
     font-size: 18px;
     line-height: 22px;
@@ -148,9 +148,12 @@ const UserWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin-bottom: 44px;
+    align-items: flex-start;
+    margin-bottom: 40px;
 `;
+
 const UserContainer = styled.div`
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -205,9 +208,7 @@ const CopyContaier = styled.div`
 `;
 
 const ClipBoard = styled.textarea`
-    position: fixed;
-    top: 0;
-    left: 0;
+    display: none;
 `;
 
 const FooterContainer = styled.div`

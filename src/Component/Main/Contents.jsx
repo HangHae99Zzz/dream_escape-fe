@@ -34,6 +34,7 @@ const Contents = () => {
 const FlexContainer = styled.div`
     width: 85%;
     height: 100%;
+    margin-top: 36px;
 `;
 
 const Banner = styled.img`

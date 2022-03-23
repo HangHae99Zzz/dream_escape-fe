@@ -51,7 +51,7 @@ const onGameRank = roomId => {
     return function (dispatch, getState) {
         console.log('onGameRank', roomId);
         instance
-            .get(`/rank/${roomId}`)
+            .get(`/ranks/${roomId}`)
             .then(res => {
                 console.log(res);
                 dispatch(loadGameRank(res.data));
