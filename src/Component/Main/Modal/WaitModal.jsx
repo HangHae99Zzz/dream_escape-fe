@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -11,20 +11,18 @@ import { MuteButton } from '../../Element';
 
 const WaitModal = ({ closeModal }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { socket } = useSelector(({ socket }) => socket);
     const { roomInfo, peers } = useSelector(({ room }) => room);
     const { isCreator } = useSelector(({ user }) => user);
 
-    const navigate = useNavigate();
+    const roomUrl = useRef();
 
-    useEffect(() => {
-        socket.on('loadingComplete', data => {
-            navigate('/loading');
-            setTimeout(() => {
-                dispatch(gameActions.gameStart());
-            }, 2000);
-        });
-    }, []);
+    const copyToClipboard = () => {
+        const el = roomUrl.current;
+        el.select();
+        document.execCommand('copy');
+    };
 
     const exit = () => {
         socket.close();
@@ -39,7 +37,18 @@ const WaitModal = ({ closeModal }) => {
         socket.emit('loading');
     };
 
-    return (
+    useEffect(() => {
+        socket.on('loadingComplete', data => {
+            navigate('/loading');
+            setTimeout(() => {
+                dispatch(gameActions.gameStart());
+            }, 2000);
+        });
+    }, []);
+
+    return !roomInfo?.roomId ? (
+        <></>
+    ) : (
         <ModalWindow>
             <ExitContainer>
                 <XIcon
@@ -71,8 +80,13 @@ const WaitModal = ({ closeModal }) => {
                     <MakeButton disabled>대기중</MakeButton>
                 )}
             </div>
-            <CopyContaier>
+            <CopyContaier onClick={copyToClipboard}>
                 <img src="image/clip.png" alt="" />
+                <ClipBoard
+                    ref={roomUrl}
+                    style={{ display: 'hidden' }}
+                    defaultValue={`https://priceless-turing-4f7218.netlify.app/${roomInfo?.roomId}`}
+                ></ClipBoard>
                 <div>링크복사</div>
             </CopyContaier>
             <FooterContainer>
@@ -187,7 +201,15 @@ const CopyContaier = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-bottom: 8px;
+    cursor: pointer;
 `;
+
+const ClipBoard = styled.textarea`
+    position: fixed;
+    top: 0;
+    left: 0;
+`;
+
 const FooterContainer = styled.div`
     margin-bottom: 42px;
     font-size: 14px;

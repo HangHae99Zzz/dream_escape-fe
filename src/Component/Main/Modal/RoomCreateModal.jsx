@@ -55,12 +55,12 @@ const RoomCreateModal = ({ closeModal }) => {
                             방 개설하기
                         </MakeButton>
                     </div>
-                    <CopyContaier>
+                    {/* <CopyContaier>
                         <img src="image/clip.png" alt="" /> <div>링크복사</div>
                     </CopyContaier>
                     <FooterContainer>
                         친구들에게 공유하시면 함께 즐길 수 있어요
-                    </FooterContainer>
+                    </FooterContainer> */}
                 </ModalWindow>
             )}
         </>
