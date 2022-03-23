@@ -1,42 +1,61 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreator as quizActions } from "../../../redux/modules/quiz";
 import { SvgX } from "../../../Asset/Icon/etc/svg_etc";
 
 function Modal({ clueType, setClueModalOpen }) {
-  console.log(clueType, typeof clueType);
+  const dispatch = useDispatch();
+  const { clue } = useSelector((state) => state?.quiz?.clue);
+  const roomId = useSelector((state) => state.room.roomInfo.roomId);
 
+  useEffect(() => dispatch(quizActions.refClue(roomId, clueType)), []);
+
+  console.log(clueType);
   return (
-    <ModalBackground>
-      <ModalContainer>
-        <TitleCloseBtn>
-          <button
-            onClick={() => {
-              setClueModalOpen(false);
-            }}
-          >
-            <SvgX />
-          </button>
-        </TitleCloseBtn>
+    <>
+      {clueType === "Bb1" ? (
+        <ModalBackground
+          onClick={() => {
+            setClueModalOpen(false);
+          }}
+        >
+          <ImgContainer>
+            <img src="./image/password.png" alt="" />
+          </ImgContainer>
+        </ModalBackground>
+      ) : (
+        <ModalBackground>
+          <ModalContainer>
+            <TitleCloseBtn>
+              <button
+                onClick={() => {
+                  setClueModalOpen(false);
+                }}
+              >
+                <SvgX />
+              </button>
+            </TitleCloseBtn>
 
-        <Title>
-          <h1>단서</h1>
-        </Title>
-        <Body>
-          {clueType === "poster2" ? <p>예쁜 스타워즈 포스터다</p> : <p>오류</p>}
-        </Body>
+            <Title>
+              <h1>단서</h1>
+            </Title>
+            <Body>{clue ? <p>{clue.content}</p> : <p>오류</p>}</Body>
 
-        <Footer>
-          <button
-            onClick={() => {
-              setClueModalOpen(false);
-            }}
-            id="cancelBtn"
-          >
-            닫기
-          </button>
-        </Footer>
-      </ModalContainer>
-    </ModalBackground>
+            <Footer>
+              <button
+                onClick={() => {
+                  setClueModalOpen(false);
+                }}
+                id="cancelBtn"
+              >
+                닫기
+              </button>
+            </Footer>
+          </ModalContainer>
+        </ModalBackground>
+      )}
+    </>
   );
 }
 
@@ -123,4 +142,12 @@ const Footer = styled.div`
     border: 3px solid #ffffff;
     border-radius: 30px;
   }
+`;
+
+const ImgContainer = styled.div`
+  img {
+    width: 500px;
+    height: 500px;
+  }
+  z-index: 2;
 `;

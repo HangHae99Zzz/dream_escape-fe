@@ -1,37 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { actionCreator as quizActions } from "../../../redux/modules/quiz";
-import { SvgX } from "../../../Asset/Icon/etc/svg_etc";
 
 function Modal({ setModalOpen, quizType }) {
-  const [hintModal, setHintModal] = useState(false);
-  console.log(hintModal);
-  const inputRef = useRef(null);
-  const dispatch = useDispatch();
-  const question = useSelector((state) => state.escape.question);
-  const content = useSelector((state) => state.escape.content);
-  const answer = useSelector((state) => state.escape.answer);
-
-  const { socket } = useSelector(({ socket }) => socket);
-
-  useEffect(() => {
-    dispatch(quizActions.refQuiz(quizType));
-  }, []);
-
-  const handleAnswer = () => {
-    if (inputRef.current.value === answer) {
-      window.alert("정답입니다!");
-      setModalOpen(false);
-      socket.emit("count");
-    } else {
-      setHintModal(true);
-      if (setHintModal == true) {
-        window.alert("오답입니다!");
-      }
-    }
-  };
-
   const onKeyDown = (e) => {
     if (e.key == "Enter") {
       handleAnswer();
@@ -41,48 +11,14 @@ function Modal({ setModalOpen, quizType }) {
   return (
     <ModalBackground
       onClick={() => {
-        document.exitPointerLock();
+        setModalOpen(false);
       }}
     >
       <ModalContainer>
-        <TitleCloseBtn>
-          <button
-            onClick={() => {
-              setModalOpen(false);
-            }}
-          >
-            <SvgX />
-          </button>
-        </TitleCloseBtn>
-
-        <Title>{question ? <h1>{question}</h1> : <h1>오류</h1>}</Title>
-        <Body>{content ? <p>{content}</p> : <p>오류</p>}</Body>
-        <Input>
-          <label>
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="정답을 입력하세요"
-              autoFocus
-              onKeyDown={onKeyDown}
-              tabIndex="0"
-            />
-          </label>
-        </Input>
-        <Footer>
-          <button type="submit" onClick={handleAnswer}>
-            제출하기
-          </button>
-        </Footer>
-        <Hint>
-          <button onClick={() => setHintModal(true)}>찬스보기</button>
-        </Hint>
+        <Body>
+          <img src="../../../Asset/image/password" alt="" />
+        </Body>
       </ModalContainer>
-      {hintModal ? (
-        <HintModal>
-          <p onClick={() => setHintModal(false)}>틀렸다. 시계를 돌려볼까?</p>
-        </HintModal>
-      ) : null}
     </ModalBackground>
   );
 }

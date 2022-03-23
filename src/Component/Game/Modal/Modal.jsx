@@ -9,9 +9,8 @@ function Modal({ setModalOpen, quizType }) {
   console.log(hintModal);
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-  const question = useSelector((state) => state.escape.question);
-  const content = useSelector((state) => state.escape.content);
-  const answer = useSelector((state) => state.escape.answer);
+  const modalData = useSelector((state) => state.quiz);
+  console.log("modalData", modalData);
 
   const { socket } = useSelector(({ socket }) => socket);
 
@@ -20,7 +19,7 @@ function Modal({ setModalOpen, quizType }) {
   }, []);
 
   const handleAnswer = () => {
-    if (inputRef.current.value === answer) {
+    if (inputRef.current.value === modalData.answer) {
       window.alert("정답입니다!");
       setModalOpen(false);
       socket.emit("count");
@@ -55,8 +54,40 @@ function Modal({ setModalOpen, quizType }) {
           </button>
         </TitleCloseBtn>
 
-        <Title>{question ? <h1>{question}</h1> : <h1>오류</h1>}</Title>
-        <Body>{content ? <p>{content}</p> : <p>오류</p>}</Body>
+        <Title>
+          {modalData ? <h1>{modalData.question}</h1> : <h1>오류</h1>}
+        </Title>
+        {quizType === "Bb" ? (
+          <Body>
+            <div>
+              <img
+                src="./image/Bb.png"
+                alt=""
+                style={{ width: "394px", height: "260px" }}
+              />
+            </div>
+            <div className="hint">
+              {modalData ? <p>{modalData.hint}</p> : <p>오류</p>}
+            </div>
+          </Body>
+        ) : quizType === "Ca" ? (
+          <Body>
+            <div>
+              <img src="./image/Ca.png" alt="" />
+            </div>
+            <div className="hint">
+              {modalData ? <p>{modalData.hint}</p> : <p>오류</p>}
+            </div>
+          </Body>
+        ) : (
+          <Body>
+            <div>{modalData ? <p>{modalData.content}</p> : <p>오류</p>}</div>
+            <div className="hint">
+              {modalData ? <p>{modalData.hint}</p> : <p>오류</p>}
+            </div>
+          </Body>
+        )}
+
         <Input>
           <label>
             <input
@@ -80,7 +111,7 @@ function Modal({ setModalOpen, quizType }) {
       </ModalContainer>
       {hintModal ? (
         <HintModal>
-          <p onClick={() => setHintModal(false)}>틀렸다. 시계를 돌려볼까?</p>
+          {modalData ? <p>{modalData.chance}</p> : <p>찬스가 없습니다.</p>}
         </HintModal>
       ) : null}
     </ModalBackground>
@@ -146,6 +177,15 @@ const Body = styled.div`
     font-size: 24px;
     line-height: 160%;
     text-align: center;
+  }
+  .hint p {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 160%;
+    text-align: center;
+    letter-spacing: -0.03em;
+
+    color: #a6b1ff;
   }
 `;
 const Input = styled.div`

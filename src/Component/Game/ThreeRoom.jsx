@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Html, useProgress, PointerLockControls } from '@react-three/drei';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import WasdControls from './WasdControls';
-import Test from './Test';
 import Room from './Room';
+import { actionCreator as quizActions } from '../../redux/modules/quiz';
 import { Modal, ClueModal, GameEndModal } from './Modal';
 import GameUsers from './UI/GameUsers';
 import { EndingCredit } from '../Main';
+import { useEffect } from 'react';
 
 const ThreeRoom = () => {
     const dispatch = useDispatch();
 
-    //   const roomId = useSelector((state) => state.room.roomInfo.roomId);
+    const roomId = useSelector(state => state.room.roomInfo.roomId);
 
     // quiz 모달, hint modal 분리하기
     const [modalOpen, setModalOpen] = useState(false);
@@ -27,19 +28,10 @@ const ThreeRoom = () => {
 
     const { count, countLimit } = useSelector(({ game }) => game);
 
-    console.log(modalOpen, quizType, typeof quizType);
-
     function Loader() {
         const { progress } = useProgress();
         return <Html center>{progress} % loaded</Html>;
     }
-
-    //   useEffect(() => {
-    //     if (!gameEnd) return;
-    //     console.log("ThreeRoom.jsx에서 dispatch");
-    //     dispatch(gameActions.deleteGame(roomId, "00:22:01"));
-    //     // dispatch(rankActions.recordTime();
-    //   }, [gameEnd]);
 
     return (
         <Container>

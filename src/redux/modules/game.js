@@ -12,7 +12,7 @@ const countUp = createAction(SET_COUNT, count => ({ count }));
 // initialState
 const initialState = {
     count: 0,
-    countLimit: 1,
+    countLimit: 5,
     // 나중에 타이머 멈추고 클릭 막을것 필요
 };
 
