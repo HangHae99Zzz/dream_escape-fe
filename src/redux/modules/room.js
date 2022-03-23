@@ -8,6 +8,7 @@ import socket from './socket';
 const GET_ROOM_INFO = 'GET_ROOM_INFO';
 const GET_ROOM_LIST = 'GET_ROOM_LIST';
 const GET_PEERS = 'GET_PEERS';
+const GET_MY_NICK_NAME = 'GET_MY_NICK_NAME';
 
 // Action Creators
 const getRoomInfo = createAction(GET_ROOM_INFO, roomInfo => ({ roomInfo }));
@@ -16,11 +17,16 @@ const getRoomList = createAction(GET_ROOM_LIST, roomList => ({ roomList }));
 
 const getPeers = createAction(GET_PEERS, peers => ({ peers }));
 
+const getMyNickName = createAction(GET_MY_NICK_NAME, myNickName => ({
+    myNickName,
+}));
+
 // initialState
 const initialState = {
     roomInfo: null,
     roomList: null,
     peers: [],
+    myNickName: null,
 };
 
 //  middleware Actions
@@ -107,10 +113,13 @@ const refPeers = (roomId, socketId) => {
         instance
             .get(`/rooms/${roomId}`)
             .then(res => {
+                const myNickName = res.data.userList.filter(
+                    user => user.userId === socketId
+                );
+                dispatch(getMyNickName(myNickName[0].nickName));
                 const peers = res.data.userList.filter(
                     user => user.userId !== socketId
                 );
-                console.log(peers);
                 dispatch(getPeers(peers));
             })
             .catch(err => console.log(err));
@@ -130,6 +139,10 @@ export default handleActions(
         [GET_PEERS]: (state, action) =>
             produce(state, draft => {
                 draft.peers = action.payload.peers;
+            }),
+        [GET_MY_NICK_NAME]: (state, action) =>
+            produce(state, draft => {
+                draft.myNickName = action.payload.myNickName;
             }),
     },
     initialState

@@ -186,6 +186,9 @@ const Chat = () => {
 
         if (!roomInfo?.roomId) return;
         // 변경사항: setTimeOut 삭제
+
+        dispatch(roomActions.refPeers(roomInfo.roomId, socketRef.current.id));
+
         getLocalStream()
             .then(() => getDevices())
             .then(() => {
