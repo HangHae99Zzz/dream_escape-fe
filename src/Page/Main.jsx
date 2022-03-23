@@ -5,14 +5,14 @@ import { Footer } from '../Layout';
 import { RoomCreateModal } from '../Component/Main/Modal';
 import { MakeRoomBtn, ModalBG } from '../Component/Element';
 
-import Layout from '../Layout/DefaultLayout';
+import DefaultLayout from '../Layout/DefaultLayout';
 
 const Main = () => {
     const [openRoomCreateModal, setOpenRoomCreateModal] = useState(false);
 
     return (
         <>
-            <Layout>
+            <DefaultLayout>
                 <MainContainer>
                     <ContentsContainer>
                         <Contents />
@@ -27,7 +27,7 @@ const Main = () => {
                         <RoomCreateModal closeModal={setOpenRoomCreateModal} />
                     </>
                 )}
-            </Layout>
+            </DefaultLayout>
         </>
     );
 };

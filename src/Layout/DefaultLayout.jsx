@@ -6,7 +6,7 @@ const DefaultLayout = ({ children }) => {
     return (
         <>
             <Sidebar />
-            <Header />
+            {/* <Header /> */}
             <div>
                 <Wrapper>{children}</Wrapper>
             </div>
