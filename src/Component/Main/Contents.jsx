@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 import { RoomList } from './index';
 
 const Contents = () => {
     const [page, setPage] = useState(1);
+    const [isFiltered, setIsFiltered] = useState(false);
 
     const pagination = page => {
         setPage(page + 1);
@@ -17,11 +18,26 @@ const Contents = () => {
                 <RoomListContainer>
                     <RoomListHeader>
                         <Sub>게임방리스트</Sub>
-                        <Selector>
-                            <option>최신순 </option>
-                        </Selector>
+                        <ToggleContainer>
+                            <UnChecked
+                                onClick={() => {
+                                    !isFiltered
+                                        ? setIsFiltered(true)
+                                        : setIsFiltered(false);
+                                }}
+                            >
+                                <input
+                                    id="check"
+                                    type={'Checkbox'}
+                                    onChange={() => {}}
+                                    checked={isFiltered}
+                                />
+                                <Checked></Checked>
+                            </UnChecked>
+                            입장 가능
+                        </ToggleContainer>
                     </RoomListHeader>
-                    <RoomList page={page}></RoomList>
+                    <RoomList page={page} isFiltered={isFiltered}></RoomList>
                 </RoomListContainer>
             </FlexContainer>
             <MoreBtn onClick={() => pagination(page)}>
@@ -73,24 +89,52 @@ const Sub = styled.h3`
     color: #000000;
 `;
 
-const Selector = styled.select`
-    width: 84px;
-    height: 33px;
-    padding-left: 15px;
-    border: 2px solid #394ddb;
-    box-sizing: border-box;
-    border-radius: 19px;
-    appearance: none;
-    background-image: url('image/downArrow.png');
-    background-repeat: no-repeat;
-    background-position-x: 56px;
-    background-position-y: 12px;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: -0.03em;
-    color: #394DDB;
-}
+const ToggleContainer = styled.div`
+    width: 94px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 20px;
+    color: #394ddb;
+    input[type='checkbox'] {
+        display: none;
+    }
+
+    input[type='checkbox']:checked + div {
+        background: #5668e8;
+    }
+
+    input[type='checkbox'] + span {
+        margin-right: 4px;
+    }
+`;
+
+const UnChecked = styled.div`
+    display: inline-block;
+    position: relative;
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background: #ffffff left top no-repeat;
+    box-shadow: inset 0px 0px 6px #a6b1ff;
+    border-radius: 100px;
+`;
+
+const Checked = styled.div`
+    position: absolute;
+    width: 12px;
+    left: 5px;
+    top: 5px;
+    height: 12px;
+    background: white left top no-repea;
+    /* border: 17px solid #ccc0; */
+    border-radius: 100px;
+    cursor: pointer;
+    /* box-sizing: content-box; */
 `;
 
 const MoreBtn = styled.button`
