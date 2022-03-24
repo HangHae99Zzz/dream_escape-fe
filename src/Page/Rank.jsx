@@ -7,14 +7,14 @@ import { actionCreator as rankActions } from "../redux/modules/rank";
 
 import { DefaultLayout } from "../Layout";
 
-const Rank2 = () => {
+const Rank = () => {
   const dispatch = useDispatch();
 
   const ranks = useSelector((state) => state.rank.ranklist);
 
   // 초반 3개, 이후 ranks
   const topThreeRanks = ranks.filter((i) => i.rank < 4);
-  const underThreeRanks = ranks.filter((i) => i.rank > 3 && i.rank < 11);
+  const underThreeRanks = ranks.filter((i) => i.rank > 3);
 
   React.useEffect(() => {
     dispatch(rankActions.refRank());
@@ -31,7 +31,7 @@ const Rank2 = () => {
           </Header>
           <Body>
             {topThreeRanks &&
-              topThreeRanks((i) => {
+              topThreeRanks.map((i) => {
                 const imgUrl = `image/rank_top_${i.rank}.png`;
                 return (
                   <TopThree key={i.roomId} id="top-three">
@@ -49,7 +49,7 @@ const Rank2 = () => {
                 );
               })}
             {underThreeRanks &&
-              underThreeRanks((i) => {
+              underThreeRanks.map((i) => {
                 return (
                   <UnderThree key={i.roomId} id="under-three">
                     <div className="first under-three-rank">{i.rank}</div>
@@ -76,7 +76,7 @@ const Rank2 = () => {
   );
 };
 
-export default Rank2;
+export default Rank;
 
 const Container = styled.div`
   width: 80%;

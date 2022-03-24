@@ -1,51 +1,78 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 
 const Virus = ({ modalData }) => {
   const { content } = modalData;
-  console.log(typeof content);
+  const arr = content.slice(1, -1).split(", ");
 
-  // string 에서 [ ] 을 제거하고 어레이에 넣는다
-  const arr = content.slice(1, -1).split(",");
-  const rendering = () => {
-    const result = [];
-    const col_1 = [];
-    const col_2 = [];
-    const col_3 = [];
-    const col_4 = [];
-    const col_5 = [];
-    const col_6 = [];
+  const inputRef = useRef();
 
-    for (let i = 0; i < arr.length; i++) {
-      if (i <= 4) {
-        col_1.push(<span key={i}>{arr[i]}</span>);
-      } else if (i > 4 && i <= 9) {
-        col_2.push(<span key={i}>{arr[i]}</span>);
-      } else if (i > 9 && i <= 14) {
-        col_3.push(<span key={i}>{arr[i]}</span>);
-      } else if (i > 14 && i <= 19) {
-        col_4.push(<span key={i}>{arr[i]}</span>);
-      } else if (i > 19 && i <= 24) {
-        col_5.push(<span key={i}>{arr[i]}</span>);
-      } else if (i > 24 && i <= 29) {
-        col_6.push(<span key={i}>{arr[i]}</span>);
-      }
-    }
-    console.log(col_1, col_2);
-
-    for (let i = 1; i < 7; i++) {
-      result.push(<div>{eval("col_" + i)}</div>);
-    }
-    console.log(result);
-
-    return result;
-  };
-
-  return <Wrapper>{rendering()}</Wrapper>;
+  return (
+    <Wrapper>
+      {arr.map((num, i) => {
+        if (num === "?") {
+          return (
+            <Question>
+              <Input placeholder="?" id={i} autoFocus></Input>
+            </Question>
+          );
+        } else {
+          return <Num>{num}</Num>;
+        }
+      })}
+    </Wrapper>
+  );
 };
 
 export default Virus;
 const Wrapper = styled.div`
   width: 358px;
   height: 265px;
+
+  margin-top: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Num = styled.div`
+  width: 70px;
+  height: 50px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 160%;
+  /* identical to box height, or 32px */
+
+  letter-spacing: -0.03em;
+
+  color: #000000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Question = styled.div`
+  width: 70px;
+`;
+
+const Input = styled.input`
+  background: #eaecff;
+
+  width: 50px;
+  height: 50px;
+
+  border-radius: 7px;
+
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  text-align: center;
+  letter-spacing: -0.03em;
+
+  color: #ababab;
 `;
