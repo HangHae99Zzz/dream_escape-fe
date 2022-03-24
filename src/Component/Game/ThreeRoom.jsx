@@ -70,7 +70,6 @@ const ThreeRoom = () => {
                 style={{ width: '100%', height: '100vh' }}
                 camera={{ fov: 45, position: [1, 4, 3] }}
             >
-                <axesHelper size={5} />
                 <directionalLight intensity={1.5} color={0xeec4ff} />
                 <pointLight
                     position={[-1, 2, -2]}

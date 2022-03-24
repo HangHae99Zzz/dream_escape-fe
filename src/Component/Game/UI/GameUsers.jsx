@@ -6,16 +6,11 @@ import { actionCreator as roomActions } from '../../../redux/modules/room';
 
 import Users from '../../Element/MainUsers';
 import Timer from './Timer';
+import Manual from './Manual';
 import { SvgMic } from '../../../Asset/Icon/etc/svg_etc';
 
-const GameUsers = ({
-    gameEnd,
-    setGameEnd,
-    gamePassed,
-    count,
-    countLimit,
-    chance,
-}) => {
+const GameUsers = ({ gameEnd, setGameEnd, gamePassed, chance }) => {
+    const { count, countLimit } = useSelector(({ game }) => game);
     const { myNickName } = useSelector(({ room }) => room);
 
     console.log(myNickName);
@@ -49,6 +44,9 @@ const GameUsers = ({
                     />
                 </TimerWrapper>
             </GameInfo>
+            <ManualWrapper>
+                <Manual />
+            </ManualWrapper>
             <MyInfo>
                 <MyMic>
                     <SvgMic />
@@ -121,6 +119,12 @@ const TimerWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+`;
+
+const ManualWrapper = styled.div`
+    position: absolute;
+    left: 50px;
+    bottom: 55px;
 `;
 
 const MyInfo = styled.div`

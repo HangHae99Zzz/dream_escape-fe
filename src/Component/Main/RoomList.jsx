@@ -51,7 +51,7 @@ const RoomList = ({ page, isFiltered }) => {
                 roomList.map((room, i) => {
                     return isFiltered ? (
                         room.startAt ? (
-                            <></>
+                            <React.Fragment key={i}></React.Fragment>
                         ) : (
                             <RoomWrapper
                                 onClick={() => enterRoom(room.roomId)}

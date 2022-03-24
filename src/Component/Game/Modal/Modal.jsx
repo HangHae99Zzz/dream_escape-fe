@@ -4,13 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actionCreator as quizActions } from '../../../redux/modules/quiz';
 import { SvgX } from '../../../Asset/Icon/etc/svg_etc';
 
+import Virus from './Virus';
+
 function Modal({ setModalOpen, quizType, setGamePassed, setGameEnd }) {
     const [hintModal, setHintModal] = useState(false);
-    console.log(hintModal);
     const inputRef = useRef(null);
     const dispatch = useDispatch();
     const modalData = useSelector(state => state.quiz);
-    console.log('modalData', modalData);
 
     const { socket } = useSelector(({ socket }) => socket);
     const { chance } = useSelector(({ game }) => game);
@@ -77,62 +77,102 @@ function Modal({ setModalOpen, quizType, setGamePassed, setGameEnd }) {
                 <Title>
                     {modalData ? <h1>{modalData.question}</h1> : <h1>오류</h1>}
                 </Title>
-                {quizType === 'Bb' ? (
+
+                {quizType === 'Ab' ? (
                     <Body>
-                        <div>
-                            <img
-                                src="./image/Bb.png"
-                                alt=""
-                                style={{ width: '394px', height: '260px' }}
-                            />
-                        </div>
-                        <div className="hint">
-                            {modalData ? <p>{modalData.hint}</p> : <p>오류</p>}
-                        </div>
+                        <Virus modalData={modalData} />
                     </Body>
+                ) : quizType === 'Bb' ? (
+                    <>
+                        <Body>
+                            <div>
+                                <img
+                                    src="./image/Bb.png"
+                                    alt=""
+                                    style={{ width: '394px', height: '260px' }}
+                                />
+                            </div>
+                            <div className="hint">
+                                {modalData ? (
+                                    <p>{modalData.hint}</p>
+                                ) : (
+                                    <p>오류</p>
+                                )}
+                            </div>
+                        </Body>
+                        <Input>
+                            <label>
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    placeholder="정답을 입력하세요"
+                                    autoFocus
+                                    onKeyDown={onKeyDown}
+                                    tabIndex="0"
+                                />
+                            </label>
+                        </Input>
+                    </>
                 ) : quizType === 'Ca' ? (
-                    <Body>
-                        <div>
-                            <img src="./image/Ca.png" alt="" />
-                        </div>
-                        <div className="hint">
-                            {modalData ? <p>{modalData.hint}</p> : <p>오류</p>}
-                        </div>
-                    </Body>
+                    <>
+                        <Body>
+                            <div>
+                                <img src="./image/Ca.png" alt="" />
+                            </div>
+                        </Body>
+                        <Input>
+                            <label>
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    placeholder="정답을 입력하세요"
+                                    autoFocus
+                                    onKeyDown={onKeyDown}
+                                    tabIndex="0"
+                                />
+                            </label>
+                        </Input>
+                    </>
                 ) : (
-                    <Body>
-                        <div>
-                            {modalData ? (
-                                <p>{modalData.content}</p>
-                            ) : (
-                                <p>오류</p>
-                            )}
-                        </div>
-                        <div className="hint">
-                            {modalData ? <p>{modalData.hint}</p> : <p>오류</p>}
-                        </div>
-                    </Body>
+                    <>
+                        <Body>
+                            <div>
+                                {modalData ? (
+                                    <p>{modalData.content}</p>
+                                ) : (
+                                    <p>오류</p>
+                                )}
+                            </div>
+                            <div className="hint">
+                                {modalData ? (
+                                    <p>{modalData.hint}</p>
+                                ) : (
+                                    <p>오류</p>
+                                )}
+                            </div>
+                        </Body>
+                        <Input>
+                            <label>
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    placeholder="정답을 입력하세요"
+                                    autoFocus
+                                    onKeyDown={onKeyDown}
+                                    tabIndex="0"
+                                />
+                            </label>
+                        </Input>
+                    </>
                 )}
 
-                <Input>
-                    <label>
-                        <input
-                            ref={inputRef}
-                            type="text"
-                            placeholder="정답을 입력하세요"
-                            autoFocus
-                            onKeyDown={onKeyDown}
-                            tabIndex="0"
-                        />
-                    </label>
-                </Input>
                 <Footer>
                     <button type="submit" onClick={handleAnswer}>
                         제출하기
                     </button>
                 </Footer>
                 <Hint>
-                    <button onClick={handleChance}>찬스보기</button>
+                    <button onClick={() => setHintModal(true)}>찬스보기</button>
                 </Hint>
             </ModalContainer>
             {hintModal ? (

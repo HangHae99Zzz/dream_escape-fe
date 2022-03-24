@@ -19,21 +19,22 @@ const Contents = () => {
                     <RoomListHeader>
                         <Sub>게임방리스트</Sub>
                         <ToggleContainer>
-                            <input
-                                id="check"
-                                type={'Checkbox'}
-                                onChange={() => {
+                            <UnChecked
+                                onClick={() => {
                                     !isFiltered
                                         ? setIsFiltered(true)
                                         : setIsFiltered(false);
                                 }}
-                                checked={isFiltered}
-                            />
-                            <label
-                                htmlFor="check"
-                                isFiltered={isFiltered}
-                            ></label>
-                            입장가능
+                            >
+                                <input
+                                    id="check"
+                                    type={'Checkbox'}
+                                    onChange={() => {}}
+                                    checked={isFiltered}
+                                />
+                                <Checked></Checked>
+                            </UnChecked>
+                            입장 가능
                         </ToggleContainer>
                     </RoomListHeader>
                     <RoomList page={page} isFiltered={isFiltered}></RoomList>
@@ -89,10 +90,51 @@ const Sub = styled.h3`
 `;
 
 const ToggleContainer = styled.div`
-    border: 1px solid black;
-    input {
+    width: 94px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 20px;
+    color: #394ddb;
+    input[type='checkbox'] {
         display: none;
     }
+
+    input[type='checkbox']:checked + div {
+        background: #5668e8;
+    }
+
+    input[type='checkbox'] + span {
+        margin-right: 4px;
+    }
+`;
+
+const UnChecked = styled.div`
+    display: inline-block;
+    position: relative;
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background: #ffffff left top no-repeat;
+    box-shadow: inset 0px 0px 6px #a6b1ff;
+    border-radius: 100px;
+`;
+
+const Checked = styled.div`
+    position: absolute;
+    width: 12px;
+    left: 5px;
+    top: 5px;
+    height: 12px;
+    background: white left top no-repea;
+    /* border: 17px solid #ccc0; */
+    border-radius: 100px;
+    cursor: pointer;
+    /* box-sizing: content-box; */
 `;
 
 const MoreBtn = styled.button`
