@@ -14,11 +14,10 @@ const ThreeRoom = () => {
 
   const roomId = useSelector((state) => state.room.roomInfo.roomId);
 
-  // quiz 모달, hint modal 분리하기
-  const [modalOpen, setModalOpen] = useState(false);
   const [quizType, setQuizType] = useState("");
+  const [clueType, setClueType] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const [clueModalOpen, setClueModalOpen] = useState(false);
-  const [clueType, setClueType] = useState(false);
   const [gameEnd, setGameEnd] = useState(false);
   const [gamePassed, setGamePassed] = useState(false);
   const [IsCredit, setIsCredit] = useState(false);

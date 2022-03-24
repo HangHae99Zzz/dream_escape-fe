@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-
-import { actionCreator as roomActions } from "../../../redux/modules/room";
 
 import Users from "../../Element/MainUsers";
 import Timer from "./Timer";

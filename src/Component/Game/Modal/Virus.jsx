@@ -20,6 +20,7 @@ const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
                 ref={q1}
                 autoFocus
                 onChange={(e) => setVirusInputOne(e.target.value)}
+                maxLength="1"
               ></Input>
             </Question>
           );
@@ -30,6 +31,7 @@ const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
                 placeholder="?"
                 ref={q2}
                 onChange={(e) => setVirusInputTwo(e.target.value)}
+                maxLength="1"
               ></Input>
             </Question>
           );
@@ -89,5 +91,9 @@ const Input = styled.input`
   text-align: center;
   letter-spacing: -0.03em;
 
-  color: #ababab;
+  color: #000;
+
+  ::placeholder {
+    color: #ababab;
+  }
 `;

@@ -28,10 +28,7 @@ function Modal({ setModalOpen, quizType }) {
       setModalOpen(false);
       socket.emit("count");
     } else {
-      setHintModal(true);
-      if (setHintModal == true) {
-        window.alert("오답입니다!");
-      }
+      window.alert("오답입니다!");
     }
   };
 
@@ -44,7 +41,6 @@ function Modal({ setModalOpen, quizType }) {
       setModalOpen(false);
       socket.emit("count");
     } else {
-      setHintModal(true);
       window.alert("오답입니다!");
     }
   };
