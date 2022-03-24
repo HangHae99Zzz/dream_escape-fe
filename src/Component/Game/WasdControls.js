@@ -25,20 +25,36 @@ export default function WasdControls() {
     const { camera } = useThree();
     const code = useCodes();
     const moveForward = distance => {
-        // console.log('z', camera.position.z); // -9 9
-        if (camera.position.x < 9 && -9 < camera.position.x) {
-            console.log('x', camera.position.x); // -9 9
+        if (
+            camera.position.x < 9 &&
+            -9 < camera.position.x &&
+            camera.position.z < 9 &&
+            -9 < camera.position.z
+        ) {
             vec.setFromMatrixColumn(camera.matrix, 0);
             vec.crossVectors(camera.up, vec);
             camera.position.addScaledVector(vec, distance);
         } else {
-            camera.position.x = 8;
+            camera.position.x = 0;
+            camera.position.z = 0;
         }
     };
+
     const moveRight = distance => {
-        vec.setFromMatrixColumn(camera.matrix, 0);
-        camera.position.addScaledVector(vec, distance);
+        if (
+            camera.position.x < 9 &&
+            -9 < camera.position.x &&
+            camera.position.z < 9 &&
+            -9 < camera.position.z
+        ) {
+            vec.setFromMatrixColumn(camera.matrix, 0);
+            camera.position.addScaledVector(vec, distance);
+        } else {
+            camera.position.x = 0;
+            camera.position.z = 0;
+        }
     };
+
     useFrame((_, delta) => {
         const speed = code.current.has('ShiftLeft') ? 5 : 2;
         if (code.current.has('KeyW')) moveForward(delta * speed);
