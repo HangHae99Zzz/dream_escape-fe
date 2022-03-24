@@ -26,7 +26,7 @@ const ThreeRoom = () => {
     const [gamePassed, setGamePassed] = useState(false);
     const [IsCredit, setIsCredit] = useState(false);
 
-    const { count, countLimit } = useSelector(({ game }) => game);
+    const { count, countLimit, chance } = useSelector(({ game }) => game);
 
     function Loader() {
         const { progress } = useProgress();
@@ -39,6 +39,9 @@ const ThreeRoom = () => {
                 gameEnd={gameEnd}
                 setGameEnd={setGameEnd}
                 gamePassed={gamePassed}
+                count={count}
+                countLimit={countLimit}
+                chance={chance}
             />
             {gameEnd && (
                 <GameEndModal
@@ -47,7 +50,12 @@ const ThreeRoom = () => {
                 />
             )}
             {modalOpen && (
-                <Modal setModalOpen={setModalOpen} quizType={quizType} />
+                <Modal
+                    setModalOpen={setModalOpen}
+                    quizType={quizType}
+                    setGamePassed={setGamePassed}
+                    setGameEnd={setGameEnd}
+                />
             )}
             {clueModalOpen && (
                 <ClueModal

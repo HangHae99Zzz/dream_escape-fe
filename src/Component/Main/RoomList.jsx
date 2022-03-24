@@ -8,7 +8,7 @@ import { actionCreator as roomActions } from '../../redux/modules/room';
 import { WaitModal } from './Modal';
 import { ModalBG } from '../Element/index';
 
-const RoomList = ({ page }) => {
+const RoomList = ({ page, isFiltered }) => {
     const dispatch = useDispatch();
     const { roomId } = useParams();
     const { roomList } = useSelector(({ room }) => room);
@@ -29,21 +29,72 @@ const RoomList = ({ page }) => {
 
     useEffect(() => {
         if (!roomId) return;
-        console.log(socket);
         enterRoom(roomId);
     }, [socket]);
 
     useEffect(() => {
-        dispatch(roomActions.refRoomList(page));
         const timeout = setTimeout(() => setPollingCnt(pollingCnt + 1), 1000);
+        if (openWaitModal) clearTimeout(timeout);
+
+        if (isFiltered) {
+            dispatch(roomActions.refRoomList(8));
+        } else {
+            dispatch(roomActions.refRoomList(page));
+        }
+
         return () => clearTimeout(timeout);
-    }, [pollingCnt, page, dispatch]);
+    }, [pollingCnt, page, dispatch, openWaitModal, isFiltered]);
 
     return (
         <RoomLi>
             {roomList &&
                 roomList.map((room, i) => {
-                    return room.startAt ? (
+                    return isFiltered ? (
+                        room.startAt ? (
+                            <></>
+                        ) : (
+                            <RoomWrapper
+                                onClick={() => enterRoom(room.roomId)}
+                                key={i}
+                            >
+                                <Left>
+                                    <Top>
+                                        <Title>{room.teamName}</Title>
+                                        <Wait>대기중</Wait>
+                                    </Top>
+                                    <Bottom>
+                                        <IconContainer>
+                                            현재인원
+                                            <MemberIcon
+                                                src={
+                                                    process.env.PUBLIC_URL +
+                                                    'image/peers.svg'
+                                                }
+                                                alt="참가자 수: "
+                                            />
+                                            {room.currentNum}
+                                        </IconContainer>
+
+                                        <MemberContainer>
+                                            {room.userList.map((user, i) => {
+                                                return i === 0 ? null : (
+                                                    <Member key={i}>
+                                                        {user.nickName}
+                                                    </Member>
+                                                );
+                                            })}
+                                        </MemberContainer>
+                                    </Bottom>
+                                </Left>
+                                <Right>
+                                    <UserImg></UserImg>
+                                    <Creator>
+                                        {room?.userList[0]?.nickName}
+                                    </Creator>
+                                </Right>
+                            </RoomWrapper>
+                        )
+                    ) : room.startAt ? (
                         <RoomWrapper
                             key={i}
                             onClick={() => {

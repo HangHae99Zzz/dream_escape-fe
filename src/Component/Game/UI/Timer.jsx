@@ -34,7 +34,7 @@ const Timer = ({ setGameTime, gameEnd, setGameEnd, gamePassed }) => {
     }, [minutes, seconds]);
 
     useEffect(() => {
-        if (gameEnd && isCreator) {
+        if (gameEnd) {
             console.log('Timer.jsx에서 dispatch');
             const _temp = streamDuration;
 

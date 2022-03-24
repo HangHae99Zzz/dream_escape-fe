@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -62,7 +62,7 @@ const GlobalStyles = createGlobalStyle`
       vertical-align: baseline;
       font-family: 'Pretendard';
       font-weight: 400;
-
+      letter-spacing: -0.03em
     }
     /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure, 

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 import { RoomList } from './index';
 
 const Contents = () => {
     const [page, setPage] = useState(1);
+    const [isFiltered, setIsFiltered] = useState(false);
 
     const pagination = page => {
         setPage(page + 1);
@@ -17,11 +18,25 @@ const Contents = () => {
                 <RoomListContainer>
                     <RoomListHeader>
                         <Sub>게임방리스트</Sub>
-                        <Selector>
-                            <option>최신순 </option>
-                        </Selector>
+                        <ToggleContainer>
+                            <input
+                                id="check"
+                                type={'Checkbox'}
+                                onChange={() => {
+                                    !isFiltered
+                                        ? setIsFiltered(true)
+                                        : setIsFiltered(false);
+                                }}
+                                checked={isFiltered}
+                            />
+                            <label
+                                htmlFor="check"
+                                isFiltered={isFiltered}
+                            ></label>
+                            입장가능
+                        </ToggleContainer>
                     </RoomListHeader>
-                    <RoomList page={page}></RoomList>
+                    <RoomList page={page} isFiltered={isFiltered}></RoomList>
                 </RoomListContainer>
             </FlexContainer>
             <MoreBtn onClick={() => pagination(page)}>
@@ -73,24 +88,11 @@ const Sub = styled.h3`
     color: #000000;
 `;
 
-const Selector = styled.select`
-    width: 84px;
-    height: 33px;
-    padding-left: 15px;
-    border: 2px solid #394ddb;
-    box-sizing: border-box;
-    border-radius: 19px;
-    appearance: none;
-    background-image: url('image/downArrow.png');
-    background-repeat: no-repeat;
-    background-position-x: 56px;
-    background-position-y: 12px;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: -0.03em;
-    color: #394DDB;
-}
+const ToggleContainer = styled.div`
+    border: 1px solid black;
+    input {
+        display: none;
+    }
 `;
 
 const MoreBtn = styled.button`

@@ -8,8 +8,14 @@ import Users from '../../Element/MainUsers';
 import Timer from './Timer';
 import { SvgMic } from '../../../Asset/Icon/etc/svg_etc';
 
-const GameUsers = ({ gameEnd, setGameEnd, gamePassed }) => {
-    const { count, countLimit } = useSelector(({ game }) => game);
+const GameUsers = ({
+    gameEnd,
+    setGameEnd,
+    gamePassed,
+    count,
+    countLimit,
+    chance,
+}) => {
     const { myNickName } = useSelector(({ room }) => room);
 
     console.log(myNickName);
@@ -28,6 +34,10 @@ const GameUsers = ({ gameEnd, setGameEnd, gamePassed }) => {
                     <p>
                         {count}/{countLimit}
                     </p>
+                </Score>
+                <Score>
+                    <p>찬스</p>
+                    <p>{chance}/2</p>
                 </Score>
                 <TimerWrapper>
                     <p>타이머</p>

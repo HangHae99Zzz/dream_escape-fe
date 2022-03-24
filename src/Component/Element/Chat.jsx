@@ -303,6 +303,14 @@ const Chat = () => {
             console.log('count up!', count);
         });
 
+        let chance = 2;
+
+        socketRef.current.on('chanceMinus', () => {
+            chance--;
+            dispatch(gameActions.chanceDown(chance));
+            console.log('chance down!', chance);
+        });
+
         ///////////////////////////////////////////////////////////////////////////
 
         return () => {
