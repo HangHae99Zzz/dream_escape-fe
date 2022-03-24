@@ -36,9 +36,7 @@ function Modal({ setModalOpen, quizType }) {
   };
 
   const handleVirusAnswer = () => {
-    console.log(virusInputOne, virusInputTwo);
     let _temp = virusInputOne + ", " + virusInputTwo;
-    console.log(_temp);
     if (virusInputOne === "" || virusInputTwo === "") {
       window.alert("답을 모두 입력해주세요");
     } else if (_temp === modalData.answer) {

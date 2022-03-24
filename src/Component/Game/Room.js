@@ -8,7 +8,6 @@ export default function Model({
   setClueModalOpen,
   setClueType,
   setGameEnd,
-  setVirusModalOpen,
   count,
   countLimit,
 }) {
@@ -24,13 +23,6 @@ export default function Model({
     console.log(quizType, typeof quizType);
     setQuizType(quizType);
     setModalOpen(true);
-  };
-
-  const virusModalHandler = (quizType) => {
-    console.log(quizType, typeof quizType);
-    setQuizType(quizType);
-    setVirusModalOpen(true);
-    console.log("setVirusModalOpen을 true로 바꿨습니다");
   };
 
   const clueHandler = (clueType) => {
