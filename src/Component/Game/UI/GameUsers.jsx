@@ -19,7 +19,6 @@ const GameUsers = ({ gameEnd, setGameEnd, gamePassed }) => {
 
   return (
     <Container>
-      {/* 다른 인원수만큼 props로 넘겨서 map으로 처리 */}
       <OtherUsers>
         <Users></Users>
       </OtherUsers>
@@ -160,21 +159,4 @@ const MyMic = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  :after {
-    content: "Here is some text..";
-    color: #fff;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-  }
-  &:hover:after {
-    opacity: 1;
-  }
 `;
