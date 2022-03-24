@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import { Suspense } from "react";
+import React, { useState, Suspense } from "react";
+import styled from "styled-components";
 import { Canvas } from "@react-three/fiber";
 import { Html, useProgress, PointerLockControls } from "@react-three/drei";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import WasdControls from "./WasdControls";
 import Room from "./Room";
-import { actionCreator as quizActions } from "../../redux/modules/quiz";
-import { Modal, ClueModal, GameEndModal } from "./Modal";
+import { Modal, ClueModal, GameEndModal, VirusQuizModal } from "./Modal";
 import GameUsers from "./UI/GameUsers";
 import { EndingCredit } from "../Main";
-import { useEffect } from "react";
 
 const ThreeRoom = () => {
   const dispatch = useDispatch();
@@ -19,12 +16,14 @@ const ThreeRoom = () => {
 
   // quiz 모달, hint modal 분리하기
   const [modalOpen, setModalOpen] = useState(false);
+  const [virusModalOpen, setVirusModalOpen] = useState(false);
   const [quizType, setQuizType] = useState("");
   const [clueModalOpen, setClueModalOpen] = useState(false);
   const [clueType, setClueType] = useState(false);
   const [gameEnd, setGameEnd] = useState(false);
   const [gamePassed, setGamePassed] = useState(false);
   const [IsCredit, setIsCredit] = useState(false);
+  console.log("ThreeRoom.jsx에서 virusModalOpen을 받았습니다", virusModalOpen);
 
   const { count, countLimit } = useSelector(({ game }) => game);
 
@@ -44,6 +43,12 @@ const ThreeRoom = () => {
         <GameEndModal setGameEnd={setGameEnd} setIsCredit={setIsCredit} />
       )}
       {modalOpen && <Modal setModalOpen={setModalOpen} quizType={quizType} />}
+      {virusModalOpen && (
+        <VirusQuizModal
+          setVirusModalOpen={setVirusModalOpen}
+          quizType={quizType}
+        />
+      )}
       {clueModalOpen && (
         <ClueModal setClueModalOpen={setClueModalOpen} clueType={clueType} />
       )}
@@ -82,6 +87,7 @@ const ThreeRoom = () => {
             setQuizType={setQuizType}
             setClueModalOpen={setClueModalOpen}
             setClueType={setClueType}
+            setVirusModalOpen={setVirusModalOpen}
             count={count}
             countLimit={countLimit}
           />

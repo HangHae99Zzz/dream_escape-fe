@@ -4,11 +4,11 @@ import { useFrame } from "@react-three/fiber";
 
 export default function Model({
   setQuizType,
-  modalOpen,
   setModalOpen,
   setClueModalOpen,
   setClueType,
   setGameEnd,
+  setVirusModalOpen,
   count,
   countLimit,
 }) {
@@ -21,9 +21,16 @@ export default function Model({
   };
   // useReducer로 바꾸기
   const modalHandler = (quizType) => {
-    console.log(modalOpen, quizType, typeof quizType);
+    console.log(quizType, typeof quizType);
     setQuizType(quizType);
     setModalOpen(true);
+  };
+
+  const virusModalHandler = (quizType) => {
+    console.log(quizType, typeof quizType);
+    setQuizType(quizType);
+    setVirusModalOpen(true);
+    console.log("setVirusModalOpen을 true로 바꿨습니다");
   };
 
   const clueHandler = (clueType) => {

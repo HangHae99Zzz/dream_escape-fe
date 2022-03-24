@@ -1,24 +1,39 @@
 import React, { useRef } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 
-const Virus = ({ modalData }) => {
+const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
   const { content } = modalData;
   const arr = content.slice(1, -1).split(", ");
 
-  const inputRef = useRef();
+  const q1 = useRef();
+  const q2 = useRef();
 
   return (
     <Wrapper>
       {arr.map((num, i) => {
-        if (num === "?") {
+        if (num === "?1")
           return (
             <Question>
-              <Input placeholder="?" id={i} autoFocus></Input>
+              <Input
+                placeholder="?"
+                ref={q1}
+                autoFocus
+                onChange={(e) => setVirusInputOne(e.target.value)}
+              ></Input>
             </Question>
           );
-        } else {
-          return <Num>{num}</Num>;
-        }
+        else if (num === "?2")
+          return (
+            <Question>
+              <Input
+                placeholder="?"
+                ref={q2}
+                onChange={(e) => setVirusInputTwo(e.target.value)}
+              ></Input>
+            </Question>
+          );
+        else return <Num>{num}</Num>;
       })}
     </Wrapper>
   );
