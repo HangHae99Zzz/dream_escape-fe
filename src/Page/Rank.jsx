@@ -9,7 +9,6 @@ import { DefaultLayout } from "../Layout";
 
 const Rank = () => {
   const dispatch = useDispatch();
-
   const ranks = useSelector((state) => state.rank.ranklist);
 
   // 초반 3개, 이후 ranks
