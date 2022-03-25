@@ -4,40 +4,50 @@ import styled from 'styled-components';
 
 const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
     const { content } = modalData;
-    const arr = content.slice(1, -1).split(', ');
+    const arr = content?.slice(1, -1).split(', ');
 
     const q1 = useRef();
     const q2 = useRef();
 
     return (
-        <Wrapper>
-            {arr.map((num, i) => {
-                if (num === '?1')
-                    return (
-                        <Question>
-                            <Input
-                                placeholder="?"
-                                ref={q1}
-                                autoFocus
-                                onChange={e => setVirusInputOne(e.target.value)}
-                                maxLength="1"
-                            ></Input>
-                        </Question>
-                    );
-                else if (num === '?2')
-                    return (
-                        <Question>
-                            <Input
-                                placeholder="?"
-                                ref={q2}
-                                onChange={e => setVirusInputTwo(e.target.value)}
-                                maxLength="1"
-                            ></Input>
-                        </Question>
-                    );
-                else return <Num>{num}</Num>;
-            })}
-        </Wrapper>
+        <>
+            {!arr ? (
+                <></>
+            ) : (
+                <Wrapper>
+                    {arr.map((num, i) => {
+                        if (num === '?1')
+                            return (
+                                <Question key={i}>
+                                    <Input
+                                        placeholder="?"
+                                        ref={q1}
+                                        autoFocus
+                                        onChange={e =>
+                                            setVirusInputOne(e.target.value)
+                                        }
+                                        maxLength="1"
+                                    ></Input>
+                                </Question>
+                            );
+                        else if (num === '?2')
+                            return (
+                                <Question key={i}>
+                                    <Input
+                                        placeholder="?"
+                                        ref={q2}
+                                        onChange={e =>
+                                            setVirusInputTwo(e.target.value)
+                                        }
+                                        maxLength="1"
+                                    ></Input>
+                                </Question>
+                            );
+                        else return <Num key={i}>{num}</Num>;
+                    })}
+                </Wrapper>
+            )}
+        </>
     );
 };
 

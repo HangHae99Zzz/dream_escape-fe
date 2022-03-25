@@ -1,5 +1,4 @@
 import { createAction, handleActions } from 'redux-actions';
-import axios from 'axios';
 
 import instance from '../../util/request';
 
@@ -10,12 +9,13 @@ const LOAD_CLUE = 'LOAD_CLUE';
 // Action Creators
 const loadQuiz = createAction(
     LOAD_QUIZ,
-    (question, content, answer, chance, hint) => ({
+    (question, content, answer, chance, hint, pass) => ({
         question,
         content,
         answer,
         chance,
         hint,
+        pass,
     })
 );
 
@@ -30,6 +30,7 @@ const initialState = {
     answer: '',
     chance: '',
     hint: '',
+    pass: '',
     clue: [],
 };
 
@@ -47,8 +48,16 @@ const refQuiz = (roomId, quizType) => {
                 let _answer = res.data.answer;
                 let _chance = res.data.chance;
                 let _hint = res.data.hint;
+                let _pass = res.data.pass;
                 dispatch(
-                    loadQuiz(_question, _content, _answer, _chance, _hint)
+                    loadQuiz(
+                        _question,
+                        _content,
+                        _answer,
+                        _chance,
+                        _hint,
+                        _pass
+                    )
                 );
                 console.log(res);
             })
@@ -72,12 +81,12 @@ const refClue = (roomId, clueType) => {
     };
 };
 
-const submitResult = roomId => {
-    const sessionRoomId = sessionStorage.getItem('sessionRoomId');
-
+// count +1
+const submitResult = (roomId, quizType) => {
+    console.log('submitResult', roomId, quizType);
     return function (dispatch, getState) {
         instance
-            .post(`/escape/${sessionRoomId}`, {})
+            .put(`/rooms/${roomId}/quizzes/${quizType}`)
             .then(res => console.log(res))
             .catch(err => console.log(err));
     };
@@ -94,6 +103,7 @@ export default handleActions(
                 answer: action.payload.answer,
                 chance: action.payload.chance,
                 hint: action.payload.hint,
+                pass: action.payload.pass,
             };
         },
 
