@@ -27,7 +27,6 @@ export default function Model({
             setGameEnd(true);
             return;
         }
-
         setQuizType(quizType);
         setModalOpen(true);
     };

@@ -1,30 +1,27 @@
-import React, { useState } from 'react';
-import { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { Html, useProgress, PointerLockControls } from '@react-three/drei';
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import WasdControls from './WasdControls';
-import Room from './Room';
-import { actionCreator as quizActions } from '../../redux/modules/quiz';
-import { Modal, ClueModal, GameEndModal } from './Modal';
-import GameUsers from './UI/GameUsers';
-import { EndingCredit } from '../Main';
-import { useEffect } from 'react';
+import React, { useState, Suspense } from "react";
+import styled from "styled-components";
+import { Canvas } from "@react-three/fiber";
+import { Html, useProgress, PointerLockControls } from "@react-three/drei";
+import { useDispatch, useSelector } from "react-redux";
+import WasdControls from "./WasdControls";
+import Room from "./Room";
+import { Modal, ClueModal, GameEndModal } from "./Modal";
+import GameUsers from "./UI/GameUsers";
+import { EndingCredit } from "../Main";
 
 const ThreeRoom = () => {
     const dispatch = useDispatch();
 
     const roomId = useSelector(state => state.room.roomInfo.roomId);
 
-    // quiz 모달, hint modal 분리하기
-    const [modalOpen, setModalOpen] = useState(false);
-    const [quizType, setQuizType] = useState('');
-    const [clueModalOpen, setClueModalOpen] = useState(false);
-    const [clueType, setClueType] = useState(false);
-    const [gameEnd, setGameEnd] = useState(false);
-    const [gamePassed, setGamePassed] = useState(false);
-    const [IsCredit, setIsCredit] = useState(false);
+  const [quizType, setQuizType] = useState("");
+  const [clueType, setClueType] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [clueModalOpen, setClueModalOpen] = useState(false);
+  const [gameEnd, setGameEnd] = useState(false);
+  const [gamePassed, setGamePassed] = useState(false);
+  const [IsCredit, setIsCredit] = useState(false);
+
 
     const { count, countLimit, chance } = useSelector(({ game }) => game);
 

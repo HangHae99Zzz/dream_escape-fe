@@ -36,32 +36,24 @@ const initialState = {
 //  middleware Actions
 
 // Quiz 조회하기
-const refQuiz = quizType => {
-    const sessionRoomId = sessionStorage.getItem('sessionRoomId');
+const refQuiz = (roomId, quizType) => {
+  console.log("refQuiz 미들웨어에서 받았습니다!", quizType, typeof quizType);
+  return function (dispatch, getState) {
+    instance
+      .get(`/rooms/${roomId}/quizzes/${quizType}`)
+      .then((res) => {
+        let _question = res.data.question;
+        let _content = res.data.content;
+        let _answer = res.data.answer;
+        let _chance = res.data.chance;
+        let _hint = res.data.hint;
+        dispatch(loadQuiz(_question, _content, _answer, _chance, _hint));
+        console.log(res);
+      })
 
-    console.log(
-        'refQuiz 미들웨어에서 받았습니다!',
-        quizType,
-        typeof quizType,
-        sessionRoomId
-    );
-    return function (dispatch, getState) {
-        instance
-            .get(`/rooms/${sessionRoomId}/quizzes/${quizType}`)
-            .then(res => {
-                let _question = res.data.question;
-                let _content = res.data.content;
-                let _answer = res.data.answer;
-                let _chance = res.data.chance;
-                let _hint = res.data.hint;
-                dispatch(
-                    loadQuiz(_question, _content, _answer, _chance, _hint)
-                );
-                console.log(res);
-            })
+      .catch((err) => console.log(err));
+  };
 
-            .catch(err => console.log(err));
-    };
 };
 
 // Clue 조회하기

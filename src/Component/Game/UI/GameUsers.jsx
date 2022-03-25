@@ -142,6 +142,9 @@ const MyInfo = styled.div`
     background: rgba(255, 255, 255, 0.25);
     border-radius: 30px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
     p {
         padding-top: 8px;
 
@@ -164,21 +167,4 @@ const MyMic = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
-    :after {
-        content: 'Here is some text..';
-        color: #fff;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background: rgba(0, 0, 0, 0.6);
-        opacity: 0;
-        transition: all 0.5s;
-        -webkit-transition: all 0.5s;
-    }
-    &:hover:after {
-        opacity: 1;
-    }
 `;

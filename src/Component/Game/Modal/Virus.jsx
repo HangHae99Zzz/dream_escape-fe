@@ -1,27 +1,44 @@
-import React, { useRef } from 'react';
-import styled from 'styled-components';
+import React, { useRef } from "react";
+import { useEffect } from "react";
+import styled from "styled-components";
 
-const Virus = ({ modalData }) => {
-    const { content } = modalData;
-    const arr = content.slice(1, -1).split(', ');
+const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
+  const { content } = modalData;
+  const arr = content.slice(1, -1).split(", ");
 
-    const inputRef = useRef();
+  const q1 = useRef();
+  const q2 = useRef();
 
-    return (
-        <Wrapper>
-            {arr.map((num, i) => {
-                if (num === '?') {
-                    return (
-                        <Question>
-                            <Input placeholder="?" autoFocus></Input>
-                        </Question>
-                    );
-                } else {
-                    return <Num>{num}</Num>;
-                }
-            })}
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      {arr.map((num, i) => {
+        if (num === "?1")
+          return (
+            <Question>
+              <Input
+                placeholder="?"
+                ref={q1}
+                autoFocus
+                onChange={(e) => setVirusInputOne(e.target.value)}
+                maxLength="1"
+              ></Input>
+            </Question>
+          );
+        else if (num === "?2")
+          return (
+            <Question>
+              <Input
+                placeholder="?"
+                ref={q2}
+                onChange={(e) => setVirusInputTwo(e.target.value)}
+                maxLength="1"
+              ></Input>
+            </Question>
+          );
+        else return <Num>{num}</Num>;
+      })}
+    </Wrapper>
+  );
 };
 
 export default Virus;
@@ -74,5 +91,9 @@ const Input = styled.input`
     text-align: center;
     letter-spacing: -0.03em;
 
+  color: #000;
+
+  ::placeholder {
     color: #ababab;
+  }
 `;
