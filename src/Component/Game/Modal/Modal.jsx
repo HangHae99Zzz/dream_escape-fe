@@ -6,7 +6,13 @@ import { SvgX } from '../../../Asset/Icon/etc/svg_etc';
 
 import Virus from './Virus';
 
-function Modal({ setModalOpen, quizType, setGamePassed, setGameEnd }) {
+function Modal({
+    setModalOpen,
+    quizType,
+    setGamePassed,
+    setGameEnd,
+    setIsFirst,
+}) {
     const dispatch = useDispatch();
 
     const roomId = useSelector(state => state.room.roomInfo.roomId);
@@ -28,6 +34,7 @@ function Modal({ setModalOpen, quizType, setGamePassed, setGameEnd }) {
         console.log('Modal.js에서 handleExitgame 실행');
         setGamePassed(true);
         setGameEnd(true);
+        setIsFirst(true);
     };
 
     const handleVirusAnswer = () => {
@@ -392,7 +399,7 @@ const Hint = styled.div`
 
 const HintModal = styled.div`
     position: absolute;
-    bottom: 120px;
+    bottom: 4vh;
     width: 443px;
     height: 82px;
     margin-top: 10px;
