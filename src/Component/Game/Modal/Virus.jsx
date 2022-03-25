@@ -14,7 +14,7 @@ const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
       {arr.map((num, i) => {
         if (num === "?1")
           return (
-            <Question>
+            <Question key={i}>
               <Input
                 placeholder="?"
                 ref={q1}
@@ -26,7 +26,7 @@ const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
           );
         else if (num === "?2")
           return (
-            <Question>
+            <Question key={i}>
               <Input
                 placeholder="?"
                 ref={q2}
@@ -35,7 +35,7 @@ const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
               ></Input>
             </Question>
           );
-        else return <Num>{num}</Num>;
+        else return <Num key={i}>{num}</Num>;
       })}
     </Wrapper>
   );
