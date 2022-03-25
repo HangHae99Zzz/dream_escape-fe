@@ -7,50 +7,40 @@ import { SvgX } from '../../../Asset/Icon/etc/svg_etc';
 import Virus from './Virus';
 
 function Modal({ setModalOpen, quizType, setGamePassed, setGameEnd }) {
-  const roomId = useSelector((state) => state.room.roomInfo.roomId);
+    const roomId = useSelector(state => state.room.roomInfo.roomId);
 
-  const [hintModal, setHintModal] = useState(false);
-  const [virusInputOne, setVirusInputOne] = useState("");
-  const [virusInputTwo, setVirusInputTwo] = useState("");
-  const inputRef = useRef(null);
-  const dispatch = useDispatch();
-  const modalData = useSelector((state) => state.quiz);
+    const [hintModal, setHintModal] = useState(false);
+    const [virusInputOne, setVirusInputOne] = useState('');
+    const [virusInputTwo, setVirusInputTwo] = useState('');
+    const inputRef = useRef(null);
+    const dispatch = useDispatch();
+    const modalData = useSelector(state => state.quiz);
 
     const { socket } = useSelector(({ socket }) => socket);
     const { chance } = useSelector(({ game }) => game);
 
-  useEffect(() => {
-    dispatch(quizActions.refQuiz(roomId, quizType));
-  }, []);
+    useEffect(() => {
+        dispatch(quizActions.refQuiz(roomId, quizType));
+    }, []);
 
-  const handleAnswer = () => {
-    if (inputRef.current.value === modalData.answer) {
-      window.alert("정답입니다!");
-      setModalOpen(false);
-      socket.emit("count");
-    } else {
-      window.alert("오답입니다!");
-    }
-  };
-  
-  const handleExitgame = () => {
+    const handleExitgame = () => {
         console.log('Modal.js에서 handleExitgame 실행');
         setGamePassed(true);
         setGameEnd(true);
     };
 
-  const handleVirusAnswer = () => {
-    let _temp = virusInputOne + ", " + virusInputTwo;
-    if (virusInputOne === "" || virusInputTwo === "") {
-      window.alert("답을 모두 입력해주세요");
-    } else if (_temp === modalData.answer) {
-      window.alert("정답입니다!");
-      setModalOpen(false);
-      socket.emit("count");
-    } else {
-      window.alert("오답입니다!");
-    }
-  };
+    const handleVirusAnswer = () => {
+        let _temp = virusInputOne + ', ' + virusInputTwo;
+        if (virusInputOne === '' || virusInputTwo === '') {
+            window.alert('답을 모두 입력해주세요');
+        } else if (_temp === modalData.answer) {
+            window.alert('정답입니다!');
+            setModalOpen(false);
+            socket.emit('count');
+        } else {
+            window.alert('오답입니다!');
+        }
+    };
 
     const handleAnswer = () => {
         if (inputRef.current.value === modalData.answer) {
@@ -68,16 +58,6 @@ function Modal({ setModalOpen, quizType, setGamePassed, setGameEnd }) {
         }
     };
 
-    const handleChance = () => {
-        if (hintModal === true) return;
-        if (!chance) {
-            window.alert('찬스를 모두 소진했습니다');
-            return;
-        }
-        setHintModal(true);
-        // chance 1 내리기
-        socket.emit('chance');
-    };
     const onKeyDown = e => {
         if (e.key == 'Enter') {
             handleAnswer();
@@ -105,108 +85,126 @@ function Modal({ setModalOpen, quizType, setGamePassed, setGameEnd }) {
                     {modalData ? <h1>{modalData.question}</h1> : <h1>오류</h1>}
                 </Title>
 
-        {quizType === "Ab" ? (
-          <Body>
-            <Virus
-              modalData={modalData}
-              setVirusInputOne={setVirusInputOne}
-              setVirusInputTwo={setVirusInputTwo}
-            />
-          </Body>
-        ) : quizType === "Bb" ? (
-          <>
-            <Body>
-              <div>
-                <img
-                  src="./image/Bb.png"
-                  alt=""
-                  style={{ width: "394px", height: "260px" }}
-                />
-              </div>
-              <div className="hint">
-                {modalData ? <p>{modalData.hint}</p> : <p>오류</p>}
-              </div>
-            </Body>
-            <Input>
-              <label>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  placeholder="정답을 입력하세요"
-                  autoFocus
-                  onKeyDown={onKeyDown}
-                  tabIndex="0"
-                />
-              </label>
-            </Input>
-          </>
-        ) : quizType === "Ca" ? (
-          <>
-            <Body>
-              <div>
-                <img src="./image/Ca.png" alt="" />
-              </div>
-            </Body>
-            <Input>
-              <label>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  placeholder="정답을 입력하세요"
-                  autoFocus
-                  onKeyDown={onKeyDown}
-                  tabIndex="0"
-                />
-              </label>
-            </Input>
-          </>
-        ) : (
-          <>
-            <Body>
-              <div>{modalData ? <p>{modalData.content}</p> : <p>오류</p>}</div>
-              <div className="hint">
-                {modalData ? <p>{modalData.hint}</p> : <p>오류</p>}
-              </div>
-            </Body>
-            <Input>
-              <label>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  placeholder="정답을 입력하세요"
-                  autoFocus
-                  onKeyDown={onKeyDown}
-                  tabIndex="0"
-                />
-              </label>
-            </Input>
-          </>
-        )}
-        {quizType === "Ab" ? (
-          <Footer>
-            <button type="submit" onClick={handleVirusAnswer}>
-              제출하기
-            </button>
-          </Footer>
-        ) : (
-          <Footer>
-            <button type="submit" onClick={handleAnswer}>
-              제출하기
-            </button>
-          </Footer>
-        )}
+                {quizType === 'Ab' ? (
+                    <Body>
+                        <Virus
+                            modalData={modalData}
+                            setVirusInputOne={setVirusInputOne}
+                            setVirusInputTwo={setVirusInputTwo}
+                        />
+                    </Body>
+                ) : quizType === 'Bb' ? (
+                    <>
+                        <Body>
+                            <div>
+                                <img
+                                    src="./image/Bb.png"
+                                    alt=""
+                                    style={{ width: '394px', height: '260px' }}
+                                />
+                            </div>
+                            <div className="hint">
+                                {modalData ? (
+                                    <p>{modalData.hint}</p>
+                                ) : (
+                                    <p>오류</p>
+                                )}
+                            </div>
+                        </Body>
+                        <Input>
+                            <label>
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    placeholder="정답을 입력하세요"
+                                    autoFocus
+                                    onKeyDown={onKeyDown}
+                                    tabIndex="0"
+                                />
+                            </label>
+                        </Input>
+                    </>
+                ) : quizType === 'Ca' ? (
+                    <>
+                        <Body>
+                            <div>
+                                <img src="./image/Ca.png" alt="" />
+                            </div>
+                        </Body>
+                        <Input>
+                            <label>
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    placeholder="정답을 입력하세요"
+                                    autoFocus
+                                    onKeyDown={onKeyDown}
+                                    tabIndex="0"
+                                />
+                            </label>
+                        </Input>
+                    </>
+                ) : (
+                    <>
+                        <Body>
+                            <div>
+                                {modalData ? (
+                                    <p>{modalData.content}</p>
+                                ) : (
+                                    <p>오류</p>
+                                )}
+                            </div>
+                            <div className="hint">
+                                {modalData ? (
+                                    <p>{modalData.hint}</p>
+                                ) : (
+                                    <p>오류</p>
+                                )}
+                            </div>
+                        </Body>
+                        <Input>
+                            <label>
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    placeholder="정답을 입력하세요"
+                                    autoFocus
+                                    onKeyDown={onKeyDown}
+                                    tabIndex="0"
+                                />
+                            </label>
+                        </Input>
+                    </>
+                )}
+                {quizType === 'Ab' ? (
+                    <Footer>
+                        <button type="submit" onClick={handleVirusAnswer}>
+                            제출하기
+                        </button>
+                    </Footer>
+                ) : (
+                    <Footer>
+                        <button type="submit" onClick={handleAnswer}>
+                            제출하기
+                        </button>
+                    </Footer>
+                )}
 
-        <Hint>
-          <button onClick={() => setHintModal(true)}>찬스보기</button>
-        </Hint>
-      </ModalContainer>
-      {hintModal ? (
-        <HintModal>
-          {modalData ? <p>{modalData.chance}</p> : <p>찬스가 없습니다.</p>}
-        </HintModal>
-      ) : null}
-    </ModalBackground>
-  );
+                <Hint>
+                    <button onClick={() => setHintModal(true)}>찬스보기</button>
+                </Hint>
+            </ModalContainer>
+            {hintModal ? (
+                <HintModal>
+                    {modalData ? (
+                        <p>{modalData.chance}</p>
+                    ) : (
+                        <p>찬스가 없습니다.</p>
+                    )}
+                </HintModal>
+            ) : null}
+        </ModalBackground>
+    );
 }
 
 export default Modal;
@@ -274,7 +272,6 @@ const Body = styled.div`
         font-size: 20px;
         line-height: 160%;
         text-align: center;
-        letter-spacing: -0.03em;
 
         color: #a6b1ff;
     }
@@ -327,7 +324,6 @@ const Hint = styled.div`
         line-height: 22px;
 
         text-align: center;
-        letter-spacing: -0.03em;
 
         color: #5668e8;
     }
@@ -350,7 +346,6 @@ const HintModal = styled.div`
         font-size: 18px;
         line-height: 22px;
         text-align: center;
-        letter-spacing: -0.03em;
 
         color: #ffffff;
     }

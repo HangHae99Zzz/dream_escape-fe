@@ -108,9 +108,6 @@ const Title = styled.div`
         font-weight: 700;
         font-size: 48px;
         line-height: 58px;
-        /* identical to box height */
-
-        letter-spacing: -0.03em;
     }
     p {
         font-weight: 600;
@@ -119,7 +116,6 @@ const Title = styled.div`
         /* or 29px */
 
         text-align: center;
-        letter-spacing: -0.03em;
     }
 `;
 
@@ -132,9 +128,6 @@ const Credit = styled.div`
         font-weight: 700;
         font-size: 48px;
         line-height: 58px;
-        /* identical to box height */
-
-        letter-spacing: -0.03em;
     }
 `;
 
@@ -151,7 +144,6 @@ const TEXT = styled.div`
         /* or 29px */
 
         text-align: center;
-        letter-spacing: -0.03em;
     }
 `;
 

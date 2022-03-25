@@ -83,9 +83,6 @@ const Sub = styled.h3`
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
-    /* identical to box height */
-    letter-spacing: -0.03em;
-
     color: #000000;
 `;
 

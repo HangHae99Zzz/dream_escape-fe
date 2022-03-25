@@ -20,8 +20,7 @@ const WaitModal = ({ closeModal }) => {
 
     const copyToClipboard = () => {
         const el = roomUrl.current;
-        el.select();
-        document.execCommand('copy');
+        navigator.clipboard.writeText(el.value);
     };
 
     const exit = () => {
@@ -129,7 +128,6 @@ const RoomName = styled.h3`
     line-height: 29px;
     /* identical to box height */
     text-align: center;
-    letter-spacing: -0.03em;
 
     color: #5668e8;
 `;
@@ -138,8 +136,6 @@ const Label = styled.div`
     font-weight: bold;
     font-size: 18px;
     line-height: 22px;
-    /* identical to box height */
-    letter-spacing: -0.03em;
 
     color: #000000;
 `;
@@ -191,7 +187,6 @@ const MakeButton = styled.button`
     line-height: 22px;
     /* identical to box height */
     text-align: center;
-    letter-spacing: -0.03em;
 
     color: #ffffff;
 `;
@@ -215,7 +210,6 @@ const FooterContainer = styled.div`
     margin-bottom: 42px;
     font-size: 14px;
     line-height: 17px;
-    letter-spacing: -0.03em;
 
     color: #9a9a9a;
 `;

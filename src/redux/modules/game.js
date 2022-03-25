@@ -13,7 +13,7 @@ const chanceDown = createAction(SET_CHANCE, chance => ({ chance }));
 
 // initialState
 const initialState = {
-    count: 0,
+    count: 3,
     countLimit: 5,
     chance: 2,
 };

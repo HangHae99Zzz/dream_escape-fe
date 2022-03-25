@@ -35,7 +35,6 @@ const Btn = styled.div`
     font-size: 18px;
     line-height: 53px;
     text-align: center;
-    letter-spacing: -0.03em;
 
     color: #5668e8;
 

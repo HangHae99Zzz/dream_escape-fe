@@ -142,18 +142,15 @@ const MyInfo = styled.div`
     background: rgba(255, 255, 255, 0.25);
     border-radius: 30px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     p {
         padding-top: 8px;
 
         font-weight: 800;
         font-size: 14px;
         line-height: 17px;
-        /* identical to box height */
-
-        letter-spacing: -0.03em;
     }
 `;
 

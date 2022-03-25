@@ -149,9 +149,6 @@ const RankList = styled.div`
         font-weight: 700;
         font-size: 18px;
         line-height: 22px;
-        /* identical to box height */
-
-        letter-spacing: -0.03em;
     }
 `;
 

@@ -248,9 +248,6 @@ const Wait = styled.div`
     font-weight: 800;
     font-size: 20px;
     line-height: 24px;
-    /* identical to box height */
-    letter-spacing: -0.03em;
-
     color: #43e3bd;
 `;
 
@@ -279,8 +276,6 @@ const Member = styled.div`
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
-    /* identical to box height */
-    letter-spacing: -0.03em;
     color: #fff;
 `;
 
@@ -305,9 +300,6 @@ const Creator = styled.div`
     font-weight: 800;
     font-size: 18px;
     line-height: 22px;
-    /* identical to box height */
-    letter-spacing: -0.03em;
-
     color: #5668e8;
 `;
 
