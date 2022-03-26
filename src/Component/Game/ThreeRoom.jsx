@@ -53,6 +53,7 @@ const ThreeRoom = () => {
                     setModalOpen={setModalOpen}
                     quizType={quizType}
                     setGamePassed={setGamePassed}
+                    gameEnd={gameEnd}
                     setGameEnd={setGameEnd}
                     setIsFirst={setIsFirst}
                 />

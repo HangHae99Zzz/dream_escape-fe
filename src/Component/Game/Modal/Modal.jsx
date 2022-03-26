@@ -10,6 +10,7 @@ function Modal({
     setModalOpen,
     quizType,
     setGamePassed,
+    gameEnd,
     setGameEnd,
     setIsFirst,
 }) {
@@ -25,10 +26,6 @@ function Modal({
     const inputRef = useRef(null);
 
     const { chance } = useSelector(({ game }) => game);
-
-    useEffect(() => {
-        dispatch(quizActions.refQuiz(roomId, quizType));
-    }, []);
 
     const handleExitgame = () => {
         console.log('Modal.js에서 handleExitgame 실행');
@@ -81,6 +78,10 @@ function Modal({
             handleAnswer();
         }
     };
+
+    useEffect(() => {
+        dispatch(quizActions.refQuiz(roomId, quizType));
+    }, []);
 
     return (
         <>
