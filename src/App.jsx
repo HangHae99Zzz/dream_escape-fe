@@ -1,4 +1,7 @@
+import React, { useEffect } from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import useGAPageTracking from "./GAPageTracking";
 
 import GlobalStyles from "./GlobalStyle";
 import Chat from "./Component/Element/Chat";
@@ -6,6 +9,7 @@ import { Main, Rank, Update, GameRoom, Description, NotFound } from "./Page";
 import Loading from "./Component/Main/Loading";
 
 function App() {
+  useGAPageTracking();
   return (
     <Router>
       <GlobalStyles />
