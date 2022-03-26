@@ -13,8 +13,8 @@ const Rank = () => {
   const ranks = useSelector((state) => state.rank.ranklist);
 
   // 초반 3개, 이후 ranks
-  const topThreeRanks = ranks.filter((i) => i.rank < 4);
-  const underThreeRanks = ranks.filter((i) => i.rank > 3);
+  const topThreeRanks = ranks?.filter((i) => i.rank < 4);
+  const underThreeRanks = ranks?.filter((i) => i.rank > 3);
 
   React.useEffect(() => {
     dispatch(rankActions.refRank());
@@ -23,58 +23,70 @@ const Rank = () => {
   return (
     <>
       <DefaultLayout>
-        <Container>
-          <Title>
-            <h4>랭킹조회</h4>
-            <SvgRanking />
-          </Title>
-          <Header>
-            <div className="first">순위</div>
-            <div className="second">방이름(인원수)</div>
-            <div className="third">총 소요 시간</div>
-          </Header>
-          <Body>
-            {topThreeRanks &&
-              topThreeRanks.map((i) => {
-                const imgUrl = `image/rank_top_${i.rank}.png`;
-                return (
-                  <TopThree key={i.roomId} id="top-three">
-                    <div className="first">
-                      <img src={imgUrl} />
-                    </div>
-                    <TeamName className="second">
-                      <div className="top-three-teamname teamname">
-                        {i.teamName}
+        {!topThreeRanks ? (
+          <ContainerNone>
+            <TitleNone>
+              <h4>랭킹조회</h4>
+              <SvgRanking />
+            </TitleNone>
+            <ContentsNone>
+              <p>아직 랭킹이 없습니다.</p>
+            </ContentsNone>
+          </ContainerNone>
+        ) : (
+          <Container>
+            <Title>
+              <h4>랭킹조회</h4>
+              <SvgRanking />
+            </Title>
+            <Header>
+              <div className="first">순위</div>
+              <div className="second">방이름(인원수)</div>
+              <div className="third">총 소요 시간</div>
+            </Header>
+            <Body>
+              {topThreeRanks &&
+                topThreeRanks.map((i) => {
+                  const imgUrl = `image/rank_top_${i.rank}.png`;
+                  return (
+                    <TopThree key={i.roomId} id="top-three">
+                      <div className="first">
+                        <img src={imgUrl} />
                       </div>
-                      <UserNum>{i.userNum}</UserNum>
-                    </TeamName>
-                    <div className="third top-three-time">{i.time}</div>
-                  </TopThree>
-                );
-              })}
-            {underThreeRanks &&
-              underThreeRanks.map((i) => {
-                return (
-                  <UnderThree key={i.roomId} id="under-three">
-                    <div className="first under-three-rank">{i.rank}</div>
-                    <TeamName className="second">
-                      <div className="under-three-teamname teamname">
-                        {i.teamName}
-                      </div>
-                      <UserNum
-                        style={{
-                          background: "#FFC3F2",
-                        }}
-                      >
-                        {i.userNum}
-                      </UserNum>
-                    </TeamName>
-                    <div className="third under-three-time">{i.time}</div>
-                  </UnderThree>
-                );
-              })}
-          </Body>
-        </Container>
+                      <TeamName className="second">
+                        <div className="top-three-teamname teamname">
+                          {i.teamName}
+                        </div>
+                        <UserNum>{i.userNum}</UserNum>
+                      </TeamName>
+                      <div className="third top-three-time">{i.time}</div>
+                    </TopThree>
+                  );
+                })}
+              {underThreeRanks &&
+                underThreeRanks.map((i) => {
+                  return (
+                    <UnderThree key={i.roomId} id="under-three">
+                      <div className="first under-three-rank">{i.rank}</div>
+                      <TeamName className="second">
+                        <div className="under-three-teamname teamname">
+                          {i.teamName}
+                        </div>
+                        <UserNum
+                          style={{
+                            background: "#FFC3F2",
+                          }}
+                        >
+                          {i.userNum}
+                        </UserNum>
+                      </TeamName>
+                      <div className="third under-three-time">{i.time}</div>
+                    </UnderThree>
+                  );
+                })}
+            </Body>
+          </Container>
+        )}
       </DefaultLayout>
     </>
   );
@@ -236,5 +248,38 @@ const UnderThree = styled.div`
     text-align: center;
 
     color: #a6b1ff;
+  }
+`;
+const ContainerNone = styled.div`
+  padding-left: 94px;
+`;
+
+const TitleNone = styled.div`
+  display: flex;
+  padding-bottom: 32px;
+
+  h4 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+
+    padding-right: 16px;
+  }
+`;
+const ContentsNone = styled.div`
+  width: 90%;
+  height: 14.844vw;
+  background: #f1f3ff;
+  border-radius: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 43px;
+    color: #c6c6c6;
   }
 `;
