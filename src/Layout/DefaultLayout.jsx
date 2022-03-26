@@ -1,20 +1,21 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Header, Sidebar } from './index';
+import React from "react";
+import styled from "styled-components";
+import { Header, Sidebar } from "./index";
 
 const DefaultLayout = ({ children }) => {
-    return (
-        <>
-            <Sidebar />
-            {/* <Header /> */}
-            <div>
-                <Wrapper>{children}</Wrapper>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <Sidebar />
+      {/* <Header /> */}
+      <div>
+        <Wrapper>{children}</Wrapper>
+      </div>
+    </>
+  );
 };
 export default DefaultLayout;
 
 const Wrapper = styled.div`
-    padding-left: 14.58vw;
+  padding-top: 4vw;
+  padding-left: 14.58vw;
 `;
