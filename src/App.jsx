@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import useGAPageTracking from "./GAPageTracking";
 
 import GlobalStyles from "./GlobalStyle";
@@ -10,8 +9,9 @@ import Loading from "./Component/Main/Loading";
 
 function App() {
   useGAPageTracking();
+
   return (
-    <Router>
+    <>
       <GlobalStyles />
       <Chat />
       <Routes>
@@ -24,7 +24,7 @@ function App() {
         <Route path="/update" element={<Update />} />
         <Route path="/notfound" element={<NotFound />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 

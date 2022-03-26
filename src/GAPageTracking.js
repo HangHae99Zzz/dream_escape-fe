@@ -22,12 +22,7 @@ const useGAPageTracking = () => {
       ReactGA.pageview(location.pathname + location.search);
     }
   }, [initialized, location]);
-
-  // 개발용
-  useEffect(() => {
-    ReactGA.initialize(TRACKING_ID);
-    ReactGA.pageview(location.pathname + location.search);
-  }, [location]);
 };
 
 export default useGAPageTracking;
+// export { useGAPageTracking };
