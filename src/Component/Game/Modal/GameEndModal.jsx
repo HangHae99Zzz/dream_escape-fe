@@ -5,7 +5,7 @@ import { actionCreator as rankActions } from '../../../redux/modules/rank';
 import { actionCreator as userActions } from '../../../redux/modules/user';
 import { EndingRankList } from './index';
 
-function Modal({ setGameEnd, quizType, setIsCredit }) {
+function GameEndModal({ setGameEnd, quizType, setIsCredit }) {
     const inputRef = useRef('');
     const dispatch = useDispatch();
     const rank = useSelector(state => state.rank.gameRank);
@@ -15,6 +15,12 @@ function Modal({ setGameEnd, quizType, setIsCredit }) {
         console.log(inputRef.current.value);
         dispatch(userActions.writeComment(inputRef.current.value));
         setIsCredit(true);
+    };
+
+    const onKeyDown = e => {
+        if (e.key == 'Enter') {
+            handleComment();
+        }
     };
 
     useEffect(() => {
@@ -27,16 +33,6 @@ function Modal({ setGameEnd, quizType, setIsCredit }) {
     return (
         <ModalBackground>
             <ModalContainer>
-                <TitleCloseBtn>
-                    <button
-                        onClick={() => {
-                            setGameEnd(false);
-                        }}
-                    >
-                        X
-                    </button>
-                </TitleCloseBtn>
-
                 <Title>
                     <h1>게임종료</h1>
                 </Title>
@@ -49,12 +45,12 @@ function Modal({ setGameEnd, quizType, setIsCredit }) {
                             ref={inputRef}
                             type="text"
                             placeholder="한줄평을 남겨보세요!"
+                            onKeyDown={onKeyDown}
                         />
                     </label>
                 </Input>
                 <Footer>
                     <button
-                        type="submit"
                         onClick={() => {
                             setGameEnd(false);
                             handleComment();
@@ -68,7 +64,7 @@ function Modal({ setGameEnd, quizType, setIsCredit }) {
     );
 }
 
-export default Modal;
+export default GameEndModal;
 
 const ModalBackground = styled.div`
     width: 100vw;
@@ -93,19 +89,6 @@ const ModalContainer = styled.div`
     padding: 25px;
 `;
 
-const TitleCloseBtn = styled.div`
-    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
-
-    display: flex;
-    justify-content: flex-end;
-    button {
-        background-color: transparent;
-        border: none;
-        font-family: 'Comfortaa', sans-serif;
-        font-size: 25px;
-        cursor: pointer;
-    }
-`;
 const Title = styled.div`
     display: inline-block;
     text-align: center;
@@ -135,24 +118,7 @@ const Body = styled.div`
     }
 `;
 
-const RankList = styled.div`
-    background: Red;
-    width: 350px;
-    height: 25px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-
-    h4 {
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 22px;
-    }
-`;
-
-const Input = styled.form`
+const Input = styled.div`
     margin: auto;
     width: 443px;
     height: 60px;

@@ -6,8 +6,15 @@ import { SvgX } from "../../../Asset/Icon/etc/svg_etc";
 
 import Virus from "./Virus";
 
-function Modal({ setModalOpen, quizType, setGamePassed, setGameEnd }) {
-  const dispatch = useDispatch();
+function Modal({
+    setModalOpen,
+    quizType,
+    setGamePassed,
+    gameEnd,
+    setGameEnd,
+    setIsFirst,
+}) {
+    const dispatch = useDispatch();
 
   const roomId = useSelector((state) => state.room.roomInfo.roomId);
   const modalData = useSelector((state) => state.quiz);
@@ -20,15 +27,12 @@ function Modal({ setModalOpen, quizType, setGamePassed, setGameEnd }) {
 
   const { chance } = useSelector(({ game }) => game);
 
-  useEffect(() => {
-    dispatch(quizActions.refQuiz(roomId, quizType));
-  }, []);
-
-  const handleExitgame = () => {
-    console.log("Modal.js에서 handleExitgame 실행");
-    setGamePassed(true);
-    setGameEnd(true);
-  };
+    const handleExitgame = () => {
+        console.log('Modal.js에서 handleExitgame 실행');
+        setGamePassed(true);
+        setGameEnd(true);
+        setIsFirst(true);
+    };
 
   const handleVirusAnswer = () => {
     let _temp = virusInputOne + ", " + virusInputTwo;
@@ -69,11 +73,49 @@ function Modal({ setModalOpen, quizType, setGamePassed, setGameEnd }) {
     socket.emit("chance");
   };
 
-  const onKeyDown = (e) => {
-    if (e.key == "Enter") {
-      handleAnswer();
-    }
-  };
+    useEffect(() => {
+        dispatch(quizActions.refQuiz(roomId, quizType));
+    }, []);
+
+    return (
+        <>
+            {modalData.pass === 'SUCCESS' ? (
+                <ModalBackground
+                    onClick={() => {
+                        document.exitPointerLock();
+                    }}
+                >
+                    <ModalContainer>
+                        <TitleCloseBtn>
+                            <button
+                                onClick={() => {
+                                    setModalOpen(false);
+                                }}
+                            >
+                                <SvgX />
+                            </button>
+                        </TitleCloseBtn>
+                        <SolvedTitle>
+                            <h1>이미 해결한 문제입니다.</h1>
+                        </SolvedTitle>
+                    </ModalContainer>
+                </ModalBackground>
+            ) : (
+                <ModalBackground
+                    onClick={() => {
+                        document.exitPointerLock();
+                    }}
+                >
+                    <ModalContainer>
+                        <TitleCloseBtn>
+                            <button
+                                onClick={() => {
+                                    setModalOpen(false);
+                                }}
+                            >
+                                <SvgX />
+                            </button>
+                        </TitleCloseBtn>
 
   return (
     <>
@@ -366,22 +408,22 @@ const Hint = styled.div`
 `;
 
 const HintModal = styled.div`
-  position: absolute;
-  bottom: 4vh;
-  width: 443px;
-  height: 82px;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 30px;
-  z-index: 11;
-  p {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    color: #ffffff;
-  }
+    position: absolute;
+    bottom: 4vh;
+    width: 443px;
+    height: 82px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 30px;
+    z-index: 11;
+    p {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: center;
+        color: #ffffff;
+    }
 `;

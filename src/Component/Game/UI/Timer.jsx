@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreator as gameActions } from '../../../redux/modules/game';
 
-const Timer = ({ setGameTime, gameEnd, setGameEnd, gamePassed }) => {
+const Timer = ({ setGameTime, gameEnd, setGameEnd, gamePassed, isFirst }) => {
     const dispatch = useDispatch();
-
-    const { isCreator } = useSelector(({ user }) => user);
 
     const [minutes, setMinutes] = useState(30);
     const [seconds, setSeconds] = useState(0);
@@ -34,7 +32,7 @@ const Timer = ({ setGameTime, gameEnd, setGameEnd, gamePassed }) => {
     }, [minutes, seconds]);
 
     useEffect(() => {
-        if (gameEnd) {
+        if (gameEnd && isFirst) {
             console.log('Timer.jsx에서 dispatch');
             const _temp = streamDuration;
 

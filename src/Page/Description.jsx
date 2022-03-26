@@ -155,6 +155,7 @@ const Catch = styled.span`
 const Background1 = styled.div`
     position: absolute;
     background: url('image/desc_background1.png');
+    background-size: cover;
     width: 100%;
     height: 1074px;
     top: -120px;
@@ -165,6 +166,7 @@ const Background1 = styled.div`
 const Background2 = styled.div`
     position: absolute;
     background: url('image/desc_background2.png');
+    background-size: cover;
     width: 100%;
     height: 1074px;
     background-position-x: -250px;
@@ -175,6 +177,7 @@ const Background2 = styled.div`
 const Background3 = styled.div`
     position: absolute;
     background: url('image/desc_background3.png');
+    background-size: cover;
     width: 100%;
     background-position-x: 350px;
     height: 1074px;
