@@ -2,7 +2,7 @@ import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 
 import GlobalStyles from "./GlobalStyle";
 import Chat from "./Component/Element/Chat";
-import { Main, Rank, Update, GameRoom, Description } from "./Page";
+import { Main, Rank, Update, GameRoom, Description, NotFound } from "./Page";
 import Loading from "./Component/Main/Loading";
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
         <Route path="/game" element={<GameRoom />} />
         <Route path="/desc" element={<Description />} />
         <Route path="/update" element={<Update />} />
+        <Route path="/notfound" element={<NotFound />} />
       </Routes>
     </Router>
   );
