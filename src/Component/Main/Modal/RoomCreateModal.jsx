@@ -57,9 +57,7 @@ const RoomCreateModal = ({ closeModal }) => {
                                 방 개설하기
                             </MakeButton>
                         </div>
-                        <FooterContainer>
-                            친구들에게 공유하시면 함께 즐길 수 있어요
-                        </FooterContainer>
+                        <FooterContainer></FooterContainer>
                     </FlexContainer>
                 </ModalWindow>
             )}
@@ -71,7 +69,7 @@ const ModalWindow = styled.div`
     position: fixed;
     z-index: 3;
     width: 37.292vw;
-    height: 500px;
+    height: 400px;
     left: 31.354vw;
     top: 112px;
     background: #ffffff;
@@ -133,7 +131,7 @@ const MicContiner = styled.div`
 const MakeButton = styled.button`
     width: 180px;
     height: 54px;
-    margin: 60px;
+    margin: 30px;
     background: #5668e8;
     border: 3px solid #5668e8;
     box-sizing: border-box;

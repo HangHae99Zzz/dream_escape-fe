@@ -120,7 +120,7 @@ const StyledNavLink = styled(NavLink)`
 
     span {
         font-style: normal;
-        font-weight: bold;
+        font-weight: 600;
         font-size: 18px;
         line-height: 22px;
         margin-left: 10px;

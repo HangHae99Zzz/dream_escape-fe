@@ -48,11 +48,11 @@ const EndingCredit = () => {
 export default EndingCredit;
 
 const sober = keyframes`
-// 0% {
-//     backdrop-filter: hue-rotate(30deg)
-// }85% {
-//     backdrop-filter:hue-rotate(120deg)
-// }100% {backdrop-filter: hue-rotate(30deg)}
+/* 0% {
+    backdrop-filter: hue-rotate(30deg)
+}85% {
+    backdrop-filter:hue-rotate(120deg)
+}100% {backdrop-filter: hue-rotate(30deg)} */
 0% {
     backdrop-filter: contrast(1)
 }30% {

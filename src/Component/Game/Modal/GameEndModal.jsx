@@ -39,7 +39,7 @@ function GameEndModal({ setGameEnd, quizType, setIsCredit }) {
                 <Body>
                     <EndingRankList list={rank}></EndingRankList>
                 </Body>
-                <Input>
+                <InputWrapper>
                     <label>
                         <input
                             ref={inputRef}
@@ -48,7 +48,7 @@ function GameEndModal({ setGameEnd, quizType, setIsCredit }) {
                             onKeyDown={onKeyDown}
                         />
                     </label>
-                </Input>
+                </InputWrapper>
                 <Footer>
                     <button
                         onClick={() => {
@@ -95,7 +95,7 @@ const Title = styled.div`
     margin-top: 10px;
     h1 {
         font-weight: 700;
-        font-size: 30px;
+        font-size: 28px;
         line-height: 36px;
         color: #5668e8;
     }
@@ -118,7 +118,7 @@ const Body = styled.div`
     }
 `;
 
-const Input = styled.div`
+const InputWrapper = styled.div`
     margin: auto;
     width: 443px;
     height: 60px;
