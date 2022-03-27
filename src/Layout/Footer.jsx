@@ -28,7 +28,16 @@ const Footer = props => {
                             <div>청소년보기정책</div>
                             <div>고객센터</div>
                         </Rigth>
-                        <Left></Left>
+                        <LogoContainer>
+                            <a
+                                href="https://github.com/HangHae99Zzz"
+                                rel="noreferrer"
+                                target={'_blank'}
+                            >
+                                <GitHub src="/image/GitHub_Logo.png"></GitHub>
+                            </a>
+                            <Hanghae></Hanghae>
+                        </LogoContainer>
                     </FlexContainer>
                 </FooterBottom>
             </PaddingLeft>
@@ -87,7 +96,21 @@ const Rigth = styled.div`
         font-weight: bold;
     }
 `;
-const Left = styled.div`
+
+const LogoContainer = styled.div`
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+`;
+
+const GitHub = styled.img`
+    width: 72px;
+    height: fit-content;
+    cursor: pointer;
+`;
+
+const Hanghae = styled.div`
     width: 72px;
     height: 50px;
     padding-right: 51px;
