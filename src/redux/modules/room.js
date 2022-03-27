@@ -1,9 +1,8 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
-
+import { Navigate, Link } from "react-router-dom";
 import instance from "../../util/request";
 import socket from "./socket";
-import NotFound from "../../Page/NotFound";
 
 // actions
 const GET_ROOM_INFO = "GET_ROOM_INFO";
@@ -63,7 +62,9 @@ const refRoomList = (page) => {
     instance
       .get(`rooms/pages/${page}`)
       .then((res) => dispatch(getRoomList(res.data)))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        Navigate("/notfound");
+      });
   };
 };
 

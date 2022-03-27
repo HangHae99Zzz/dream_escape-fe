@@ -25,4 +25,3 @@ const useGAPageTracking = () => {
 };
 
 export default useGAPageTracking;
-// export { useGAPageTracking };
