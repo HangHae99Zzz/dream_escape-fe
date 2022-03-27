@@ -21,6 +21,7 @@ const RoomCreateModal = ({ closeModal }) => {
         const teamName = teamNameRef.current.value;
 
         if (!teamName) return alert('팀 이름을 입력해주세요');
+        if (teamName.length > 15) return alert('15자 이내로 작성해주세요');
         dispatch(userActions.isCreator(true));
         dispatch(roomActions.makeRoom(teamName, socket.id));
         SetWaitModal(true);

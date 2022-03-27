@@ -13,7 +13,7 @@ const WaitModal = ({ closeModal }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { socket } = useSelector(({ socket }) => socket);
-    const { roomInfo, peers } = useSelector(({ room }) => room);
+    const { roomInfo, peers, myNickName } = useSelector(({ room }) => room);
     const { isCreator } = useSelector(({ user }) => user);
 
     const roomUrl = useRef();
@@ -61,6 +61,10 @@ const WaitModal = ({ closeModal }) => {
             </div>
             <Label>현재인원</Label>
             <UserWrapper>
+                <UserContainer>
+                    <UserImg img={myNickName.img} />
+                    {myNickName.nickName}
+                </UserContainer>
                 {peers?.map((peer, i) => (
                     <UserContainer key={i}>
                         <UserImg img={peer.img} />
@@ -118,6 +122,7 @@ const XIcon = styled.img`
     position: absolute;
     top: 39px;
     right: 42px;
+    cursor: pointer;
 `;
 const RoomName = styled.h3`
     margin-bottom: 47px;
@@ -173,6 +178,9 @@ const ImgContainer = styled.div`
     height: 10.417vw;
     background: #e3e3e3;
     border-radius: 30px;
+    background: url('image/room.png');
+    background-size: cover;
+    background-repeat: no-repeat;
 `;
 const MakeButton = styled.button`
     width: 180px;

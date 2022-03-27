@@ -18,25 +18,10 @@ const Video = ({ stream, muted }) => {
     );
 };
 
-const Container = styled.div`
-    position: relative;
-    display: inline-block;
-    width: 240px;
-    height: 270px;
-    margin: 5px;
-`;
+const Container = styled.div``;
 
-const VideoContainer = styled.video`
-    width: 240px;
-    height: 240px;
-    background-color: black;
-`;
+const VideoContainer = styled.video``;
 
-const UserLabel = styled.p`
-    display: inline-block;
-    position: absolute;
-    top: 230px;
-    left: 0px;
-`;
+const UserLabel = styled.p``;
 
 export default Video;

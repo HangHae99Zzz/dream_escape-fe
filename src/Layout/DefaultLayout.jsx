@@ -16,6 +16,5 @@ const DefaultLayout = ({ children }) => {
 export default DefaultLayout;
 
 const Wrapper = styled.div`
-    padding-top: 1vw;
     padding-left: 14.58vw;
 `;

@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-
+import { Navigate, Link } from 'react-router-dom';
 import instance from '../../util/request';
 import socket from './socket';
 
@@ -26,7 +26,7 @@ const initialState = {
     roomInfo: null,
     roomList: null,
     peers: [],
-    myNickName: null,
+    myNickName: {},
 };
 
 //  middleware Actions
@@ -62,7 +62,9 @@ const refRoomList = page => {
         instance
             .get(`rooms/pages/${page}`)
             .then(res => dispatch(getRoomList(res.data)))
-            .catch(err => console.log(err));
+            .catch(err => {
+                Navigate('/notfound');
+            });
     };
 };
 
@@ -116,7 +118,7 @@ const refPeers = (roomId, socketId) => {
                 const myNickName = res.data.userList.filter(
                     user => user.userId === socketId
                 );
-                dispatch(getMyNickName(myNickName[0].nickName));
+                dispatch(getMyNickName(myNickName[0]));
                 const peers = res.data.userList.filter(
                     user => user.userId !== socketId
                 );

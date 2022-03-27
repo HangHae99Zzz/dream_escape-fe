@@ -49,10 +49,10 @@ const GameUsers = ({ gameEnd, setGameEnd, gamePassed, chance, isFirst }) => {
                 <Manual />
             </ManualWrapper>
             <MyInfo>
-                <MyMic>
+                <MyMic myNickName={myNickName}>
                     <SvgMic />
                 </MyMic>
-                <p>{myNickName}</p>
+                <p>{myNickName.nickName}</p>
             </MyInfo>
         </Container>
     );
@@ -160,7 +160,8 @@ const MyMic = styled.div`
     height: 76px;
 
     border-radius: 50%;
-    background-image: url('image/mymic.png');
+    background-image: url(${props => props.myNickName.img});
+    background-size: contain;
 
     display: flex;
     justify-content: center;

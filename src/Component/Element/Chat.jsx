@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import styled from 'styled-components';
 
@@ -24,9 +25,9 @@ const SOCKET_SERVER_URL = 'https://www.roomescape57.shop:3000/';
 const Chat = () => {
     const { isIn } = useSelector(({ user }) => user);
     const { roomInfo } = useSelector(({ room }) => room);
-    const { countLimit } = useSelector(({ game }) => game);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const socketRef = useRef();
     const pcsRef = useRef();
@@ -121,6 +122,10 @@ const Chat = () => {
             if (!deviceId) await getDevices();
         } catch (e) {
             console.log(`getUserMedia error: ${e}`);
+            window.alert(
+                '정상적인 게임 플레이를 위해 오디오 인 아웃 디바이스가 필요합니다. '
+            );
+            navigate('/notfound');
         }
     }, []);
 
@@ -333,17 +338,7 @@ const Chat = () => {
         return (
             <>
                 <ChatWrapper>
-                    <video
-                        style={{
-                            width: 240,
-                            height: 240,
-                            margin: 5,
-                            backgroundColor: 'black',
-                        }}
-                        muted
-                        ref={localVideoRef}
-                        autoPlay
-                    />
+                    <video muted ref={localVideoRef} autoPlay />
                     <button ref={muteBtn} onClick={() => handleMuteClick()}>
                         {'muted ' + muted}
                     </button>

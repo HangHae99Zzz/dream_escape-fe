@@ -54,10 +54,9 @@ const sober = keyframes`
     backdrop-filter:hue-rotate(120deg)
 }100% {backdrop-filter: hue-rotate(30deg)} */
 0% {
-    backdrop-filter: contrast(1)
-}30% {
-    backdrop-filter: contrast(0.8)
-}100% {backdrop-filter: contrast(.1)}
+    backdrop-filter: brightness(3.5);
+}100% {    backdrop-filter: brightness(.1);
+}
 `;
 
 const slideUp = keyframes`

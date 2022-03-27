@@ -146,7 +146,7 @@ function Modal({
                         ) : quizType === 'Bb' ? (
                             <>
                                 <Body>
-                                    <div style={{ marginTop: '13px' }}>
+                                    <div>
                                         <img
                                             src="./image/Bb.png"
                                             alt=""
@@ -156,7 +156,8 @@ function Modal({
                                             }}
                                         />
                                     </div>
-                                    {/* <div className="hint">
+                                    {/*  힌트 이미지 위에 올라간거 디자이너께 받아야 함
+                                    <div className="hint">
                                         {modalData ? (
                                             <p>{modalData.hint}</p>
                                         ) : (
@@ -179,7 +180,7 @@ function Modal({
                         ) : quizType === 'Ca' ? (
                             <>
                                 <Body>
-                                    <div style={{ marginTop: '13px' }}>
+                                    <div>
                                         <img src="./image/Ca.png" alt="" />
                                     </div>
                                 </Body>
@@ -400,7 +401,7 @@ const Hint = styled.div`
 
 const HintModal = styled.div`
     position: absolute;
-    bottom: 4vh;
+    bottom: 8vh;
     width: 443px;
     height: 82px;
     margin-top: 10px;
