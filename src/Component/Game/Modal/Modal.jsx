@@ -10,7 +10,6 @@ function Modal({
     setModalOpen,
     quizType,
     setGamePassed,
-    gameEnd,
     setGameEnd,
     setIsFirst,
 }) {
