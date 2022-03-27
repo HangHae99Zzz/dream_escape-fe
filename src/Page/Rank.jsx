@@ -158,7 +158,7 @@ const Header = styled.div`
   background: #5668e8;
   border-radius: 30px;
   .third {
-    flex: 10%;
+    flex: 15%;
   }
 `;
 
