@@ -7,12 +7,12 @@ const Footer = props => {
             <PaddingLeft>
                 <FooterTop>
                     <div>
-                        <Roll style={{ margin: '0 7.5px 0 0' }}>designer</Roll>{' '}
+                        <Roll style={{ margin: '0 10px 0 0' }}>designer</Roll>{' '}
                         kim bo kyung seo hye won{' '}
                     </div>
                     <div>
                         <Roll>developer</Roll> kim ga eun ryu gang hyeon ban won
-                        jae woo hye min choi gyu won
+                        jae woo hye min choi kyu won
                     </div>
                 </FooterTop>
                 <FooterBottom>
@@ -28,7 +28,16 @@ const Footer = props => {
                             <div>청소년보기정책</div>
                             <div>고객센터</div>
                         </Rigth>
-                        <Left></Left>
+                        <LogoContainer>
+                            <a
+                                href="https://github.com/HangHae99Zzz"
+                                rel="noreferrer"
+                                target={'_blank'}
+                            >
+                                <GitHub src="/image/GitHub_Logo.png"></GitHub>
+                            </a>
+                            <Hanghae></Hanghae>
+                        </LogoContainer>
                     </FlexContainer>
                 </FooterBottom>
             </PaddingLeft>
@@ -51,6 +60,7 @@ const FooterTop = styled.div`
     color: #8f8f8f;
     padding: 100px 0 100px;
     line-height: 22px;
+    text-transform: uppercase;
 `;
 
 const Roll = styled.span`
@@ -82,8 +92,25 @@ const Rigth = styled.div`
     display: flex;
     justify-content: space-between;
     color: #b5b5b5;
+    div {
+        font-weight: bold;
+    }
 `;
-const Left = styled.div`
+
+const LogoContainer = styled.div`
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+`;
+
+const GitHub = styled.img`
+    width: 72px;
+    height: fit-content;
+    cursor: pointer;
+`;
+
+const Hanghae = styled.div`
     width: 72px;
     height: 50px;
     padding-right: 51px;

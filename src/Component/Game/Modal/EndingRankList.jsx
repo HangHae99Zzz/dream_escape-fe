@@ -99,6 +99,7 @@ const RankList = styled.table`
 
         td {
             font-weight: 600;
+            padding: 10px 0;
         }
     }
 

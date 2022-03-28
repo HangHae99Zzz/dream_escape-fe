@@ -14,7 +14,6 @@ const Contents = () => {
     return (
         <>
             <FlexContainer>
-                <Banner src="image/banner.png"></Banner>
                 <RoomListContainer>
                     <RoomListHeader>
                         <Sub>게임방리스트</Sub>
@@ -48,14 +47,9 @@ const Contents = () => {
 };
 
 const FlexContainer = styled.div`
-    width: 85%;
+    width: 83.7%;
     height: 100%;
-    margin-top: 36px;
-`;
-
-const Banner = styled.img`
-    width: 100%;
-    object-fit: contain;
+    margin-top: 416px;
 `;
 
 const RoomListContainer = styled.div`
@@ -83,7 +77,7 @@ const Sub = styled.h3`
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
-    color: #000000;
+    color: #394ddb;
 `;
 
 const ToggleContainer = styled.div`

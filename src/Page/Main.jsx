@@ -34,13 +34,15 @@ const Main = () => {
 
 const MainContainer = styled.div`
     width: 100%;
+    background-image: url('image/banner.png');
+    background-repeat: no-repeat;
 `;
 
 const ContentsContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-left: -1.1099999999999994vw;
+    margin-left: -2.099999999999998vw;
     align-items: center;
 `;
 
