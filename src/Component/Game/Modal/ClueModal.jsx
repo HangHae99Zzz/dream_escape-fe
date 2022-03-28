@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as quizActions } from "../../../redux/modules/quiz";
-import { SvgX } from "../../../Asset/Icon/etc/svg_etc";
+import { SvgXW } from "../../../Asset/Icon/etc/svg_etc";
 
 function Modal({ clueType, setClueModalOpen }) {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function Modal({ clueType, setClueModalOpen }) {
                   setClueModalOpen(false);
                 }}
               >
-                <SvgX />
+                <SvgXW />
               </button>
             </TitleCloseBtn>
 
@@ -94,6 +94,7 @@ const TitleCloseBtn = styled.div`
     color: white;
     cursor: pointer;
   }
+  padding-right: 7px;
 `;
 const Title = styled.div`
   display: inline-block;
