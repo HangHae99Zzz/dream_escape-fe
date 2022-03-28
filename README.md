@@ -54,9 +54,27 @@
 
 <br />
 
-## 📚 Library
+## 📚 Stack
+<!-- ## 📚 Library -->
 
-| Name                              | Tag                  |
+<div align=center>
+  <img src="https://img.shields.io/badge/React-60d3f3?style=for-the-badge&logo=react&logoColor=black"> 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+  <br>
+  <img src="https://img.shields.io/badge/Redux-7247b5?style=for-the-badge&logo=redux&logoColor=white"> 
+  <img src="https://img.shields.io/badge/styled-c260af?style=for-the-badge&logo=styledcomponents&logoColor=black">
+  <img src="https://img.shields.io/badge/Router-ec4151?style=for-the-badge&logo=reactrouter&logoColor=black">
+  <br>
+  <img src="https://img.shields.io/badge/threejs-ffffff?style=for-the-badge&logo=three.js&logoColor=black"> 
+  <img src="https://img.shields.io/badge/webrtc-ffffff?style=for-the-badge&logo=webrtc&logoColor=black">
+  <img src="https://img.shields.io/badge/socket.io-ffffff?style=for-the-badge&logo=socket.io&logoColor=black">
+  <br>
+  <img src="https://img.shields.io/badge/lighthouse-1a73e8?style=for-the-badge&logo=lighthouse&logoColor=white">
+  <img src="https://img.shields.io/badge/netlify-4fb5ba?style=for-the-badge&logo=netlify&logoColor=white">
+  
+</div>
+
+<!-- | Name                              | Tag                  |
 | --------------------------------- | -------------------- |
 | React-Redux                       | Redux                |
 | Immer, Redux-Actions, Redux-Thunk | Redux                |
@@ -64,7 +82,7 @@
 | Axios                             | HTTP Networking      |
 | Three(drei,fiber)                 | 3D Rendering         |
 | socket.io                         | WebScoket Networking |
-| Styled Component                  | Styling              |
+| Styled Component                  | Styling              | -->
 
 <br />
 
