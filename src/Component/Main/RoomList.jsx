@@ -71,6 +71,7 @@ const RoomList = ({ page, isFiltered }) => {
                                                     'image/peers.svg'
                                                 }
                                                 alt="참가자 수: "
+                                                width={'auto'}
                                             />
                                             {room.currentNum}
                                         </IconContainer>

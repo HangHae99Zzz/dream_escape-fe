@@ -5,7 +5,7 @@ const MuteButton = ({ abs }) => {
     return (
         <Button abs={abs}>
             <Label>ON</Label>
-            <MicIcon src="image/mic.svg" alt="" />
+            <MicIcon src="image/mic.svg" alt="mic" width={'14px'} />
         </Button>
     );
 };
@@ -21,7 +21,6 @@ const Label = styled.div`
     font-weight: bold;
 `;
 const MicIcon = styled.img`
-    width: 14px;
     margin-left: 8px;
 `;
 

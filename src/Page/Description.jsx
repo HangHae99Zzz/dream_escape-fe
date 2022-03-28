@@ -35,11 +35,23 @@ const Description = () => {
                         </Desc>
                     </DescContainer>
                     <ImgContainer>
-                        <Img1 src="image/desc_image1.png" />
-                        <ImgContainer2>
-                            <Img2 src="image/desc_image2.png" />
-                            <Img3 src="image/desc_image3.png" />
-                        </ImgContainer2>
+                        <img
+                            src="image/desc_image1.png"
+                            alt="image1.png"
+                            width={'auto'}
+                        />
+                        <div>
+                            <img
+                                src="image/desc_image2.png"
+                                alt="image2.png"
+                                width={'auto'}
+                            />
+                            <img
+                                src="image/desc_image3.png"
+                                alt="image2.png"
+                                width={'auto'}
+                            />
+                        </div>
                     </ImgContainer>
                     <Bottom>
                         <Desc>
@@ -128,10 +140,6 @@ const ImgContainer = styled.div`
     margin-bottom: 80px;
 `;
 
-const Img1 = styled.img``;
-const ImgContainer2 = styled.div``;
-const Img2 = styled.img``;
-const Img3 = styled.img``;
 const Bottom = styled.div`
     width: 600px;
     height: 715px;

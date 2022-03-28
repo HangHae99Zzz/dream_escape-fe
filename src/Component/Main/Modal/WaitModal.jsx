@@ -52,7 +52,8 @@ const WaitModal = ({ closeModal }) => {
             <ExitContainer>
                 <XIcon
                     src="image/x.svg"
-                    alt=""
+                    alt="X"
+                    width={'auto'}
                     onClick={() => exit(socket.id)}
                 />
             </ExitContainer>
@@ -126,7 +127,6 @@ const XIcon = styled.img`
 `;
 const RoomName = styled.h3`
     margin-bottom: 47px;
-    font-family: Pretendard;
     font-style: normal;
     font-weight: bold;
     font-size: 24px;
@@ -178,7 +178,7 @@ const ImgContainer = styled.div`
     height: 10.417vw;
     background: #e3e3e3;
     border-radius: 30px;
-    background: url('image/room.png');
+    background: url('image/room.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 `;

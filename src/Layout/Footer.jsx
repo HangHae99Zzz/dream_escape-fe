@@ -34,7 +34,11 @@ const Footer = props => {
                                 rel="noreferrer"
                                 target={'_blank'}
                             >
-                                <GitHub src="/image/GitHub_Logo.png"></GitHub>
+                                <GitHub
+                                    src="/image/GitHub_Logo.png"
+                                    alt="GitHub"
+                                    width={'72px'}
+                                ></GitHub>
                             </a>
                             <Hanghae></Hanghae>
                         </LogoContainer>
@@ -105,7 +109,6 @@ const LogoContainer = styled.div`
 `;
 
 const GitHub = styled.img`
-    width: 72px;
     height: fit-content;
     cursor: pointer;
 `;

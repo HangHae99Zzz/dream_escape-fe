@@ -39,7 +39,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-    background-image: url('image/room.png');
+    background-image: url('image/room.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

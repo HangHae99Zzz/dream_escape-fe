@@ -37,7 +37,8 @@ const RoomCreateModal = ({ closeModal }) => {
                         <ExitContainer>
                             <XIcon
                                 src="image/x.svg"
-                                alt=""
+                                alt="X"
+                                width={'auto'}
                                 onClick={() => closeModal(false)}
                             />
                         </ExitContainer>
