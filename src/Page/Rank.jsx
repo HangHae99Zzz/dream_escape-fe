@@ -35,12 +35,11 @@ const Rank = () => {
           </ContainerNone>
         ) : (
           <Container>
-            <Title>
-              {/* <h4>랭킹조회</h4> */}
-              {/* <SvgRanking /> */}
-            </Title>
+            <Title></Title>
             <Header>
-              <div className="first">순위</div>
+              <div className="first">
+                <div id="rank">순위</div>
+              </div>
               <div className="second">방이름(인원수)</div>
               <div className="third">총 소요 시간</div>
             </Header>
@@ -104,11 +103,11 @@ const Container = styled.div`
   }
 
   .second {
-    flex: 60%;
+    flex: 50%;
   }
 
   .third {
-    flex: 20%;
+    flex: 30%;
   }
 
   .teamname {
@@ -160,8 +159,18 @@ const Header = styled.div`
   div {
     font-weight: 500;
   }
+  .first {
+    /* background-color: red; */
+    display: flex;
+
+    justify-content: center;
+    #rank {
+      /* background-color: blue; */
+      width: 80%;
+    }
+  }
   .third {
-    flex: 10%;
+    text-align: center;
   }
 `;
 
@@ -181,6 +190,10 @@ const TopThree = styled.div`
 
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
   height: 90px;
+
+  .first {
+    padding-left: 57px;
+  }
 
   .top-three-teamname {
     font-size: 24px;

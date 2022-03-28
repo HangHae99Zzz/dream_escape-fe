@@ -277,6 +277,7 @@ const TitleCloseBtn = styled.div`
     font-size: 25px;
     cursor: pointer;
   }
+  padding-right: 7px;
 `;
 
 const SolvedTitle = styled.div`
