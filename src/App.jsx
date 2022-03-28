@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import useGAPageTracking from './GAPageTracking';
 
 import GlobalStyles from './GlobalStyle';
 import Chat from './Component/Element/Chat';
-import { Main, Rank, Update, GameRoom, Description, NotFound } from './Page';
+import { Main, Rank, Update, GameRoom, NotFound } from './Page';
 import Loading from './Component/Main/Loading';
 
 function App() {
     useGAPageTracking();
 
+    const Description = React.lazy(() => import('./Page/Description'));
+
     return (
-        <>
+        <Suspense fallback={<div>Loading...</div>}>
             <GlobalStyles />
             <Chat />
             <Routes>
@@ -24,7 +26,7 @@ function App() {
                 <Route path="/update" element={<Update />} />
                 <Route path="/notfound" element={<NotFound />} />
             </Routes>
-        </>
+        </Suspense>
     );
 }
 

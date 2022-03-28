@@ -63,13 +63,13 @@ const WaitModal = ({ closeModal }) => {
             <Label>현재인원</Label>
             <UserWrapper>
                 <UserContainer>
-                    <UserImg img={myNickName.img} />
-                    {myNickName.nickName}
+                    <UserImg img={myNickName?.img} />
+                    {myNickName?.nickName}
                 </UserContainer>
                 {peers?.map((peer, i) => (
                     <UserContainer key={i}>
-                        <UserImg img={peer.img} />
-                        {peer.nickName}
+                        <UserImg img={peer?.img} />
+                        {peer?.nickName}
                     </UserContainer>
                 ))}
             </UserWrapper>
@@ -197,6 +197,7 @@ const MakeButton = styled.button`
     text-align: center;
 
     color: #ffffff;
+    cursor: pointer;
 `;
 const CopyContaier = styled.div`
     width: 12%;

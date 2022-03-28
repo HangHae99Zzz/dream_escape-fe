@@ -34,7 +34,7 @@ const Main = () => {
 
 const MainContainer = styled.div`
     width: 100%;
-    background-image: url('image/banner.png');
+    background-image: url('image/banner.jpg');
     background-repeat: no-repeat;
 `;
 

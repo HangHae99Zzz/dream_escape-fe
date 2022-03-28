@@ -115,7 +115,7 @@ const GitHub = styled.img`
 
 const Hanghae = styled.div`
     width: 72px;
-    height: 50px;
+    height: 54px;
     padding-right: 51px;
     background-image: url('/image/hanghae.png');
     background-repeat: no-repeat;
