@@ -4,16 +4,12 @@ import { Canvas } from '@react-three/fiber';
 import { Html, useProgress, PointerLockControls } from '@react-three/drei';
 import { useDispatch, useSelector } from 'react-redux';
 import WasdControls from './WasdControls';
-import Room from './Room';
 import { Modal, ClueModal, GameEndModal } from './Modal';
 import GameUsers from './UI/GameUsers';
 import { EndingCredit } from '../Main';
 
 const ThreeRoom = () => {
-    const dispatch = useDispatch();
-
-    const roomId = useSelector(state => state.room.roomInfo.roomId);
-    const modalData = useSelector(state => state.quiz);
+    const Room = React.lazy(() => import('./Room'));
 
     const [quizType, setQuizType] = useState('');
     const [clueType, setClueType] = useState('');
