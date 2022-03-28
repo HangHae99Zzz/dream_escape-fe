@@ -1,18 +1,27 @@
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+
 import useGAPageTracking from './GAPageTracking';
 
 import GlobalStyles from './GlobalStyle';
 import Chat from './Component/Element/Chat';
-import { Main, Rank, Update, GameRoom, NotFound } from './Page';
+import { Main, Rank, Update, GameRoom, NotFound, Mobile } from './Page';
 import Loading from './Component/Main/Loading';
 
 function App() {
     useGAPageTracking();
 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+
     const Description = React.lazy(() => import('./Page/Description'));
 
-    return (
+    return isTabletOrMobile ? (
+        <>
+            <GlobalStyles />
+            <Mobile />
+        </>
+    ) : (
         <Suspense fallback={<div>Loading...</div>}>
             <GlobalStyles />
             <Chat />
