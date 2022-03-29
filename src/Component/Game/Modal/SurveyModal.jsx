@@ -135,4 +135,7 @@ const SurveyData = styled.div`
 
     color: #ffffff;
   }
+  a:visited {
+    color: #ffffff;
+  }
 `;
