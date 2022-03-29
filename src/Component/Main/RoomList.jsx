@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { actionCreator as roomActions } from '../../redux/modules/room';
@@ -10,6 +10,7 @@ import { ModalBG } from '../Element/index';
 
 const RoomList = ({ page, isFiltered }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { roomId } = useParams();
     const { roomList } = useSelector(({ room }) => room);
     const { socket } = useSelector(({ socket }) => socket);
@@ -37,9 +38,9 @@ const RoomList = ({ page, isFiltered }) => {
         if (openWaitModal) clearTimeout(timeout);
 
         if (isFiltered) {
-            dispatch(roomActions.refRoomList(8));
+            dispatch(roomActions.refRoomList(8, navigate));
         } else {
-            dispatch(roomActions.refRoomList(page));
+            dispatch(roomActions.refRoomList(page, navigate));
         }
 
         return () => clearTimeout(timeout);

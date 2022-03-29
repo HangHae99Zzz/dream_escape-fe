@@ -24,7 +24,14 @@ const ThreeRoom = () => {
 
     function Loader() {
         const { progress } = useProgress();
-        return <Html center>{progress} % loaded</Html>;
+        return (
+            <Html
+                center
+                style={{ width: '100vw', height: '100vh', background: 'black' }}
+            >
+                {progress} % loaded
+            </Html>
+        );
     }
 
     return (

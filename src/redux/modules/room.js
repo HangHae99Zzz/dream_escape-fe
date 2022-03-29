@@ -1,8 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import { Navigate, Link } from 'react-router-dom';
 import instance from '../../util/request';
-import socket from './socket';
 
 // actions
 const GET_ROOM_INFO = 'GET_ROOM_INFO';
@@ -57,13 +55,14 @@ const makeRoom = (teamName, socketId) => {
 };
 
 // 방 리스트 조회하기
-const refRoomList = page => {
+const refRoomList = (page, navigate) => {
     return function (dispatch, getState) {
         instance
             .get(`rooms/pages/${page}`)
             .then(res => dispatch(getRoomList(res.data)))
             .catch(err => {
-                Navigate('/notfound');
+                console.log(err);
+                navigate('/notfound');
             });
     };
 };

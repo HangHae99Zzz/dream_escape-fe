@@ -300,7 +300,7 @@ const Chat = () => {
                 : null;
         });
         //////////////////////////////////////////////////////////////////////////
-        let count = 0;
+        let count = 4;
 
         socketRef.current.on('countPlus', () => {
             count++;
