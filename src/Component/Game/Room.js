@@ -24,6 +24,8 @@ export default function Model({
   const refCa = useRef();
   // 선물(Cylinder, Cube006, Cube008)
   const refDa = useRef();
+  const refDb = useRef();
+  const refDc = useRef();
 
   // Animate model
   useFrame((state) => {
@@ -32,7 +34,10 @@ export default function Model({
     refAb.current.rotation.y = (3 + Math.sin(t)) / 4;
     refBa.current.rotation.z = (-2 + Math.sin(t)) / 20;
     refCa.current.rotation.z = (0 + Math.sin(t)) / 20;
-    refDa.current.rotation.y = (3 + Math.sin(t)) / 4;
+    refDa.current.position.y = (1 + Math.cos(t)) / 2;
+    refDb.current.position.y = (1 + Math.sin(-t)) / 2;
+    refDc.current.position.y = (1 + Math.sin(t)) / 2;
+    refDc.current.rotation.y = (0 + Math.sin(t)) / 4;
   });
 
   const modalHandler = (quizType) => {
@@ -1218,12 +1223,13 @@ export default function Model({
         />
       </group>
       <mesh
-        refDa={refDa}
+        ref={refDa}
         geometry={nodes.Cube008?.geometry}
         material={materials["Gift.001"]}
         position={[-7.69, 0, 7.94]}
         rotation={[0, 0.66, 0]}
         scale={0.39}
+        onClick={() => surveyHandler()}
       >
         <mesh
           geometry={nodes.BezierCircle?.geometry}
@@ -1256,12 +1262,13 @@ export default function Model({
         />
       </mesh>
       <mesh
-        ref={refDa}
+        ref={refDb}
         geometry={nodes.Cube006?.geometry}
         material={materials["Gift.002"]}
         position={[-7.98, 0, 6.53]}
         rotation={[-Math.PI, 1.02, -Math.PI]}
         scale={0.31}
+        onClick={() => surveyHandler()}
       >
         <mesh
           geometry={nodes.BezierCircle001?.geometry}
@@ -1294,12 +1301,13 @@ export default function Model({
         />
       </mesh>
       <mesh
-        ref={refDa}
+        ref={refDc}
         geometry={nodes.Cylinder?.geometry}
         material={materials.Gift}
         position={[-6.79, 0, 7.09]}
         rotation={[0, -0.48, 0]}
         scale={0.53}
+        onClick={() => surveyHandler()}
       >
         <mesh
           geometry={nodes.BezierCircle002?.geometry}

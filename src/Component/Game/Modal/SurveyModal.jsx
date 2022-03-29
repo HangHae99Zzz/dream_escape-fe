@@ -29,7 +29,9 @@ const SurveyModal = ({ setSurveyModalOpen }) => {
             의견을 남겨주세요
           </p>
 
-          <a href="https://bit.ly/3uyuAoN">https://bit.ly/3uyuAoN</a>
+          <a href="https://bit.ly/3uyuAoN" target="_blank">
+            https://bit.ly/3uyuAoN
+          </a>
         </SurveyData>
       </ModalContainer>
     </ModalBackground>
@@ -76,6 +78,8 @@ const TitleCloseBtn = styled.div`
 `;
 
 const SurveyData = styled.div`
+  text-align: center;
+
   h1 {
     font-family: "Pretendard";
     font-style: normal;
