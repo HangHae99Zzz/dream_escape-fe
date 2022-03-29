@@ -4,7 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { Html, useProgress, PointerLockControls } from "@react-three/drei";
 import { useDispatch, useSelector } from "react-redux";
 import WasdControls from "./WasdControls";
-import { Modal, ClueModal, GameEndModal } from "./Modal";
+import { Modal, ClueModal, GameEndModal, SurveyModal } from "./Modal";
 import GameUsers from "./UI/GameUsers";
 import { EndingCredit } from "../Main";
 
@@ -15,6 +15,7 @@ const ThreeRoom = () => {
   const [clueType, setClueType] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [clueModalOpen, setClueModalOpen] = useState(false);
+  const [surveyModalOpen, setSurveyModalOpen] = useState(false);
   const [gameEnd, setGameEnd] = useState(false);
   const [gamePassed, setGamePassed] = useState(false);
   const [isCredit, setIsCredit] = useState(false);
@@ -41,6 +42,9 @@ const ThreeRoom = () => {
       {gameEnd && (
         <GameEndModal setGameEnd={setGameEnd} setIsCredit={setIsCredit} />
       )}
+      {surveyModalOpen && (
+        <SurveyModal setSurveyModalOpen={setSurveyModalOpen} />
+      )}
       {modalOpen && (
         <Modal
           setModalOpen={setModalOpen}
@@ -55,7 +59,9 @@ const ThreeRoom = () => {
         <ClueModal setClueModalOpen={setClueModalOpen} clueType={clueType} />
       )}
       {/* 가운데 원 */}
-      {!modalOpen && !clueModalOpen && !isCredit && <MouseCircle></MouseCircle>}
+      {!modalOpen && !clueModalOpen && !isCredit && !surveyModalOpen && (
+        <MouseCircle></MouseCircle>
+      )}
 
       <Canvas
         style={{ width: "100%", height: "100vh" }}
@@ -75,7 +81,7 @@ const ThreeRoom = () => {
           decay={2}
         />
         <pointLight position={[1, 1, 1]} color={0xf242cb} />
-        {modalOpen || clueModalOpen || gameEnd ? (
+        {modalOpen || clueModalOpen || gameEnd || surveyModalOpen ? (
           <PointerLockControls enabled={false} />
         ) : (
           <PointerLockControls enabled={true} />
@@ -89,6 +95,7 @@ const ThreeRoom = () => {
             setQuizType={setQuizType}
             setClueModalOpen={setClueModalOpen}
             setClueType={setClueType}
+            setSurveyModalOpen={setSurveyModalOpen}
             count={count}
             countLimit={countLimit}
           />
