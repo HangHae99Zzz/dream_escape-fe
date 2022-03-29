@@ -1,4 +1,5 @@
 # zzz 꿈깨
+
 <!-- <img src="https://user-images.githubusercontent.com/74045440/159398628-3296c8af-a716-48c6-80ca-81f3cbc78368.png" align=left width=100> -->
 
 > 온라인 3D 방탈출 게임 서비스 😴
@@ -20,7 +21,6 @@
 
 ## ✨ 주요 기능
 
-
 - **`홈`**
   방탈출 게임을 위한 방을 만들고, 랭킹조회 및 게임 설명을 확인할 수 있습니다.
 - **`대기`**
@@ -34,11 +34,10 @@
 
 ## 🍎 Team Member - `FrontEnd`
 
-|  <img src="https://user-images.githubusercontent.com/74045440/159398343-db70bd0a-b93b-4e08-9193-5f666521f472.jpeg" width=200>   | <img src="https://user-images.githubusercontent.com/74045440/159398563-46cd3461-4369-4bfd-b9bf-254277e878c8.jpeg" width=200> |
-| :----------------------------------------: | :-------------------------------------------: |
-|                 **류강현**                 |                  **우혜민**                   |
-| [@Ryu ganghun](https://github.com/softwat) | [@Woo hyemin](https://github.com/hyemin9403)  |
-
+| <img src="https://user-images.githubusercontent.com/74045440/159398343-db70bd0a-b93b-4e08-9193-5f666521f472.jpeg" width=200> | <img src="https://user-images.githubusercontent.com/74045440/159398563-46cd3461-4369-4bfd-b9bf-254277e878c8.jpeg" width=200> |
+| :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
+|                                                          **류강현**                                                          |                                                          **우혜민**                                                          |
+|                                          [@Ryu ganghun](https://github.com/softwat)                                          |                                         [@Woo hyemin](https://github.com/hyemin9403)                                         |
 
 #### 류강현
 
@@ -55,6 +54,7 @@
 <br />
 
 ## 📚 Stack
+
 <!-- ## 📚 Library -->
 
 <div align=center>
@@ -152,54 +152,51 @@ ex) handleComment(O) handle_comment(X)
 
 <br />
 
-## 🐾 Branch Strategy
+## 🐾 Trouble Shooting
 
-`Git Flow` · `GitHub Flow`
+`Three JS` · `Socket` · `폴더 구조` · `깃허브` · `Lighthouse`
 
 <details markdown="1">
-<summary>브랜치 종류 소개</summary>
+<summary>Three JS를 리액트에서 사용할 수 있도록 세팅하기</summary>
+
+- 패키지: @react-three, @three-fiber, @three-drei
+- glb파일 확장자 변경하기
+  https://github.com/CesiumGS/gltf-pipeline
+- gltf파일을 JSX로 변경하기
+  https://github.com/pmndrs/gltfjsx
+- canvas 내에서 JSX로 변경한 gltf 파일 로딩(suspense를 사용해 Lazy loading)
+
+</details>
+
+<details markdown="2">
+<summary>3D 파일 크기 줄이기</summary>
+
+- 블렌더에서 Three JS로 줄 수 있는 애니메이션 등을 제거 및 압축해서 파일 크기 압축(130MB -> 12MB)
+
+</details>
+
+<details markdown="3">
+<summary>폴더 구조 변경</summary>
+
+- 프로젝트의 사이즈가 커지며 원하는 파일을 빠르고 정확하게 찾을 수 있도록 폴더 구조 리팩토링이 필요해짐
+- 후(리드미 > Folder Architecture 참고)
+
+</details>
+
+<details markdown="4">
+<summary>깃허브 활성화</summary>
+
+- 커밋 메시지(리드미 > convention > Commit Type 참고)
+- 이슈, 풀리퀘스트 활성화
+
+</details>
+
+<details markdown="5">
+<summary>페이지 성능향상(라이트하우스)</summary>
 
 `develop` - default
 
 - protected → 승인 받아야만 merge 가능
-
-`feature`
-
-- feature/#이슈번호
-- feature/#1
-
-</details>
-
-<details markdown="1">
-<summary>시나리오</summary>
-
-> 1️⃣ **Issue**
->
-> 1. 이슈생성
-
-> 2️⃣ **Branch**
->
-
-> - ex. feature/#16
-
-> 3️⃣ **Pull request**
->
-> 1. reviewer → 2명
-> 2. 2명이 전부 승인(approve)을 해야 merge 가능
-
-> 4️⃣ **Code Review**
->
-> 1. 수정 요청
-> 2. 대상자(작업자)가 수정을 하고 다시 커밋을 날림
-> 3. 수정 반영하고 답글로 커밋로그 남기기
-
->    - 수정사항은 커밋번호로 남기기
-
-> 5️⃣ **merge**
->
-> 1. 팀원 호출
-> 2. 간단한 리뷰, 피드백, 회의 마친 후
-> 3. 다 같이 보는 자리에서 합칠 수 있도록 하기
 
 </details>
 
@@ -209,7 +206,6 @@ ex) handleComment(O) handle_comment(X)
 
 <details markdown="1">
 <summary>폴더 구조✨</summary>
-
 
 - 🗂 src
   - App.jsx

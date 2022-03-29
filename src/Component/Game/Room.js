@@ -7,6 +7,7 @@ export default function Model({
   modalOpen,
   setModalOpen,
   setClueModalOpen,
+  setSurveyModalOpen,
   setClueType,
   setGameEnd,
   setGamePassed,
@@ -21,6 +22,8 @@ export default function Model({
   const refBa = useRef();
   // 칠판
   const refCa = useRef();
+  // 선물(Cylinder, Cube006, Cube008)
+  const refDa = useRef();
 
   // Animate model
   useFrame((state) => {
@@ -29,10 +32,10 @@ export default function Model({
     refAb.current.rotation.y = (3 + Math.sin(t)) / 4;
     refBa.current.rotation.z = (-2 + Math.sin(t)) / 20;
     refCa.current.rotation.z = (0 + Math.sin(t)) / 20;
+    refDa.current.rotation.y = (3 + Math.sin(t)) / 4;
   });
 
   const modalHandler = (quizType) => {
-    console.log(modalOpen, quizType, typeof quizType);
     if (quizType === "Bb" && count < countLimit - 1) {
       window.alert(
         `${countLimit - count} 개의 남은 퀴즈를 해결하고 도전해주세요`
@@ -49,9 +52,13 @@ export default function Model({
   };
 
   const clueHandler = (clueType) => {
-    console.log(clueType, typeof clueType);
     setClueType(clueType);
     setClueModalOpen(true);
+  };
+
+  const surveyHandler = () => {
+    console.log("서베이 실행!");
+    setSurveyModalOpen(true);
   };
 
   const { nodes, materials } = useGLTF(
@@ -1211,6 +1218,7 @@ export default function Model({
         />
       </group>
       <mesh
+        refDa={refDa}
         geometry={nodes.Cube008?.geometry}
         material={materials["Gift.001"]}
         position={[-7.69, 0, 7.94]}
@@ -1248,6 +1256,7 @@ export default function Model({
         />
       </mesh>
       <mesh
+        ref={refDa}
         geometry={nodes.Cube006?.geometry}
         material={materials["Gift.002"]}
         position={[-7.98, 0, 6.53]}
@@ -1285,6 +1294,7 @@ export default function Model({
         />
       </mesh>
       <mesh
+        ref={refDa}
         geometry={nodes.Cylinder?.geometry}
         material={materials.Gift}
         position={[-6.79, 0, 7.09]}

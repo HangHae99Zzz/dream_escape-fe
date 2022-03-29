@@ -15,6 +15,7 @@ const ThreeRoom = () => {
   const [clueType, setClueType] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [clueModalOpen, setClueModalOpen] = useState(false);
+  const [surveyModalOpen, setSurveyModalOpen] = useState(false);
   const [gameEnd, setGameEnd] = useState(false);
   const [gamePassed, setGamePassed] = useState(false);
   const [isCredit, setIsCredit] = useState(false);
@@ -40,6 +41,9 @@ const ThreeRoom = () => {
       />
       {gameEnd && (
         <GameEndModal setGameEnd={setGameEnd} setIsCredit={setIsCredit} />
+      )}
+      {surveyModalOpen && (
+        <surveyModal setSurveyModalOpen={setSurveyModalOpen} />
       )}
       {modalOpen && (
         <Modal
@@ -89,6 +93,7 @@ const ThreeRoom = () => {
             setQuizType={setQuizType}
             setClueModalOpen={setClueModalOpen}
             setClueType={setClueType}
+            setSurveyModalOpen={setSurveyModalOpen}
             count={count}
             countLimit={countLimit}
           />
