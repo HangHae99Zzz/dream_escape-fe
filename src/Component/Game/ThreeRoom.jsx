@@ -23,10 +23,17 @@ const ThreeRoom = () => {
 
   const { count, countLimit, chance } = useSelector(({ game }) => game);
 
-  function Loader() {
-    const { progress } = useProgress();
-    return <Html center>{progress} % loaded</Html>;
-  }
+    function Loader() {
+        const { progress } = useProgress();
+        return (
+            <Html
+                center
+                style={{ width: '100vw', height: '100vh', background: 'black' }}
+            >
+                {progress} % loaded
+            </Html>
+        );
+    }
 
   return (
     <Container>
