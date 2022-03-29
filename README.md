@@ -179,7 +179,7 @@ ex) handleComment(O) handle_comment(X)
 <summary>폴더 구조 변경</summary>
 
 - 프로젝트의 사이즈가 커지며 원하는 파일을 빠르고 정확하게 찾을 수 있도록 폴더 구조 리팩토링이 필요해짐
-- 후(리드미 > Folder Architecture 참고)
+- 후(README > Folder Architecture 참고)
 
 </details>
 
