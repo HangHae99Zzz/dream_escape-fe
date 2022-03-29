@@ -15,24 +15,25 @@ const SurveyModal = ({ setSurveyModalOpen }) => {
             <SvgXW />
           </button>
         </TitleCloseBtn>
+        <SurveyGroup>
+          <img src="./image/present.png" alt="" />
 
-        <img src="" alt="" />
+          <SurveyData>
+            <h1>게임에 잘 참여하고 계신가요 ?</h1>
 
-        <SurveyData>
-          <h1>게임에 잘 참여하고 계신가요</h1>
+            <p>
+              진행 도중 게임을 그만두고 싶으시거나
+              <br />
+              불편하신 부분이 있다면 아래 링크를 눌러
+              <br />
+              의견을 남겨주세요
+            </p>
 
-          <p>
-            진행 도중 게임을 그만두고 싶으시거나
-            <br />
-            불편하신 부분이 있다면 아래 링크를 눌러
-            <br />
-            의견을 남겨주세요
-          </p>
-
-          <a href="https://bit.ly/3uyuAoN" target="_blank">
-            https://bit.ly/3uyuAoN
-          </a>
-        </SurveyData>
+            <a href="https://bit.ly/3uyuAoN" target="_blank">
+              https://bit.ly/3uyuAoN
+            </a>
+          </SurveyData>
+        </SurveyGroup>
       </ModalContainer>
     </ModalBackground>
   );
@@ -62,6 +63,16 @@ const ModalContainer = styled.div`
   flex-direction: column;
 
   padding: 45px;
+`;
+
+const SurveyGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 230px;
+    margin-bottom: 40px;
+  }
 `;
 
 const TitleCloseBtn = styled.div`
