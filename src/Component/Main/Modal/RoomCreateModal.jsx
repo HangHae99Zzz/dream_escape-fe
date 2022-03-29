@@ -142,8 +142,9 @@ const MakeButton = styled.button`
     font-size: 18px;
     line-height: 22px;
     text-align: center;
-
     color: #ffffff;
+
+    cursor: pointer;
 `;
 
 const FooterContainer = styled.div`
