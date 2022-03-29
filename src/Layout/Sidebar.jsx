@@ -7,6 +7,7 @@ import {
     SvgRanking,
     SvgDescription,
     SvgUpdate,
+    SvgReport,
 } from '../Asset/Icon/sidebar/svg_sidebar';
 
 const Sidebar = () => {
@@ -45,6 +46,16 @@ const Sidebar = () => {
                             <SvgUpdate />
                             <span>업데이트 소식</span>
                         </StyledNavLink>
+                    </li>
+                    <li>
+                        <StyledAnchor
+                            href="https://forms.gle/71TDYiC8xTJmR81Y6"
+                            target={'_blank'}
+                            rel="noreferrer"
+                        >
+                            <SvgReport />
+                            <span>오류제보</span>
+                        </StyledAnchor>
                     </li>
                 </ul>
             </Section>
@@ -106,6 +117,44 @@ const Section = styled.section`
 `;
 
 const StyledNavLink = styled(NavLink)`
+    cursor: pointer;
+    width: 10.8vw;
+    height: 2.9vw;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 1vw;
+    margin-bottom: 1vw;
+
+    border-radius: 16px;
+
+    span {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        margin-left: 10px;
+
+        color: #bebebe;
+    }
+
+    :hover {
+        background: #f1f3ff;
+        span {
+            color: #394ddb;
+        }
+    }
+
+    &.active {
+        background: #f1f3ff;
+        span {
+            color: #394ddb;
+        }
+    }
+`;
+
+const StyledAnchor = styled.a`
     cursor: pointer;
     width: 10.8vw;
     height: 2.9vw;

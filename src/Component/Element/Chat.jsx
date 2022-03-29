@@ -125,7 +125,7 @@ const Chat = () => {
             window.alert(
                 '정상적인 게임 플레이를 위해 오디오 인 아웃 디바이스가 필요합니다. '
             );
-            navigate('/notfound');
+            window.location.reload(false);
         }
     }, []);
 
