@@ -65,9 +65,9 @@
   <img src="https://img.shields.io/badge/styled-c260af?style=for-the-badge&logo=styledcomponents&logoColor=black">
   <img src="https://img.shields.io/badge/Router-ec4151?style=for-the-badge&logo=reactrouter&logoColor=black">
   <br>
-  <img src="https://img.shields.io/badge/threejs-ffffff?style=for-the-badge&logo=three.js&logoColor=black"> 
-  <img src="https://img.shields.io/badge/webrtc-ffffff?style=for-the-badge&logo=webrtc&logoColor=black">
-  <img src="https://img.shields.io/badge/socket.io-ffffff?style=for-the-badge&logo=socket.io&logoColor=black">
+  <img src="https://img.shields.io/badge/threejs-333333?style=for-the-badge&logo=three.js&logoColor=white"> 
+  <img src="https://img.shields.io/badge/webrtc-333333?style=for-the-badge&logo=webrtc&logoColor=white">
+  <img src="https://img.shields.io/badge/socket.io-333333?style=for-the-badge&logo=socket.io&logoColor=white">
   <br>
   <img src="https://img.shields.io/badge/lighthouse-1a73e8?style=for-the-badge&logo=lighthouse&logoColor=white">
   <img src="https://img.shields.io/badge/netlify-4fb5ba?style=for-the-badge&logo=netlify&logoColor=white">
@@ -154,7 +154,7 @@ ex) handleComment(O) handle_comment(X)
 
 ## 🐾 Trouble Shooting
 
-`Three JS` · `Socket` · `폴더 구조` · `깃허브` · `Lighthouse`
+`Three JS` · `Socket` · `폴더 구조` · `깃허브` · `동시성 구현` · `Lighthouse`
 
 <details markdown="1">
 <summary>Three JS를 리액트에서 사용할 수 있도록 세팅하기</summary>
@@ -192,6 +192,15 @@ ex) handleComment(O) handle_comment(X)
 </details>
 
 <details markdown="5">
+<summary>동시성 구현</summary>
+
+`develop` - default
+
+- protected → 승인 받아야만 merge 가능
+
+</details>
+
+<details markdown="6">
 <summary>페이지 성능향상(라이트하우스)</summary>
 
 `develop` - default
