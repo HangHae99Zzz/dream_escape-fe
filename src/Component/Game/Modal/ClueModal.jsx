@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as quizActions } from "../../../redux/modules/quiz";
@@ -11,7 +11,6 @@ function Modal({ clueType, setClueModalOpen }) {
 
   useEffect(() => dispatch(quizActions.refClue(roomId, clueType)), []);
 
-  console.log(clueType);
   return (
     <>
       {clueType === "Bb1" ? (

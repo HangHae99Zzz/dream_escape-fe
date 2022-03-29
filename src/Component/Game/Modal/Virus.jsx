@@ -101,4 +101,5 @@ const Input = styled.input`
   ::placeholder {
     color: #ababab;
   }
+  z-index: 100;
 `;

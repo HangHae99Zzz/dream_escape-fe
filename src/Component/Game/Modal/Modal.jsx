@@ -13,18 +13,17 @@ function Modal({
   setGameEnd,
   setIsFirst,
 }) {
+  const inputRef = useRef(null);
   const dispatch = useDispatch();
 
   const roomId = useSelector((state) => state.room.roomInfo.roomId);
   const modalData = useSelector((state) => state.quiz);
   const { socket } = useSelector(({ socket }) => socket);
+  const { chance } = useSelector(({ game }) => game);
 
   const [hintModal, setHintModal] = useState(false);
   const [virusInputOne, setVirusInputOne] = useState("");
   const [virusInputTwo, setVirusInputTwo] = useState("");
-  const inputRef = useRef(null);
-
-  const { chance } = useSelector(({ game }) => game);
 
   const handleExitgame = () => {
     console.log("Modal.js에서 handleExitgame 실행");
