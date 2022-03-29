@@ -194,18 +194,18 @@ ex) handleComment(O) handle_comment(X)
 <details markdown="5">
 <summary>동시성 구현</summary>
 
-`develop` - default
-
-- protected → 승인 받아야만 merge 가능
+- node로 구축한 서버와 spring 서버가 클라이언트에 데이터를 전송하면 
+- 클라이언트는 데이터를 다른 서버에 보내어 두 서버간의 상태를 최신으로 유지해야 함
+- 양 서버의 처리속도와 통신속도에 시간차가 있어 에러 발생
+- 프론트단에서 두 번째 호출을 지연시킴으로써 해결
 
 </details>
 
 <details markdown="6">
-<summary>페이지 성능향상(라이트하우스)</summary>
-
-`develop` - default
-
-- protected → 승인 받아야만 merge 가능
+<summary>페이지 성능향상</summary>
+  
+- 이미지 압축, 코드 스플리팅, 프로덕션 빌드 등의 방법론을 사용
+- 초기 로드 리소스를 줄이는데 성공하여 라이트하우스의 성능 카테고리 점수 13점 상승시킴
 
 </details>
 
