@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DefaultLayout } from '../Layout';
+import { DefaultLayout, Footer } from '../Layout';
 // import { SvgUpdate } from '../Asset/Icon/etc/svg_etc';
 
 const Update = () => {
@@ -17,6 +17,7 @@ const Update = () => {
                         <p>아직 업데이트 소식이 없습니다.</p>
                     </Contents>
                 </Container>
+                <Footer />
             </DefaultLayout>
         </>
     );
@@ -25,6 +26,7 @@ const Update = () => {
 export default Update;
 const Container = styled.div`
     padding-left: 94px;
+    margin-bottom: 13.5%;
 `;
 
 const Title = styled.div`
