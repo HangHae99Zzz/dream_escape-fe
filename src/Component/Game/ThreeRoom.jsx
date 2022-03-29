@@ -2,15 +2,14 @@ import React, { useState, Suspense } from 'react';
 import styled from 'styled-components';
 import { Canvas } from '@react-three/fiber';
 import { Html, useProgress, PointerLockControls } from '@react-three/drei';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import Room from './Room';
 import WasdControls from './WasdControls';
 import { Modal, ClueModal, GameEndModal, SurveyModal } from './Modal';
 import GameUsers from './UI/GameUsers';
 import { EndingCredit } from '../Main';
 
 const ThreeRoom = () => {
-    const Room = React.lazy(() => import('./Room'));
-
     const [quizType, setQuizType] = useState('');
     const [clueType, setClueType] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
@@ -25,14 +24,7 @@ const ThreeRoom = () => {
 
     function Loader() {
         const { progress } = useProgress();
-        return (
-            <Html
-                center
-                style={{ width: '100vw', height: '100vh', background: 'black' }}
-            >
-                {progress} % loaded
-            </Html>
-        );
+        return <Html center>{progress} % loaded</Html>;
     }
 
     return (
@@ -80,27 +72,30 @@ const ThreeRoom = () => {
                 style={{ width: '100%', height: '100vh' }}
                 camera={{ fov: 45, position: [1, 4, 3] }}
             >
-                <directionalLight intensity={1.5} color={0xb8b7ff} />
-                <pointLight
-                    position={[-1, 2, -2]}
-                    intensity={0.5}
-                    color={0x29bfff}
-                    decay={2}
-                />
-                <pointLight
-                    position={[2, 1.5, -2]}
-                    intensity={0.5}
-                    color={0xff7ee3}
-                    decay={2}
-                />
-                <pointLight position={[1, 1, 1]} color={0xf242cb} />
-                {modalOpen || clueModalOpen || gameEnd || surveyModalOpen ? (
-                    <PointerLockControls enabled={false} />
-                ) : (
-                    <PointerLockControls enabled={true} />
-                )}
-                <WasdControls />
                 <Suspense fallback={<Loader />}>
+                    <directionalLight intensity={1.5} color={0xb8b7ff} />
+                    <pointLight
+                        position={[-1, 2, -2]}
+                        intensity={0.5}
+                        color={0x29bfff}
+                        decay={2}
+                    />
+                    <pointLight
+                        position={[2, 1.5, -2]}
+                        intensity={0.5}
+                        color={0xff7ee3}
+                        decay={2}
+                    />
+                    <pointLight position={[1, 1, 1]} color={0xf242cb} />
+                    {modalOpen ||
+                    clueModalOpen ||
+                    gameEnd ||
+                    surveyModalOpen ? (
+                        <PointerLockControls enabled={false} />
+                    ) : (
+                        <PointerLockControls enabled={true} />
+                    )}
+                    <WasdControls />
                     <Room
                         setGameEnd={setGameEnd}
                         setGamePassed={setGamePassed}
