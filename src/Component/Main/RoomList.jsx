@@ -216,7 +216,9 @@ const RoomWrapper = styled.div`
     border-radius: 30px;
     padding: 45px;
     :hover {
-        outline: 4px solid #5668e8;
+        /* webkit에서 사용 불가 */
+        /* outline: 4px solid #5668e8; */
+        box-shadow: 0 0 0 4px rgb(86 104 232);
     }
 `;
 

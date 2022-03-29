@@ -109,7 +109,8 @@ const LogoContainer = styled.div`
 `;
 
 const GitHub = styled.img`
-    height: fit-content;
+    /* webkit에서 에러 */
+    /* height: fit-content; */
     cursor: pointer;
 `;
 
