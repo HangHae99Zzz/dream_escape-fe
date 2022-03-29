@@ -1,5 +1,5 @@
 //https://velog.io/@raverana96/React-How-to-use-Google-Analytics-with-React
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ReactGA from "react-ga";
 
@@ -10,7 +10,7 @@ const useGAPageTracking = () => {
   const [initialized, setInitialized] = useState(false);
 
   /* localhost는 인지 못하게  */
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!window.location.href.includes("localhost")) {
       ReactGA.initialize(TRACKING_ID);
     }
