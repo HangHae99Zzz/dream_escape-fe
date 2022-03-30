@@ -39,12 +39,12 @@ const WaitModal = ({ closeModal }) => {
 
   useEffect(() => {
     socket.on("loadingComplete", (data) => {
-      navigate("/loading");
       if (isCreator) {
         setTimeout(() => {
           dispatch(gameActions.gameStart());
         }, 2000);
       }
+      navigate("/loading");
     });
   }, []);
 
@@ -92,7 +92,7 @@ const WaitModal = ({ closeModal }) => {
         <ClipBoard
           ref={roomUrl}
           style={{ display: "hidden" }}
-          defaultValue={`https://priceless-turing-4f7218.netlify.app/${roomInfo?.roomId}`}
+          defaultValue={`https://zzz-escape.netlify.app/${roomInfo?.roomId}`}
         ></ClipBoard>
         <div>링크복사</div>
       </CopyContaier>

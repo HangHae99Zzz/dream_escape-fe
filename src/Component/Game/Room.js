@@ -300,10 +300,10 @@ export default function Model({
           geometry={nodes.Plane009?.geometry}
           material={nodes.Plane009?.material}
         />
-        <mesh
+        {/* <mesh
           geometry={nodes.Plane010?.geometry}
           material={nodes.Plane010?.material}
-        />
+        /> */}
         <mesh
           geometry={nodes.Plane011?.geometry}
           material={nodes.Plane011?.material}
@@ -356,11 +356,12 @@ export default function Model({
           material={nodes.Plane035?.material}
           onClick={() => modalHandler("Aa")}
         />
-        <mesh
+        {/* 디스크 */}
+        {/* <mesh
           geometry={nodes.Plane036_1?.geometry}
           material={nodes.Plane036_1?.material}
           position={[0, 0, -0.09]}
-        />
+        /> */}
         <mesh
           geometry={nodes.Plane037?.geometry}
           material={nodes.Plane037?.material}
