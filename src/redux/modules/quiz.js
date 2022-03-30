@@ -63,7 +63,6 @@ const refClue = (roomId, clueType) => {
     instance
       .get(`/rooms/${roomId}/clues/${clueType}`)
       .then((res) => {
-        console.log(res);
         let _temp = res.data;
         dispatch(loadClue(_temp));
       })
@@ -97,7 +96,6 @@ export default handleActions(
     },
 
     [LOAD_CLUE]: (state, action = {}) => {
-      console.log(action.payload);
       return {
         ...state,
         clue: action.payload,

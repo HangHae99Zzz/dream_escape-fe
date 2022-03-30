@@ -38,6 +38,7 @@ const ThreeRoom = () => {
         countLimit={countLimit}
         chance={chance}
         isFirst={isFirst}
+        setIsFirst={setIsFirst}
       />
       {gameEnd && (
         <GameEndModal setGameEnd={setGameEnd} setIsCredit={setIsCredit} />

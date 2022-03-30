@@ -8,7 +8,14 @@ import Manual from "./Manual";
 
 import { SvgMic } from "../../../Asset/Icon/etc/svg_etc";
 
-const GameUsers = ({ gameEnd, setGameEnd, gamePassed, chance, isFirst }) => {
+const GameUsers = ({
+  gameEnd,
+  setGameEnd,
+  gamePassed,
+  chance,
+  isFirst,
+  setIsFirst,
+}) => {
   const { count, countLimit } = useSelector(({ game }) => game);
   const { myNickName } = useSelector(({ room }) => room);
 
@@ -39,6 +46,7 @@ const GameUsers = ({ gameEnd, setGameEnd, gamePassed, chance, isFirst }) => {
             setGameEnd={setGameEnd}
             gamePassed={gamePassed}
             isFirst={isFirst}
+            setIsFirst={setIsFirst}
           />
         </TimerWrapper>
       </GameInfo>
