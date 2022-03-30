@@ -300,10 +300,10 @@ export default function Model({
           geometry={nodes.Plane009?.geometry}
           material={nodes.Plane009?.material}
         />
-        <mesh
+        {/* <mesh
           geometry={nodes.Plane010?.geometry}
           material={nodes.Plane010?.material}
-        />
+        /> */}
         <mesh
           geometry={nodes.Plane011?.geometry}
           material={nodes.Plane011?.material}
