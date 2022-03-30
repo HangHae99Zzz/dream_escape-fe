@@ -244,7 +244,8 @@ export default function Model({
         rotation={[0, -0.22, 0]}
         scale={1.2}
       >
-        <mesh
+        {/* sofa 방석 주석처리 */}
+        {/* <mesh
           geometry={nodes.Cube?.geometry}
           material={nodes.Cube?.material}
           position={[-1.36, 2.14, -0.13]}
@@ -255,7 +256,7 @@ export default function Model({
           material={nodes.Cube001?.material}
           position={[1.14, 1.02, -0.44]}
           rotation={[0.08, -1.26, 0.37]}
-        />
+        /> */}
       </mesh>
       <mesh
         geometry={nodes.Table001?.geometry}
