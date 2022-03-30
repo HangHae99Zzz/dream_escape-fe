@@ -14,7 +14,11 @@ const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
       {!arr ? (
         <></>
       ) : (
-        <Wrapper>
+        <Wrapper
+          onClick={() => {
+            document.exitPointerLock();
+          }}
+        >
           {arr.map((num, i) => {
             if (num === "?1")
               return (
@@ -22,7 +26,6 @@ const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
                   <Input
                     placeholder="?"
                     ref={q1}
-                    autoFocus
                     onChange={(e) => setVirusInputOne(e.target.value)}
                     maxLength="1"
                   ></Input>
@@ -34,6 +37,7 @@ const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
                   <Input
                     placeholder="?"
                     ref={q2}
+                    autoFocus
                     onChange={(e) => setVirusInputTwo(e.target.value)}
                     maxLength="1"
                   ></Input>
@@ -50,7 +54,6 @@ const Virus = ({ modalData, setVirusInputOne, setVirusInputTwo }) => {
 export default Virus;
 const Wrapper = styled.div`
   width: 358px;
-  height: 265px;
 
   margin-top: 20px;
 
