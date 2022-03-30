@@ -18,10 +18,12 @@ const WaitModal = ({ closeModal }) => {
 
   const roomUrl = useRef();
 
-  const copyToClipboard = () => {
+  const copyToClipboard = (callback) => {
     const el = roomUrl.current;
     navigator.clipboard.writeText(el.value);
-    window.alert("링크가 복사되었습니다!");
+    function callback(callback) {
+      window.alert("링크가 복사되었습니다.");
+    }
   };
 
   const exit = () => {
