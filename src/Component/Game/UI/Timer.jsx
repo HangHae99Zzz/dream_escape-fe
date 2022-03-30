@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreator as gameActions } from "../../../redux/modules/game";
 
-const Timer = ({ setGameTime, gameEnd, setGameEnd, gamePassed, isFirst }) => {
+const Timer = ({
+  setGameTime,
+  gameEnd,
+  setGameEnd,
+  gamePassed,
+  isFirst,
+  setIsFirst,
+}) => {
   const dispatch = useDispatch();
 
   const [minutes, setMinutes] = useState(30);
@@ -26,6 +33,7 @@ const Timer = ({ setGameTime, gameEnd, setGameEnd, gamePassed, isFirst }) => {
       if (streamDuration === 1800) {
         // 30분 되면 게임 끝
         setGameEnd(true);
+        setIsFirst(true);
       }
     }, 1000);
     return () => clearInterval(countdown);
