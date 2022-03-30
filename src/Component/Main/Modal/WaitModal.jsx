@@ -21,6 +21,7 @@ const WaitModal = ({ closeModal }) => {
   const copyToClipboard = () => {
     const el = roomUrl.current;
     navigator.clipboard.writeText(el.value);
+    window.alert("링크가 복사되었습니다!");
   };
 
   const exit = () => {
