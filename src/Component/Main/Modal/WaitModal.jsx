@@ -38,14 +38,12 @@ const WaitModal = ({ closeModal }) => {
   };
 
   useEffect(() => {
-    if (isCreator) {
-      socket.on("loadingComplete", (data) => {
-        navigate("/loading");
-        setTimeout(() => {
-          dispatch(gameActions.gameStart());
-        }, 2000);
-      });
-    }
+    socket.on("loadingComplete", (data) => {
+      navigate("/loading");
+      setTimeout(() => {
+        dispatch(gameActions.gameStart());
+      }, 2000);
+    });
   }, []);
 
   return !roomInfo?.roomId ? (
