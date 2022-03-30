@@ -40,9 +40,11 @@ const WaitModal = ({ closeModal }) => {
   useEffect(() => {
     socket.on("loadingComplete", (data) => {
       navigate("/loading");
-      setTimeout(() => {
-        dispatch(gameActions.gameStart());
-      }, 2000);
+      if (isCreator) {
+        setTimeout(() => {
+          dispatch(gameActions.gameStart());
+        }, 2000);
+      }
     });
   }, []);
 
