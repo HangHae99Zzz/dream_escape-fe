@@ -55,7 +55,7 @@ const Timer = ({
 
   return (
     <div>
-      {minutes}:{seconds > 10 ? seconds : "0" + seconds}
+      {minutes}:{seconds > 9 ? seconds : "0" + seconds}
     </div>
   );
 };
