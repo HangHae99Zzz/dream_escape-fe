@@ -57,7 +57,7 @@ const GameUsers = ({
         <MyMic myNickName={myNickName}>
           <SvgMic />
         </MyMic>
-        <p>{myNickName.nickName}</p>
+        <p>{myNickName?.nickName}</p>
       </MyInfo>
     </Container>
   );
@@ -165,7 +165,7 @@ const MyMic = styled.div`
   height: 76px;
 
   border-radius: 50%;
-  background-image: url(${(props) => props.myNickName.img});
+  background-image: url(${(props) => props.myNickName?.img});
   background-size: contain;
 
   display: flex;
