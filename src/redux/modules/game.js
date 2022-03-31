@@ -15,7 +15,7 @@ const getSolved = createAction(GET_SOLVED, (solved) => ({ solved }));
 
 // initialState
 const initialState = {
-  count: 0,
+  count: 4,
   countLimit: 5,
   chance: 2,
   solved: "",

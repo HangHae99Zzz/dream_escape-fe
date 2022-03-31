@@ -125,7 +125,6 @@ const refPeers = (roomId, socketId, navigate) => {
       })
       .catch((err) => {
         console.log(err);
-        navigate("/notfound");
       });
   };
 };
