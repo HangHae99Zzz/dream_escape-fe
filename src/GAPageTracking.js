@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ReactGA from "react-ga";
 
-const TRACKING_ID = process.env.REACT_APP_GA_TRACKING_ID;
+const TRACKING_ID = "UA-216505646-3";
 
 const useGAPageTracking = () => {
   const location = useLocation();
