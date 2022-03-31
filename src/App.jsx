@@ -13,7 +13,7 @@ ReactGA.initialize("UA-216505646-3");
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 function App() {
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1040px)" });
 
   const Description = React.lazy(() => import("./Page/Description"));
 
