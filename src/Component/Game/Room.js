@@ -351,10 +351,10 @@ export default function Model({
         onClick={() => modalHandler("Ab")}
       >
         <mesh
-          ref={refAa}
+          ref={refAb}
           geometry={nodes.Plane035?.geometry}
           material={nodes.Plane035?.material}
-          onClick={() => modalHandler("Aa")}
+          onClick={() => modalHandler("Ab")}
         />
         {/* 디스크 */}
         {/* <mesh
