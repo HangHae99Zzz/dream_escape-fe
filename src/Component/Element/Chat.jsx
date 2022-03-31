@@ -10,6 +10,7 @@ import { actionCreator as roomActions } from "../../redux/modules/room";
 import { actionCreator as gameActions } from "../../redux/modules/game";
 
 import Video from "./Video";
+import mediaAlert from "../../util/mediaAlert";
 
 const pc_config = {
   iceServers: [
@@ -121,9 +122,7 @@ const Chat = () => {
       if (!deviceId) await getDevices();
     } catch (e) {
       console.log(`getUserMedia error: ${e}`);
-      window.alert(
-        "정상적인 게임 플레이를 위해 오디오 인 아웃 디바이스가 필요합니다. "
-      );
+      window.alert(mediaAlert);
       window.location.reload(false);
     }
   }, []);
