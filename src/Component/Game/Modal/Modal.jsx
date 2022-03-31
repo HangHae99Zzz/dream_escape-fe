@@ -19,7 +19,7 @@ function Modal({
   const roomId = useSelector((state) => state.room.roomInfo.roomId);
   const modalData = useSelector((state) => state.quiz);
   const { socket } = useSelector(({ socket }) => socket);
-  const { chance } = useSelector(({ game }) => game);
+  const { chance, solved } = useSelector(({ game }) => game);
 
   const [hintModal, setHintModal] = useState(false);
   const [virusInputOne, setVirusInputOne] = useState("");
@@ -40,7 +40,7 @@ function Modal({
       dispatch(quizActions.submitResult(roomId, quizType));
       window.alert("정답입니다!");
       setModalOpen(false);
-      socket.emit("count");
+      socket.emit("count", quizType);
     } else {
       window.alert("오답입니다!");
     }
@@ -51,7 +51,7 @@ function Modal({
       dispatch(quizActions.submitResult(roomId, quizType));
       window.alert("정답입니다!");
       setModalOpen(false);
-      socket.emit("count");
+      socket.emit("count", quizType);
       if (quizType === "Bb") {
         handleExitgame();
       }
@@ -79,7 +79,7 @@ function Modal({
 
   useEffect(() => {
     dispatch(quizActions.refQuiz(roomId, quizType));
-  }, []);
+  }, [solved]);
 
   return (
     <>

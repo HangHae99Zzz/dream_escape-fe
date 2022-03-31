@@ -297,10 +297,11 @@ const Chat = () => {
     //////////////////////////////////////////////////////////////////////////
     let count = 0;
 
-    socketRef.current.on("countPlus", () => {
+    socketRef.current.on("countPlus", (data) => {
       count++;
       dispatch(gameActions.countUp(count));
-      console.log("count up!", count);
+      dispatch(gameActions.getSolved(data));
+      console.log("count up!", count, data);
     });
 
     let chance = 2;
