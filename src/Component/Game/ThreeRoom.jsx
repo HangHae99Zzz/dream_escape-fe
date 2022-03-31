@@ -88,7 +88,7 @@ const ThreeRoom = () => {
           ) : (
             <PointerLockControls enabled={true} />
           )}
-          <WasdControls />
+          {!modalOpen && !clueModalOpen && <WasdControls />}
           <Room
             setGameEnd={setGameEnd}
             setGamePassed={setGamePassed}
