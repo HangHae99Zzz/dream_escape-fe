@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { SvgBlueMic } from '../../Asset/Icon/etc/svg_etc';
+
 const MuteButton = ({ abs }) => {
     return (
         <Button abs={abs}>
             <Label>ON</Label>
-            <MicIcon src="image/mic.svg" alt="mic" width={'14px'} />
+            <SvgBlueMic alt="mic" width={'14px'} />
         </Button>
     );
 };
