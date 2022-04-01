@@ -5,7 +5,8 @@ import styled from 'styled-components';
 import { actionCreator as roomActions } from '../../../redux/modules/room';
 import { actionCreator as userActions } from '../../../redux/modules/user';
 
-import { MuteButton } from '../../Element';
+import { SvgBlueMic } from '../../../Asset/Icon/etc/svg_etc';
+
 import { WaitModal } from './index';
 
 const RoomCreateModal = ({ closeModal }) => {
@@ -48,10 +49,13 @@ const RoomCreateModal = ({ closeModal }) => {
                                 placeholder="팀 이름을 입력하세요"
                             ></NameInput>
                         </div>
-                        {/* <MicContiner>
-                            <div>보이스채팅 마이크</div>
-                            <MuteButton></MuteButton>
-                        </MicContiner> */}
+                        <MicContiner>
+                            <div>
+                                방 생성 시{' '}
+                                <SvgBlueMic style={{ margin: '0 4px' }} />
+                                <span>보이스 채팅</span>이 시작됩니다
+                            </div>
+                        </MicContiner>
                     </FlexContainer>
                     <FlexContainer>
                         <div>
@@ -71,7 +75,7 @@ const ModalWindow = styled.div`
     position: fixed;
     z-index: 3;
     width: 37.292vw;
-    height: 400px;
+    height: 452px;
     left: 31.354vw;
     top: 26.833vh;
     background: #ffffff;
@@ -128,6 +132,15 @@ const MicContiner = styled.div`
     height: 64px;
     align-items: center;
     justify-content: space-evenly;
+    div {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 20px;
+    }
+    span {
+        font-weight: 700;
+    }
 `;
 
 const MakeButton = styled.button`
