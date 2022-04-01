@@ -296,7 +296,7 @@ const UserImg = styled.div`
     height: 100px;
     background-repeat: no-repeat;
     background-position: right;
-    background-size: contain;
+    background-size: 100%;
     margin-bottom: 8px;
 `;
 
