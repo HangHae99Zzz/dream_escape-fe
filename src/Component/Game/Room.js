@@ -14,7 +14,7 @@ export default function Model({
   count,
   countLimit,
 }) {
-  // 시계임
+  // 시계
   const refAa = useRef();
   // 컴퓨터
   const refAb = useRef();

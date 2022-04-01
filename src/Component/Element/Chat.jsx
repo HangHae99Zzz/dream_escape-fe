@@ -94,8 +94,6 @@ const Chat = () => {
         .getSenders()
         .find((sender) => sender.track.kind === "audio");
       audioSander.replaceTrack(audioTrack);
-      console.log(audioTrack);
-      console.log(audioSander);
     }
   };
 
@@ -140,12 +138,9 @@ const Chat = () => {
         });
       };
 
-      pc.oniceconnectionstatechange = (e) => {
-        // console.log('뭔가 peer에 변화');
-      };
+      pc.oniceconnectionstatechange = (e) => {};
 
       pc.ontrack = (e) => {
-        console.log("누가 들어옴");
         // peers 업데이트
         const roomId = sessionStorage.getItem("sessionRoomId");
 
