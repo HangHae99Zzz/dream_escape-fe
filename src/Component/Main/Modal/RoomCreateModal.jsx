@@ -48,10 +48,10 @@ const RoomCreateModal = ({ closeModal }) => {
                                 placeholder="팀 이름을 입력하세요"
                             ></NameInput>
                         </div>
-                        <MicContiner>
+                        {/* <MicContiner>
                             <div>보이스채팅 마이크</div>
-                            <MuteButton> </MuteButton>
-                        </MicContiner>
+                            <MuteButton></MuteButton>
+                        </MicContiner> */}
                     </FlexContainer>
                     <FlexContainer>
                         <div>
@@ -73,7 +73,7 @@ const ModalWindow = styled.div`
     width: 37.292vw;
     height: 400px;
     left: 31.354vw;
-    top: 112px;
+    top: 26.833vh;
     background: #ffffff;
     border-radius: 30px;
     display: flex;

@@ -13,12 +13,14 @@ const MuteButton = ({ abs }) => {
 const Button = styled.div`
     display: flex;
     align-items: center;
-    position: ${props => props.abs && 'absolute'};
+    position: ${props => (props.abs ? 'absolute' : 'relative')};
     bottom: ${props => props.abs && '17px'};
     left: ${props => props.abs && '24px'};
+    z-index: 1;
 `;
 const Label = styled.div`
     font-weight: bold;
+    color: white;
 `;
 const MicIcon = styled.img`
     margin-left: 8px;
