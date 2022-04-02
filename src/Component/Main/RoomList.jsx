@@ -20,8 +20,7 @@ const RoomList = ({ page, isFiltered }) => {
     const clientTime = Date.now();
 
     const enterRoom = roomId => {
-        if (!roomInfo || !socket)
-            return window.alert('삭제되었거나 이미 게임이 시작된 방입니다.');
+        if (!socket) return;
         setOpenWaitModal(true);
         setTimeout(
             () => dispatch(roomActions.joinRoom(roomId, socket.id)),

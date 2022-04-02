@@ -74,7 +74,12 @@ const refRoom = roomId => {
             .get(`/rooms/${roomId}`)
             .then(res => {
                 console.log(res);
-                return dispatch(getRoomInfo(res.data));
+                if (!res.data.userList.length || res.data.startAt) {
+                    window.alert('존재하지 않거나 이미 시작된 방입니다.');
+                    window.location.reload(false);
+                } else {
+                    return dispatch(getRoomInfo(res.data));
+                }
             })
             .catch(err => console.log(err));
     };
@@ -85,13 +90,11 @@ const joinRoom = (roomId, socketId) => {
     return function (dispatch, getState) {
         // roomInfo 업데이트
         dispatch(refRoom(roomId));
-
         instance
             .post(`/rooms/${roomId}`, {
                 userId: socketId,
             })
             .then(res => {
-                // session storage에 저장 roomId:'1'
                 saveSessionRoomId(roomId);
             })
             .catch(err =>
