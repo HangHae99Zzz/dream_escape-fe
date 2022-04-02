@@ -127,7 +127,7 @@ const NameInput = styled.input`
     }
 `;
 const MicContiner = styled.div`
-    width: 48%;
+    min-width: 48%;
     display: flex;
     height: 64px;
     align-items: center;

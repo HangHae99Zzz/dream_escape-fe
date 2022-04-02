@@ -12,7 +12,7 @@ const RoomList = ({ page, isFiltered }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { roomId } = useParams();
-    const { roomList } = useSelector(({ room }) => room);
+    const { roomList, roomInfo } = useSelector(({ room }) => room);
     const { socket } = useSelector(({ socket }) => socket);
     const [openWaitModal, setOpenWaitModal] = useState(false);
     const [pollingCnt, setPollingCnt] = useState(1);
@@ -20,7 +20,8 @@ const RoomList = ({ page, isFiltered }) => {
     const clientTime = Date.now();
 
     const enterRoom = roomId => {
-        if (!socket) return;
+        if (!roomInfo || !socket)
+            return window.alert('삭제되었거나 이미 게임이 시작된 방입니다.');
         setOpenWaitModal(true);
         setTimeout(
             () => dispatch(roomActions.joinRoom(roomId, socket.id)),
