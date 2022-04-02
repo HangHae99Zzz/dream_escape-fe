@@ -47,6 +47,7 @@ const RoomCreateModal = ({ closeModal }) => {
                             <NameInput
                                 ref={teamNameRef}
                                 placeholder="팀 이름을 입력하세요"
+                                autoFocus={true}
                             ></NameInput>
                         </div>
                         <MicContiner>
