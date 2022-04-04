@@ -23,9 +23,7 @@ const Button = styled.div`
 const Label = styled.div`
     font-weight: bold;
     color: white;
-`;
-const MicIcon = styled.img`
-    margin-left: 8px;
+    margin-right: 4px;
 `;
 
 export default MuteButton;

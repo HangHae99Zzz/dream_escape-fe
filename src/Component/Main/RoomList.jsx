@@ -12,7 +12,7 @@ const RoomList = ({ page, isFiltered }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { roomId } = useParams();
-    const { roomList } = useSelector(({ room }) => room);
+    const { roomList, roomInfo } = useSelector(({ room }) => room);
     const { socket } = useSelector(({ socket }) => socket);
     const [openWaitModal, setOpenWaitModal] = useState(false);
     const [pollingCnt, setPollingCnt] = useState(1);
