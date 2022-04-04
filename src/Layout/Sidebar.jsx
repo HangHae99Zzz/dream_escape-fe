@@ -47,7 +47,7 @@ const Sidebar = () => {
                             <span>업데이트 소식</span>
                         </StyledNavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <StyledAnchor
                             href="https://forms.gle/71TDYiC8xTJmR81Y6"
                             target={'_blank'}
@@ -56,7 +56,7 @@ const Sidebar = () => {
                             <SvgReport />
                             <span>오류제보</span>
                         </StyledAnchor>
-                    </li>
+                    </li> */}
                 </ul>
             </Section>
         </StyledSidebar>

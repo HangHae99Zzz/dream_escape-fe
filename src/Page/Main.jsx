@@ -18,9 +18,9 @@ const Main = () => {
                         <Contents />
                     </ContentsContainer>
                 </MainContainer>
-                <Footer />
                 <MakeRoomBtn setOpenRoomCreateModal={setOpenRoomCreateModal} />
 
+                <Footer />
                 {openRoomCreateModal && (
                     <>
                         <ModalBG closeModal={setOpenRoomCreateModal} />
