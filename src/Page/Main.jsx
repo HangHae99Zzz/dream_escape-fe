@@ -20,7 +20,6 @@ const Main = () => {
                 </MainContainer>
                 <MakeRoomBtn setOpenRoomCreateModal={setOpenRoomCreateModal} />
 
-                <Footer />
                 {openRoomCreateModal && (
                     <>
                         <ModalBG closeModal={setOpenRoomCreateModal} />
@@ -28,6 +27,7 @@ const Main = () => {
                     </>
                 )}
             </DefaultLayout>
+            <Footer />
         </>
     );
 };

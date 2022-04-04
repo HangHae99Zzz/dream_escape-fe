@@ -3,55 +3,67 @@ import styled from 'styled-components';
 
 const Footer = props => {
     return (
-        <FooterContiner>
-            <PaddingLeft>
-                <FooterTop>
-                    <div>
-                        <Roll style={{ margin: '0 10px 0 0' }}>designer</Roll>{' '}
-                        kim bo kyung seo hye won{' '}
-                    </div>
-                    <div>
-                        <Roll>developer</Roll> kim ga eun ryu gang hyeon ban won
-                        jae woo hye min choi kyu won
-                    </div>
-                </FooterTop>
-                <FooterBottom>
-                    <CopyRight>
-                        copyrights (c) the title 2022{' '}
-                        <AllRights>All rights are reserved</AllRights>
-                    </CopyRight>
-                    <FlexContainer>
-                        <Rigth>
-                            <div>회사소개</div>
-                            <div>이용약관</div>
-                            <div>개인정보처리방침</div>
-                            <div>청소년보기정책</div>
-                            <div>고객센터</div>
-                        </Rigth>
-                        <LogoContainer>
-                            <a
-                                href="https://github.com/HangHae99Zzz"
-                                rel="noreferrer"
-                                target={'_blank'}
-                            >
-                                <GitHub
-                                    src="/image/GitHub_Logo.png"
-                                    alt="GitHub"
-                                    width={'72px'}
-                                ></GitHub>
-                            </a>
-                            <Hanghae></Hanghae>
-                        </LogoContainer>
-                    </FlexContainer>
-                </FooterBottom>
-            </PaddingLeft>
-        </FooterContiner>
+        <FooterLayout>
+            <FooterContiner>
+                <PaddingLeft>
+                    <FooterTop>
+                        <div>
+                            <Roll style={{ margin: '0 10px 0 0' }}>
+                                designer
+                            </Roll>{' '}
+                            kim bo kyung seo hye won{' '}
+                        </div>
+                        <div>
+                            <Roll>developer</Roll> kim ga eun ryu gang hyeon ban
+                            won jae woo hye min choi kyu won
+                        </div>
+                    </FooterTop>
+                    <FooterBottom>
+                        <CopyRight>
+                            copyrights (c) the title 2022{' '}
+                            <AllRights>All rights are reserved</AllRights>
+                        </CopyRight>
+                        <FlexContainer>
+                            <Rigth>
+                                <div>회사소개</div>
+                                <div>이용약관</div>
+                                <div>개인정보처리방침</div>
+                                <div>청소년보기정책</div>
+                                <div>고객센터</div>
+                            </Rigth>
+                            <LogoContainer>
+                                <a
+                                    href="https://github.com/HangHae99Zzz"
+                                    rel="noreferrer"
+                                    target={'_blank'}
+                                >
+                                    <GitHub
+                                        src="/image/GitHub_Logo.png"
+                                        alt="GitHub"
+                                        width={'72px'}
+                                    ></GitHub>
+                                </a>
+                                <Hanghae></Hanghae>
+                            </LogoContainer>
+                        </FlexContainer>
+                    </FooterBottom>
+                </PaddingLeft>
+            </FooterContiner>
+        </FooterLayout>
     );
 };
+
+const FooterLayout = styled.div`
+    padding-left: 14.58vw;
+    height: 0;
+`;
 
 const FooterContiner = styled.div`
     background-color: #f7f7f7;
     font-size: 14px;
+    height: 376px;
+    position: relative;
+    transform: translateY(-100%);
 `;
 
 const PaddingLeft = styled.div`

@@ -17,8 +17,8 @@ const Update = () => {
                         <p>아직 업데이트 소식이 없습니다.</p>
                     </Contents>
                 </Container>
-                <Footer />
             </DefaultLayout>
+            <Footer />
         </>
     );
 };
