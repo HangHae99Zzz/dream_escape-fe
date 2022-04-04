@@ -39,6 +39,7 @@ const Btn = styled.div`
     color: #5668e8;
 
     cursor: pointer;
+    z-index: 1;
 
     :hover {
         background: #ffffff;

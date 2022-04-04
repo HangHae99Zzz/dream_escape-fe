@@ -17,5 +17,7 @@ export default DefaultLayout;
 
 const Wrapper = styled.div`
     padding-left: 14.58vw;
+    height: auto;
     min-height: 100vh;
+    padding-bottom: 376px;
 `;
