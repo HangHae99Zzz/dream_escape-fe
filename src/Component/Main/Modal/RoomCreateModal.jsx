@@ -37,7 +37,7 @@ const RoomCreateModal = ({ closeModal }) => {
                     <FlexContainer>
                         <ExitContainer>
                             <XIcon
-                                src="image/x.svg"
+                                src="https://d2ug3aglf1tff7.cloudfront.net/image/x.svg"
                                 alt="X"
                                 width={'auto'}
                                 onClick={() => closeModal(false)}
@@ -104,6 +104,7 @@ const XIcon = styled.img`
     position: absolute;
     top: 39px;
     right: 39px;
+    cursor: pointer;
 `;
 const NameInput = styled.input`
     width: 23.073vw;

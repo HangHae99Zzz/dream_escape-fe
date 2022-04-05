@@ -38,7 +38,7 @@ const Footer = props => {
                                     target={'_blank'}
                                 >
                                     <GitHub
-                                        src="/image/GitHub_Logo.png"
+                                        src="https://d2ug3aglf1tff7.cloudfront.net/image/GitHub_Logo.png"
                                         alt="GitHub"
                                         width={'72px'}
                                     ></GitHub>
@@ -130,7 +130,7 @@ const Hanghae = styled.div`
     width: 72px;
     height: 54px;
     padding-right: 51px;
-    background-image: url('/image/hanghae.png');
+    background-image: url('https://d2ug3aglf1tff7.cloudfront.net/image/hanghae.png');
     background-repeat: no-repeat;
 `;
 
