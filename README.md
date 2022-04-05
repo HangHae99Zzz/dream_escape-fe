@@ -89,9 +89,10 @@
   <img src="https://img.shields.io/badge/webrtc-333333?style=for-the-badge&logo=webrtc&logoColor=white">
   <img src="https://img.shields.io/badge/socket.io-333333?style=for-the-badge&logo=socket.io&logoColor=white">
   <br>
-  <img src="https://img.shields.io/badge/lighthouse-1a73e8?style=for-the-badge&logo=lighthouse&logoColor=white">
-  <img src="https://img.shields.io/badge/netlify-4fb5ba?style=for-the-badge&logo=netlify&logoColor=white">  
-  <img src="https://img.shields.io/badge/google analytics-E37400?style=for-the-badge&logo=google analytics&logoColor=white">
+  <img src="https://img.shields.io/badge/google analytics-202c3c?style=for-the-badge&logo=google analytics&logoColor=white">
+  <img src="https://img.shields.io/badge/lighthouse-202c3c?style=for-the-badge&logo=lighthouse&logoColor=white">
+  <img src="https://img.shields.io/badge/cloud front-202c3c?style=for-the-badge&logo=amazonaws&logoColor=white">
+  <img src="https://img.shields.io/badge/netlify-202c3c?style=for-the-badge&logo=netlify&logoColor=white">
 
   
 </div>
@@ -226,8 +227,8 @@ ex) handleComment(O) handle_comment(X)
 <details markdown="6">
 <summary>페이지 성능향상</summary>
   
-- 이미지 압축, 코드 스플리팅, 프로덕션 빌드 등의 방법론을 사용
-- 초기 로드 리소스를 줄이는데 성공하여 라이트하우스의 성능 카테고리 점수 13점 상승시킴
+- AWS의 Cloud Front CDN 적용, 이미지 압축, 코드 스플리팅, 프로덕션 빌드 등의 방법론을 사용
+- 초기 로드 리소스를 줄이는데 성공하여 라이트하우스의 성능 카테고리 점수 15점 상승시킴
 
 </details>
 
