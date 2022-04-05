@@ -5,7 +5,7 @@ const Mobile = () => {
     return (
         <Bg>
             <RendingPage
-                src="image/mobile.jpg"
+                src="https://d2ug3aglf1tff7.cloudfront.net/image/mobile.jpg"
                 width={'390px'}
                 height={'1933px'}
             ></RendingPage>

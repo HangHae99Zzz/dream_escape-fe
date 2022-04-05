@@ -16,8 +16,8 @@ const Description = () => {
                     <Backgrounds>
                         <DescContainer>
                             <LogoContainer>
-                                <Logo1 src="image/logo.png"></Logo1>
-                                <Logo2 src="image/desc_logo.png"></Logo2>
+                                <Logo1 src="https://d2ug3aglf1tff7.cloudfront.net/image/logo.png"></Logo1>
+                                <Logo2 src="https://d2ug3aglf1tff7.cloudfront.net/image/desc_logo.png"></Logo2>
                             </LogoContainer>
                             <Desc>
                                 ‘zzz’ 는 꿈을 꾸는 상태를 표현한 단어이자, 게임
@@ -37,18 +37,18 @@ const Description = () => {
                         </DescContainer>
                         <ImgContainer>
                             <img
-                                src="image/desc_image1.png"
+                                src="https://d2ug3aglf1tff7.cloudfront.net/image/desc_image1.png"
                                 alt="image1.png"
                                 width={'auto'}
                             />
                             <div>
                                 <img
-                                    src="image/desc_image2.png"
+                                    src="https://d2ug3aglf1tff7.cloudfront.net/image/desc_image2.png"
                                     alt="image2.png"
                                     width={'auto'}
                                 />
                                 <img
-                                    src="image/desc_image3.png"
+                                    src="https://d2ug3aglf1tff7.cloudfront.net/image/desc_image3.png"
                                     alt="image2.png"
                                     width={'auto'}
                                 />
@@ -164,7 +164,7 @@ const Catch = styled.span`
 
 const Background1 = styled.div`
     position: absolute;
-    background: url('image/desc_background1.png');
+    background: url('https://d2ug3aglf1tff7.cloudfront.net/image/desc_background1.png');
     background-size: cover;
     width: 100%;
     height: 1074px;
@@ -175,7 +175,7 @@ const Background1 = styled.div`
 
 const Background2 = styled.div`
     position: absolute;
-    background: url('image/desc_background2.png');
+    background: url('https://d2ug3aglf1tff7.cloudfront.net/image/desc_background2.png');
     background-size: cover;
     width: 100%;
     height: 1074px;
@@ -186,7 +186,7 @@ const Background2 = styled.div`
 
 const Background3 = styled.div`
     position: absolute;
-    background: url('image/desc_background3.png');
+    background: url('https://d2ug3aglf1tff7.cloudfront.net/image/desc_background3.png');
     background-size: cover;
     width: 100%;
     background-position-x: 350px;

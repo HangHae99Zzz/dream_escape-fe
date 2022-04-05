@@ -69,7 +69,7 @@ const RoomList = ({ page, isFiltered }) => {
                                             <MemberIcon
                                                 src={
                                                     process.env.PUBLIC_URL +
-                                                    'image/peers.svg'
+                                                    'https://d2ug3aglf1tff7.cloudfront.net/image/peers.svg'
                                                 }
                                                 alt="참가자 수: "
                                                 width={'auto'}
@@ -122,7 +122,7 @@ const RoomList = ({ page, isFiltered }) => {
                                         <MemberIcon
                                             src={
                                                 process.env.PUBLIC_URL +
-                                                'image/peers.svg'
+                                                'https://d2ug3aglf1tff7.cloudfront.net/image/peers.svg'
                                             }
                                             alt="참가자 수: "
                                         />
@@ -161,7 +161,7 @@ const RoomList = ({ page, isFiltered }) => {
                                         <MemberIcon
                                             src={
                                                 process.env.PUBLIC_URL +
-                                                'image/peers.svg'
+                                                'https://d2ug3aglf1tff7.cloudfront.net/image/peers.svg'
                                             }
                                             alt="참가자 수: "
                                         />
@@ -290,7 +290,7 @@ const Right = styled.div`
 `;
 
 const UserImg = styled.div`
-    background-image: url('image/userImg_ex.png');
+    background-image: url('https://d2ug3aglf1tff7.cloudfront.net/image/userImg_ex.png');
     width: 100px;
     /* min-width: 60px; */
     height: 100px;

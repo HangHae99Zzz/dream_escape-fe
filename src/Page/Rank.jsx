@@ -51,7 +51,7 @@ const Rank = () => {
                         <Body>
                             {topThreeRanks &&
                                 topThreeRanks.map(i => {
-                                    const imgUrl = `image/rank_top_${i.rank}.png`;
+                                    const imgUrl = `https://d2ug3aglf1tff7.cloudfront.net/image/rank_top_${i.rank}.png`;
                                     return (
                                         <TopThree key={i.roomId} id="top-three">
                                             <div className="first">

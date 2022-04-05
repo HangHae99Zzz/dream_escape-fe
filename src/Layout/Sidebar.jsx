@@ -101,7 +101,7 @@ const StyledSidebar = styled.nav`
 `;
 
 const Logo = styled.div`
-    background: url('image/logo.png');
+    background: url('https://d2ug3aglf1tff7.cloudfront.net/image/logo.png');
     background-size: contain;
     background-repeat: no-repeat;
     width: 80%;

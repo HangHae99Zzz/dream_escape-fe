@@ -55,7 +55,7 @@ const WaitModal = ({ closeModal }) => {
         <ModalWindow>
             <ExitContainer>
                 <XIcon
-                    src="image/x.svg"
+                    src="https://d2ug3aglf1tff7.cloudfront.net/image/x.svg"
                     alt="X"
                     width={'auto'}
                     onClick={() => exit(socket.id)}
@@ -94,7 +94,10 @@ const WaitModal = ({ closeModal }) => {
                 )}
             </div>
             <CopyContaier onClick={copyToClipboard}>
-                <img src="image/clip.png" alt="" />
+                <img
+                    src="https://d2ug3aglf1tff7.cloudfront.net/image/clip.png"
+                    alt=""
+                />
                 <ClipBoard
                     ref={roomUrl}
                     style={{ display: 'hidden' }}
@@ -193,7 +196,7 @@ const ImgContainer = styled.div`
         width: 100%;
         height: 100%;
         border-radius: 30px;
-        background-image: url('image/room.jpg');
+        background-image: url('https://d2ug3aglf1tff7.cloudfront.net/image/room.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         filter: brightness(0.3);
