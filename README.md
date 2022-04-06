@@ -2,7 +2,7 @@
 
 <!-- <img src="https://user-images.githubusercontent.com/74045440/159398628-3296c8af-a716-48c6-80ca-81f3cbc78368.png" align=left width=100> -->
 
-> 온라인 3D 방탈출 게임 서비스 😴
+> 보이스채팅으로 즐기는 3D 방탈출 게임 서비스 😴
 
 <br />
 
