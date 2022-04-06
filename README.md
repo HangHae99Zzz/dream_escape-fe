@@ -228,9 +228,11 @@ ex) handleComment(O) handle_comment(X)
   
 - AWS의 Cloud Front CDN 적용, 이미지 압축, 코드 스플리팅, 프로덕션 빌드 등의 방법론을 사용
 - 초기 로드 리소스를 줄이는데 성공하여 라이트하우스의 성능 카테고리 점수 15점 상승시킴
-  - ![스크린샷 2022-04-05 오후 10 16 58](https://user-images.githubusercontent.com/74045440/161762715-ed019cf7-0239-4691-9b40-6a708b274ef0.png) 최적화 작업 전
+  ![스크린샷 2022-04-05 오후 10 16 58](https://user-images.githubusercontent.com/74045440/161762715-ed019cf7-0239-4691-9b40-6a708b274ef0.png)
+    - 최적화 작업 전
   
-  - ![스크린샷 2022-04-05 오후 10 18 43](https://user-images.githubusercontent.com/74045440/161762779-49435693-189d-4029-8d8c-23d4ae5da425.png) 최적화 작업 후
+  ![스크린샷 2022-04-05 오후 10 18 43](https://user-images.githubusercontent.com/74045440/161762779-49435693-189d-4029-8d8c-23d4ae5da425.png) 
+    - 최적화 작업 후
 
 </details>
 
@@ -314,3 +316,5 @@ ex) handleComment(O) handle_comment(X)
 <br />
 
 ## 📺 Detail
+
+[시연영상 링크](https://www.youtube.com/watch?v=RM0JHUcUwoM)
