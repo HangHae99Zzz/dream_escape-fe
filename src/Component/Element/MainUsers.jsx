@@ -17,7 +17,7 @@ const MainUsers = () => {
           <User img={peer.img}></User>
           <NameBox>
             <Name>
-              <SvgMic style={{ paddingRight: "3px" }} />
+              <SvgMic style={{ paddingRight: "3px", position: "absolute" }} />
               <p>{peer.nickName}</p>
             </Name>
           </NameBox>
@@ -44,9 +44,9 @@ const Container = styled.div`
 const UserContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 80px;
+  height: 110px;
 `;
 
 const User = styled.div`
@@ -69,5 +69,11 @@ const NameBox = styled.div`
 
 const Name = styled.div`
   display: flex;
-  width: 90%;
+  padding-left: 5px;
+  p {
+    padding-left: 13px;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 17px;
+  }
 `;
