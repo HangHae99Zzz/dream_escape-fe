@@ -2,7 +2,7 @@
 
 <!-- <img src="https://user-images.githubusercontent.com/74045440/159398628-3296c8af-a716-48c6-80ca-81f3cbc78368.png" align=left width=100> -->
 
-> 온라인 3D 방탈출 게임 서비스 😴
+> 보이스채팅으로 즐기는 3D 방탈출 게임 서비스 😴
 
 <br />
 
@@ -27,7 +27,26 @@
   현재 대기중인 인원을 체크하고 게임을 시작할 수 있습니다.
 - **`게임`**
   팀원들과 보이스채팅을 나누며 방에 배치된 3D 물체를 클릭해 주어진 문제를 풀고 탈출할 수 있습니다.
+  
+<details markdown="1">
+  <summary>주요 기능 구현을 위해 사용된 기술과 그 기술을 채택하게 된 경위</summary>
+  
+ - **Socket.io** : 
+    - Signalling 서버
+      - WebRTC의 ICE가 성사되기 위해선 클라이언트 간 여러 단계의 요청과 응답을 전달해주는 Signalling 서버가 필요합니다.<br> Node.js의 라이브러리인 Socket.io는 프론트엔드와 백엔드 양 쪽에 ICE를 위한 편리한 도구를 제공하고, Springboot로 구현한 Signalling 서버보다 훨씬 많은 자료가 인터넷에 존재합니다. <br>또한, 프론트엔드 개발자 역시 JavaScript 기반인 Node.js에 대한 접근성이 Springboot보다 높고 Signalling  서버의 코드를 리뷰하거나 Signalling 서버를 로컬에 실행시켜 로그를 보면서 개발할 수 있는점 등이 개발 생산성을 높일거라 판단해 채택하였습니다.
+    - 동시성 구현
+      - 동시성 구현을 위해서는 HTTP 통신이 아닌 WebSocket API의 양방향 통신 방식을 이용해야 할 것이라 판단하였습니다. <br>이미 Signalling 서버 개발에 Node.js의 Socket.io 라이브러리를 사용하고 있었기 때문에, 소켓통신을 위한 새로운 라이브러리를 도입하는 것 보다 이미 프로젝트에 도입된 라이브러리를 사용하는 것이 더 효율적이라 여김과 동시에, Socket.io의 장점 중 하나인 이벤트 작명을 개발자가 자유롭게 할 수 있다는 것이 다양한 상황에서의 동시성을 구현하고 컨트롤 하는데 이점이 있다 판단하여 사용하였습니다.
+    
 
+ - **WebRTC** : 
+    - 보이스 채팅을 구현하기 위해 도입
+      - Zzz에서 유저는 마우스와 키보드를 사용해 물체를 클릭하며 게임을 진행하기 때문에, 채팅의 경우 최대한 마우스와 키보드를 사용하지 않고 게임에 더 집중할 수 있도록 보이스 채팅으로 구현하기로 결정하였습니다. <br>최대 4명의 클라이언트가 오디오 데이터만 주고받기 때문에 클라이언트 리소스의 부하가 심하지 않을 것으로 판단하여, 외부 미디어 서버를 사용하지 않고 오픈소스 API인 WebRTC를 따라 직접 구현하는 P2P 방식을 채택하였습니다.
+    
+ - **Three.js** :  
+    - 유려한 그래픽과 실감나는 게임경험을 위해 도입
+      - 개발팀은 유저가 실제로 방 안에 들어가 있는 것 같은 실감나는 게임 경험을 제공하고자 했고, 그 목적을 달성하기 위하여 3D를 사용해 게임 월드를 구현하기로 결정하였습니다. <br>3D는 두 프론트엔드 개발자가 경험해 본 적 없는 기술이기 때문에 WebGL API를 다루는 라이브러리 중 가장 보편적이고도 공식 가이드와 도큐먼트가 잘 갖추어져있는 Three.js를 채택하였습니다.  
+</details>
+  
 <!-- ![This is the last](https://user-images.githubusercontent.com/75469131/150535885-e6c38a60-19b0-4957-8919-2c78074cdb50.png) -->
 
 <br />
@@ -69,8 +88,11 @@
   <img src="https://img.shields.io/badge/webrtc-333333?style=for-the-badge&logo=webrtc&logoColor=white">
   <img src="https://img.shields.io/badge/socket.io-333333?style=for-the-badge&logo=socket.io&logoColor=white">
   <br>
-  <img src="https://img.shields.io/badge/lighthouse-1a73e8?style=for-the-badge&logo=lighthouse&logoColor=white">
-  <img src="https://img.shields.io/badge/netlify-4fb5ba?style=for-the-badge&logo=netlify&logoColor=white">
+  <img src="https://img.shields.io/badge/google analytics-202c3c?style=for-the-badge&logo=google analytics&logoColor=white">
+  <img src="https://img.shields.io/badge/lighthouse-202c3c?style=for-the-badge&logo=lighthouse&logoColor=white">
+  <img src="https://img.shields.io/badge/cloud front-202c3c?style=for-the-badge&logo=amazonaws&logoColor=white">
+  <img src="https://img.shields.io/badge/netlify-202c3c?style=for-the-badge&logo=netlify&logoColor=white">
+
   
 </div>
 
@@ -204,8 +226,13 @@ ex) handleComment(O) handle_comment(X)
 <details markdown="6">
 <summary>페이지 성능향상</summary>
   
-- 이미지 압축, 코드 스플리팅, 프로덕션 빌드 등의 방법론을 사용
-- 초기 로드 리소스를 줄이는데 성공하여 라이트하우스의 성능 카테고리 점수 13점 상승시킴
+- AWS의 Cloud Front CDN 적용, 이미지 압축, 코드 스플리팅, 프로덕션 빌드 등의 방법론을 사용
+- 초기 로드 리소스를 줄이는데 성공하여 라이트하우스의 성능 카테고리 점수 15점 상승시킴
+  ![스크린샷 2022-04-05 오후 10 16 58](https://user-images.githubusercontent.com/74045440/161762715-ed019cf7-0239-4691-9b40-6a708b274ef0.png)
+    - 최적화 작업 전
+  
+  ![스크린샷 2022-04-05 오후 10 18 43](https://user-images.githubusercontent.com/74045440/161762779-49435693-189d-4029-8d8c-23d4ae5da425.png) 
+    - 최적화 작업 후
 
 </details>
 
@@ -289,3 +316,5 @@ ex) handleComment(O) handle_comment(X)
 <br />
 
 ## 📺 Detail
+
+[시연영상 링크](https://www.youtube.com/watch?v=RM0JHUcUwoM)

@@ -177,7 +177,6 @@ const Chat = () => {
 
     useEffect(() => {
         if (!isIn) {
-            console.log('처음이야!');
             socketRef.current = io.connect(SOCKET_SERVER_URL);
 
             dispatch(socketActions.getSocket(socketRef.current));
