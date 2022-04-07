@@ -43,7 +43,6 @@ const refQuiz = (roomId, quizType) => {
         instance
             .get(`/rooms/${roomId}/quizzes/${quizType}`)
             .then(res => {
-                console.log(res.data.answer);
                 let _question = res.data.question;
                 let _content = res.data.content;
                 let _answer = res.data.answer;
