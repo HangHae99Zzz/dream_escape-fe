@@ -49,6 +49,7 @@ const refQuiz = (roomId, quizType) => {
                 let _chance = res.data.chance;
                 let _hint = res.data.hint;
                 let _pass = res.data.pass;
+                console.log(_answer);
                 dispatch(
                     loadQuiz(
                         _question,

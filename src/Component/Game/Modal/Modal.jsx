@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+import useSound from 'use-sound';
+
 import { actionCreator as quizActions } from '../../../redux/modules/quiz';
 import { SvgX } from '../../../Asset/Icon/etc/svg_etc';
+import { WrongSound } from '../../../Asset/Sound/mp3_sound';
 
 import Virus from './Virus';
 
@@ -20,6 +23,7 @@ function Modal({
     const modalData = useSelector(state => state.quiz);
     const { socket } = useSelector(({ socket }) => socket);
     const { chance, solved } = useSelector(({ game }) => game);
+    const [playWrongSound] = useSound(WrongSound);
 
     const [hintModal, setHintModal] = useState(false);
     const [virusInputOne, setVirusInputOne] = useState('');
@@ -42,6 +46,7 @@ function Modal({
             setModalOpen(false);
             socket.emit('count', quizType);
         } else {
+            playWrongSound();
             window.alert('오답입니다!');
         }
     };
@@ -56,6 +61,7 @@ function Modal({
                 handleExitgame();
             }
         } else {
+            playWrongSound();
             window.alert('오답입니다!');
         }
     };

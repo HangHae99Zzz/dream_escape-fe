@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
+import useSound from 'use-sound';
+
+import { EndingSong } from '../../Asset/Sound/mp3_sound';
+
 const EndingCredit = () => {
+    const [playEndingSong, { stop }] = useSound(EndingSong);
+
+    useEffect(() => {
+        playEndingSong();
+
+        return () => {
+            stop();
+        };
+    });
+
     return (
         <Container>
             <DivContainer>

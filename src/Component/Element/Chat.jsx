@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import styled from 'styled-components';
+import useSound from 'use-sound';
 
 import { actionCreator as socketActions } from '../../redux/modules/socket';
 import { actionCreator as userActions } from '../../redux/modules/user';
@@ -11,6 +12,13 @@ import { actionCreator as gameActions } from '../../redux/modules/game';
 
 import Video from './Video';
 import mediaAlert from '../../util/mediaAlert';
+import {
+    QuizSound1,
+    QuizSound2,
+    QuizSound3,
+    QuizSound4,
+    EscapeSound,
+} from '../../Asset/Sound/mp3_sound';
 
 const pc_config = {
     iceServers: [
@@ -48,6 +56,12 @@ const Chat = () => {
 
     const [muted, setMuted] = useState(false);
     const [users, setUsers] = useState([]);
+
+    const [playQuizSound1] = useSound(QuizSound1);
+    const [playQuizSound2] = useSound(QuizSound2);
+    const [playQuizSound3] = useSound(QuizSound3);
+    const [playQuizSound4] = useSound(QuizSound4);
+    const [playEscapeSound] = useSound(EscapeSound);
 
     const getDevices = async () => {
         try {
@@ -300,6 +314,11 @@ const Chat = () => {
 
         socketRef.current.on('countPlus', data => {
             count++;
+            if (count === 1) playQuizSound1();
+            if (count === 2) playQuizSound2();
+            if (count === 3) playQuizSound3();
+            if (count === 4) playQuizSound4();
+            if (count === 5) playEscapeSound();
             dispatch(gameActions.countUp(count));
             dispatch(gameActions.getSolved(data));
             console.log('count up!', count, data);
