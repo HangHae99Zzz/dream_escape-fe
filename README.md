@@ -56,7 +56,7 @@
 | <img src="https://user-images.githubusercontent.com/74045440/159398343-db70bd0a-b93b-4e08-9193-5f666521f472.jpeg" width=200> | <img src="https://user-images.githubusercontent.com/74045440/159398563-46cd3461-4369-4bfd-b9bf-254277e878c8.jpeg" width=200> |
 | :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
 |                                                          **류강현**                                                          |                                                          **우혜민**                                                          |
-|                                          [@Ryu ganghun](https://github.com/softwat)                                          |                                         [@Woo hyemin](https://github.com/hyemin9403)                                         |
+|                                          [@Ryu ganghyeon](https://github.com/f-ffff-f)                                          |                                         [@Woo hyemin](https://github.com/hyemin9403)                                         |
 
 #### 류강현
 
