@@ -3,6 +3,9 @@
 <!-- <img src="https://user-images.githubusercontent.com/74045440/159398628-3296c8af-a716-48c6-80ca-81f3cbc78368.png" align=left width=100> -->
 
 > 보이스채팅으로 즐기는 3D 방탈출 게임 서비스 😴
+<br />
+<img src='https://user-images.githubusercontent.com/74045440/163561005-9320751e-e899-4eb8-bf2c-e03897b7f05d.png' width=450/>
+
 
 <br />
 
@@ -318,3 +321,5 @@ ex) handleComment(O) handle_comment(X)
 ## 📺 Detail
 
 [시연영상 링크](https://www.youtube.com/watch?v=RM0JHUcUwoM)
+
+
